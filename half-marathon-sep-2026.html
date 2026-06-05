@@ -71,7 +71,7 @@
     .weeks-container { padding: 0 24px 48px; display: flex; flex-direction: column; gap: 24px; }
     .week-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
     .week-section.recovery-week { border-color: #10b981; }
-    .week-header { padding: 14px 18px; border-bottom: 1px solid var(--border); background: var(--surface2); }
+    .week-header { padding: 14px 18px; border-bottom: 1px solid var(--border); background: var(--surface2); cursor: pointer; user-select: none; }
     .week-title { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; flex-wrap: wrap; }
     .week-num { font-size: 15px; font-weight: 700; }
     .week-dates { font-size: 13px; color: var(--text3); }
@@ -88,6 +88,9 @@
     .day-header { margin-bottom: 8px; }
     .day-name { font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; }
     .day-date { font-size: 11px; color: var(--text3); }
+    .week-collapse-arrow { font-size: 13px; color: var(--text3); margin-left: auto; transition: transform .2s; }
+    .week-section.collapsed .week-collapse-arrow { transform: rotate(-90deg); }
+    .week-section.collapsed .week-grid { display: none; }
 
     .workout-card { background: var(--surface2); border-radius: 6px; padding: 8px; margin-bottom: 6px; cursor: pointer; transition: opacity .15s; }
     .workout-card:hover { opacity: .9; }
@@ -128,32 +131,46 @@
       .main-tabs { padding: 0; }
       .main-tab { flex: 1; padding: 10px 4px; font-size: 12px; white-space: nowrap; border-radius: 0; }
 
-      /* Week grid — collapse to vertical list */
+      /* Week grid — vertical day list, rest days hidden */
       .weeks-container { padding: 0 8px 48px; gap: 14px; }
       .week-section { border-radius: 8px; }
       .week-header { padding: 12px 14px; }
-      .week-grid { display: flex; flex-direction: column; }
+      .week-num { font-size: 14px; }
+      .week-dates { font-size: 11px; }
+      .week-collapse-arrow { margin-left: auto; }
+      .week-grid { display: flex; flex-direction: column; border-top: 1px solid var(--border); }
+      /* Hide rest-only days on mobile */
+      .day-rest-only { display: none; }
+      /* Each active day = full-width card */
       .day-col {
         border-right: none;
         border-bottom: 1px solid var(--border);
-        padding: 10px 12px;
+        padding: 0;
         min-height: unset;
-        display: grid;
-        grid-template-columns: 52px 1fr;
-        gap: 8px;
-        align-items: start;
+        display: block;
       }
       .day-col:last-child { border-bottom: none; }
-      .day-header { margin-bottom: 0; }
-      .day-name { font-size: 12px; }
-      .day-date { font-size: 11px; }
-
-      /* Workout cards — bigger touch targets */
-      .workout-card { padding: 10px 12px; margin-bottom: 6px; }
-      .workout-name { font-size: 13px; }
+      /* Day header — sticky label inside the card */
+      .day-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px 6px;
+        background: rgba(255,255,255,.04);
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 0;
+      }
+      .day-name { font-size: 13px; font-weight: 700; text-transform: uppercase; color: var(--accent); }
+      .day-date { font-size: 12px; color: var(--text3); }
+      /* Workouts list inside a day */
+      .day-workouts { padding: 8px 10px; display: flex; flex-direction: column; gap: 6px; }
+      /* Bigger workout cards on mobile */
+      .workout-card { padding: 12px 14px; border-radius: 8px; margin-bottom: 0; }
+      .workout-name { font-size: 14px; }
       .workout-detail { font-size: 12px; }
-      .workout-check { font-size: 18px; padding: 2px; }
-      .export-btn { padding: 4px 8px; font-size: 12px; }
+      .sport-icon { font-size: 18px; }
+      .workout-check { font-size: 20px; padding: 2px 4px; }
+      .export-btn { padding: 5px 10px; font-size: 12px; }
 
       /* Today panel */
       .today-panel-wrap { grid-template-columns: 1fr; }
@@ -610,11 +627,12 @@
   <div class="weeks-container">
     
   <section class="week-section recovery-week" data-week-start="2026-06-01">
-    <div class="week-header">
+    <div class="week-header" onclick="toggleWeek(this)">
       <div class="week-title">
         <span class="week-num">Week 1</span>
         <span class="week-dates">1 Jun – 7 Jun</span>
         <span class="recovery-badge">Recovery</span>
+        <span class="week-collapse-arrow">▾</span>
       </div>
       <div class="week-meta">
         <span class="phase-badge" style="background:#6b7280">Recovery</span>
@@ -625,12 +643,13 @@
       <div class="week-focus">Return to routine after Copenhagen Marathon. All easy.</div>
     </div>
     <div class="week-grid">
-    <div class="day-col" data-date="2026-06-01">
+    <div class="day-col day-rest-only" data-date="2026-06-01">
       <div class="day-header">
         <div class="day-name">Mon</div>
         <div class="day-date">1 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -649,14 +668,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-06-02">
       <div class="day-header">
         <div class="day-name">Tue</div>
         <div class="day-date">2 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card auto-done" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -688,14 +708,15 @@
     </div>
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-06-03">
       <div class="day-header">
         <div class="day-name">Wed</div>
         <div class="day-date">3 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card auto-done" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -757,14 +778,15 @@
     </div>
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-06-04">
       <div class="day-header">
         <div class="day-name">Thu</div>
         <div class="day-date">4 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card auto-done" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -796,14 +818,15 @@
     </div>
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-06-05">
       <div class="day-header">
         <div class="day-name">Fri</div>
         <div class="day-date">5 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #84cc16" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💪</span>
@@ -831,14 +854,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
-    <div class="day-col" data-date="2026-06-06">
+    <div class="day-col day-rest-only" data-date="2026-06-06">
       <div class="day-header">
         <div class="day-name">Sat</div>
         <div class="day-date">6 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -857,14 +881,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-06-07">
       <div class="day-header">
         <div class="day-name">Sun</div>
         <div class="day-date">7 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #7c3aed" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -893,16 +918,17 @@
         
       </div>
     </div>
-    </div>
-  </div>
+      </div>
+    </div></div>
   </section>
 
   <section class="week-section " data-week-start="2026-06-08">
-    <div class="week-header">
+    <div class="week-header" onclick="toggleWeek(this)">
       <div class="week-title">
         <span class="week-num">Week 2</span>
         <span class="week-dates">8 Jun – 14 Jun</span>
         
+        <span class="week-collapse-arrow">▾</span>
       </div>
       <div class="week-meta">
         <span class="phase-badge" style="background:#6b7280">Recovery</span>
@@ -918,7 +944,8 @@
         <div class="day-name">Mon</div>
         <div class="day-date">8 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #84cc16" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💪</span>
@@ -946,14 +973,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-06-09">
       <div class="day-header">
         <div class="day-name">Tue</div>
         <div class="day-date">9 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #06b6d4" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💨</span>
@@ -982,14 +1010,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-06-10">
       <div class="day-header">
         <div class="day-name">Wed</div>
         <div class="day-date">10 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -1045,14 +1074,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-06-11">
       <div class="day-header">
         <div class="day-name">Thu</div>
         <div class="day-date">11 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -1081,14 +1111,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-06-12">
       <div class="day-header">
         <div class="day-name">Fri</div>
         <div class="day-date">12 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #84cc16" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💪</span>
@@ -1116,14 +1147,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
-    <div class="day-col" data-date="2026-06-13">
+    <div class="day-col day-rest-only" data-date="2026-06-13">
       <div class="day-header">
         <div class="day-name">Sat</div>
         <div class="day-date">13 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -1142,14 +1174,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-06-14">
       <div class="day-header">
         <div class="day-name">Sun</div>
         <div class="day-date">14 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #7c3aed" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -1178,16 +1211,17 @@
         
       </div>
     </div>
-    </div>
-  </div>
+      </div>
+    </div></div>
   </section>
 
   <section class="week-section " data-week-start="2026-06-15">
-    <div class="week-header">
+    <div class="week-header" onclick="toggleWeek(this)">
       <div class="week-title">
         <span class="week-num">Week 3</span>
         <span class="week-dates">15 Jun – 21 Jun</span>
         
+        <span class="week-collapse-arrow">▾</span>
       </div>
       <div class="week-meta">
         <span class="phase-badge" style="background:#10b981">Base</span>
@@ -1203,7 +1237,8 @@
         <div class="day-name">Mon</div>
         <div class="day-date">15 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #84cc16" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💪</span>
@@ -1231,14 +1266,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-06-16">
       <div class="day-header">
         <div class="day-name">Tue</div>
         <div class="day-date">16 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #06b6d4" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💨</span>
@@ -1267,14 +1303,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-06-17">
       <div class="day-header">
         <div class="day-name">Wed</div>
         <div class="day-date">17 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -1330,14 +1367,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-06-18">
       <div class="day-header">
         <div class="day-name">Thu</div>
         <div class="day-date">18 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #ef4444" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🔥</span>
@@ -1366,14 +1404,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-06-19">
       <div class="day-header">
         <div class="day-name">Fri</div>
         <div class="day-date">19 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #84cc16" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💪</span>
@@ -1401,14 +1440,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
-    <div class="day-col" data-date="2026-06-20">
+    <div class="day-col day-rest-only" data-date="2026-06-20">
       <div class="day-header">
         <div class="day-name">Sat</div>
         <div class="day-date">20 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -1427,14 +1467,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-06-21">
       <div class="day-header">
         <div class="day-name">Sun</div>
         <div class="day-date">21 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #7c3aed" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -1463,16 +1504,17 @@
         
       </div>
     </div>
-    </div>
-  </div>
+      </div>
+    </div></div>
   </section>
 
   <section class="week-section " data-week-start="2026-06-22">
-    <div class="week-header">
+    <div class="week-header" onclick="toggleWeek(this)">
       <div class="week-title">
         <span class="week-num">Week 4</span>
         <span class="week-dates">22 Jun – 28 Jun</span>
         
+        <span class="week-collapse-arrow">▾</span>
       </div>
       <div class="week-meta">
         <span class="phase-badge" style="background:#10b981">Base</span>
@@ -1488,7 +1530,8 @@
         <div class="day-name">Mon</div>
         <div class="day-date">22 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #84cc16" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💪</span>
@@ -1516,14 +1559,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-06-23">
       <div class="day-header">
         <div class="day-name">Tue</div>
         <div class="day-date">23 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #06b6d4" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💨</span>
@@ -1552,14 +1596,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-06-24">
       <div class="day-header">
         <div class="day-name">Wed</div>
         <div class="day-date">24 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -1615,14 +1660,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-06-25">
       <div class="day-header">
         <div class="day-name">Thu</div>
         <div class="day-date">25 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #f97316" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">⚡</span>
@@ -1651,14 +1697,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-06-26">
       <div class="day-header">
         <div class="day-name">Fri</div>
         <div class="day-date">26 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #84cc16" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💪</span>
@@ -1686,14 +1733,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
-    <div class="day-col" data-date="2026-06-27">
+    <div class="day-col day-rest-only" data-date="2026-06-27">
       <div class="day-header">
         <div class="day-name">Sat</div>
         <div class="day-date">27 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -1712,14 +1760,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-06-28">
       <div class="day-header">
         <div class="day-name">Sun</div>
         <div class="day-date">28 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #7c3aed" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -1748,16 +1797,17 @@
         
       </div>
     </div>
-    </div>
-  </div>
+      </div>
+    </div></div>
   </section>
 
   <section class="week-section recovery-week" data-week-start="2026-06-29">
-    <div class="week-header">
+    <div class="week-header" onclick="toggleWeek(this)">
       <div class="week-title">
         <span class="week-num">Week 5</span>
         <span class="week-dates">29 Jun – 5 Jul</span>
         <span class="recovery-badge">Recovery</span>
+        <span class="week-collapse-arrow">▾</span>
       </div>
       <div class="week-meta">
         <span class="phase-badge" style="background:#10b981">Base</span>
@@ -1773,7 +1823,8 @@
         <div class="day-name">Mon</div>
         <div class="day-date">29 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #84cc16" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💪</span>
@@ -1801,14 +1852,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-06-30">
       <div class="day-header">
         <div class="day-name">Tue</div>
         <div class="day-date">30 Jun</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #06b6d4" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💨</span>
@@ -1837,14 +1889,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-07-01">
       <div class="day-header">
         <div class="day-name">Wed</div>
         <div class="day-date">1 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -1900,14 +1953,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-07-02">
       <div class="day-header">
         <div class="day-name">Thu</div>
         <div class="day-date">2 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -1936,14 +1990,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-07-03">
       <div class="day-header">
         <div class="day-name">Fri</div>
         <div class="day-date">3 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #84cc16" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💪</span>
@@ -1971,14 +2026,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
-    <div class="day-col" data-date="2026-07-04">
+    <div class="day-col day-rest-only" data-date="2026-07-04">
       <div class="day-header">
         <div class="day-name">Sat</div>
         <div class="day-date">4 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -1997,14 +2053,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-07-05">
       <div class="day-header">
         <div class="day-name">Sun</div>
         <div class="day-date">5 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #7c3aed" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -2033,16 +2090,17 @@
         
       </div>
     </div>
-    </div>
-  </div>
+      </div>
+    </div></div>
   </section>
 
   <section class="week-section " data-week-start="2026-07-06">
-    <div class="week-header">
+    <div class="week-header" onclick="toggleWeek(this)">
       <div class="week-title">
         <span class="week-num">Week 6</span>
         <span class="week-dates">6 Jul – 12 Jul</span>
         
+        <span class="week-collapse-arrow">▾</span>
       </div>
       <div class="week-meta">
         <span class="phase-badge" style="background:#10b981">Base</span>
@@ -2058,7 +2116,8 @@
         <div class="day-name">Mon</div>
         <div class="day-date">6 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #84cc16" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💪</span>
@@ -2086,14 +2145,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-07-07">
       <div class="day-header">
         <div class="day-name">Tue</div>
         <div class="day-date">7 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #f97316" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">⚡</span>
@@ -2122,14 +2182,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-07-08">
       <div class="day-header">
         <div class="day-name">Wed</div>
         <div class="day-date">8 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -2185,14 +2246,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-07-09">
       <div class="day-header">
         <div class="day-name">Thu</div>
         <div class="day-date">9 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #ef4444" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🔥</span>
@@ -2221,14 +2283,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-07-10">
       <div class="day-header">
         <div class="day-name">Fri</div>
         <div class="day-date">10 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #84cc16" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💪</span>
@@ -2256,14 +2319,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
-    <div class="day-col" data-date="2026-07-11">
+    <div class="day-col day-rest-only" data-date="2026-07-11">
       <div class="day-header">
         <div class="day-name">Sat</div>
         <div class="day-date">11 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -2282,14 +2346,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-07-12">
       <div class="day-header">
         <div class="day-name">Sun</div>
         <div class="day-date">12 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #7c3aed" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -2318,16 +2383,17 @@
         
       </div>
     </div>
-    </div>
-  </div>
+      </div>
+    </div></div>
   </section>
 
   <section class="week-section " data-week-start="2026-07-13">
-    <div class="week-header">
+    <div class="week-header" onclick="toggleWeek(this)">
       <div class="week-title">
         <span class="week-num">Week 7</span>
         <span class="week-dates">13 Jul – 19 Jul</span>
         
+        <span class="week-collapse-arrow">▾</span>
       </div>
       <div class="week-meta">
         <span class="phase-badge" style="background:#10b981">Base</span>
@@ -2343,7 +2409,8 @@
         <div class="day-name">Mon</div>
         <div class="day-date">13 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #84cc16" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💪</span>
@@ -2371,14 +2438,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-07-14">
       <div class="day-header">
         <div class="day-name">Tue</div>
         <div class="day-date">14 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #f97316" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">⚡</span>
@@ -2407,14 +2475,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-07-15">
       <div class="day-header">
         <div class="day-name">Wed</div>
         <div class="day-date">15 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -2470,14 +2539,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-07-16">
       <div class="day-header">
         <div class="day-name">Thu</div>
         <div class="day-date">16 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #ef4444" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🔥</span>
@@ -2506,14 +2576,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-07-17">
       <div class="day-header">
         <div class="day-name">Fri</div>
         <div class="day-date">17 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #84cc16" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💪</span>
@@ -2541,14 +2612,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
-    <div class="day-col" data-date="2026-07-18">
+    <div class="day-col day-rest-only" data-date="2026-07-18">
       <div class="day-header">
         <div class="day-name">Sat</div>
         <div class="day-date">18 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -2567,14 +2639,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-07-19">
       <div class="day-header">
         <div class="day-name">Sun</div>
         <div class="day-date">19 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #7c3aed" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -2603,16 +2676,17 @@
         
       </div>
     </div>
-    </div>
-  </div>
+      </div>
+    </div></div>
   </section>
 
   <section class="week-section " data-week-start="2026-07-20">
-    <div class="week-header">
+    <div class="week-header" onclick="toggleWeek(this)">
       <div class="week-title">
         <span class="week-num">Week 8</span>
         <span class="week-dates">20 Jul – 26 Jul</span>
         
+        <span class="week-collapse-arrow">▾</span>
       </div>
       <div class="week-meta">
         <span class="phase-badge" style="background:#10b981">Base</span>
@@ -2628,7 +2702,8 @@
         <div class="day-name">Mon</div>
         <div class="day-date">20 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #84cc16" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💪</span>
@@ -2656,14 +2731,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-07-21">
       <div class="day-header">
         <div class="day-name">Tue</div>
         <div class="day-date">21 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #f97316" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">⚡</span>
@@ -2692,14 +2768,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-07-22">
       <div class="day-header">
         <div class="day-name">Wed</div>
         <div class="day-date">22 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -2755,14 +2832,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-07-23">
       <div class="day-header">
         <div class="day-name">Thu</div>
         <div class="day-date">23 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #ef4444" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🔥</span>
@@ -2791,14 +2869,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-07-24">
       <div class="day-header">
         <div class="day-name">Fri</div>
         <div class="day-date">24 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #84cc16" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💪</span>
@@ -2826,14 +2905,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
-    <div class="day-col" data-date="2026-07-25">
+    <div class="day-col day-rest-only" data-date="2026-07-25">
       <div class="day-header">
         <div class="day-name">Sat</div>
         <div class="day-date">25 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -2852,14 +2932,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-07-26">
       <div class="day-header">
         <div class="day-name">Sun</div>
         <div class="day-date">26 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #7c3aed" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -2888,16 +2969,17 @@
         
       </div>
     </div>
-    </div>
-  </div>
+      </div>
+    </div></div>
   </section>
 
   <section class="week-section " data-week-start="2026-07-27">
-    <div class="week-header">
+    <div class="week-header" onclick="toggleWeek(this)">
       <div class="week-title">
         <span class="week-num">Week 9</span>
         <span class="week-dates">27 Jul – 2 Aug</span>
         
+        <span class="week-collapse-arrow">▾</span>
       </div>
       <div class="week-meta">
         <span class="phase-badge" style="background:#f97316">Build</span>
@@ -2913,7 +2995,8 @@
         <div class="day-name">Mon</div>
         <div class="day-date">27 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #84cc16" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💪</span>
@@ -2941,14 +3024,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-07-28">
       <div class="day-header">
         <div class="day-name">Tue</div>
         <div class="day-date">28 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #ef4444" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🔥</span>
@@ -2977,14 +3061,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-07-29">
       <div class="day-header">
         <div class="day-name">Wed</div>
         <div class="day-date">29 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -3040,14 +3125,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-07-30">
       <div class="day-header">
         <div class="day-name">Thu</div>
         <div class="day-date">30 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #f97316" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">⚡</span>
@@ -3076,14 +3162,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-07-31">
       <div class="day-header">
         <div class="day-name">Fri</div>
         <div class="day-date">31 Jul</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #84cc16" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💪</span>
@@ -3111,14 +3198,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
-    <div class="day-col" data-date="2026-08-01">
+    <div class="day-col day-rest-only" data-date="2026-08-01">
       <div class="day-header">
         <div class="day-name">Sat</div>
         <div class="day-date">1 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -3137,14 +3225,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-08-02">
       <div class="day-header">
         <div class="day-name">Sun</div>
         <div class="day-date">2 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #7c3aed" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -3173,16 +3262,17 @@
         
       </div>
     </div>
-    </div>
-  </div>
+      </div>
+    </div></div>
   </section>
 
   <section class="week-section " data-week-start="2026-08-03">
-    <div class="week-header">
+    <div class="week-header" onclick="toggleWeek(this)">
       <div class="week-title">
         <span class="week-num">Week 10</span>
         <span class="week-dates">3 Aug – 9 Aug</span>
         
+        <span class="week-collapse-arrow">▾</span>
       </div>
       <div class="week-meta">
         <span class="phase-badge" style="background:#f97316">Build</span>
@@ -3198,7 +3288,8 @@
         <div class="day-name">Mon</div>
         <div class="day-date">3 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #84cc16" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💪</span>
@@ -3226,14 +3317,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-08-04">
       <div class="day-header">
         <div class="day-name">Tue</div>
         <div class="day-date">4 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #ef4444" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🔥</span>
@@ -3262,14 +3354,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-08-05">
       <div class="day-header">
         <div class="day-name">Wed</div>
         <div class="day-date">5 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -3325,14 +3418,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-08-06">
       <div class="day-header">
         <div class="day-name">Thu</div>
         <div class="day-date">6 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #ef4444" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🔥</span>
@@ -3361,14 +3455,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-08-07">
       <div class="day-header">
         <div class="day-name">Fri</div>
         <div class="day-date">7 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #84cc16" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💪</span>
@@ -3396,14 +3491,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
-    <div class="day-col" data-date="2026-08-08">
+    <div class="day-col day-rest-only" data-date="2026-08-08">
       <div class="day-header">
         <div class="day-name">Sat</div>
         <div class="day-date">8 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -3422,14 +3518,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-08-09">
       <div class="day-header">
         <div class="day-name">Sun</div>
         <div class="day-date">9 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #7c3aed" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -3458,16 +3555,17 @@
         
       </div>
     </div>
-    </div>
-  </div>
+      </div>
+    </div></div>
   </section>
 
   <section class="week-section recovery-week" data-week-start="2026-08-10">
-    <div class="week-header">
+    <div class="week-header" onclick="toggleWeek(this)">
       <div class="week-title">
         <span class="week-num">Week 11</span>
         <span class="week-dates">10 Aug – 16 Aug</span>
         <span class="recovery-badge">Recovery</span>
+        <span class="week-collapse-arrow">▾</span>
       </div>
       <div class="week-meta">
         <span class="phase-badge" style="background:#f97316">Build</span>
@@ -3478,12 +3576,13 @@
       <div class="week-focus">Recovery week. You are absorbing the training. Do NOT skip this.</div>
     </div>
     <div class="week-grid">
-    <div class="day-col" data-date="2026-08-10">
+    <div class="day-col day-rest-only" data-date="2026-08-10">
       <div class="day-header">
         <div class="day-name">Mon</div>
         <div class="day-date">10 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -3502,14 +3601,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-08-11">
       <div class="day-header">
         <div class="day-name">Tue</div>
         <div class="day-date">11 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #06b6d4" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💨</span>
@@ -3538,14 +3638,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-08-12">
       <div class="day-header">
         <div class="day-name">Wed</div>
         <div class="day-date">12 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -3601,14 +3702,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-08-13">
       <div class="day-header">
         <div class="day-name">Thu</div>
         <div class="day-date">13 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -3637,14 +3739,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-08-14">
       <div class="day-header">
         <div class="day-name">Fri</div>
         <div class="day-date">14 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #84cc16" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💪</span>
@@ -3672,14 +3775,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
-    <div class="day-col" data-date="2026-08-15">
+    <div class="day-col day-rest-only" data-date="2026-08-15">
       <div class="day-header">
         <div class="day-name">Sat</div>
         <div class="day-date">15 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -3698,14 +3802,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-08-16">
       <div class="day-header">
         <div class="day-name">Sun</div>
         <div class="day-date">16 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #7c3aed" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -3734,16 +3839,17 @@
         
       </div>
     </div>
-    </div>
-  </div>
+      </div>
+    </div></div>
   </section>
 
   <section class="week-section " data-week-start="2026-08-17">
-    <div class="week-header">
+    <div class="week-header" onclick="toggleWeek(this)">
       <div class="week-title">
         <span class="week-num">Week 12</span>
         <span class="week-dates">17 Aug – 23 Aug</span>
         
+        <span class="week-collapse-arrow">▾</span>
       </div>
       <div class="week-meta">
         <span class="phase-badge" style="background:#f97316">Build</span>
@@ -3754,12 +3860,13 @@
       <div class="week-focus">Peak build week. VO₂max + race pace. This is the hardest week — embrace it.</div>
     </div>
     <div class="week-grid">
-    <div class="day-col" data-date="2026-08-17">
+    <div class="day-col day-rest-only" data-date="2026-08-17">
       <div class="day-header">
         <div class="day-name">Mon</div>
         <div class="day-date">17 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -3778,14 +3885,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-08-18">
       <div class="day-header">
         <div class="day-name">Tue</div>
         <div class="day-date">18 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #ef4444" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🔥</span>
@@ -3814,14 +3922,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-08-19">
       <div class="day-header">
         <div class="day-name">Wed</div>
         <div class="day-date">19 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -3877,14 +3986,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-08-20">
       <div class="day-header">
         <div class="day-name">Thu</div>
         <div class="day-date">20 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #ef4444" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🔥</span>
@@ -3913,14 +4023,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-08-21">
       <div class="day-header">
         <div class="day-name">Fri</div>
         <div class="day-date">21 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #84cc16" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💪</span>
@@ -3948,14 +4059,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
-    <div class="day-col" data-date="2026-08-22">
+    <div class="day-col day-rest-only" data-date="2026-08-22">
       <div class="day-header">
         <div class="day-name">Sat</div>
         <div class="day-date">22 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -3974,14 +4086,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-08-23">
       <div class="day-header">
         <div class="day-name">Sun</div>
         <div class="day-date">23 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #7c3aed" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -4010,16 +4123,17 @@
         
       </div>
     </div>
-    </div>
-  </div>
+      </div>
+    </div></div>
   </section>
 
   <section class="week-section " data-week-start="2026-08-24">
-    <div class="week-header">
+    <div class="week-header" onclick="toggleWeek(this)">
       <div class="week-title">
         <span class="week-num">Week 13</span>
         <span class="week-dates">24 Aug – 30 Aug</span>
         
+        <span class="week-collapse-arrow">▾</span>
       </div>
       <div class="week-meta">
         <span class="phase-badge" style="background:#f97316">Build</span>
@@ -4030,12 +4144,13 @@
       <div class="week-focus">Race-pace Tuesday + tempo Thursday. Maximum race specificity before taper.</div>
     </div>
     <div class="week-grid">
-    <div class="day-col" data-date="2026-08-24">
+    <div class="day-col day-rest-only" data-date="2026-08-24">
       <div class="day-header">
         <div class="day-name">Mon</div>
         <div class="day-date">24 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -4054,14 +4169,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-08-25">
       <div class="day-header">
         <div class="day-name">Tue</div>
         <div class="day-date">25 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #ef4444" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🔥</span>
@@ -4090,14 +4206,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-08-26">
       <div class="day-header">
         <div class="day-name">Wed</div>
         <div class="day-date">26 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -4153,14 +4270,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-08-27">
       <div class="day-header">
         <div class="day-name">Thu</div>
         <div class="day-date">27 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #f97316" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">⚡</span>
@@ -4189,14 +4307,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-08-28">
       <div class="day-header">
         <div class="day-name">Fri</div>
         <div class="day-date">28 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #84cc16" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💪</span>
@@ -4224,14 +4343,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
-    <div class="day-col" data-date="2026-08-29">
+    <div class="day-col day-rest-only" data-date="2026-08-29">
       <div class="day-header">
         <div class="day-name">Sat</div>
         <div class="day-date">29 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -4250,14 +4370,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-08-30">
       <div class="day-header">
         <div class="day-name">Sun</div>
         <div class="day-date">30 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #7c3aed" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -4286,16 +4407,17 @@
         
       </div>
     </div>
-    </div>
-  </div>
+      </div>
+    </div></div>
   </section>
 
   <section class="week-section " data-week-start="2026-08-31">
-    <div class="week-header">
+    <div class="week-header" onclick="toggleWeek(this)">
       <div class="week-title">
         <span class="week-num">Week 14</span>
         <span class="week-dates">31 Aug – 6 Sept</span>
         
+        <span class="week-collapse-arrow">▾</span>
       </div>
       <div class="week-meta">
         <span class="phase-badge" style="background:#8b5cf6">Taper</span>
@@ -4306,12 +4428,13 @@
       <div class="week-focus">Taper begins. Volume drops, quality stays. Trust the process.</div>
     </div>
     <div class="week-grid">
-    <div class="day-col" data-date="2026-08-31">
+    <div class="day-col day-rest-only" data-date="2026-08-31">
       <div class="day-header">
         <div class="day-name">Mon</div>
         <div class="day-date">31 Aug</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -4330,14 +4453,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-09-01">
       <div class="day-header">
         <div class="day-name">Tue</div>
         <div class="day-date">1 Sept</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #ef4444" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🔥</span>
@@ -4366,14 +4490,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-09-02">
       <div class="day-header">
         <div class="day-name">Wed</div>
         <div class="day-date">2 Sept</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -4429,14 +4554,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-09-03">
       <div class="day-header">
         <div class="day-name">Thu</div>
         <div class="day-date">3 Sept</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -4465,14 +4591,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-09-04">
       <div class="day-header">
         <div class="day-name">Fri</div>
         <div class="day-date">4 Sept</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #84cc16" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💪</span>
@@ -4500,14 +4627,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
-    <div class="day-col" data-date="2026-09-05">
+    <div class="day-col day-rest-only" data-date="2026-09-05">
       <div class="day-header">
         <div class="day-name">Sat</div>
         <div class="day-date">5 Sept</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -4526,14 +4654,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-09-06">
       <div class="day-header">
         <div class="day-name">Sun</div>
         <div class="day-date">6 Sept</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #7c3aed" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -4562,16 +4691,17 @@
         
       </div>
     </div>
-    </div>
-  </div>
+      </div>
+    </div></div>
   </section>
 
   <section class="week-section " data-week-start="2026-09-07">
-    <div class="week-header">
+    <div class="week-header" onclick="toggleWeek(this)">
       <div class="week-title">
         <span class="week-num">Week 15</span>
         <span class="week-dates">7 Sept – 13 Sept</span>
         
+        <span class="week-collapse-arrow">▾</span>
       </div>
       <div class="week-meta">
         <span class="phase-badge" style="background:#8b5cf6">Taper</span>
@@ -4582,12 +4712,13 @@
       <div class="week-focus">Sharp taper. Stay sharp, sleep more, eat well. The work is done.</div>
     </div>
     <div class="week-grid">
-    <div class="day-col" data-date="2026-09-07">
+    <div class="day-col day-rest-only" data-date="2026-09-07">
       <div class="day-header">
         <div class="day-name">Mon</div>
         <div class="day-date">7 Sept</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -4606,14 +4737,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-09-08">
       <div class="day-header">
         <div class="day-name">Tue</div>
         <div class="day-date">8 Sept</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #ef4444" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🔥</span>
@@ -4642,14 +4774,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-09-09">
       <div class="day-header">
         <div class="day-name">Wed</div>
         <div class="day-date">9 Sept</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -4705,14 +4838,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-09-10">
       <div class="day-header">
         <div class="day-name">Thu</div>
         <div class="day-date">10 Sept</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #06b6d4" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💨</span>
@@ -4741,14 +4875,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
-    <div class="day-col" data-date="2026-09-11">
+    <div class="day-col day-rest-only" data-date="2026-09-11">
       <div class="day-header">
         <div class="day-name">Fri</div>
         <div class="day-date">11 Sept</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -4767,14 +4902,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
-    <div class="day-col" data-date="2026-09-12">
+    <div class="day-col day-rest-only" data-date="2026-09-12">
       <div class="day-header">
         <div class="day-name">Sat</div>
         <div class="day-date">12 Sept</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -4793,14 +4929,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-09-13">
       <div class="day-header">
         <div class="day-name">Sun</div>
         <div class="day-date">13 Sept</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -4829,16 +4966,17 @@
         
       </div>
     </div>
-    </div>
-  </div>
+      </div>
+    </div></div>
   </section>
 
   <section class="week-section " data-week-start="2026-09-14">
-    <div class="week-header">
+    <div class="week-header" onclick="toggleWeek(this)">
       <div class="week-title">
         <span class="week-num">Week 16</span>
         <span class="week-dates">14 Sept – 20 Sept</span>
         
+        <span class="week-collapse-arrow">▾</span>
       </div>
       <div class="week-meta">
         <span class="phase-badge" style="background:#8b5cf6">Taper</span>
@@ -4849,12 +4987,13 @@
       <div class="week-focus">Race week. Be calm. Trust the training. You are ready.</div>
     </div>
     <div class="week-grid">
-    <div class="day-col" data-date="2026-09-14">
+    <div class="day-col day-rest-only" data-date="2026-09-14">
       <div class="day-header">
         <div class="day-name">Mon</div>
         <div class="day-date">14 Sept</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -4873,14 +5012,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-09-15">
       <div class="day-header">
         <div class="day-name">Tue</div>
         <div class="day-date">15 Sept</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #06b6d4" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">💨</span>
@@ -4909,14 +5049,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
-    <div class="day-col" data-date="2026-09-16">
+    <div class="day-col day-rest-only" data-date="2026-09-16">
       <div class="day-header">
         <div class="day-name">Wed</div>
         <div class="day-date">16 Sept</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -4935,14 +5076,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-09-17">
       <div class="day-header">
         <div class="day-name">Thu</div>
         <div class="day-date">17 Sept</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -4971,14 +5113,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
-    <div class="day-col" data-date="2026-09-18">
+    <div class="day-col day-rest-only" data-date="2026-09-18">
       <div class="day-header">
         <div class="day-name">Fri</div>
         <div class="day-date">18 Sept</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #d1d5db" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">😴</span>
@@ -4997,14 +5140,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-09-19">
       <div class="day-header">
         <div class="day-name">Sat</div>
         <div class="day-date">19 Sept</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #3b82f6" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏃</span>
@@ -5033,14 +5177,15 @@
         
       </div>
     </div>
+      </div>
     </div>
-  
     <div class="day-col" data-date="2026-09-20">
       <div class="day-header">
         <div class="day-name">Sun</div>
         <div class="day-date">20 Sept</div>
       </div>
-      
+      <div class="day-workouts">
+        
     <div class="workout-card" style="border-left: 4px solid #f59e0b" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">🏁</span>
@@ -5069,8 +5214,8 @@
         
       </div>
     </div>
-    </div>
-  </div>
+      </div>
+    </div></div>
   </section>
   </div>
 </div>
@@ -5814,6 +5959,19 @@ function switchMainTab(name) {
 (function() {
   const saved = localStorage.getItem('coach_active_tab');
   if (saved && saved !== 'today') switchMainTab(saved);
+})();
+
+// ── WEEK COLLAPSE ────────────────────────────────────────────
+function toggleWeek(headerEl) {
+  headerEl.closest('.week-section').classList.toggle('collapsed');
+}
+// On mobile, collapse all past weeks by default to keep plan tidy
+(function() {
+  if (window.innerWidth > 700) return;
+  document.querySelectorAll('.week-section').forEach(sec => {
+    const start = sec.dataset.weekStart;
+    if (start && start < TODAY) sec.classList.add('collapsed');
+  });
 })();
 
 // ── KEYBOARD SHORTCUTS ───────────────────────────────────────

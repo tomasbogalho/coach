@@ -716,7 +716,6 @@ function weekCard(w) {
   const isRecovery = w.isRecoveryWeek;
   const phaseColor = phaseBadgeColor(w.phase);
   const totalKm = w.summary?.totalKm || 0;
-  const runSessions = w.summary?.runSessions || 0;
   const strengthSessions = w.summary?.strengthSessions || 0;
   const actKm = actualKmByWeek[w.startDate] ?? null;
   const kmStatus = actKm !== null
@@ -726,23 +725,28 @@ function weekCard(w) {
     ? `<span class="week-stat actual-km ${kmStatus}">📍 ${actKm}km done</span>`
     : '';
 
-  const daysHtml = w.days.map(day => `
-    <div class="day-col" data-date="${day.date}">
+  const daysHtml = w.days.map(day => {
+    const isRestOnly = day.workouts.every(wo => wo.sport === 'rest');
+    return `
+    <div class="day-col${isRestOnly ? ' day-rest-only' : ''}" data-date="${day.date}">
       <div class="day-header">
         <div class="day-name">${day.dayOfWeek.slice(0,3)}</div>
         <div class="day-date">${formatDate(day.date)}</div>
       </div>
-      ${day.workouts.map(w => workoutCard(w, day.date)).join('')}
-    </div>
-  `).join('');
+      <div class="day-workouts">
+        ${day.workouts.map(wo => workoutCard(wo, day.date)).join('')}
+      </div>
+    </div>`;
+  }).join('');
 
   return `
   <section class="week-section ${isRecovery ? 'recovery-week' : ''}" data-week-start="${w.startDate}">
-    <div class="week-header">
+    <div class="week-header" onclick="toggleWeek(this)">
       <div class="week-title">
         <span class="week-num">Week ${w.weekNumber}</span>
         <span class="week-dates">${formatDate(w.startDate)} – ${formatDate(w.endDate)}</span>
         ${isRecovery ? '<span class="recovery-badge">Recovery</span>' : ''}
+        <span class="week-collapse-arrow">▾</span>
       </div>
       <div class="week-meta">
         <span class="phase-badge" style="background:${phaseColor}">${w.phase}</span>
@@ -938,7 +942,7 @@ const html = `<!DOCTYPE html>
     .weeks-container { padding: 0 24px 48px; display: flex; flex-direction: column; gap: 24px; }
     .week-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
     .week-section.recovery-week { border-color: #10b981; }
-    .week-header { padding: 14px 18px; border-bottom: 1px solid var(--border); background: var(--surface2); }
+    .week-header { padding: 14px 18px; border-bottom: 1px solid var(--border); background: var(--surface2); cursor: pointer; user-select: none; }
     .week-title { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; flex-wrap: wrap; }
     .week-num { font-size: 15px; font-weight: 700; }
     .week-dates { font-size: 13px; color: var(--text3); }
@@ -955,6 +959,9 @@ const html = `<!DOCTYPE html>
     .day-header { margin-bottom: 8px; }
     .day-name { font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; }
     .day-date { font-size: 11px; color: var(--text3); }
+    .week-collapse-arrow { font-size: 13px; color: var(--text3); margin-left: auto; transition: transform .2s; }
+    .week-section.collapsed .week-collapse-arrow { transform: rotate(-90deg); }
+    .week-section.collapsed .week-grid { display: none; }
 
     .workout-card { background: var(--surface2); border-radius: 6px; padding: 8px; margin-bottom: 6px; cursor: pointer; transition: opacity .15s; }
     .workout-card:hover { opacity: .9; }
@@ -995,32 +1002,46 @@ const html = `<!DOCTYPE html>
       .main-tabs { padding: 0; }
       .main-tab { flex: 1; padding: 10px 4px; font-size: 12px; white-space: nowrap; border-radius: 0; }
 
-      /* Week grid — collapse to vertical list */
+      /* Week grid — vertical day list, rest days hidden */
       .weeks-container { padding: 0 8px 48px; gap: 14px; }
       .week-section { border-radius: 8px; }
       .week-header { padding: 12px 14px; }
-      .week-grid { display: flex; flex-direction: column; }
+      .week-num { font-size: 14px; }
+      .week-dates { font-size: 11px; }
+      .week-collapse-arrow { margin-left: auto; }
+      .week-grid { display: flex; flex-direction: column; border-top: 1px solid var(--border); }
+      /* Hide rest-only days on mobile */
+      .day-rest-only { display: none; }
+      /* Each active day = full-width card */
       .day-col {
         border-right: none;
         border-bottom: 1px solid var(--border);
-        padding: 10px 12px;
+        padding: 0;
         min-height: unset;
-        display: grid;
-        grid-template-columns: 52px 1fr;
-        gap: 8px;
-        align-items: start;
+        display: block;
       }
       .day-col:last-child { border-bottom: none; }
-      .day-header { margin-bottom: 0; }
-      .day-name { font-size: 12px; }
-      .day-date { font-size: 11px; }
-
-      /* Workout cards — bigger touch targets */
-      .workout-card { padding: 10px 12px; margin-bottom: 6px; }
-      .workout-name { font-size: 13px; }
+      /* Day header — sticky label inside the card */
+      .day-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px 6px;
+        background: rgba(255,255,255,.04);
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 0;
+      }
+      .day-name { font-size: 13px; font-weight: 700; text-transform: uppercase; color: var(--accent); }
+      .day-date { font-size: 12px; color: var(--text3); }
+      /* Workouts list inside a day */
+      .day-workouts { padding: 8px 10px; display: flex; flex-direction: column; gap: 6px; }
+      /* Bigger workout cards on mobile */
+      .workout-card { padding: 12px 14px; border-radius: 8px; margin-bottom: 0; }
+      .workout-name { font-size: 14px; }
       .workout-detail { font-size: 12px; }
-      .workout-check { font-size: 18px; padding: 2px; }
-      .export-btn { padding: 4px 8px; font-size: 12px; }
+      .sport-icon { font-size: 18px; }
+      .workout-check { font-size: 20px; padding: 2px 4px; }
+      .export-btn { padding: 5px 10px; font-size: 12px; }
 
       /* Today panel */
       .today-panel-wrap { grid-template-columns: 1fr; }
@@ -2117,6 +2138,19 @@ function switchMainTab(name) {
 (function() {
   const saved = localStorage.getItem('coach_active_tab');
   if (saved && saved !== 'today') switchMainTab(saved);
+})();
+
+// ── WEEK COLLAPSE ────────────────────────────────────────────
+function toggleWeek(headerEl) {
+  headerEl.closest('.week-section').classList.toggle('collapsed');
+}
+// On mobile, collapse all past weeks by default to keep plan tidy
+(function() {
+  if (window.innerWidth > 700) return;
+  document.querySelectorAll('.week-section').forEach(sec => {
+    const start = sec.dataset.weekStart;
+    if (start && start < TODAY) sec.classList.add('collapsed');
+  });
 })();
 
 // ── KEYBOARD SHORTCUTS ───────────────────────────────────────
