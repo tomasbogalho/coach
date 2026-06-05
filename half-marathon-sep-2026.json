@@ -1,0 +1,2621 @@
+{
+  "version": "1.0",
+  "meta": {
+    "id": "half-marathon-sep-2026-tomas",
+    "athlete": "Tomás Bogalho",
+    "event": "Half Marathon",
+    "eventDate": "2026-09-20",
+    "planStartDate": "2026-06-01",
+    "planEndDate": "2026-09-20",
+    "createdAt": "2026-05-30T09:17:01.618Z",
+    "updatedAt": "2026-05-30T09:17:01.618Z",
+    "totalWeeks": 16,
+    "generatedBy": "Claude Coach",
+    "goalTime": "1:39:59",
+    "racePacePerKm": "4:44",
+    "notes": "Post-Copenhagen Marathon. Goal: Sub 1:40. 6 days running + 2-3x strength/week."
+  },
+  "preferences": {
+    "run": "kilometers",
+    "firstDayOfWeek": "monday"
+  },
+  "assessment": {
+    "foundation": {
+      "raceHistory": [
+        "Copenhagen Marathon May 2026 (4:21, 42.7km)",
+        "Half Marathon Vasco da Gama Oct 2025 (1:54, 5:22/km)",
+        "10km race Apr 2026 (50:42, 4:57/km)",
+        "78 runs, 685km lifetime on Strava"
+      ],
+      "peakTrainingLoad": 68,
+      "foundationLevel": "advanced",
+      "yearsInSport": 2
+    },
+    "currentForm": {
+      "weeklyKmAvg": 45,
+      "longestRunKm": 42.7,
+      "recentRuns": "3 weeks post-marathon, resuming with easy runs + tempo",
+      "consistency": "Very high — regular running through marathon block"
+    },
+    "strengths": [
+      {
+        "sport": "run",
+        "evidence": "Marathon finisher, 30km training runs at easy HR 150"
+      },
+      {
+        "sport": "strength",
+        "evidence": "Regular CrossFit & weight training"
+      }
+    ],
+    "limiters": [
+      {
+        "sport": "run",
+        "evidence": "Speed — HM PR 5:22/km, goal is 4:44/km. Big but achievable gap."
+      }
+    ],
+    "constraints": []
+  },
+  "zones": {
+    "run": {
+      "hr": {
+        "lthr": 167,
+        "zones": [
+          {
+            "zone": 1,
+            "name": "Recovery",
+            "percentLow": 0,
+            "percentHigh": 81,
+            "hrLow": 0,
+            "hrHigh": 135,
+            "paceLow": "6:30",
+            "paceHigh": "7:00"
+          },
+          {
+            "zone": 2,
+            "name": "Aerobic",
+            "percentLow": 81,
+            "percentHigh": 89,
+            "hrLow": 135,
+            "hrHigh": 149,
+            "paceLow": "5:50",
+            "paceHigh": "6:15"
+          },
+          {
+            "zone": 3,
+            "name": "Tempo",
+            "percentLow": 90,
+            "percentHigh": 93,
+            "hrLow": 150,
+            "hrHigh": 155,
+            "paceLow": "5:10",
+            "paceHigh": "5:30"
+          },
+          {
+            "zone": 4,
+            "name": "Sub-threshold",
+            "percentLow": 94,
+            "percentHigh": 99,
+            "hrLow": 157,
+            "hrHigh": 166,
+            "paceLow": "4:48",
+            "paceHigh": "5:10"
+          },
+          {
+            "zone": "5a",
+            "name": "Threshold",
+            "percentLow": 100,
+            "percentHigh": 102,
+            "hrLow": 167,
+            "hrHigh": 170,
+            "paceLow": "4:40",
+            "paceHigh": "4:48"
+          },
+          {
+            "zone": "5b",
+            "name": "VO2max",
+            "percentLow": 103,
+            "percentHigh": 106,
+            "hrLow": 172,
+            "hrHigh": 177,
+            "paceLow": "4:20",
+            "paceHigh": "4:35"
+          }
+        ]
+      },
+      "paces": {
+        "easy": "5:50–6:15/km",
+        "marathon": "5:00/km",
+        "threshold": "4:48–5:05/km",
+        "interval": "4:25–4:35/km",
+        "raceGoal": "4:44/km",
+        "strides": "4:00–4:20/km (20 sec)"
+      }
+    }
+  },
+  "phases": [
+    {
+      "name": "Recovery",
+      "startWeek": 1,
+      "endWeek": 2,
+      "focus": "Post-marathon recovery, restore consistency",
+      "weeklyKmRange": {
+        "low": 36,
+        "high": 45
+      },
+      "keyWorkouts": [
+        "Easy runs only",
+        "First strides in W2"
+      ],
+      "physiologicalGoals": [
+        "Allow marathon adaptation",
+        "Restore connective tissue",
+        "Rebuild routine"
+      ]
+    },
+    {
+      "name": "Base",
+      "startWeek": 3,
+      "endWeek": 8,
+      "focus": "Aerobic foundation, introduce tempo",
+      "weeklyKmRange": {
+        "low": 50,
+        "high": 68
+      },
+      "keyWorkouts": [
+        "Progressive long runs",
+        "Strides",
+        "Tempo introduced W6"
+      ],
+      "physiologicalGoals": [
+        "Maximise aerobic capacity",
+        "Fat metabolism",
+        "Build mileage base"
+      ]
+    },
+    {
+      "name": "Build",
+      "startWeek": 9,
+      "endWeek": 13,
+      "focus": "Threshold & VO2max development",
+      "weeklyKmRange": {
+        "low": 50,
+        "high": 68
+      },
+      "keyWorkouts": [
+        "VO2max intervals",
+        "Threshold intervals",
+        "Race-pace long runs"
+      ],
+      "physiologicalGoals": [
+        "Raise VO2max",
+        "Improve lactate threshold",
+        "Race-pace specificity"
+      ]
+    },
+    {
+      "name": "Taper",
+      "startWeek": 14,
+      "endWeek": 16,
+      "focus": "Sharpen, recover, race",
+      "weeklyKmRange": {
+        "low": 20,
+        "high": 48
+      },
+      "keyWorkouts": [
+        "Race-pace sharpeners",
+        "Strides",
+        "Race Day"
+      ],
+      "physiologicalGoals": [
+        "Supercompensation",
+        "Neuromuscular freshness",
+        "Confidence"
+      ]
+    }
+  ],
+  "weeks": [
+    {
+      "weekNumber": 1,
+      "phase": "Recovery",
+      "focus": "Return to routine after Copenhagen Marathon. All easy.",
+      "isRecoveryWeek": true,
+      "startDate": "2026-06-01",
+      "endDate": "2026-06-07",
+      "targetKm": 40,
+      "days": [
+        {
+          "date": "2026-06-01",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w1-mon-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-02",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w1-tue-easy",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run — conversational pace. Stay in Z1-2. This week is about moving, not training.",
+              "durationMinutes": 37,
+              "distanceKm": 6,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50–6:15/km",
+              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 5km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-03",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w1-wed-easy",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run — conversational pace.",
+              "durationMinutes": 37,
+              "distanceKm": 6,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50–6:15/km",
+              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 5km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "completed": false
+            },
+            {
+              "id": "w1-wed-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability. Light loads — no heavy squats or plyometrics yet.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-04",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w1-thu-easy",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run — conversational pace.",
+              "durationMinutes": 43,
+              "distanceKm": 7,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50–6:15/km",
+              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 6km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-05",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w1-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability. Mobility focus. Hip flexors, hamstrings, calves.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-06",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w1-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-07",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w1-sun-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Long Run",
+              "description": "Weekly long run. This is the cornerstone workout of the week.",
+              "durationMinutes": 78,
+              "distanceKm": 13,
+              "primaryZone": "Zone 2",
+              "targetPace": "5:50–6:10/km",
+              "targetHR": "<149 bpm",
+              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 11km steady Z2 (HR < 149)\nFocus: Stay aerobic, resist pushing. Fuel with gels every 45 min.\nCool-down: Walk 5 min after.",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalKm": 32,
+        "totalHours": 3.3,
+        "runSessions": 4,
+        "strengthSessions": 2
+      }
+    },
+    {
+      "weekNumber": 2,
+      "phase": "Recovery",
+      "focus": "Ease back in. First strides to wake up fast-twitch without stress.",
+      "isRecoveryWeek": false,
+      "startDate": "2026-06-08",
+      "endDate": "2026-06-14",
+      "targetKm": 45,
+      "days": [
+        {
+          "date": "2026-06-08",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w2-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "KB Upper & Core Activation",
+              "description": "Light kettlebell session — upper body and core only. Day after the long run: no heavy leg loading. Keep it to 25–30 min.",
+              "durationMinutes": 30,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-09",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w2-tue-str-run",
+              "sport": "run",
+              "type": "strides",
+              "name": "Easy Run + 4×Strides",
+              "description": "Easy aerobic run with 4 strides to activate fast-twitch fibres without adding fatigue.",
+              "durationMinutes": 50,
+              "distanceKm": 7,
+              "primaryZone": "Zone 2",
+              "targetPace": "5:50–6:10/km easy + strides @ 4:10/km for 20 sec",
+              "humanReadable": "Warm-up: 2km easy Z2\nMain: 4km easy Z2\nStrides: 4×20 sec @ 4:00–4:20/km, walk/jog 90 sec between\nCool-down: 1km easy",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-10",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w2-wed-easy",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run — conversational pace.",
+              "durationMinutes": 37,
+              "distanceKm": 6,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50–6:15/km",
+              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 5km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "completed": false
+            },
+            {
+              "id": "w2-wed-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-11",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w2-thu-easy",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run — conversational pace.",
+              "durationMinutes": 43,
+              "distanceKm": 7,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50–6:15/km",
+              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 6km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-12",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w2-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-13",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w2-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-14",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w2-sun-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Long Run",
+              "description": "Weekly long run. This is the cornerstone workout of the week.",
+              "durationMinutes": 78,
+              "distanceKm": 13,
+              "primaryZone": "Zone 2",
+              "targetPace": "5:50–6:10/km",
+              "targetHR": "<149 bpm",
+              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 11km steady Z2 (HR < 149)\nFocus: Stay aerobic, resist pushing. Fuel with gels every 45 min.\nCool-down: Walk 5 min after.",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalKm": 33,
+        "totalHours": 3.5,
+        "runSessions": 4,
+        "strengthSessions": 3
+      }
+    },
+    {
+      "weekNumber": 3,
+      "phase": "Base",
+      "focus": "Establish aerobic base. Strides Tuesday, first short threshold Thursday.",
+      "isRecoveryWeek": false,
+      "startDate": "2026-06-15",
+      "endDate": "2026-06-21",
+      "targetKm": 52,
+      "days": [
+        {
+          "date": "2026-06-15",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w3-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "KB Upper & Core Activation",
+              "description": "Light kettlebell session — upper body and core only. Day after the long run: no heavy leg loading. Keep it to 25–30 min.",
+              "durationMinutes": 30,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-16",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w3-tue-str-run",
+              "sport": "run",
+              "type": "strides",
+              "name": "Easy Run + 6×Strides",
+              "description": "Easy aerobic run with 6 strides to activate fast-twitch fibres without adding fatigue.",
+              "durationMinutes": 60,
+              "distanceKm": 8,
+              "primaryZone": "Zone 2",
+              "targetPace": "5:50–6:10/km easy + strides @ 4:10/km for 20 sec",
+              "humanReadable": "Warm-up: 2km easy Z2\nMain: 5km easy Z2\nStrides: 6×20 sec @ 4:00–4:20/km, walk/jog 90 sec between\nCool-down: 1km easy",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-17",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w3-wed-easy",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run — conversational pace.",
+              "durationMinutes": 43,
+              "distanceKm": 7,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50–6:15/km",
+              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 6km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "completed": false
+            },
+            {
+              "id": "w3-wed-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-18",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w3-thu-thresh",
+              "sport": "run",
+              "type": "intervals",
+              "name": "Threshold Intervals – 3×1km",
+              "description": "Cruise intervals at half-marathon threshold effort. Controlled and purposeful.",
+              "durationMinutes": 54,
+              "distanceKm": 9,
+              "primaryZone": "Zone 4",
+              "targetPace": "5:05–5:15/km",
+              "targetHR": "157–166 bpm",
+              "humanReadable": "Warm-up: 2km easy Z2 (12 min)\nMain: 3×1km @ 5:05–5:15/km, 90 sec jog recovery\nCool-down: 2km easy (12 min)\nFocus: Smooth sustained effort. Each rep should feel the same.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-19",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w3-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-20",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w3-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-21",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w3-sun-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Long Run",
+              "description": "Weekly long run. This is the cornerstone workout of the week.",
+              "durationMinutes": 90,
+              "distanceKm": 15,
+              "primaryZone": "Zone 2",
+              "targetPace": "5:50–6:10/km",
+              "targetHR": "<149 bpm",
+              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 13km steady Z2 (HR < 149)\nFocus: Stay aerobic, resist pushing. Fuel with gels every 45 min.\nCool-down: Walk 5 min after.",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalKm": 39,
+        "totalHours": 4.1,
+        "runSessions": 4,
+        "strengthSessions": 3
+      }
+    },
+    {
+      "weekNumber": 4,
+      "phase": "Base",
+      "focus": "Build volume. Strides Tuesday, tempo Thursday, progressive long run Sunday.",
+      "isRecoveryWeek": false,
+      "startDate": "2026-06-22",
+      "endDate": "2026-06-28",
+      "targetKm": 58,
+      "days": [
+        {
+          "date": "2026-06-22",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w4-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "KB Upper & Core Activation",
+              "description": "Light kettlebell session — upper body and core only. Day after the long run: no heavy leg loading. Keep it to 25–30 min.",
+              "durationMinutes": 30,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-23",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w4-tue-str-run",
+              "sport": "run",
+              "type": "strides",
+              "name": "Easy Run + 6×Strides",
+              "description": "Easy aerobic run with 6 strides to activate fast-twitch fibres without adding fatigue.",
+              "durationMinutes": 66,
+              "distanceKm": 9,
+              "primaryZone": "Zone 2",
+              "targetPace": "5:50–6:10/km easy + strides @ 4:10/km for 20 sec",
+              "humanReadable": "Warm-up: 2km easy Z2\nMain: 6km easy Z2\nStrides: 6×20 sec @ 4:00–4:20/km, walk/jog 90 sec between\nCool-down: 1km easy",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-24",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w4-wed-easy",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run — conversational pace.",
+              "durationMinutes": 49,
+              "distanceKm": 8,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50–6:15/km",
+              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 7km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "completed": false
+            },
+            {
+              "id": "w4-wed-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-25",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w4-thu-tempo",
+              "sport": "run",
+              "type": "tempo",
+              "name": "Tempo Run – 20 min",
+              "description": "Continuous tempo effort at comfortably hard pace. \"7/10 effort\" — you can speak in short phrases only.",
+              "durationMinutes": 51,
+              "distanceKm": 9,
+              "primaryZone": "Zone 3–4",
+              "targetPace": "5:10–5:20/km",
+              "targetHR": "155–165 bpm",
+              "humanReadable": "Warm-up: 2km easy Z1-2 (12 min)\nMain: 20 min continuous @ 5:10–5:20/km\nCool-down: 2km easy Z1 (12 min)\nFocus: Smooth, controlled — if HR exceeds 166, ease off slightly",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-26",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w4-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-27",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w4-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-28",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w4-sun-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Progressive Long Run",
+              "description": "Weekly long run. Last 4km at marathon/race pace (4:44–5:00/km). This is the cornerstone workout of the week.",
+              "durationMinutes": 98,
+              "distanceKm": 17,
+              "primaryZone": "Zone 2 → Zone 3",
+              "targetPace": "5:50–6:00/km easy, last 4km @ 4:44–5:00/km",
+              "targetHR": "<149 easy, <165 race finish",
+              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 11km easy Z2 (HR < 149)\nFinish: 4km @ 4:44–5:00/km (Z3-4, controlled effort)\nNutrition: Take a gel every 45 min",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalKm": 43,
+        "totalHours": 4.4,
+        "runSessions": 4,
+        "strengthSessions": 3
+      }
+    },
+    {
+      "weekNumber": 5,
+      "phase": "Base",
+      "focus": "Recovery week. Back off — this is where adaptation happens.",
+      "isRecoveryWeek": true,
+      "startDate": "2026-06-29",
+      "endDate": "2026-07-05",
+      "targetKm": 42,
+      "days": [
+        {
+          "date": "2026-06-29",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w5-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "KB Upper & Core Activation",
+              "description": "Light kettlebell session — upper body and core only. Day after the long run: no heavy leg loading. Keep it to 25–30 min.",
+              "durationMinutes": 30,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-06-30",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w5-tue-str-run",
+              "sport": "run",
+              "type": "strides",
+              "name": "Easy Run + 4×Strides",
+              "description": "Easy aerobic run with 4 strides to activate fast-twitch fibres without adding fatigue.",
+              "durationMinutes": 44,
+              "distanceKm": 6,
+              "primaryZone": "Zone 2",
+              "targetPace": "5:50–6:10/km easy + strides @ 4:10/km for 20 sec",
+              "humanReadable": "Warm-up: 2km easy Z2\nMain: 3km easy Z2\nStrides: 4×20 sec @ 4:00–4:20/km, walk/jog 90 sec between\nCool-down: 1km easy",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-01",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w5-wed-easy",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run — conversational pace.",
+              "durationMinutes": 37,
+              "distanceKm": 6,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50–6:15/km",
+              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 5km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "completed": false
+            },
+            {
+              "id": "w5-wed-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability. Full intensity — recovery week is for legs, not gym.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-02",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w5-thu-easy",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run — conversational pace.",
+              "durationMinutes": 37,
+              "distanceKm": 6,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50–6:15/km",
+              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 5km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-03",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w5-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-04",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w5-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-05",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w5-sun-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Long Run",
+              "description": "Weekly long run. This is the cornerstone workout of the week.",
+              "durationMinutes": 72,
+              "distanceKm": 12,
+              "primaryZone": "Zone 2",
+              "targetPace": "5:50–6:10/km",
+              "targetHR": "<149 bpm",
+              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 10km steady Z2 (HR < 149)\nFocus: Stay aerobic, resist pushing. Fuel with gels every 45 min.\nCool-down: Walk 5 min after.",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalKm": 30,
+        "totalHours": 3.2,
+        "runSessions": 4,
+        "strengthSessions": 3
+      }
+    },
+    {
+      "weekNumber": 6,
+      "phase": "Base",
+      "focus": "Two quality days: tempo Tuesday + threshold cruise intervals Thursday.",
+      "isRecoveryWeek": false,
+      "startDate": "2026-07-06",
+      "endDate": "2026-07-12",
+      "targetKm": 61,
+      "days": [
+        {
+          "date": "2026-07-06",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w6-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "KB Upper & Core Activation",
+              "description": "Light kettlebell session — upper body and core only. Day after the long run: no heavy leg loading. Keep it to 25–30 min.",
+              "durationMinutes": 30,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-07",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w6-tue-tempo",
+              "sport": "run",
+              "type": "tempo",
+              "name": "Tempo Run – 20 min",
+              "description": "Continuous tempo effort at comfortably hard pace. \"7/10 effort\" — you can speak in short phrases only.",
+              "durationMinutes": 57,
+              "distanceKm": 10,
+              "primaryZone": "Zone 3–4",
+              "targetPace": "5:10–5:20/km",
+              "targetHR": "155–165 bpm",
+              "humanReadable": "Warm-up: 2km easy Z1-2 (12 min)\nMain: 20 min continuous @ 5:10–5:20/km\nCool-down: 2km easy Z1 (12 min)\nFocus: Smooth, controlled — if HR exceeds 166, ease off slightly",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-08",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w6-wed-easy",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run — conversational pace.",
+              "durationMinutes": 49,
+              "distanceKm": 8,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50–6:15/km",
+              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 7km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "completed": false
+            },
+            {
+              "id": "w6-wed-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-09",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w6-thu-thresh",
+              "sport": "run",
+              "type": "intervals",
+              "name": "Threshold Intervals – 3×1km",
+              "description": "Cruise intervals at half-marathon threshold effort. Controlled and purposeful.",
+              "durationMinutes": 54,
+              "distanceKm": 9,
+              "primaryZone": "Zone 4",
+              "targetPace": "5:00–5:10/km",
+              "targetHR": "157–166 bpm",
+              "humanReadable": "Warm-up: 2km easy Z2 (12 min)\nMain: 3×1km @ 5:00–5:10/km, 90 sec jog recovery\nCool-down: 2km easy (12 min)\nFocus: Smooth sustained effort. Each rep should feel the same.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-10",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w6-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-11",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w6-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-12",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w6-sun-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Progressive Long Run",
+              "description": "Weekly long run. Last 3km at marathon/race pace (4:44–5:00/km). This is the cornerstone workout of the week.",
+              "durationMinutes": 105,
+              "distanceKm": 18,
+              "primaryZone": "Zone 2 → Zone 3",
+              "targetPace": "5:50–6:00/km easy, last 3km @ 4:44–5:00/km",
+              "targetHR": "<149 easy, <165 race finish",
+              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 13km easy Z2 (HR < 149)\nFinish: 3km @ 4:44–5:00/km (Z3-4, controlled effort)\nNutrition: Take a gel every 45 min",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalKm": 45,
+        "totalHours": 4.4,
+        "runSessions": 4,
+        "strengthSessions": 3
+      }
+    },
+    {
+      "weekNumber": 7,
+      "phase": "Base",
+      "focus": "Two quality days: longer tempo Tuesday + threshold intervals Thursday.",
+      "isRecoveryWeek": false,
+      "startDate": "2026-07-13",
+      "endDate": "2026-07-19",
+      "targetKm": 65,
+      "days": [
+        {
+          "date": "2026-07-13",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w7-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "KB Upper & Core Activation",
+              "description": "Light kettlebell session — upper body and core only. Day after the long run: no heavy leg loading. Keep it to 25–30 min.",
+              "durationMinutes": 30,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-14",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w7-tue-tempo",
+              "sport": "run",
+              "type": "tempo",
+              "name": "Tempo Run – 25 min",
+              "description": "Continuous tempo effort at comfortably hard pace. \"7/10 effort\" — you can speak in short phrases only.",
+              "durationMinutes": 62,
+              "distanceKm": 11,
+              "primaryZone": "Zone 3–4",
+              "targetPace": "5:05–5:15/km",
+              "targetHR": "155–165 bpm",
+              "humanReadable": "Warm-up: 2km easy Z1-2 (12 min)\nMain: 25 min continuous @ 5:05–5:15/km\nCool-down: 2km easy Z1 (12 min)\nFocus: Smooth, controlled — if HR exceeds 166, ease off slightly",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-15",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w7-wed-easy",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run — conversational pace.",
+              "durationMinutes": 49,
+              "distanceKm": 8,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50–6:15/km",
+              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 7km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "completed": false
+            },
+            {
+              "id": "w7-wed-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-16",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w7-thu-thresh",
+              "sport": "run",
+              "type": "intervals",
+              "name": "Threshold Intervals – 4×1km",
+              "description": "Cruise intervals at half-marathon threshold effort. Controlled and purposeful.",
+              "durationMinutes": 60,
+              "distanceKm": 10,
+              "primaryZone": "Zone 4",
+              "targetPace": "4:55–5:05/km",
+              "targetHR": "157–166 bpm",
+              "humanReadable": "Warm-up: 2km easy Z2 (12 min)\nMain: 4×1km @ 4:55–5:05/km, 90 sec jog recovery\nCool-down: 2km easy (12 min)\nFocus: Smooth sustained effort. Each rep should feel the same.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-17",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w7-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-18",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w7-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-19",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w7-sun-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Progressive Long Run",
+              "description": "Weekly long run. Last 4km at marathon/race pace (4:44–5:00/km). This is the cornerstone workout of the week.",
+              "durationMinutes": 116,
+              "distanceKm": 20,
+              "primaryZone": "Zone 2 → Zone 3",
+              "targetPace": "5:50–6:00/km easy, last 4km @ 4:44–5:00/km",
+              "targetHR": "<149 easy, <165 race finish",
+              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 14km easy Z2 (HR < 149)\nFinish: 4km @ 4:44–5:00/km (Z3-4, controlled effort)\nNutrition: Take a gel every 45 min",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalKm": 49,
+        "totalHours": 4.8,
+        "runSessions": 4,
+        "strengthSessions": 3
+      }
+    },
+    {
+      "weekNumber": 8,
+      "phase": "Base",
+      "focus": "Peak base week. Longest tempo Tuesday + threshold intervals Thursday.",
+      "isRecoveryWeek": false,
+      "startDate": "2026-07-20",
+      "endDate": "2026-07-26",
+      "targetKm": 69,
+      "days": [
+        {
+          "date": "2026-07-20",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w8-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "KB Upper & Core Activation",
+              "description": "Light kettlebell session — upper body and core only. Day after the long run: no heavy leg loading. Keep it to 25–30 min.",
+              "durationMinutes": 30,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-21",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w8-tue-tempo",
+              "sport": "run",
+              "type": "tempo",
+              "name": "Tempo Run – 30 min",
+              "description": "Continuous tempo effort at comfortably hard pace. \"7/10 effort\" — you can speak in short phrases only.",
+              "durationMinutes": 67,
+              "distanceKm": 12,
+              "primaryZone": "Zone 3–4",
+              "targetPace": "5:00–5:10/km",
+              "targetHR": "155–165 bpm",
+              "humanReadable": "Warm-up: 2km easy Z1-2 (12 min)\nMain: 30 min continuous @ 5:00–5:10/km\nCool-down: 2km easy Z1 (12 min)\nFocus: Smooth, controlled — if HR exceeds 166, ease off slightly",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-22",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w8-wed-easy",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run — conversational pace.",
+              "durationMinutes": 49,
+              "distanceKm": 8,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50–6:15/km",
+              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 7km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "completed": false
+            },
+            {
+              "id": "w8-wed-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-23",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w8-thu-thresh",
+              "sport": "run",
+              "type": "intervals",
+              "name": "Threshold Intervals – 4×1km",
+              "description": "Cruise intervals at half-marathon threshold effort. Controlled and purposeful.",
+              "durationMinutes": 60,
+              "distanceKm": 10,
+              "primaryZone": "Zone 4",
+              "targetPace": "4:52–5:02/km",
+              "targetHR": "157–166 bpm",
+              "humanReadable": "Warm-up: 2km easy Z2 (12 min)\nMain: 4×1km @ 4:52–5:02/km, 90 sec jog recovery\nCool-down: 2km easy (12 min)\nFocus: Smooth sustained effort. Each rep should feel the same.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-24",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w8-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-25",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w8-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-26",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w8-sun-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Progressive Long Run",
+              "description": "Weekly long run. Last 5km at marathon/race pace (4:44–5:00/km). This is the cornerstone workout of the week.",
+              "durationMinutes": 121,
+              "distanceKm": 21,
+              "primaryZone": "Zone 2 → Zone 3",
+              "targetPace": "5:50–6:00/km easy, last 5km @ 4:44–5:00/km",
+              "targetHR": "<149 easy, <165 race finish",
+              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 14km easy Z2 (HR < 149)\nFinish: 5km @ 4:44–5:00/km (Z3-4, controlled effort)\nNutrition: Take a gel every 45 min",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalKm": 51,
+        "totalHours": 5,
+        "runSessions": 4,
+        "strengthSessions": 3
+      }
+    },
+    {
+      "weekNumber": 9,
+      "phase": "Build",
+      "focus": "Build begins. VO₂max intervals + tempo. This is where the sub-1:40 is forged.",
+      "isRecoveryWeek": false,
+      "startDate": "2026-07-27",
+      "endDate": "2026-08-02",
+      "targetKm": 64,
+      "days": [
+        {
+          "date": "2026-07-27",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w9-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "KB Upper & Core Activation",
+              "description": "Light kettlebell session — upper body and core only. Day after the long run: no heavy leg loading. Keep it to 25–30 min.",
+              "durationMinutes": 30,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-28",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w9-tue-vo2",
+              "sport": "run",
+              "type": "intervals",
+              "name": "VO₂max Intervals – 5×1000m",
+              "description": "Hard VO₂max intervals. These hurt but build your speed ceiling. Full recovery between.",
+              "durationMinutes": 65,
+              "distanceKm": 10,
+              "primaryZone": "Zone 5b",
+              "targetPace": "4:30–4:38/km",
+              "targetHR": "> 167 bpm during reps",
+              "humanReadable": "Warm-up: 2km easy + 4×100m strides (15 min)\nMain: 5×1000m @ 4:30–4:38/km, 2:30 min jog recovery\nCool-down: 2km easy (10 min)\nFocus: Hit pace from rep 1. If fading badly after rep 4, take extra rest.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-29",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w9-wed-easy",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run — conversational pace.",
+              "durationMinutes": 49,
+              "distanceKm": 8,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50–6:15/km",
+              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 7km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "completed": false
+            },
+            {
+              "id": "w9-wed-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-30",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w9-thu-tempo",
+              "sport": "run",
+              "type": "tempo",
+              "name": "Tempo Run – 25 min",
+              "description": "Continuous tempo effort at comfortably hard pace. \"7/10 effort\" — you can speak in short phrases only.",
+              "durationMinutes": 62,
+              "distanceKm": 11,
+              "primaryZone": "Zone 3–4",
+              "targetPace": "5:00–5:10/km",
+              "targetHR": "155–165 bpm",
+              "humanReadable": "Warm-up: 2km easy Z1-2 (12 min)\nMain: 25 min continuous @ 5:00–5:10/km\nCool-down: 2km easy Z1 (12 min)\nFocus: Smooth, controlled — if HR exceeds 166, ease off slightly",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-07-31",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w9-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-01",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w9-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-02",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w9-sun-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Progressive Long Run",
+              "description": "Weekly long run. Last 5km at marathon/race pace (4:44–5:00/km). This is the cornerstone workout of the week.",
+              "durationMinutes": 115,
+              "distanceKm": 20,
+              "primaryZone": "Zone 2 → Zone 3",
+              "targetPace": "5:50–6:00/km easy, last 5km @ 4:44–5:00/km",
+              "targetHR": "<149 easy, <165 race finish",
+              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 13km easy Z2 (HR < 149)\nFinish: 5km @ 4:44–5:00/km (Z3-4, controlled effort)\nNutrition: Take a gel every 45 min",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalKm": 49,
+        "totalHours": 4.9,
+        "runSessions": 4,
+        "strengthSessions": 3
+      }
+    },
+    {
+      "weekNumber": 10,
+      "phase": "Build",
+      "focus": "Two quality days: threshold Tuesday + VO₂max intervals Thursday.",
+      "isRecoveryWeek": false,
+      "startDate": "2026-08-03",
+      "endDate": "2026-08-09",
+      "targetKm": 66,
+      "days": [
+        {
+          "date": "2026-08-03",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w10-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "KB Upper & Core Activation",
+              "description": "Light kettlebell session — upper body and core only. Day after the long run: no heavy leg loading. Keep it to 25–30 min.",
+              "durationMinutes": 30,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-04",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w10-tue-thresh",
+              "sport": "run",
+              "type": "intervals",
+              "name": "Threshold Intervals – 4×2km",
+              "description": "Cruise intervals at half-marathon threshold effort. Controlled and purposeful.",
+              "durationMinutes": 72,
+              "distanceKm": 12,
+              "primaryZone": "Zone 4",
+              "targetPace": "4:52–5:00/km",
+              "targetHR": "157–166 bpm",
+              "humanReadable": "Warm-up: 2km easy Z2 (12 min)\nMain: 4×2km @ 4:52–5:00/km, 90 sec jog recovery\nCool-down: 2km easy (12 min)\nFocus: Smooth sustained effort. Each rep should feel the same.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-05",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w10-wed-easy",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run — conversational pace.",
+              "durationMinutes": 49,
+              "distanceKm": 8,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50–6:15/km",
+              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 7km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "completed": false
+            },
+            {
+              "id": "w10-wed-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-06",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w10-thu-vo2",
+              "sport": "run",
+              "type": "intervals",
+              "name": "VO₂max Intervals – 5×800m",
+              "description": "Hard VO₂max intervals. These hurt but build your speed ceiling. Full recovery between.",
+              "durationMinutes": 59,
+              "distanceKm": 9,
+              "primaryZone": "Zone 5b",
+              "targetPace": "4:28–4:35/km",
+              "targetHR": "> 167 bpm during reps",
+              "humanReadable": "Warm-up: 2km easy + 4×100m strides (15 min)\nMain: 5×800m @ 4:28–4:35/km, 2:30 min jog recovery\nCool-down: 2km easy (10 min)\nFocus: Hit pace from rep 1. If fading badly after rep 4, take extra rest.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-07",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w10-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-08",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w10-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-09",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w10-sun-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Progressive Long Run",
+              "description": "Weekly long run. Last 6km at marathon/race pace (4:44–5:00/km). This is the cornerstone workout of the week.",
+              "durationMinutes": 114,
+              "distanceKm": 20,
+              "primaryZone": "Zone 2 → Zone 3",
+              "targetPace": "5:50–6:00/km easy, last 6km @ 4:44–5:00/km",
+              "targetHR": "<149 easy, <165 race finish",
+              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 12km easy Z2 (HR < 149)\nFinish: 6km @ 4:44–5:00/km (Z3-4, controlled effort)\nNutrition: Take a gel every 45 min",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalKm": 49,
+        "totalHours": 4.9,
+        "runSessions": 4,
+        "strengthSessions": 3
+      }
+    },
+    {
+      "weekNumber": 11,
+      "phase": "Build",
+      "focus": "Recovery week. You are absorbing the training. Do NOT skip this.",
+      "isRecoveryWeek": true,
+      "startDate": "2026-08-10",
+      "endDate": "2026-08-16",
+      "targetKm": 48,
+      "days": [
+        {
+          "date": "2026-08-10",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w11-mon-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-11",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w11-tue-str-run",
+              "sport": "run",
+              "type": "strides",
+              "name": "Easy Run + 6×Strides",
+              "description": "Easy aerobic run with 6 strides to activate fast-twitch fibres without adding fatigue.",
+              "durationMinutes": 54,
+              "distanceKm": 7,
+              "primaryZone": "Zone 2",
+              "targetPace": "5:50–6:10/km easy + strides @ 4:10/km for 20 sec",
+              "humanReadable": "Warm-up: 2km easy Z2\nMain: 4km easy Z2\nStrides: 6×20 sec @ 4:00–4:20/km, walk/jog 90 sec between\nCool-down: 1km easy",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-12",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w11-wed-easy",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run — conversational pace.",
+              "durationMinutes": 37,
+              "distanceKm": 6,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50–6:15/km",
+              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 5km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "completed": false
+            },
+            {
+              "id": "w11-wed-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-13",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w11-thu-easy",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run — conversational pace.",
+              "durationMinutes": 43,
+              "distanceKm": 7,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50–6:15/km",
+              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 6km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-14",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w11-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-15",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w11-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-16",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w11-sun-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Long Run",
+              "description": "Weekly long run. This is the cornerstone workout of the week.",
+              "durationMinutes": 90,
+              "distanceKm": 15,
+              "primaryZone": "Zone 2",
+              "targetPace": "5:50–6:10/km",
+              "targetHR": "<149 bpm",
+              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 13km steady Z2 (HR < 149)\nFocus: Stay aerobic, resist pushing. Fuel with gels every 45 min.\nCool-down: Walk 5 min after.",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalKm": 35,
+        "totalHours": 3.7,
+        "runSessions": 4,
+        "strengthSessions": 2
+      }
+    },
+    {
+      "weekNumber": 12,
+      "phase": "Build",
+      "focus": "Peak build week. VO₂max + race pace. This is the hardest week — embrace it.",
+      "isRecoveryWeek": false,
+      "startDate": "2026-08-17",
+      "endDate": "2026-08-23",
+      "targetKm": 65,
+      "days": [
+        {
+          "date": "2026-08-17",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w12-mon-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-18",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w12-tue-vo2",
+              "sport": "run",
+              "type": "intervals",
+              "name": "VO₂max Intervals – 6×1000m",
+              "description": "Hard VO₂max intervals. These hurt but build your speed ceiling. Full recovery between.",
+              "durationMinutes": 65,
+              "distanceKm": 10,
+              "primaryZone": "Zone 5b",
+              "targetPace": "4:28–4:35/km",
+              "targetHR": "> 167 bpm during reps",
+              "humanReadable": "Warm-up: 2km easy + 4×100m strides (15 min)\nMain: 6×1000m @ 4:28–4:35/km, 2:30 min jog recovery\nCool-down: 2km easy (10 min)\nFocus: Hit pace from rep 1. If fading badly after rep 4, take extra rest.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-19",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w12-wed-easy",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run — conversational pace.",
+              "durationMinutes": 49,
+              "distanceKm": 8,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50–6:15/km",
+              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 7km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "completed": false
+            },
+            {
+              "id": "w12-wed-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-20",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w12-thu-thresh",
+              "sport": "run",
+              "type": "intervals",
+              "name": "Threshold Intervals – 3×2km",
+              "description": "Cruise intervals at half-marathon threshold effort. Controlled and purposeful.",
+              "durationMinutes": 60,
+              "distanceKm": 10,
+              "primaryZone": "Zone 4",
+              "targetPace": "4:48–4:55/km",
+              "targetHR": "157–166 bpm",
+              "humanReadable": "Warm-up: 2km easy Z2 (12 min)\nMain: 3×2km @ 4:48–4:55/km, 90 sec jog recovery\nCool-down: 2km easy (12 min)\nFocus: Smooth sustained effort. Each rep should feel the same.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-21",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w12-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-22",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w12-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-23",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w12-sun-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Progressive Long Run",
+              "description": "Weekly long run. Last 7km at marathon/race pace (4:44–5:00/km). This is the cornerstone workout of the week.",
+              "durationMinutes": 113,
+              "distanceKm": 20,
+              "primaryZone": "Zone 2 → Zone 3",
+              "targetPace": "5:50–6:00/km easy, last 7km @ 4:44–5:00/km",
+              "targetHR": "<149 easy, <165 race finish",
+              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 11km easy Z2 (HR < 149)\nFinish: 7km @ 4:44–5:00/km (Z3-4, controlled effort)\nNutrition: Take a gel every 45 min",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalKm": 48,
+        "totalHours": 4.8,
+        "runSessions": 4,
+        "strengthSessions": 2
+      }
+    },
+    {
+      "weekNumber": 13,
+      "phase": "Build",
+      "focus": "Race-pace Tuesday + tempo Thursday. Maximum race specificity before taper.",
+      "isRecoveryWeek": false,
+      "startDate": "2026-08-24",
+      "endDate": "2026-08-30",
+      "targetKm": 61,
+      "days": [
+        {
+          "date": "2026-08-24",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w13-mon-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-25",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w13-tue-rp",
+              "sport": "run",
+              "type": "intervals",
+              "name": "Race Pace Intervals – 3×3km",
+              "description": "Sub-1:40 race pace rehearsal. Lock in 4:44/km so it feels natural on race day.",
+              "durationMinutes": 70,
+              "distanceKm": 12,
+              "primaryZone": "Zone 4–5a",
+              "targetPace": "4:44/km",
+              "targetHR": "160–167 bpm",
+              "humanReadable": "Warm-up: 2km easy Z2\nMain: 3×3km @ 4:44/km, 2 min easy jog recovery\nCool-down: 2km easy\nFocus: This is your goal race pace — it should feel hard but controlled.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-26",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w13-wed-easy",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run — conversational pace.",
+              "durationMinutes": 49,
+              "distanceKm": 8,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50–6:15/km",
+              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 7km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "completed": false
+            },
+            {
+              "id": "w13-wed-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-27",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w13-thu-tempo",
+              "sport": "run",
+              "type": "tempo",
+              "name": "Tempo Run – 25 min",
+              "description": "Continuous tempo effort at comfortably hard pace. \"7/10 effort\" — you can speak in short phrases only.",
+              "durationMinutes": 50,
+              "distanceKm": 9,
+              "primaryZone": "Zone 3–4",
+              "targetPace": "4:55–5:05/km",
+              "targetHR": "155–165 bpm",
+              "humanReadable": "Warm-up: 2km easy Z1-2 (12 min)\nMain: 25 min continuous @ 4:55–5:05/km\nCool-down: 2km easy Z1 (12 min)\nFocus: Smooth, controlled — if HR exceeds 166, ease off slightly",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-28",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w13-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-29",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w13-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-30",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w13-sun-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Progressive Long Run",
+              "description": "Weekly long run. Last 6km at marathon/race pace (4:44–5:00/km). This is the cornerstone workout of the week.",
+              "durationMinutes": 102,
+              "distanceKm": 18,
+              "primaryZone": "Zone 2 → Zone 3",
+              "targetPace": "5:50–6:00/km easy, last 6km @ 4:44–5:00/km",
+              "targetHR": "<149 easy, <165 race finish",
+              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 10km easy Z2 (HR < 149)\nFinish: 6km @ 4:44–5:00/km (Z3-4, controlled effort)\nNutrition: Take a gel every 45 min",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalKm": 47,
+        "totalHours": 4.5,
+        "runSessions": 4,
+        "strengthSessions": 2
+      }
+    },
+    {
+      "weekNumber": 14,
+      "phase": "Taper",
+      "focus": "Taper begins. Volume drops, quality stays. Trust the process.",
+      "isRecoveryWeek": false,
+      "startDate": "2026-08-31",
+      "endDate": "2026-09-06",
+      "targetKm": 46,
+      "days": [
+        {
+          "date": "2026-08-31",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w14-mon-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-01",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w14-tue-rp",
+              "sport": "run",
+              "type": "intervals",
+              "name": "Race Pace Intervals – 4×1km",
+              "description": "Sub-1:40 race pace rehearsal. Lock in 4:44/km so it feels natural on race day.",
+              "durationMinutes": 52,
+              "distanceKm": 9,
+              "primaryZone": "Zone 4–5a",
+              "targetPace": "4:44/km",
+              "targetHR": "160–167 bpm",
+              "humanReadable": "Warm-up: 2km easy Z2\nMain: 4×1km @ 4:44/km, 2 min easy jog recovery\nCool-down: 2km easy\nFocus: This is your goal race pace — it should feel hard but controlled.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-02",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w14-wed-easy",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run — conversational pace.",
+              "durationMinutes": 37,
+              "distanceKm": 6,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50–6:15/km",
+              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 5km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "completed": false
+            },
+            {
+              "id": "w14-wed-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability. Reduce loads 20-30%. Last heavy strength week.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-03",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w14-thu-easy",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run — conversational pace.",
+              "durationMinutes": 43,
+              "distanceKm": 7,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50–6:15/km",
+              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 6km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-04",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w14-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability. Light session — mobility focus.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-05",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w14-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-06",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w14-sun-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Progressive Long Run",
+              "description": "Weekly long run. Last 4km at marathon/race pace (4:44–5:00/km). This is the cornerstone workout of the week.",
+              "durationMinutes": 74,
+              "distanceKm": 13,
+              "primaryZone": "Zone 2 → Zone 3",
+              "targetPace": "5:50–6:00/km easy, last 4km @ 4:44–5:00/km",
+              "targetHR": "<149 easy, <165 race finish",
+              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 7km easy Z2 (HR < 149)\nFinish: 4km @ 4:44–5:00/km (Z3-4, controlled effort)\nNutrition: Take a gel every 45 min",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalKm": 35,
+        "totalHours": 3.4,
+        "runSessions": 4,
+        "strengthSessions": 2
+      }
+    },
+    {
+      "weekNumber": 15,
+      "phase": "Taper",
+      "focus": "Sharp taper. Stay sharp, sleep more, eat well. The work is done.",
+      "isRecoveryWeek": false,
+      "startDate": "2026-09-07",
+      "endDate": "2026-09-13",
+      "targetKm": 30,
+      "days": [
+        {
+          "date": "2026-09-07",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w15-mon-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-08",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w15-tue-sharp",
+              "sport": "run",
+              "type": "intervals",
+              "name": "Race Sharpener – 3×1km",
+              "description": "Short race-pace sharpener to stay sharp during taper. Low volume, high quality.",
+              "durationMinutes": 38,
+              "distanceKm": 6.5,
+              "primaryZone": "Zone 4–5a",
+              "targetPace": "4:44/km",
+              "targetHR": "160–167 bpm",
+              "humanReadable": "Warm-up: 2km easy + 4×strides\nMain: 3×1km @ 4:44/km, 2 min jog recovery\nCool-down: 1.5km easy\nFocus: Remind your legs what race pace feels like. Don't overdo it.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-09",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w15-wed-taper",
+              "sport": "run",
+              "type": "easy",
+              "name": "Taper Easy Run",
+              "description": "Short easy run during taper. Trust the training — do NOT add extra miles.",
+              "durationMinutes": 30,
+              "distanceKm": 5,
+              "primaryZone": "Zone 1–2",
+              "targetPace": "5:50–6:20/km",
+              "humanReadable": "5km easy Z1-2. Stay relaxed, don't push. Your job is to arrive at the start line fresh.",
+              "completed": false
+            },
+            {
+              "id": "w15-wed-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength & Conditioning",
+              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability. 15-20 min only. Bodyweight, activation only. No heavy loads.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-10",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w15-thu-str-run",
+              "sport": "run",
+              "type": "strides",
+              "name": "Easy Run + 4×Strides",
+              "description": "Easy aerobic run with 4 strides to activate fast-twitch fibres without adding fatigue.",
+              "durationMinutes": 38,
+              "distanceKm": 5,
+              "primaryZone": "Zone 2",
+              "targetPace": "5:50–6:10/km easy + strides @ 4:10/km for 20 sec",
+              "humanReadable": "Warm-up: 2km easy Z2\nMain: 2km easy Z2\nStrides: 4×20 sec @ 4:00–4:20/km, walk/jog 90 sec between\nCool-down: 1km easy",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-11",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w15-fri-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-12",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w15-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-13",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w15-sun-taper",
+              "sport": "run",
+              "type": "easy",
+              "name": "Taper Easy Run",
+              "description": "Short easy run during taper. Trust the training — do NOT add extra miles.",
+              "durationMinutes": 48,
+              "distanceKm": 8,
+              "primaryZone": "Zone 1–2",
+              "targetPace": "5:50–6:20/km",
+              "humanReadable": "8km easy Z1-2. Stay relaxed, don't push. Your job is to arrive at the start line fresh.",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalKm": 24.5,
+        "totalHours": 2.6,
+        "runSessions": 4,
+        "strengthSessions": 1
+      }
+    },
+    {
+      "weekNumber": 16,
+      "phase": "Taper",
+      "focus": "Race week. Be calm. Trust the training. You are ready.",
+      "isRecoveryWeek": false,
+      "startDate": "2026-09-14",
+      "endDate": "2026-09-20",
+      "targetKm": 0,
+      "days": [
+        {
+          "date": "2026-09-14",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w16-mon-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-15",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w16-tue-str-run",
+              "sport": "run",
+              "type": "strides",
+              "name": "Easy Run + 4×Strides",
+              "description": "Easy aerobic run with 4 strides to activate fast-twitch fibres without adding fatigue.",
+              "durationMinutes": 32,
+              "distanceKm": 4,
+              "primaryZone": "Zone 2",
+              "targetPace": "5:50–6:10/km easy + strides @ 4:10/km for 20 sec",
+              "humanReadable": "Warm-up: 2km easy Z2\nMain: 1km easy Z2\nStrides: 4×20 sec @ 4:00–4:20/km, walk/jog 90 sec between\nCool-down: 1km easy",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-16",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w16-wed-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-17",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w16-thu-taper",
+              "sport": "run",
+              "type": "easy",
+              "name": "Pre-race Shakeout",
+              "description": "Very easy 3km + 2 strides. Stay off your feet the rest of the day.",
+              "durationMinutes": 18,
+              "distanceKm": 3,
+              "primaryZone": "Zone 1–2",
+              "targetPace": "5:50–6:20/km",
+              "humanReadable": "3km easy Z1-2. Stay relaxed, don't push. Your job is to arrive at the start line fresh.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-18",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w16-fri-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest Day",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-19",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w16-sat-pre",
+              "sport": "run",
+              "type": "easy",
+              "name": "Day-Before Activation",
+              "description": "10 min easy jog + 2 strides. Eat pasta tonight.",
+              "durationMinutes": 15,
+              "distanceKm": 2,
+              "primaryZone": "Zone 1",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-20",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w16-sun-race",
+              "sport": "run",
+              "type": "race",
+              "name": "🏁 Half Marathon – RACE DAY",
+              "description": "Half Marathon. Goal: Sub 1:40:00. Pacing strategy: even splits at 4:44/km with slight negative (last 5km a touch faster).",
+              "distanceKm": 21.1,
+              "durationMinutes": 99,
+              "primaryZone": "Zone 4–5a",
+              "targetPace": "4:44/km",
+              "targetHR": "160–167 bpm",
+              "humanReadable": "Pre-race: Breakfast 3hr before (oats + banana + coffee)\nWarm-up: 10 min easy jog + 4×strides 30 min before gun\nKm 1–3: 4:50–4:55/km (conservative start, let the pack go)\nKm 4–15: 4:44/km (lock in rhythm, run YOUR race)\nKm 16–21: Push — if feeling strong, negative split to 4:38–4:42/km\nNutrition: 1 gel at km 7, 1 gel at km 14. Sip water at every station.\nMantras: \"Smooth, strong, controlled.\"",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalKm": 30.1,
+        "totalHours": 2.7,
+        "runSessions": 4,
+        "strengthSessions": 0
+      }
+    }
+  ],
+  "raceStrategy": {
+    "event": {
+      "name": "Half Marathon",
+      "date": "2026-09-20",
+      "distances": {
+        "run": 21.1
+      }
+    },
+    "goal": {
+      "A": "Sub 1:40:00",
+      "B": "Sub 1:45:00",
+      "C": "Sub 1:50:00 (guaranteed PB)"
+    },
+    "pacing": {
+      "km1to3": "4:50–4:55/km (controlled start, ignore early crowd surge)",
+      "km4to15": "4:44/km (your race — lock in the rhythm, use HR as guide: 160-167)",
+      "km16to21": "Push — run by feel. If you have it, negative split to 4:38–4:42/km"
+    },
+    "nutrition": {
+      "preRace": "3hr before: Oats, banana, coffee. 1hr before: 1 gel + 200ml water.",
+      "during": {
+        "gel1": "At km 7–8",
+        "gel2": "At km 13–14",
+        "water": "Sip at every station"
+      },
+      "notes": "Do not try anything new on race day. Use only what you trained with."
+    },
+    "warmUp": "10-min easy jog starting 30 min before gun + 4 strides. Do NOT stand in queue.",
+    "taper": {
+      "startDate": "2026-08-31",
+      "volumeReduction": 40,
+      "notes": "Volume drops ~40% over 3 weeks. Intensity maintained via sharpeners."
+    }
+  }
+}
