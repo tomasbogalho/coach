@@ -117,7 +117,29 @@ db.exec(`
     velocity_smooth TEXT,
     synced_at TEXT DEFAULT (datetime('now'))
   );
+
+  CREATE TABLE IF NOT EXISTS sync_log (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    synced_at TEXT DEFAULT (datetime('now')),
+    api_calls INTEGER DEFAULT 0
+  );
 `);
+
+// ── DAILY RATE LIMIT ─────────────────────────────────────────
+const DAILY_SYNC_LIMIT = 5; // max syncs per calendar day
+const todayDate = new Date().toISOString().slice(0, 10);
+const syncsTodayRow = db.prepare(
+  `SELECT COUNT(*) as cnt FROM sync_log WHERE date(synced_at) = ?`
+).get(todayDate);
+const syncsToday = syncsTodayRow?.cnt ?? 0;
+if (syncsToday >= DAILY_SYNC_LIMIT) {
+  console.warn(`⚠️  Daily sync limit reached (${syncsToday}/${DAILY_SYNC_LIMIT} syncs today). Skipping Strava API calls.`);
+  console.warn(`   Re-run tomorrow or increase DAILY_SYNC_LIMIT in sync.mjs if needed.`);
+  db.close();
+  process.exit(0);
+}
+// Log this sync attempt
+db.prepare(`INSERT INTO sync_log (api_calls) VALUES (0)`).run();
 
 // Fetch athlete profile
 console.log('Fetching athlete profile...');
