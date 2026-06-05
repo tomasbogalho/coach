@@ -973,29 +973,100 @@ const html = `<!DOCTYPE html>
     .hr-target { font-size: 11px; color: #ef4444; margin-bottom: 6px; }
     .workout-desc { font-size: 11px; color: var(--text2); line-height: 1.6; }
 
-    /* ── RESPONSIVE ─────────────────────────────────────────── */
-    @media (max-width: 900px) {
-      .week-grid { grid-template-columns: repeat(4, 1fr); }
-    }
+    /* ── RESPONSIVE — MOBILE FIRST ──────────────────────────── */
     @media (max-width: 700px) {
+      /* Global spacing */
+      .tab-panel { padding: 12px; }
+
       /* Header */
-      .plan-header { padding: 20px 16px; }
-      .header-stats { gap: 10px; }
-      .stat-box { min-width: 70px; padding: 10px 12px; }
+      .plan-header { padding: 18px 14px; }
+      .plan-title { font-size: 20px; }
+      .plan-subtitle { font-size: 13px; margin-bottom: 14px; }
+      .plan-stats { gap: 8px; }
+      .stat-box { min-width: 0; flex: 1; padding: 8px 10px; }
       .stat-value { font-size: 18px; }
-      /* Week grid — horizontal scroll so all 7 days stay visible */
-      .week-grid { grid-template-columns: repeat(7, minmax(130px, 1fr)); overflow-x: auto; -webkit-overflow-scrolling: touch; }
-      .week-section { overflow: hidden; }
-      /* Wider spacing for touch targets */
-      .workout-card { padding: 10px; }
-      .workout-check { font-size: 18px; }
-      .export-btn { padding: 3px 8px; font-size: 12px; }
-      /* Sections */
-      .race-strategy, .zones-section, .weeks-container, .phase-legend, .progress-bar-wrap { margin-left: 8px; margin-right: 8px; }
-      /* Modal — full screen on mobile */
-      .modal-box { width: 100vw; height: 100dvh; max-height: 100dvh; top: 0; left: 0; transform: none; border-radius: 0; }
-      /* Sync bar */
-      #sync-bar { padding: 8px 12px; }
+      .stat-label { font-size: 10px; }
+
+      /* Countdown sticky bar */
+      .countdown-bar { padding: 10px 14px; flex-wrap: wrap; gap: 8px; }
+      #next-quality-pill { display: none; }
+
+      /* Main tabs — equal width, smaller text, no overflow */
+      .main-tabs { padding: 0; }
+      .main-tab { flex: 1; padding: 10px 4px; font-size: 12px; white-space: nowrap; border-radius: 0; }
+
+      /* Week grid — collapse to vertical list */
+      .weeks-container { padding: 0 8px 48px; gap: 14px; }
+      .week-section { border-radius: 8px; }
+      .week-header { padding: 12px 14px; }
+      .week-grid { display: flex; flex-direction: column; }
+      .day-col {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 10px 12px;
+        min-height: unset;
+        display: grid;
+        grid-template-columns: 52px 1fr;
+        gap: 8px;
+        align-items: start;
+      }
+      .day-col:last-child { border-bottom: none; }
+      .day-header { margin-bottom: 0; }
+      .day-name { font-size: 12px; }
+      .day-date { font-size: 11px; }
+
+      /* Workout cards — bigger touch targets */
+      .workout-card { padding: 10px 12px; margin-bottom: 6px; }
+      .workout-name { font-size: 13px; }
+      .workout-detail { font-size: 12px; }
+      .workout-check { font-size: 18px; padding: 2px; }
+      .export-btn { padding: 4px 8px; font-size: 12px; }
+
+      /* Today panel */
+      .today-panel-wrap { grid-template-columns: 1fr; }
+      .today-date-heading { font-size: 16px; }
+      .today-workout-card { padding: 14px; }
+      .today-sport-icon { font-size: 24px; }
+      .today-workout-name { font-size: 15px; }
+      .upcoming-row { grid-template-columns: 70px 1fr; }
+      .upcoming-pace { display: none; }
+      .upcoming-km { display: none; }
+
+      /* Strategy / zones sections */
+      .race-strategy, .zones-section { margin: 0 0 16px; }
+      .strategy-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .phase-legend { margin: 0 0 12px; gap: 8px; }
+      .zone-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .zone-table th, .zone-table td { padding: 7px 8px; font-size: 12px; white-space: nowrap; }
+
+      /* Stats — charts scroll horizontally */
+      .volume-canvas-wrap, .trend-canvas-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .volume-canvas-wrap canvas, .trend-canvas-wrap canvas { min-width: 560px; }
+
+      /* Progress bar dots — smaller */
+      .prog-week { width: 28px; height: 28px; font-size: 10px; }
+      .progress-bar-wrap { margin: 0 0 16px; }
+
+      /* Modal — full screen */
+      .modal-box { width: 100vw !important; height: 100dvh; max-height: 100dvh; top: 0 !important; left: 0 !important; transform: none !important; border-radius: 0; position: fixed; }
+
+      /* Race predictor */
+      .predictor-section { flex-direction: column; gap: 12px; }
+      .pred-main { text-align: center; }
+
+      /* Rationale / feedback */
+      .workout-rationale { padding: 10px; }
+      .rationale-text, .today-focus-text { font-size: 13px; }
+      .str-exercise-list li { font-size: 13px; }
+      .act-feedback { padding: 8px 10px; }
+      .fb-well, .fb-improve, .fb-line { font-size: 13px; }
+    }
+
+    /* Smallest phones */
+    @media (max-width: 380px) {
+      .strategy-grid { grid-template-columns: 1fr; }
+      .main-tab { font-size: 11px; padding: 10px 3px; }
+      .plan-stats { display: grid; grid-template-columns: 1fr 1fr; }
     }
 
     /* ── PROGRESS BAR ───────────────────────────────────────── */
@@ -1134,7 +1205,6 @@ const html = `<!DOCTYPE html>
 
     /* ── TODAY PANEL ─────────────────────────────────────────── */
     .today-panel-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    @media (max-width: 900px) { .today-panel-wrap { grid-template-columns: 1fr; } }
     .today-date-heading { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 14px; }
     .today-workout-card { background: var(--surface2); border-radius: 10px; padding: 18px; margin-bottom: 14px; box-shadow: 0 2px 8px rgba(0,0,0,.3); }
     .today-workout-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
