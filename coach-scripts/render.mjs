@@ -520,6 +520,35 @@ function strengthWorkout(w) {
   const isBuild  = phase === 'Build';
   const isRecov  = phase === 'Recovery';
 
+  // ── TRAVEL OVERRIDE: w2 Mon (Jun 8) + Wed (Jun 10) — KB only ─────────────
+  if (weekNum === 2 && day === 'mon') return {
+    label: '🧳 Session A — KB Only (Travelling)',
+    duration: '25 min',
+    exercises: [
+      'KB Halo — 3×8 each direction  (shoulder + thoracic mobility)',
+      'Single-Arm KB Farmer Carry — 3×20 m each side  (lateral core, posture)',
+      'KB Bent-Over Row — 3×10 each arm  (upper back)',
+      'KB Glute Bridge — 3×15  (hip activation)',
+      'Dead Bug — 3×10 each side',
+      'Couch Stretch — 2×60 s each leg',
+    ],
+    note: 'Travelling this week — KB only. Day after long run so keep it light. Upper body + core only, no leg loading.',
+  };
+  if (weekNum === 2 && day === 'wed') return {
+    label: '🧳 Session B — KB Only (Travelling)',
+    duration: '35 min',
+    exercises: [
+      'KB Deadlift — 4×10  (hip hinge pattern, posterior chain)',
+      'KB Goblet Squat — 4×12  (quad + glute base)',
+      'KB Swing — 4×20  (hip drive power)',
+      'KB Walking Lunge — 3×10 each leg',
+      'Copenhagen Plank — 3×25 s each side',
+      'KB Suitcase Carry — 3×20 m each side  (lateral core)',
+      'Weighted Calf Raise — 3×15',
+    ],
+    note: 'Travelling — KB only version of the Wednesday power session. Focus on hip hinge quality and swing power. Increase KB weight if the goblet squat feels easy.',
+  };
+
   // ── SESSION A — MONDAY: Upper body + core (post long run, no leg loading) ──
   if (day === 'mon') {
     if (isBuild) return {
