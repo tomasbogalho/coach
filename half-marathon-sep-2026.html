@@ -190,17 +190,30 @@
       /* Export to watch button */
       .dl-btn { font-size: 15px; padding: 12px 20px; margin-top: 16px; border-radius: 10px; }
 
+      /* Coach status card */
+      .coach-status-card { padding: 18px 16px; border-radius: 16px; margin-bottom: 20px; }
+      .cs-status-emoji { font-size: 26px; }
+      .cs-status-label { font-size: 18px; }
+      .cs-timeline-pill { font-size: 12px; padding: 5px 12px; }
+      .cs-line { font-size: 15px; line-height: 1.7; }
+      .cs-pred-row { gap: 8px; }
+      .cs-pred-time { font-size: 20px; }
+      .cs-pred-arrow { font-size: 16px; }
+
       /* Upcoming sessions */
       .section-sub-title { font-size: 15px; letter-spacing: .04em; margin-bottom: 12px; }
       .upcoming-section { margin-top: 24px; }
-      .upcoming-row {
-        display: flex; align-items: center; gap: 12px;
-        padding: 13px 16px; border-radius: 12px; margin-bottom: 8px;
-      }
-      .upcoming-date { font-size: 12px; font-weight: 700; min-width: 64px; flex-shrink: 0; }
-      .upcoming-name { font-size: 16px; font-weight: 600; flex: 1; }
-      .upcoming-pace { display: none; }
-      .upcoming-km { display: none; }
+      .upcoming-card { border-radius: 14px; margin-bottom: 10px; }
+      .upcoming-card-header { padding: 14px 16px; gap: 12px; }
+      .upcoming-icon { font-size: 24px; }
+      .upcoming-name { font-size: 17px; }
+      .upcoming-date { font-size: 13px; margin-top: 3px; }
+      .upcoming-pace-chip { font-size: 13px; padding: 5px 10px; }
+      .upcoming-expand-arrow { font-size: 24px; }
+      .upcoming-detail { padding: 0 16px 16px 16px; gap: 12px; }
+      .upcoming-focus-label { font-size: 11px; }
+      .upcoming-focus-text { font-size: 15px; line-height: 1.7; }
+      .upcoming-desc { font-size: 14px; }
 
       /* ── PLAN TAB ── */
       .weeks-container { padding: 0 0 16px; gap: 10px; }
@@ -371,6 +384,37 @@
     .inj-risk-banner { margin: 0 24px 16px; border-radius: var(--radius); padding: 11px 16px; font-size: 13px; font-weight: 500; border: 1px solid; }
     .inj-risk-banner.risk-warn { background: rgba(239,68,68,.1); border-color: rgba(239,68,68,.35); color: #fca5a5; }
     .inj-risk-banner.risk-caution { background: rgba(251,191,36,.07); border-color: rgba(251,191,36,.3); color: #fde68a; }
+
+    /* ── COACH STATUS CARD ───────────────────────────────────── */
+    .coach-status-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px 22px; margin-bottom: 22px; }
+    .cs-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+    .cs-status-emoji { font-size: 22px; margin-right: 8px; }
+    .cs-status-label { font-size: 16px; font-weight: 800; }
+    .cs-timeline-pill { font-size: 12px; color: var(--text2); background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; padding: 4px 12px; }
+    .cs-body { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    .cs-line { font-size: 14px; color: var(--text2); line-height: 1.65; }
+    .cs-pred-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .cs-pred-box { background: var(--surface2); border: 2px solid var(--border); border-radius: 10px; padding: 10px 14px; text-align: center; flex: 1; min-width: 90px; }
+    .cs-pred-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 4px; }
+    .cs-pred-time { font-size: 22px; font-weight: 800; color: var(--text); }
+    .cs-pred-arrow { font-size: 20px; color: var(--text3); flex-shrink: 0; }
+
+    /* ── UPCOMING QUALITY SESSIONS (expandable) ──────────────── */
+    .upcoming-card { background: var(--surface2); border-radius: 10px; margin-bottom: 8px; cursor: pointer; transition: background .15s; overflow: hidden; }
+    .upcoming-card:hover { background: var(--surface); }
+    .upcoming-card-header { display: flex; align-items: center; gap: 10px; padding: 12px 14px; }
+    .upcoming-icon { font-size: 20px; flex-shrink: 0; }
+    .upcoming-card-info { flex: 1; min-width: 0; }
+    .upcoming-name { font-size: 14px; font-weight: 700; color: var(--text); }
+    .upcoming-date { font-size: 12px; color: var(--text3); margin-top: 2px; }
+    .upcoming-pace-chip { font-size: 12px; font-weight: 600; color: var(--accent); background: rgba(245,158,11,.12); border-radius: 8px; padding: 3px 8px; white-space: nowrap; flex-shrink: 0; }
+    .upcoming-expand-arrow { font-size: 20px; color: var(--text3); flex-shrink: 0; transition: transform .2s; font-weight: 300; }
+    .upcoming-expand-arrow.open { transform: rotate(90deg); }
+    .upcoming-detail { padding: 0 14px 14px 44px; display: flex; flex-direction: column; gap: 10px; }
+    .upcoming-desc { font-size: 13px; color: var(--text2); line-height: 1.6; border-left: 2px solid var(--border); padding-left: 10px; }
+    .upcoming-focus-block { display: flex; flex-direction: column; gap: 4px; }
+    .upcoming-focus-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); }
+    .upcoming-focus-text { font-size: 13px; color: var(--text2); line-height: 1.6; }
 
     /* ── ACTUAL KM BADGES ────────────────────────────────────── */
     .actual-km { border-radius: 20px; padding: 1px 8px; font-size: 11px; font-weight: 600; }
@@ -582,6 +626,36 @@
 <!-- TAB: TODAY -->
 <div id="maintab-today" class="tab-panel">
   
+  
+  <div class="coach-status-card">
+    <div class="cs-header">
+      <div>
+        <span class="cs-status-emoji">🔄</span>
+        <span class="cs-status-label" style="color:#6366f1">Steady — gains coming</span>
+      </div>
+      <div class="cs-timeline-pill">🌱 Still in base — consistency over intensity. Every easy run counts.</div>
+    </div>
+    <div class="cs-body">
+      <p class="cs-line">1 of 16 weeks complete (6% of the plan).</p><p class="cs-line">You've run <strong>32km</strong> vs 32km planned — great adherence (101%).</p><p class="cs-line">Prediction is holding steady at <strong>1:49:11</strong> (baseline was 1:49:11). Fitness gains typically show up in the Build phase — stay consistent.</p><p class="cs-line">You need to find <strong>9m 11s</strong> to hit 1:40 — that's 26 sec/km at race pace. Plenty of time with consistent training.</p>
+    </div>
+    
+    <div class="cs-pred-row">
+      <div class="cs-pred-box cs-pred-baseline">
+        <div class="cs-pred-label">At plan start</div>
+        <div class="cs-pred-time">1:49:11</div>
+      </div>
+      <div class="cs-pred-arrow">→</div>
+      <div class="cs-pred-box cs-pred-now" style="border-color:#f59e0b">
+        <div class="cs-pred-label">Now</div>
+        <div class="cs-pred-time" style="color:#f59e0b">1:49:11</div>
+      </div>
+      <div class="cs-pred-arrow">→</div>
+      <div class="cs-pred-box cs-pred-goal">
+        <div class="cs-pred-label">Goal</div>
+        <div class="cs-pred-time" style="color:#f59e0b">1:40:00</div>
+      </div>
+    </div>
+  </div>
   <div class="today-panel-wrap">
     <div class="today-left">
       <h2 class="today-date-heading">📅 Monday 8 June</h2>
@@ -612,26 +686,90 @@
       
   <div class="upcoming-section">
     <h3 class="section-sub-title">📅 Next Quality Sessions</h3>
-    <div class="upcoming-row" style="border-left:3px solid #06b6d4">
-        <div class="upcoming-date">Tue 9 Jun</div>
-        <div class="upcoming-name">Easy Run + 4×Strides</div>
-        <div class="upcoming-km">7km</div>
-        <div class="upcoming-pace">🎯 5:50–6:10/km easy + strides @ 4:10/km for 20 sec</div>
-      </div><div class="upcoming-row" style="border-left:3px solid #7c3aed">
-        <div class="upcoming-date">Sun 14 Jun</div>
-        <div class="upcoming-name">Long Run</div>
-        <div class="upcoming-km">13km</div>
-        <div class="upcoming-pace">🎯 5:50–6:10/km</div>
-      </div><div class="upcoming-row" style="border-left:3px solid #06b6d4">
-        <div class="upcoming-date">Tue 16 Jun</div>
-        <div class="upcoming-name">Easy Run + 6×Strides</div>
-        <div class="upcoming-km">8km</div>
-        <div class="upcoming-pace">🎯 5:50–6:10/km easy + strides @ 4:10/km for 20 sec</div>
-      </div><div class="upcoming-row" style="border-left:3px solid #ef4444">
-        <div class="upcoming-date">Thu 18 Jun</div>
-        <div class="upcoming-name">Threshold Intervals – 3×1km</div>
-        <div class="upcoming-km">9km</div>
-        <div class="upcoming-pace">🎯 5:05–5:15/km</div>
+    <div class="upcoming-card" style="border-left:4px solid #06b6d4" onclick="toggleUpcoming('upc-0')">
+        <div class="upcoming-card-header">
+          <span class="upcoming-icon">💨</span>
+          <div class="upcoming-card-info">
+            <div class="upcoming-name">Easy Run + 4×Strides</div>
+            <div class="upcoming-date">Tue 9 Jun · 7km · 50min</div>
+          </div>
+          <span class="upcoming-pace-chip">🎯 5:50–6:10/km easy + strides @ 4:10/km for 20 sec</span>
+          <span class="upcoming-expand-arrow" id="upc-0-arrow">›</span>
+        </div>
+        <div class="upcoming-detail" id="upc-0" style="display:none">
+          <p class="upcoming-desc">Warm-up: 2km easy Z2<br>Main: 4km easy Z2<br>Strides: 4×20 sec @ 4:00–4:20/km, walk/jog 90 sec between<br>Cool-down: 1km easy</p>
+          <div class="upcoming-focus-block">
+            <div class="upcoming-focus-label">🧠 Why</div>
+            <p class="upcoming-focus-text">Strides activate fast-twitch fibres and improve running economy (how efficiently you use each stride). They sharpen neuromuscular coordination without accumulating significant fatigue — the best return on 6 minutes of work.</p>
+          </div>
+          <div class="upcoming-focus-block">
+            <div class="upcoming-focus-label">🎯 Focus</div>
+            <p class="upcoming-focus-text">Smooth acceleration over 15–20 seconds to ~90% effort, then gradually decelerate. These are NOT sprints — think controlled, effortless speed with tall posture. Full 90-second walk/jog recovery between each. Focus on feeling fast, not going fast.</p>
+          </div>
+        </div>
+      </div><div class="upcoming-card" style="border-left:4px solid #7c3aed" onclick="toggleUpcoming('upc-1')">
+        <div class="upcoming-card-header">
+          <span class="upcoming-icon">🏃</span>
+          <div class="upcoming-card-info">
+            <div class="upcoming-name">Long Run</div>
+            <div class="upcoming-date">Sun 14 Jun · 13km · 78min</div>
+          </div>
+          <span class="upcoming-pace-chip">🎯 5:50–6:10/km</span>
+          <span class="upcoming-expand-arrow" id="upc-1-arrow">›</span>
+        </div>
+        <div class="upcoming-detail" id="upc-1" style="display:none">
+          <p class="upcoming-desc">Warm-up: 2km very easy Z1<br>Main: 11km steady Z2 (HR < 149)<br>Focus: Stay aerobic, resist pushing. Fuel with gels every 45 min.<br>Cool-down: Walk 5 min after.</p>
+          <div class="upcoming-focus-block">
+            <div class="upcoming-focus-label">🧠 Why</div>
+            <p class="upcoming-focus-text">Long runs train fat metabolism, glycogen efficiency, and the connective tissue resilience you need for 21km. They also build the mental toughness that makes the final 5km of a half marathon manageable rather than a survival exercise.</p>
+          </div>
+          <div class="upcoming-focus-block">
+            <div class="upcoming-focus-label">🎯 Focus</div>
+            <p class="upcoming-focus-text">First 9km in Z2 (HR 135–149 bpm). Only push the final portion if you feel genuinely strong and HR has stayed controlled. Eat/drink every 30–40 min to practise race-day fuelling. Do NOT race this run — fatigue from a too-hard long run can wreck the following week.</p>
+          </div>
+        </div>
+      </div><div class="upcoming-card" style="border-left:4px solid #06b6d4" onclick="toggleUpcoming('upc-2')">
+        <div class="upcoming-card-header">
+          <span class="upcoming-icon">💨</span>
+          <div class="upcoming-card-info">
+            <div class="upcoming-name">Easy Run + 6×Strides</div>
+            <div class="upcoming-date">Tue 16 Jun · 8km · 60min</div>
+          </div>
+          <span class="upcoming-pace-chip">🎯 5:50–6:10/km easy + strides @ 4:10/km for 20 sec</span>
+          <span class="upcoming-expand-arrow" id="upc-2-arrow">›</span>
+        </div>
+        <div class="upcoming-detail" id="upc-2" style="display:none">
+          <p class="upcoming-desc">Warm-up: 2km easy Z2<br>Main: 5km easy Z2<br>Strides: 6×20 sec @ 4:00–4:20/km, walk/jog 90 sec between<br>Cool-down: 1km easy</p>
+          <div class="upcoming-focus-block">
+            <div class="upcoming-focus-label">🧠 Why</div>
+            <p class="upcoming-focus-text">Strides activate fast-twitch fibres and improve running economy (how efficiently you use each stride). They sharpen neuromuscular coordination without accumulating significant fatigue — the best return on 6 minutes of work.</p>
+          </div>
+          <div class="upcoming-focus-block">
+            <div class="upcoming-focus-label">🎯 Focus</div>
+            <p class="upcoming-focus-text">Smooth acceleration over 15–20 seconds to ~90% effort, then gradually decelerate. These are NOT sprints — think controlled, effortless speed with tall posture. Full 90-second walk/jog recovery between each. Focus on feeling fast, not going fast.</p>
+          </div>
+        </div>
+      </div><div class="upcoming-card" style="border-left:4px solid #ef4444" onclick="toggleUpcoming('upc-3')">
+        <div class="upcoming-card-header">
+          <span class="upcoming-icon">🔥</span>
+          <div class="upcoming-card-info">
+            <div class="upcoming-name">Threshold Intervals – 3×1km</div>
+            <div class="upcoming-date">Thu 18 Jun · 9km · 54min</div>
+          </div>
+          <span class="upcoming-pace-chip">🎯 5:05–5:15/km</span>
+          <span class="upcoming-expand-arrow" id="upc-3-arrow">›</span>
+        </div>
+        <div class="upcoming-detail" id="upc-3" style="display:none">
+          <p class="upcoming-desc">Warm-up: 2km easy Z2 (12 min)<br>Main: 3×1km @ 5:05–5:15/km, 90 sec jog recovery<br>Cool-down: 2km easy (12 min)<br>Focus: Smooth sustained effort. Each rep should feel the same.</p>
+          <div class="upcoming-focus-block">
+            <div class="upcoming-focus-label">🧠 Why</div>
+            <p class="upcoming-focus-text">Intervals push your VO₂max — the aerobic ceiling. A higher VO₂max means race pace demands a smaller percentage of your maximum capacity, making 4:44/km feel less hard as training progresses.</p>
+          </div>
+          <div class="upcoming-focus-block">
+            <div class="upcoming-focus-label">🎯 Focus</div>
+            <p class="upcoming-focus-text">Hit the target pace (5:05–5:15/km) on every single rep — not faster. Going 5 sec/km too fast on rep 1 costs you reps 5–8. Recovery between reps is as important as the effort: take the full rest. Stop a rep if form breaks down, not just if pace drops.</p>
+          </div>
+        </div>
       </div>
   </div>
     </div>
@@ -5444,7 +5582,7 @@
   </div>
   <div class="pred-bar-wrap">
     <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3)"><span>1:50</span><span>🎯 1:40</span></div>
-    <div class="pred-bar-track"><div class="pred-bar-fill" style="width:NaN%;background:#ef4444"></div></div>
+    <div class="pred-bar-track"><div class="pred-bar-fill" style="width:8%;background:#ef4444"></div></div>
     <div style="font-size:10px;color:var(--text3);margin-top:4px">Pace @ race pace: 5:11/km · Target: 4:44/km</div>
   </div>
 </div>
@@ -5470,7 +5608,7 @@ const PLAN_TOTAL_WEEKS = 16;
 window.FITNESS_TREND = [];
 window.ACTUAL_KM = {"2026-06-01":32.4,"2026-06-08":0};
 window.PLAN_WEEKS_KM = [{"start":"2026-06-01","planned":32,"wk":1},{"start":"2026-06-08","planned":33,"wk":2},{"start":"2026-06-15","planned":39,"wk":3},{"start":"2026-06-22","planned":43,"wk":4},{"start":"2026-06-29","planned":30,"wk":5},{"start":"2026-07-06","planned":45,"wk":6},{"start":"2026-07-13","planned":49,"wk":7},{"start":"2026-07-20","planned":51,"wk":8},{"start":"2026-07-27","planned":49,"wk":9},{"start":"2026-08-03","planned":49,"wk":10},{"start":"2026-08-10","planned":35,"wk":11},{"start":"2026-08-17","planned":48,"wk":12},{"start":"2026-08-24","planned":47,"wk":13},{"start":"2026-08-31","planned":35,"wk":14},{"start":"2026-09-07","planned":24.5,"wk":15},{"start":"2026-09-14","planned":30.1,"wk":16}];
-window.RACE_PRED = {"timeStr":"1:49:11","paceStr":"5:11/km","gapSec":551,"srcDistKm":10.2,"srcPaceStr":"4:57/km","srcDate":"2026-04-07","onTrack":false};
+window.RACE_PRED = {"timeStr":"1:49:11","paceStr":"5:11/km","gapSec":551,"srcDistKm":10.2,"srcPaceStr":"4:57/km","srcDate":"2026-04-07","onTrack":false,"predicted":6551};
 
 // Plan day index for "next quality session"
 const PLAN_DAYS = [{"date":"2026-06-01","weekNum":1,"workouts":[{"id":"w1-mon-rest","sport":"rest","type":"rest","name":"Rest Day"}]},{"date":"2026-06-02","weekNum":1,"workouts":[{"id":"w1-tue-easy","sport":"run","type":"easy","name":"Easy Run"}]},{"date":"2026-06-03","weekNum":1,"workouts":[{"id":"w1-wed-easy","sport":"run","type":"easy","name":"Easy Run"},{"id":"w1-wed-str","sport":"strength","type":"strength","name":"Hyrox B — Power"}]},{"date":"2026-06-04","weekNum":1,"workouts":[{"id":"w1-thu-easy","sport":"run","type":"easy","name":"Easy Run"}]},{"date":"2026-06-05","weekNum":1,"workouts":[{"id":"w1-fri-str","sport":"strength","type":"strength","name":"Hyrox C — Conditioning"}]},{"date":"2026-06-06","weekNum":1,"workouts":[{"id":"w1-sat-rest","sport":"rest","type":"rest","name":"Rest Day"}]},{"date":"2026-06-07","weekNum":1,"workouts":[{"id":"w1-sun-long","sport":"run","type":"long","name":"Long Run"}]},{"date":"2026-06-08","weekNum":2,"workouts":[{"id":"w2-mon-str","sport":"strength","type":"strength","name":"Hyrox A — Upper & Core"}]},{"date":"2026-06-09","weekNum":2,"workouts":[{"id":"w2-tue-str-run","sport":"run","type":"strides","name":"Easy Run + 4×Strides"}]},{"date":"2026-06-10","weekNum":2,"workouts":[{"id":"w2-wed-easy","sport":"run","type":"easy","name":"Easy Run"},{"id":"w2-wed-str","sport":"strength","type":"strength","name":"Hyrox B — Power"}]},{"date":"2026-06-11","weekNum":2,"workouts":[{"id":"w2-thu-easy","sport":"run","type":"easy","name":"Easy Run"}]},{"date":"2026-06-12","weekNum":2,"workouts":[{"id":"w2-fri-str","sport":"strength","type":"strength","name":"Hyrox C — Conditioning"}]},{"date":"2026-06-13","weekNum":2,"workouts":[{"id":"w2-sat-str","sport":"strength","type":"strength","name":"Hyrox D — Skill & Sim"}]},{"date":"2026-06-14","weekNum":2,"workouts":[{"id":"w2-sun-long","sport":"run","type":"long","name":"Long Run"}]},{"date":"2026-06-15","weekNum":3,"workouts":[{"id":"w3-mon-str","sport":"strength","type":"strength","name":"Hyrox A — Upper & Core"}]},{"date":"2026-06-16","weekNum":3,"workouts":[{"id":"w3-tue-str-run","sport":"run","type":"strides","name":"Easy Run + 6×Strides"}]},{"date":"2026-06-17","weekNum":3,"workouts":[{"id":"w3-wed-easy","sport":"run","type":"easy","name":"Easy Run"},{"id":"w3-wed-str","sport":"strength","type":"strength","name":"Hyrox B — Power"}]},{"date":"2026-06-18","weekNum":3,"workouts":[{"id":"w3-thu-thresh","sport":"run","type":"intervals","name":"Threshold Intervals – 3×1km"}]},{"date":"2026-06-19","weekNum":3,"workouts":[{"id":"w3-fri-str","sport":"strength","type":"strength","name":"Hyrox C — Conditioning"}]},{"date":"2026-06-20","weekNum":3,"workouts":[{"id":"w3-sat-str","sport":"strength","type":"strength","name":"Hyrox D — Skill & Sim"}]},{"date":"2026-06-21","weekNum":3,"workouts":[{"id":"w3-sun-long","sport":"run","type":"long","name":"Long Run"}]},{"date":"2026-06-22","weekNum":4,"workouts":[{"id":"w4-mon-str","sport":"strength","type":"strength","name":"Hyrox A — Upper & Core"}]},{"date":"2026-06-23","weekNum":4,"workouts":[{"id":"w4-tue-str-run","sport":"run","type":"strides","name":"Easy Run + 6×Strides"}]},{"date":"2026-06-24","weekNum":4,"workouts":[{"id":"w4-wed-easy","sport":"run","type":"easy","name":"Easy Run"},{"id":"w4-wed-str","sport":"strength","type":"strength","name":"Hyrox B — Power"}]},{"date":"2026-06-25","weekNum":4,"workouts":[{"id":"w4-thu-tempo","sport":"run","type":"tempo","name":"Tempo Run – 20 min"}]},{"date":"2026-06-26","weekNum":4,"workouts":[{"id":"w4-fri-str","sport":"strength","type":"strength","name":"Hyrox C — Conditioning"}]},{"date":"2026-06-27","weekNum":4,"workouts":[{"id":"w4-sat-str","sport":"strength","type":"strength","name":"Hyrox D — Skill & Sim"}]},{"date":"2026-06-28","weekNum":4,"workouts":[{"id":"w4-sun-long","sport":"run","type":"long","name":"Progressive Long Run"}]},{"date":"2026-06-29","weekNum":5,"workouts":[{"id":"w5-mon-str","sport":"strength","type":"strength","name":"Hyrox A — Upper & Core"}]},{"date":"2026-06-30","weekNum":5,"workouts":[{"id":"w5-tue-str-run","sport":"run","type":"strides","name":"Easy Run + 4×Strides"}]},{"date":"2026-07-01","weekNum":5,"workouts":[{"id":"w5-wed-easy","sport":"run","type":"easy","name":"Easy Run"},{"id":"w5-wed-str","sport":"strength","type":"strength","name":"Hyrox B — Power"}]},{"date":"2026-07-02","weekNum":5,"workouts":[{"id":"w5-thu-easy","sport":"run","type":"easy","name":"Easy Run"}]},{"date":"2026-07-03","weekNum":5,"workouts":[{"id":"w5-fri-str","sport":"strength","type":"strength","name":"Hyrox C — Conditioning"}]},{"date":"2026-07-04","weekNum":5,"workouts":[{"id":"w5-sat-str","sport":"strength","type":"strength","name":"Hyrox D — Skill & Sim"}]},{"date":"2026-07-05","weekNum":5,"workouts":[{"id":"w5-sun-long","sport":"run","type":"long","name":"Long Run"}]},{"date":"2026-07-06","weekNum":6,"workouts":[{"id":"w6-mon-str","sport":"strength","type":"strength","name":"Hyrox A — Upper & Core"}]},{"date":"2026-07-07","weekNum":6,"workouts":[{"id":"w6-tue-tempo","sport":"run","type":"tempo","name":"Tempo Run – 20 min"}]},{"date":"2026-07-08","weekNum":6,"workouts":[{"id":"w6-wed-easy","sport":"run","type":"easy","name":"Easy Run"},{"id":"w6-wed-str","sport":"strength","type":"strength","name":"Hyrox B — Power"}]},{"date":"2026-07-09","weekNum":6,"workouts":[{"id":"w6-thu-thresh","sport":"run","type":"intervals","name":"Threshold Intervals – 3×1km"}]},{"date":"2026-07-10","weekNum":6,"workouts":[{"id":"w6-fri-str","sport":"strength","type":"strength","name":"Hyrox C — Conditioning"}]},{"date":"2026-07-11","weekNum":6,"workouts":[{"id":"w6-sat-str","sport":"strength","type":"strength","name":"Hyrox D — Skill & Sim"}]},{"date":"2026-07-12","weekNum":6,"workouts":[{"id":"w6-sun-long","sport":"run","type":"long","name":"Progressive Long Run"}]},{"date":"2026-07-13","weekNum":7,"workouts":[{"id":"w7-mon-str","sport":"strength","type":"strength","name":"Hyrox A — Upper & Core"}]},{"date":"2026-07-14","weekNum":7,"workouts":[{"id":"w7-tue-tempo","sport":"run","type":"tempo","name":"Tempo Run – 25 min"}]},{"date":"2026-07-15","weekNum":7,"workouts":[{"id":"w7-wed-easy","sport":"run","type":"easy","name":"Easy Run"},{"id":"w7-wed-str","sport":"strength","type":"strength","name":"Hyrox B — Power"}]},{"date":"2026-07-16","weekNum":7,"workouts":[{"id":"w7-thu-thresh","sport":"run","type":"intervals","name":"Threshold Intervals – 4×1km"}]},{"date":"2026-07-17","weekNum":7,"workouts":[{"id":"w7-fri-str","sport":"strength","type":"strength","name":"Hyrox C — Conditioning"}]},{"date":"2026-07-18","weekNum":7,"workouts":[{"id":"w7-sat-str","sport":"strength","type":"strength","name":"Hyrox D — Skill & Sim"}]},{"date":"2026-07-19","weekNum":7,"workouts":[{"id":"w7-sun-long","sport":"run","type":"long","name":"Progressive Long Run"}]},{"date":"2026-07-20","weekNum":8,"workouts":[{"id":"w8-mon-str","sport":"strength","type":"strength","name":"Hyrox A — Upper & Core"}]},{"date":"2026-07-21","weekNum":8,"workouts":[{"id":"w8-tue-tempo","sport":"run","type":"tempo","name":"Tempo Run – 30 min"}]},{"date":"2026-07-22","weekNum":8,"workouts":[{"id":"w8-wed-easy","sport":"run","type":"easy","name":"Easy Run"},{"id":"w8-wed-str","sport":"strength","type":"strength","name":"Hyrox B — Power"}]},{"date":"2026-07-23","weekNum":8,"workouts":[{"id":"w8-thu-thresh","sport":"run","type":"intervals","name":"Threshold Intervals – 4×1km"}]},{"date":"2026-07-24","weekNum":8,"workouts":[{"id":"w8-fri-str","sport":"strength","type":"strength","name":"Hyrox C — Conditioning"}]},{"date":"2026-07-25","weekNum":8,"workouts":[{"id":"w8-sat-str","sport":"strength","type":"strength","name":"Hyrox D — Skill & Sim"}]},{"date":"2026-07-26","weekNum":8,"workouts":[{"id":"w8-sun-long","sport":"run","type":"long","name":"Progressive Long Run"}]},{"date":"2026-07-27","weekNum":9,"workouts":[{"id":"w9-mon-str","sport":"strength","type":"strength","name":"Hyrox A — Upper & Core"}]},{"date":"2026-07-28","weekNum":9,"workouts":[{"id":"w9-tue-vo2","sport":"run","type":"intervals","name":"VO₂max Intervals – 5×1000m"}]},{"date":"2026-07-29","weekNum":9,"workouts":[{"id":"w9-wed-easy","sport":"run","type":"easy","name":"Easy Run"},{"id":"w9-wed-str","sport":"strength","type":"strength","name":"Hyrox B — Power"}]},{"date":"2026-07-30","weekNum":9,"workouts":[{"id":"w9-thu-tempo","sport":"run","type":"tempo","name":"Tempo Run – 25 min"}]},{"date":"2026-07-31","weekNum":9,"workouts":[{"id":"w9-fri-str","sport":"strength","type":"strength","name":"Hyrox C — Conditioning"}]},{"date":"2026-08-01","weekNum":9,"workouts":[{"id":"w9-sat-str","sport":"strength","type":"strength","name":"Hyrox D — Skill & Sim"}]},{"date":"2026-08-02","weekNum":9,"workouts":[{"id":"w9-sun-long","sport":"run","type":"long","name":"Progressive Long Run"}]},{"date":"2026-08-03","weekNum":10,"workouts":[{"id":"w10-mon-str","sport":"strength","type":"strength","name":"Hyrox A — Upper & Core"}]},{"date":"2026-08-04","weekNum":10,"workouts":[{"id":"w10-tue-thresh","sport":"run","type":"intervals","name":"Threshold Intervals – 4×2km"}]},{"date":"2026-08-05","weekNum":10,"workouts":[{"id":"w10-wed-easy","sport":"run","type":"easy","name":"Easy Run"},{"id":"w10-wed-str","sport":"strength","type":"strength","name":"Hyrox B — Power"}]},{"date":"2026-08-06","weekNum":10,"workouts":[{"id":"w10-thu-vo2","sport":"run","type":"intervals","name":"VO₂max Intervals – 5×800m"}]},{"date":"2026-08-07","weekNum":10,"workouts":[{"id":"w10-fri-str","sport":"strength","type":"strength","name":"Hyrox C — Conditioning"}]},{"date":"2026-08-08","weekNum":10,"workouts":[{"id":"w10-sat-str","sport":"strength","type":"strength","name":"Hyrox D — Skill & Sim"}]},{"date":"2026-08-09","weekNum":10,"workouts":[{"id":"w10-sun-long","sport":"run","type":"long","name":"Progressive Long Run"}]},{"date":"2026-08-10","weekNum":11,"workouts":[{"id":"w11-mon-str","sport":"strength","type":"strength","name":"Hyrox A — Upper & Core"}]},{"date":"2026-08-11","weekNum":11,"workouts":[{"id":"w11-tue-str-run","sport":"run","type":"strides","name":"Easy Run + 6×Strides"}]},{"date":"2026-08-12","weekNum":11,"workouts":[{"id":"w11-wed-easy","sport":"run","type":"easy","name":"Easy Run"},{"id":"w11-wed-str","sport":"strength","type":"strength","name":"Hyrox B — Power"}]},{"date":"2026-08-13","weekNum":11,"workouts":[{"id":"w11-thu-easy","sport":"run","type":"easy","name":"Easy Run"}]},{"date":"2026-08-14","weekNum":11,"workouts":[{"id":"w11-fri-str","sport":"strength","type":"strength","name":"Hyrox C — Conditioning"}]},{"date":"2026-08-15","weekNum":11,"workouts":[{"id":"w11-sat-str","sport":"strength","type":"strength","name":"Hyrox D — Skill & Sim"}]},{"date":"2026-08-16","weekNum":11,"workouts":[{"id":"w11-sun-long","sport":"run","type":"long","name":"Long Run"}]},{"date":"2026-08-17","weekNum":12,"workouts":[{"id":"w12-mon-str","sport":"strength","type":"strength","name":"Hyrox A — Upper & Core"}]},{"date":"2026-08-18","weekNum":12,"workouts":[{"id":"w12-tue-vo2","sport":"run","type":"intervals","name":"VO₂max Intervals – 6×1000m"}]},{"date":"2026-08-19","weekNum":12,"workouts":[{"id":"w12-wed-easy","sport":"run","type":"easy","name":"Easy Run"},{"id":"w12-wed-str","sport":"strength","type":"strength","name":"Hyrox B — Power"}]},{"date":"2026-08-20","weekNum":12,"workouts":[{"id":"w12-thu-thresh","sport":"run","type":"intervals","name":"Threshold Intervals – 3×2km"}]},{"date":"2026-08-21","weekNum":12,"workouts":[{"id":"w12-fri-str","sport":"strength","type":"strength","name":"Hyrox C — Conditioning"}]},{"date":"2026-08-22","weekNum":12,"workouts":[{"id":"w12-sat-str","sport":"strength","type":"strength","name":"Hyrox D — Skill & Sim"}]},{"date":"2026-08-23","weekNum":12,"workouts":[{"id":"w12-sun-long","sport":"run","type":"long","name":"Progressive Long Run"}]},{"date":"2026-08-24","weekNum":13,"workouts":[{"id":"w13-mon-str","sport":"strength","type":"strength","name":"Hyrox A — Upper & Core"}]},{"date":"2026-08-25","weekNum":13,"workouts":[{"id":"w13-tue-rp","sport":"run","type":"intervals","name":"Race Pace Intervals – 3×3km"}]},{"date":"2026-08-26","weekNum":13,"workouts":[{"id":"w13-wed-easy","sport":"run","type":"easy","name":"Easy Run"},{"id":"w13-wed-str","sport":"strength","type":"strength","name":"Hyrox B — Power"}]},{"date":"2026-08-27","weekNum":13,"workouts":[{"id":"w13-thu-tempo","sport":"run","type":"tempo","name":"Tempo Run – 25 min"}]},{"date":"2026-08-28","weekNum":13,"workouts":[{"id":"w13-fri-str","sport":"strength","type":"strength","name":"Hyrox C — Conditioning"}]},{"date":"2026-08-29","weekNum":13,"workouts":[{"id":"w13-sat-str","sport":"strength","type":"strength","name":"Hyrox D — Skill & Sim"}]},{"date":"2026-08-30","weekNum":13,"workouts":[{"id":"w13-sun-long","sport":"run","type":"long","name":"Progressive Long Run"}]},{"date":"2026-08-31","weekNum":14,"workouts":[{"id":"w14-mon-rest","sport":"rest","type":"rest","name":"Rest Day"}]},{"date":"2026-09-01","weekNum":14,"workouts":[{"id":"w14-tue-rp","sport":"run","type":"intervals","name":"Race Pace Intervals – 4×1km"}]},{"date":"2026-09-02","weekNum":14,"workouts":[{"id":"w14-wed-easy","sport":"run","type":"easy","name":"Easy Run"},{"id":"w14-wed-str","sport":"strength","type":"strength","name":"Hyrox B — Maintenance"}]},{"date":"2026-09-03","weekNum":14,"workouts":[{"id":"w14-thu-easy","sport":"run","type":"easy","name":"Easy Run"}]},{"date":"2026-09-04","weekNum":14,"workouts":[{"id":"w14-fri-str","sport":"strength","type":"strength","name":"Strength & Conditioning"}]},{"date":"2026-09-05","weekNum":14,"workouts":[{"id":"w14-sat-rest","sport":"rest","type":"rest","name":"Rest Day"}]},{"date":"2026-09-06","weekNum":14,"workouts":[{"id":"w14-sun-long","sport":"run","type":"long","name":"Progressive Long Run"}]},{"date":"2026-09-07","weekNum":15,"workouts":[{"id":"w15-mon-rest","sport":"rest","type":"rest","name":"Rest Day"}]},{"date":"2026-09-08","weekNum":15,"workouts":[{"id":"w15-tue-sharp","sport":"run","type":"intervals","name":"Race Sharpener – 3×1km"}]},{"date":"2026-09-09","weekNum":15,"workouts":[{"id":"w15-wed-taper","sport":"run","type":"easy","name":"Taper Easy Run"},{"id":"w15-wed-str","sport":"strength","type":"strength","name":"Hyrox B — Maintenance"}]},{"date":"2026-09-10","weekNum":15,"workouts":[{"id":"w15-thu-str-run","sport":"run","type":"strides","name":"Easy Run + 4×Strides"}]},{"date":"2026-09-11","weekNum":15,"workouts":[{"id":"w15-fri-rest","sport":"rest","type":"rest","name":"Rest Day"}]},{"date":"2026-09-12","weekNum":15,"workouts":[{"id":"w15-sat-rest","sport":"rest","type":"rest","name":"Rest Day"}]},{"date":"2026-09-13","weekNum":15,"workouts":[{"id":"w15-sun-taper","sport":"run","type":"easy","name":"Taper Easy Run"}]},{"date":"2026-09-14","weekNum":16,"workouts":[{"id":"w16-mon-rest","sport":"rest","type":"rest","name":"Rest Day"}]},{"date":"2026-09-15","weekNum":16,"workouts":[{"id":"w16-tue-str-run","sport":"run","type":"strides","name":"Easy Run + 4×Strides"}]},{"date":"2026-09-16","weekNum":16,"workouts":[]},{"date":"2026-09-17","weekNum":16,"workouts":[{"id":"w16-thu-taper","sport":"run","type":"easy","name":"Pre-race Shakeout"}]},{"date":"2026-09-18","weekNum":16,"workouts":[{"id":"w16-fri-rest","sport":"rest","type":"rest","name":"Rest Day"}]},{"date":"2026-09-19","weekNum":16,"workouts":[{"id":"w16-sat-pre","sport":"run","type":"easy","name":"Day-Before Activation"}]},{"date":"2026-09-20","weekNum":16,"workouts":[{"id":"w16-sun-race","sport":"run","type":"race","name":"🏁 Half Marathon – RACE DAY"}]}];
@@ -6104,6 +6242,16 @@ function switchMainTab(name) {
 // ── WEEK COLLAPSE ────────────────────────────────────────────
 function toggleWeek(headerEl) {
   headerEl.closest('.week-section').classList.toggle('collapsed');
+}
+
+// ── UPCOMING SESSION EXPAND ──────────────────────────────────
+function toggleUpcoming(uid) {
+  const detail = document.getElementById(uid);
+  const arrow = document.getElementById(uid + '-arrow');
+  if (!detail) return;
+  const open = detail.style.display === 'none' || detail.style.display === '';
+  detail.style.display = open ? 'flex' : 'none';
+  if (arrow) arrow.classList.toggle('open', open);
 }
 // On mobile, collapse all past weeks by default to keep plan tidy
 (function() {

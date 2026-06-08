@@ -110,49 +110,69 @@ try {
 // Uses Riegel formula: T2 = T1 × (D2/D1)^1.06
 // Uses best recent effort (last 90 days) at race-ish distances (5–22km)
 let racePrediction = null;
+let baselinePrediction = null; // earliest prediction (pre-plan or plan start)
 try {
   const db3 = new DatabaseSync(DB_FILE);
-  // Find best recent run by effort (best pace for 5km+ runs)
+  const goalDistM = 21097;
+  const goalDistKm = goalDistM / 1000;
+  const goalSec = (1 * 3600) + (40 * 60); // 1:40:00
+
+  function riegelPredict(rows) {
+    let best = null;
+    for (const r of rows) {
+      if (r.distance < 4000) continue;
+      const predicted = r.moving_time * Math.pow(goalDistM / r.distance, 1.06);
+      if (!best || predicted < best.predicted) best = { ...r, predicted: Math.round(predicted) };
+    }
+    if (!best) return null;
+    const hrs = Math.floor(best.predicted / 3600);
+    const mins = Math.floor((best.predicted % 3600) / 60);
+    const secs = best.predicted % 60;
+    const timeStr = `${hrs}:${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+    const paceSec = Math.round(best.predicted / goalDistKm);
+    const paceStr = `${Math.floor(paceSec/60)}:${String(paceSec%60).padStart(2,'0')}/km`;
+    const gapSec = best.predicted - goalSec;
+    const srcDistKm = Math.round(best.distance / 100) / 10;
+    const srcPaceSec = Math.round(1000 / best.average_speed);
+    const srcPaceStr = `${Math.floor(srcPaceSec/60)}:${String(srcPaceSec%60).padStart(2,'0')}/km`;
+    return { timeStr, paceStr, gapSec, srcDistKm, srcPaceStr, srcDate: best.date, onTrack: gapSec <= 0, predicted: best.predicted };
+  }
+
+  // Current prediction — best effort last 90 days
   const recentRuns = db3.prepare(`
     SELECT distance, moving_time, average_heartrate, average_speed,
            substr(start_date,1,10) as date
     FROM activities
     WHERE type='Run' AND distance>=4000 AND average_speed>0
       AND start_date>=date('now','-90 days')
-    ORDER BY average_speed DESC
-    LIMIT 20
+    ORDER BY average_speed DESC LIMIT 20
   `).all();
-  db3.close();
+  racePrediction = riegelPredict(recentRuns);
 
-  // Pick the best effort run (fastest pace) that has decent HR data or just fastest
-  const goalDistM = 21097;
-  const goalDistKm = goalDistM / 1000;
-  let best = null;
-  for (const r of recentRuns) {
-    if (r.distance < 4000) continue;
-    // Riegel prediction to 21.1km
-    const predicted = r.moving_time * Math.pow(goalDistM / r.distance, 1.06);
-    if (!best || predicted < best.predicted) {
-      best = { ...r, predicted: Math.round(predicted) };
-    }
-  }
-  if (best) {
-    const hrs = Math.floor(best.predicted / 3600);
-    const mins = Math.floor((best.predicted % 3600) / 60);
-    const secs = best.predicted % 60;
-    const timeStr = hrs > 0
-      ? `${hrs}:${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`
-      : `${mins}:${String(secs).padStart(2,'0')}`;
-    const paceSec = Math.round(best.predicted / goalDistKm);
-    const paceStr = `${Math.floor(paceSec/60)}:${String(paceSec%60).padStart(2,'0')}/km`;
-    const goalSec = (1 * 3600) + (40 * 60); // 1:40:00
-    const gapSec = best.predicted - goalSec;
-    const srcDistKm = Math.round(best.distance / 100) / 10;
-    const srcPaceSec = Math.round(1000 / best.average_speed);
-    const srcPaceStr = `${Math.floor(srcPaceSec/60)}:${String(srcPaceSec%60).padStart(2,'0')}/km`;
-    racePrediction = { timeStr, paceStr, gapSec, srcDistKm, srcPaceStr, srcDate: best.date, onTrack: gapSec <= 0 };
-  }
+  // Baseline prediction — best effort in the 90 days BEFORE plan start
+  const planStart = plan.meta.planStartDate;
+  const baselineRuns = db3.prepare(`
+    SELECT distance, moving_time, average_heartrate, average_speed,
+           substr(start_date,1,10) as date
+    FROM activities
+    WHERE type='Run' AND distance>=4000 AND average_speed>0
+      AND start_date < '${planStart}'
+      AND start_date >= date('${planStart}','-90 days')
+    ORDER BY average_speed DESC LIMIT 20
+  `).all();
+  baselinePrediction = riegelPredict(baselineRuns);
+
+  db3.close();
 } catch(e) { /* ignore */ }
+
+// ── PLAN PROGRESS STATS ──────────────────────────────────────
+const planStartDate = plan.meta.planStartDate;
+const totalPlanWeeks = plan.weeks.length;
+const weeksCompleted = plan.weeks.filter(w => w.endDate < todayStr).length;
+const plannedKmToDate = plan.weeks
+  .filter(w => w.endDate < todayStr)
+  .reduce((s, w) => s + (w.summary?.totalKm || 0), 0);
+const actualKmToDate = Object.values(actualKmByWeek).reduce((s, v) => s + v, 0);
 
 // ── ZONE TIME FROM HR STREAM ────────────────────────────────
 function zoneTimesFromStream(hrStream, timeStream) {
@@ -869,6 +889,136 @@ function weekCard(w) {
 }
 
 // ── TODAY PANEL (server-side) ────────────────────────────────
+// ── COACH STATUS / PROGRESSION COMMENTARY ───────────────────
+function coachStatusHtml() {
+  const goalSec = 6000; // 1:40:00
+  const weeksLeft = totalPlanWeeks - weeksCompleted;
+  const pctDone = Math.round((weeksCompleted / totalPlanWeeks) * 100);
+
+  // Progress sentence
+  const progressLine = weeksCompleted === 0
+    ? `Plan just started — week 1 of ${totalPlanWeeks}.`
+    : `${weeksCompleted} of ${totalPlanWeeks} weeks complete (${pctDone}% of the plan).`;
+
+  // Km adherence
+  let kmLine = '';
+  if (plannedKmToDate > 0) {
+    const pct = Math.round((actualKmToDate / plannedKmToDate) * 100);
+    const diff = Math.abs(actualKmToDate - plannedKmToDate).toFixed(0);
+    if (pct >= 90) kmLine = `You've run <strong>${actualKmToDate.toFixed(0)}km</strong> vs ${plannedKmToDate.toFixed(0)}km planned — great adherence (${pct}%).`;
+    else if (pct >= 70) kmLine = `You've run <strong>${actualKmToDate.toFixed(0)}km</strong> vs ${plannedKmToDate.toFixed(0)}km planned (${pct}%). About ${diff}km behind — manageable, keep the current week clean.`;
+    else if (actualKmToDate > 0) kmLine = `You've run <strong>${actualKmToDate.toFixed(0)}km</strong> vs ${plannedKmToDate.toFixed(0)}km planned (${pct}%). ${diff}km behind schedule — prioritise not missing any more runs this block.`;
+  }
+
+  // Prediction delta narrative
+  let predLine = '';
+  let trend = null;
+  if (racePrediction && baselinePrediction) {
+    const deltaS = baselinePrediction.predicted - racePrediction.predicted;
+    const deltaMins = Math.abs(Math.floor(deltaS / 60));
+    const deltaSecs = Math.abs(deltaS % 60);
+    const deltaStr = deltaMins > 0 ? `${deltaMins}m ${deltaSecs}s` : `${deltaSecs}s`;
+    if (deltaS > 30) {
+      trend = 'improving';
+      predLine = `Since starting the plan your predicted time has improved by <strong>${deltaStr}</strong> — from ${baselinePrediction.timeStr} → <strong>${racePrediction.timeStr}</strong>. The training is working.`;
+    } else if (deltaS < -30) {
+      trend = 'slower';
+      predLine = `Your current prediction (${racePrediction.timeStr}) is <strong>${deltaStr} slower</strong> than at plan start (${baselinePrediction.timeStr}). This can happen with training fatigue or low mileage — keep the easy runs easy and hit the quality sessions.`;
+    } else {
+      trend = 'flat';
+      predLine = `Prediction is holding steady at <strong>${racePrediction.timeStr}</strong> (baseline was ${baselinePrediction.timeStr}). Fitness gains typically show up in the Build phase — stay consistent.`;
+    }
+  } else if (racePrediction) {
+    predLine = `Current prediction: <strong>${racePrediction.timeStr}</strong>. No baseline data from before the plan — progress comparison will appear once more Strava data is synced.`;
+  }
+
+  // Gap to goal
+  let gapLine = '';
+  if (racePrediction) {
+    const gapAbs = Math.abs(racePrediction.gapSec);
+    const gapMins = Math.floor(gapAbs / 60), gapSecs = gapAbs % 60;
+    const gapStr = `${gapMins}m ${gapSecs}s`;
+    if (racePrediction.onTrack) {
+      gapLine = `You're <strong>${gapStr} ahead of your 1:40 goal</strong>. Keep building — don't change anything, don't go harder.`;
+    } else {
+      const gapPerKm = Math.round(racePrediction.gapSec / 21.1);
+      gapLine = `You need to find <strong>${gapStr}</strong> to hit 1:40 — that's ${gapPerKm} sec/km at race pace. ${weeksLeft > 8 ? 'Plenty of time with consistent training.' : weeksLeft > 4 ? 'Focused quality work in the next few weeks can close this.' : 'Taper well and race smart.'}`;
+    }
+  }
+
+  // Overall coaching status label
+  let statusEmoji = '📋', statusColor = '#64748b', statusLabel = 'Building base';
+  if (racePrediction) {
+    if (racePrediction.onTrack && trend === 'improving') { statusEmoji = '🚀'; statusColor = '#10b981'; statusLabel = 'On fire — ahead of target'; }
+    else if (racePrediction.onTrack) { statusEmoji = '✅'; statusColor = '#10b981'; statusLabel = 'On track for sub-1:40'; }
+    else if (trend === 'improving') { statusEmoji = '📈'; statusColor = '#f59e0b'; statusLabel = 'Improving — keep going'; }
+    else if (trend === 'slower') { statusEmoji = '⚠️'; statusColor = '#ef4444'; statusLabel = 'Attention needed'; }
+    else { statusEmoji = '🔄'; statusColor = '#6366f1'; statusLabel = 'Steady — gains coming'; }
+  }
+
+  // Z2 trend narrative (last 3 weeks if available)
+  let z2Line = '';
+  if (fitnessTrend.length >= 2) {
+    const last = fitnessTrend[fitnessTrend.length - 1];
+    const prev = fitnessTrend[fitnessTrend.length - 2];
+    const delta = last.avgPace - prev.avgPace;
+    const fmtPace = s => `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}/km`;
+    if (delta < -8) z2Line = `Your easy-run pace improved by ${Math.abs(delta)} sec/km this week (${fmtPace(prev.avgPace)} → ${fmtPace(last.avgPace)}) — aerobic engine is responding.`;
+    else if (delta > 8) z2Line = `Easy-run pace was ${delta} sec/km slower this week — likely accumulated fatigue. Prioritise sleep and keep this week's easy runs genuinely easy.`;
+  }
+
+  // Weeks left comment
+  const timelineComment = weeksLeft <= 0 ? '' :
+    weeksLeft === 1 ? '⏱️ Race week — trust your training, protect the legs.' :
+    weeksLeft <= 3 ? '🎯 Taper block — your body is absorbing the work. Resist extra effort.' :
+    weeksLeft <= 6 ? '🔥 Build phase — the hardest and most important weeks. Execute every session.' :
+    '🌱 Still in base — consistency over intensity. Every easy run counts.';
+
+  const lines = [progressLine, kmLine, predLine, gapLine, z2Line].filter(Boolean);
+
+  return `
+  <div class="coach-status-card">
+    <div class="cs-header">
+      <div>
+        <span class="cs-status-emoji">${statusEmoji}</span>
+        <span class="cs-status-label" style="color:${statusColor}">${statusLabel}</span>
+      </div>
+      ${timelineComment ? `<div class="cs-timeline-pill">${timelineComment}</div>` : ''}
+    </div>
+    <div class="cs-body">
+      ${lines.map(l => `<p class="cs-line">${l}</p>`).join('')}
+    </div>
+    ${racePrediction && baselinePrediction ? `
+    <div class="cs-pred-row">
+      <div class="cs-pred-box cs-pred-baseline">
+        <div class="cs-pred-label">At plan start</div>
+        <div class="cs-pred-time">${baselinePrediction.timeStr}</div>
+      </div>
+      <div class="cs-pred-arrow">→</div>
+      <div class="cs-pred-box cs-pred-now" style="border-color:${racePrediction.onTrack ? '#10b981' : '#f59e0b'}">
+        <div class="cs-pred-label">Now</div>
+        <div class="cs-pred-time" style="color:${racePrediction.onTrack ? '#10b981' : '#f59e0b'}">${racePrediction.timeStr}</div>
+      </div>
+      <div class="cs-pred-arrow">→</div>
+      <div class="cs-pred-box cs-pred-goal">
+        <div class="cs-pred-label">Goal</div>
+        <div class="cs-pred-time" style="color:#f59e0b">1:40:00</div>
+      </div>
+    </div>` : (racePrediction ? `
+    <div class="cs-pred-row">
+      <div class="cs-pred-box cs-pred-now" style="border-color:${racePrediction.onTrack ? '#10b981' : '#f59e0b'}">
+        <div class="cs-pred-label">Current prediction</div>
+        <div class="cs-pred-time" style="color:${racePrediction.onTrack ? '#10b981' : '#f59e0b'}">${racePrediction.timeStr}</div>
+      </div>
+      <div class="cs-pred-arrow">→</div>
+      <div class="cs-pred-box cs-pred-goal">
+        <div class="cs-pred-label">Goal</div>
+        <div class="cs-pred-time" style="color:#f59e0b">1:40:00</div>
+      </div>
+    </div>` : '')}
+  </div>`;
+}
+
 function todayPanelHtml() {
   const todayPlan = plan.weeks.flatMap(wk => wk.days).find(d => d.date === todayStr);
   const dateHeading = new Date(todayStr).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
@@ -937,7 +1087,7 @@ function todayPanelHtml() {
     }
   }
 
-  // Upcoming quality sessions
+  // Upcoming quality sessions — expandable
   const qualTypes = new Set(['tempo','intervals','strides','race','long']);
   const upcomingDays = plan.weeks.flatMap(wk => wk.days)
     .filter(d => d.date > todayStr)
@@ -946,20 +1096,44 @@ function todayPanelHtml() {
   const upcomingHtml = upcomingDays.length ? `
   <div class="upcoming-section">
     <h3 class="section-sub-title">📅 Next Quality Sessions</h3>
-    ${upcomingDays.map(d => {
+    ${upcomingDays.map((d, idx) => {
       const qw = d.workouts.find(w => qualTypes.has(w.type));
       const dt = new Date(d.date).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
       const color = sportColor(qw);
-      return `<div class="upcoming-row" style="border-left:3px solid ${color}">
-        <div class="upcoming-date">${dt}</div>
-        <div class="upcoming-name">${qw.name}</div>
-        ${qw.distanceKm ? `<div class="upcoming-km">${qw.distanceKm}km</div>` : ''}
-        ${qw.targetPace ? `<div class="upcoming-pace">🎯 ${qw.targetPace}</div>` : ''}
+      const icon = sportIcon(qw);
+      const focus = workoutFocus(qw);
+      const dist = qw.distanceKm ? `${qw.distanceKm}km` : '';
+      const dur = qw.durationMinutes ? `${qw.durationMinutes}min` : '';
+      const detail = [dist, dur].filter(Boolean).join(' · ');
+      const desc = (qw.humanReadable || qw.description || '').replace(/\n/g,'<br>');
+      const uid = `upc-${idx}`;
+      return `<div class="upcoming-card" style="border-left:4px solid ${color}" onclick="toggleUpcoming('${uid}')">
+        <div class="upcoming-card-header">
+          <span class="upcoming-icon">${icon}</span>
+          <div class="upcoming-card-info">
+            <div class="upcoming-name">${qw.name}</div>
+            <div class="upcoming-date">${dt}${detail ? ' · ' + detail : ''}</div>
+          </div>
+          ${qw.targetPace ? `<span class="upcoming-pace-chip">🎯 ${qw.targetPace}</span>` : ''}
+          <span class="upcoming-expand-arrow" id="${uid}-arrow">›</span>
+        </div>
+        <div class="upcoming-detail" id="${uid}" style="display:none">
+          ${desc ? `<p class="upcoming-desc">${desc}</p>` : ''}
+          ${focus ? `<div class="upcoming-focus-block">
+            <div class="upcoming-focus-label">🧠 Why</div>
+            <p class="upcoming-focus-text">${focus.why}</p>
+          </div>
+          <div class="upcoming-focus-block">
+            <div class="upcoming-focus-label">🎯 Focus</div>
+            <p class="upcoming-focus-text">${focus.focus}</p>
+          </div>` : ''}
+        </div>
       </div>`;
     }).join('')}
   </div>` : '';
 
   return `
+  ${coachStatusHtml()}
   <div class="today-panel-wrap">
     <div class="today-left">
       <h2 class="today-date-heading">📅 ${dateHeading}</h2>
@@ -1169,17 +1343,30 @@ const html = `<!DOCTYPE html>
       /* Export to watch button */
       .dl-btn { font-size: 15px; padding: 12px 20px; margin-top: 16px; border-radius: 10px; }
 
+      /* Coach status card */
+      .coach-status-card { padding: 18px 16px; border-radius: 16px; margin-bottom: 20px; }
+      .cs-status-emoji { font-size: 26px; }
+      .cs-status-label { font-size: 18px; }
+      .cs-timeline-pill { font-size: 12px; padding: 5px 12px; }
+      .cs-line { font-size: 15px; line-height: 1.7; }
+      .cs-pred-row { gap: 8px; }
+      .cs-pred-time { font-size: 20px; }
+      .cs-pred-arrow { font-size: 16px; }
+
       /* Upcoming sessions */
       .section-sub-title { font-size: 15px; letter-spacing: .04em; margin-bottom: 12px; }
       .upcoming-section { margin-top: 24px; }
-      .upcoming-row {
-        display: flex; align-items: center; gap: 12px;
-        padding: 13px 16px; border-radius: 12px; margin-bottom: 8px;
-      }
-      .upcoming-date { font-size: 12px; font-weight: 700; min-width: 64px; flex-shrink: 0; }
-      .upcoming-name { font-size: 16px; font-weight: 600; flex: 1; }
-      .upcoming-pace { display: none; }
-      .upcoming-km { display: none; }
+      .upcoming-card { border-radius: 14px; margin-bottom: 10px; }
+      .upcoming-card-header { padding: 14px 16px; gap: 12px; }
+      .upcoming-icon { font-size: 24px; }
+      .upcoming-name { font-size: 17px; }
+      .upcoming-date { font-size: 13px; margin-top: 3px; }
+      .upcoming-pace-chip { font-size: 13px; padding: 5px 10px; }
+      .upcoming-expand-arrow { font-size: 24px; }
+      .upcoming-detail { padding: 0 16px 16px 16px; gap: 12px; }
+      .upcoming-focus-label { font-size: 11px; }
+      .upcoming-focus-text { font-size: 15px; line-height: 1.7; }
+      .upcoming-desc { font-size: 14px; }
 
       /* ── PLAN TAB ── */
       .weeks-container { padding: 0 0 16px; gap: 10px; }
@@ -1350,6 +1537,37 @@ const html = `<!DOCTYPE html>
     .inj-risk-banner { margin: 0 24px 16px; border-radius: var(--radius); padding: 11px 16px; font-size: 13px; font-weight: 500; border: 1px solid; }
     .inj-risk-banner.risk-warn { background: rgba(239,68,68,.1); border-color: rgba(239,68,68,.35); color: #fca5a5; }
     .inj-risk-banner.risk-caution { background: rgba(251,191,36,.07); border-color: rgba(251,191,36,.3); color: #fde68a; }
+
+    /* ── COACH STATUS CARD ───────────────────────────────────── */
+    .coach-status-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px 22px; margin-bottom: 22px; }
+    .cs-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+    .cs-status-emoji { font-size: 22px; margin-right: 8px; }
+    .cs-status-label { font-size: 16px; font-weight: 800; }
+    .cs-timeline-pill { font-size: 12px; color: var(--text2); background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; padding: 4px 12px; }
+    .cs-body { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    .cs-line { font-size: 14px; color: var(--text2); line-height: 1.65; }
+    .cs-pred-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .cs-pred-box { background: var(--surface2); border: 2px solid var(--border); border-radius: 10px; padding: 10px 14px; text-align: center; flex: 1; min-width: 90px; }
+    .cs-pred-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 4px; }
+    .cs-pred-time { font-size: 22px; font-weight: 800; color: var(--text); }
+    .cs-pred-arrow { font-size: 20px; color: var(--text3); flex-shrink: 0; }
+
+    /* ── UPCOMING QUALITY SESSIONS (expandable) ──────────────── */
+    .upcoming-card { background: var(--surface2); border-radius: 10px; margin-bottom: 8px; cursor: pointer; transition: background .15s; overflow: hidden; }
+    .upcoming-card:hover { background: var(--surface); }
+    .upcoming-card-header { display: flex; align-items: center; gap: 10px; padding: 12px 14px; }
+    .upcoming-icon { font-size: 20px; flex-shrink: 0; }
+    .upcoming-card-info { flex: 1; min-width: 0; }
+    .upcoming-name { font-size: 14px; font-weight: 700; color: var(--text); }
+    .upcoming-date { font-size: 12px; color: var(--text3); margin-top: 2px; }
+    .upcoming-pace-chip { font-size: 12px; font-weight: 600; color: var(--accent); background: rgba(245,158,11,.12); border-radius: 8px; padding: 3px 8px; white-space: nowrap; flex-shrink: 0; }
+    .upcoming-expand-arrow { font-size: 20px; color: var(--text3); flex-shrink: 0; transition: transform .2s; font-weight: 300; }
+    .upcoming-expand-arrow.open { transform: rotate(90deg); }
+    .upcoming-detail { padding: 0 14px 14px 44px; display: flex; flex-direction: column; gap: 10px; }
+    .upcoming-desc { font-size: 13px; color: var(--text2); line-height: 1.6; border-left: 2px solid var(--border); padding-left: 10px; }
+    .upcoming-focus-block { display: flex; flex-direction: column; gap: 4px; }
+    .upcoming-focus-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); }
+    .upcoming-focus-text { font-size: 13px; color: var(--text2); line-height: 1.6; }
 
     /* ── ACTUAL KM BADGES ────────────────────────────────────── */
     .actual-km { border-radius: 20px; padding: 1px 8px; font-size: 11px; font-weight: 600; }
@@ -2343,6 +2561,16 @@ function switchMainTab(name) {
 // ── WEEK COLLAPSE ────────────────────────────────────────────
 function toggleWeek(headerEl) {
   headerEl.closest('.week-section').classList.toggle('collapsed');
+}
+
+// ── UPCOMING SESSION EXPAND ──────────────────────────────────
+function toggleUpcoming(uid) {
+  const detail = document.getElementById(uid);
+  const arrow = document.getElementById(uid + '-arrow');
+  if (!detail) return;
+  const open = detail.style.display === 'none' || detail.style.display === '';
+  detail.style.display = open ? 'flex' : 'none';
+  if (arrow) arrow.classList.toggle('open', open);
 }
 // On mobile, collapse all past weeks by default to keep plan tidy
 (function() {
