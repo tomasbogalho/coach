@@ -1088,150 +1088,204 @@ const html = `<!DOCTYPE html>
     .hr-target { font-size: 11px; color: #ef4444; margin-bottom: 6px; }
     .workout-desc { font-size: 11px; color: var(--text2); line-height: 1.6; }
 
-    /* ── RESPONSIVE — MOBILE ────────────────────────────────── */
+    /* ── RESPONSIVE — NATIVE MOBILE APP ──────────────────────── */
     @media (max-width: 700px) {
-      /* ── GLOBAL ── */
-      .tab-panel { padding: 10px; }
 
-      /* ── HEADER ── */
-      .plan-header { padding: 12px 12px 14px; }
-      .plan-title { font-size: 17px; }
-      .plan-subtitle { font-size: 12px; margin-bottom: 10px; }
-      /* Stat boxes: 3-column grid, compact */
-      .plan-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-      .stat-box { min-width: 0; padding: 7px 6px; }
-      .stat-value { font-size: 15px; }
-      .stat-label { font-size: 9px; }
-      /* Hide the keyboard-shortcut hint on touch devices */
-      .plan-header > div:last-child > span { display: none; }
-      /* Stack export + theme buttons */
-      .plan-header > div:last-child { margin-top: 10px; gap: 6px; }
-      .export-all-btn { font-size: 12px; padding: 7px 12px; }
-      .theme-toggle { font-size: 12px; margin-left: 0; }
+      /* ── BASE FONT ── */
+      body { font-size: 16px; }
 
-      /* ── COUNTDOWN BAR — not sticky on mobile (saves screen height) ── */
-      .countdown-bar { position: static; padding: 8px 12px; gap: 10px; }
-      .cd-value { font-size: 16px; }
-      .cd-label { font-size: 9px; }
-      /* Hide progress bar inside countdown on mobile — too wide */
+      /* ── HIDE DESKTOP HEADER — too dense for mobile ── */
+      .plan-header { display: none; }
+
+      /* ── SLIM APP BAR (countdown bar repurposed as top app bar) ── */
+      .countdown-bar {
+        position: sticky; top: 0; z-index: 80;
+        padding: 12px 18px;
+        gap: 16px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+      }
+      .cd-value { font-size: 22px; font-weight: 800; }
+      .cd-label { font-size: 11px; }
+      .cd-sep { display: none; }
       .plan-prog-wrap { display: none !important; }
-      #next-session-pill-wrap { display: none; }
+      #next-session-pill-wrap { margin-left: auto; }
 
-      /* ── MAIN TABS — sticky, full-width, emoji only hint ── */
-      .main-tabs { padding: 0; position: sticky; top: 0; }
-      .main-tab { flex: 1; padding: 11px 2px; font-size: 11px; white-space: nowrap; border-radius: 0; }
+      /* ── BOTTOM TAB BAR (native mobile pattern) ── */
+      .main-tabs {
+        position: fixed;
+        bottom: 0; left: 0; right: 0; top: auto;
+        padding: 0 0 env(safe-area-inset-bottom, 6px);
+        background: var(--surface);
+        border-top: 2px solid var(--border);
+        border-bottom: none;
+        z-index: 100;
+        gap: 0;
+      }
+      .main-tab {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        padding: 8px 4px 6px;
+        font-size: 11px;
+        font-weight: 600;
+        white-space: nowrap;
+        border-radius: 0;
+        border-bottom: none;
+        border-top: 3px solid transparent;
+        margin-bottom: 0;
+        min-height: 56px;
+      }
+      .main-tab.active { border-bottom-color: transparent; border-top-color: var(--accent); color: var(--accent); }
+      .tab-icon { font-size: 22px; line-height: 1; display: block; }
+      .tab-label { font-size: 10px; font-weight: 600; display: block; }
+
+      /* ── CONTENT AREA — pad for bottom nav ── */
+      .tab-panel {
+        padding: 16px 14px;
+        padding-bottom: calc(76px + env(safe-area-inset-bottom, 6px));
+      }
 
       /* ── TODAY PANEL ── */
-      .today-panel-wrap { grid-template-columns: 1fr; gap: 16px; }
-      .today-date-heading { font-size: 15px; margin-bottom: 10px; }
-      .today-workout-card { padding: 12px; }
-      .today-sport-icon { font-size: 22px; }
-      .today-workout-name { font-size: 14px; }
-      .today-workout-detail { font-size: 12px; }
-      .today-chip { font-size: 11px; padding: 2px 6px; }
-      .today-session-desc { font-size: 12px; }
-      .today-focus-section { padding: 10px; gap: 8px; }
-      .today-focus-text { font-size: 12px; }
-      .today-focus-label { font-size: 10px; }
-      .upcoming-section { margin-top: 14px; }
-      .upcoming-row { grid-template-columns: 66px 1fr; gap: 6px; padding: 8px 10px; }
-      .upcoming-date { font-size: 10px; }
-      .upcoming-name { font-size: 12px; }
+      .today-panel-wrap { grid-template-columns: 1fr; gap: 20px; }
+      .today-date-heading { font-size: 20px; font-weight: 800; margin-bottom: 16px; }
+      .today-workout-card { padding: 20px 18px; border-radius: 16px; margin-bottom: 12px; }
+      .today-workout-header { gap: 14px; }
+      .today-sport-icon { font-size: 36px; }
+      .today-workout-name { font-size: 22px; font-weight: 800; line-height: 1.2; }
+      .today-workout-detail { font-size: 15px; margin-top: 5px; }
+      .today-chip { font-size: 14px; font-weight: 700; padding: 6px 12px; border-radius: 12px; }
+      /* Hide verbose session description — focus sections cover it */
+      .today-session-desc { display: none; }
+      .today-focus-section { padding: 16px; gap: 14px; margin-top: 14px; border-radius: 12px; }
+      .today-focus-label { font-size: 11px; }
+      .today-focus-text { font-size: 15px; line-height: 1.65; }
+      .str-exercise-list { margin-top: 10px; gap: 8px; }
+      .str-exercise-list li { font-size: 15px; padding-left: 20px; line-height: 1.5; }
+      .today-rest-card { font-size: 17px; padding: 22px; border-radius: 16px; line-height: 1.7; }
+      /* Export to watch button */
+      .dl-btn { font-size: 15px; padding: 12px 20px; margin-top: 16px; border-radius: 10px; }
+
+      /* Upcoming sessions */
+      .section-sub-title { font-size: 15px; letter-spacing: .04em; margin-bottom: 12px; }
+      .upcoming-section { margin-top: 24px; }
+      .upcoming-row {
+        display: flex; align-items: center; gap: 12px;
+        padding: 13px 16px; border-radius: 12px; margin-bottom: 8px;
+      }
+      .upcoming-date { font-size: 12px; font-weight: 700; min-width: 64px; flex-shrink: 0; }
+      .upcoming-name { font-size: 16px; font-weight: 600; flex: 1; }
       .upcoming-pace { display: none; }
       .upcoming-km { display: none; }
 
-      /* ── PLAN TAB — WEEK SECTIONS ── */
-      .weeks-container { padding: 0 6px 48px; gap: 10px; }
-      .week-section { border-radius: 8px; }
-      .week-header { padding: 10px 12px; }
-      .week-num { font-size: 13px; }
-      .week-dates { font-size: 10px; }
-      .week-focus { font-size: 11px; }
-      .week-collapse-arrow { margin-left: auto; }
+      /* ── PLAN TAB ── */
+      .weeks-container { padding: 0 0 16px; gap: 10px; }
+      .week-section { border-radius: 14px; }
+      .week-header { padding: 16px 18px; }
+      .week-num { font-size: 17px; font-weight: 800; }
+      .week-dates { font-size: 13px; }
+      .week-stat { font-size: 13px; }
+      /* Hide verbose italic focus text — too small and dense */
+      .week-focus { display: none; }
+      .week-collapse-arrow { margin-left: auto; font-size: 18px; }
+      .recovery-badge, .phase-badge, .week0-badge { font-size: 11px; padding: 3px 9px; }
 
-      /* Vertical day list — rest days hidden */
+      /* Vertical day list — rest-only days hidden */
       .week-grid { display: flex; flex-direction: column; border-top: 1px solid var(--border); }
       .day-rest-only { display: none; }
       .day-col {
         border-right: none;
         border-bottom: 1px solid var(--border);
-        padding: 0;
-        min-height: unset;
-        display: block;
+        padding: 0; min-height: unset; display: block;
       }
       .day-col:last-child { border-bottom: none; }
       /* Day label strip */
       .day-header {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 7px 12px 5px;
+        display: flex; align-items: center; gap: 10px;
+        padding: 10px 18px 8px;
         background: rgba(255,255,255,.04);
         border-bottom: 1px solid var(--border);
         margin-bottom: 0;
       }
-      .day-name { font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--accent); }
-      .day-date { font-size: 11px; color: var(--text3); }
-      /* Workouts inside day */
-      .day-workouts { padding: 7px 8px; display: flex; flex-direction: column; gap: 5px; }
-      .workout-card { padding: 10px 12px; border-radius: 7px; margin-bottom: 0; }
-      .workout-name { font-size: 13px; }
-      .workout-detail { font-size: 11px; }
-      .sport-icon { font-size: 16px; }
-      .workout-check { font-size: 18px; padding: 1px 4px; }
-      .export-btn { padding: 4px 8px; font-size: 11px; }
-      .workout-body { margin-top: 6px; padding-top: 6px; }
-      .pace, .hr-target, .workout-desc { font-size: 11px; }
-      /* Expanded rationale */
-      .workout-rationale { padding: 8px 10px; gap: 8px; }
-      .rationale-label { font-size: 10px; }
-      .rationale-text { font-size: 12px; }
-      .str-exercise-list li { font-size: 12px; }
-      .act-feedback { padding: 7px 8px; }
-      .act-feedback-header { font-size: 10px; }
-      .fb-well, .fb-improve, .fb-line { font-size: 12px; }
+      .day-name { font-size: 14px; font-weight: 800; text-transform: uppercase; color: var(--accent); }
+      .day-date { font-size: 13px; color: var(--text3); }
+
+      /* Workout cards */
+      .day-workouts { padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; }
+      .workout-card { padding: 14px 16px; border-radius: 12px; margin-bottom: 0; }
+      .workout-header { gap: 10px; }
+      .sport-icon { font-size: 24px; }
+      .workout-name { font-size: 17px; font-weight: 700; }
+      .workout-detail { font-size: 14px; margin-top: 4px; }
+      .expand-arrow { font-size: 18px; }
+      .workout-check { font-size: 24px; padding: 4px 8px; }
+      .export-btn { font-size: 13px; padding: 6px 12px; border-radius: 6px; }
+      /* Expanded card body */
+      .workout-body { margin-top: 14px; padding-top: 14px; }
+      .pace { font-size: 15px; margin-bottom: 6px; }
+      .hr-target { font-size: 15px; margin-bottom: 8px; }
+      .workout-desc { font-size: 15px; line-height: 1.7; }
+      /* Rationale */
+      .workout-rationale { padding: 14px; gap: 12px; margin-top: 12px; border-radius: 10px; }
+      .rationale-label { font-size: 11px; }
+      .rationale-text { font-size: 15px; line-height: 1.65; }
+      /* Strava feedback in plan cards */
+      .act-feedback { padding: 12px 14px; margin-top: 12px; border-radius: 10px; }
+      .act-feedback-header { font-size: 12px; }
+      .fb-line { font-size: 14px; }
+      .fb-well { font-size: 14px; }
+      .fb-improve { font-size: 14px; }
 
       /* ── WEEK 0 / STRAVA ACTIVITY CARDS ── */
-      .actual-activity { padding: 10px 12px; }
-      .actual-name { font-size: 13px; }
-      .actual-detail { font-size: 11px; }
-      .actual-hr { font-size: 11px; }
-      /* Remove indent so feedback fills full width on mobile */
-      .actual-feedback { padding-left: 0; }
-      .feedback-line { font-size: 12px; }
-      .chart-btn { margin-left: 0; font-size: 12px; padding: 5px 10px; }
+      .actual-activity { padding: 16px 18px; }
+      .actual-icon { font-size: 26px; }
+      .actual-name { font-size: 17px; font-weight: 700; }
+      .actual-detail { font-size: 14px; margin-top: 3px; }
+      .actual-hr { font-size: 14px; }
+      /* Remove left indent — fill full width on mobile */
+      .actual-feedback { padding-left: 0; margin-top: 10px; }
+      /* Show only the one-line summary; hide the detailed bullet lines */
+      .feedback-line { display: none; }
+      .feedback-summary { display: block; font-size: 15px; font-style: normal; color: var(--text2); }
+      .chart-btn { margin-left: 0; margin-top: 12px; font-size: 14px; padding: 10px 16px; border-radius: 8px; }
 
       /* ── STRATEGY TAB ── */
-      .race-strategy, .zones-section { margin: 0 0 12px; }
-      .strategy-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-      .strategy-card { padding: 10px; }
-      .strategy-card h3 { font-size: 10px; }
-      .strategy-card p { font-size: 12px; }
-      .pace-goal { font-size: 18px; }
-      .phase-legend { margin: 0 0 10px; gap: 6px; flex-wrap: wrap; }
-      .legend-item { font-size: 11px; }
-      .zone-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-      .zone-table th, .zone-table td { padding: 6px 8px; font-size: 11px; white-space: nowrap; }
+      .race-strategy, .zones-section { margin: 0 0 14px; border-radius: 14px; padding: 18px; }
+      .race-strategy h2, .zones-section h2 { font-size: 18px; margin-bottom: 16px; }
+      /* Single column — no 2-column grids */
+      .strategy-grid { grid-template-columns: 1fr; gap: 10px; }
+      .strategy-card { padding: 16px; border-radius: 12px; }
+      .strategy-card h3 { font-size: 11px; margin-bottom: 8px; }
+      .strategy-card p { font-size: 16px; line-height: 1.6; }
+      .pace-goal { font-size: 32px; }
+      .phase-legend { margin: 0 0 14px; gap: 10px; }
+      .legend-item { font-size: 14px; }
+      .zone-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 8px; }
+      .zone-table th { font-size: 11px; padding: 8px 10px; }
+      .zone-table td { font-size: 15px; padding: 11px 10px; }
 
       /* ── STATS TAB ── */
-      .progress-bar-wrap { margin: 0 0 12px; padding: 12px; }
-      .prog-week { width: 26px; height: 26px; font-size: 9px; }
-      .progress-weeks { gap: 3px; }
+      .progress-bar-wrap { margin: 0 0 14px; padding: 16px; border-radius: 14px; }
+      .progress-bar-wrap h2 { font-size: 16px; margin-bottom: 12px; }
+      .prog-week { width: 32px; height: 32px; font-size: 10px; border-radius: 8px; }
+      .progress-weeks { gap: 4px; }
       .volume-canvas-wrap, .trend-canvas-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
       .volume-canvas-wrap canvas, .trend-canvas-wrap canvas { min-width: 520px; }
-      .predictor-section { flex-direction: column; gap: 12px; }
+      .predictor-section { flex-direction: column; gap: 16px; }
       .pred-main { text-align: center; }
 
-      /* ── MODAL — full screen ── */
+      /* ── MODAL — full screen on mobile ── */
       .modal-box { width: 100vw !important; height: 100dvh; max-height: 100dvh; top: 0 !important; left: 0 !important; transform: none !important; border-radius: 0; position: fixed; }
     }
 
-    /* Smallest phones (≤380px) */
+    /* Tiny phones (≤380px): emoji-only bottom nav */
     @media (max-width: 380px) {
+      .tab-label { display: none; }
+      .main-tab { padding-top: 10px; }
       .strategy-grid { grid-template-columns: 1fr; }
-      .main-tab { font-size: 10px; }
-      .plan-stats { grid-template-columns: 1fr 1fr; }
-      .stat-box:last-child { display: none; } /* hide 6th stat if 5 don't fit in 2-col */
     }
 
     /* ── PROGRESS BAR ───────────────────────────────────────── */
@@ -1363,9 +1417,11 @@ const html = `<!DOCTYPE html>
 
     /* ── MAIN TABS ───────────────────────────────────────────── */
     .main-tabs { display: flex; gap: 4px; padding: 12px 20px 0; background: var(--surface); border-bottom: 2px solid var(--border); position: sticky; top: 0; z-index: 90; }
-    .main-tab { background: transparent; border: none; border-bottom: 3px solid transparent; padding: 10px 18px; font-size: 14px; font-weight: 600; color: var(--text2); cursor: pointer; transition: all .15s; margin-bottom: -2px; border-radius: 6px 6px 0 0; letter-spacing: .01em; }
+    .main-tab { background: transparent; border: none; border-bottom: 3px solid transparent; padding: 10px 18px; font-size: 14px; font-weight: 600; color: var(--text2); cursor: pointer; transition: all .15s; margin-bottom: -2px; border-radius: 6px 6px 0 0; letter-spacing: .01em; display: flex; align-items: center; gap: 6px; }
     .main-tab:hover { color: var(--text); background: var(--surface2); }
     .main-tab.active { color: var(--accent); border-bottom-color: var(--accent); background: var(--surface2); }
+    .tab-icon { font-size: 16px; line-height: 1; }
+    .tab-label { font-size: 14px; font-weight: 600; }
     .tab-panel { padding: 20px; }
 
     /* ── TODAY PANEL ─────────────────────────────────────────── */
@@ -1496,10 +1552,10 @@ const html = `<!DOCTYPE html>
 
 <!-- MAIN TABS -->
 <nav class="main-tabs">
-  <button class="main-tab active" onclick="switchMainTab('today')">📅 Today</button>
-  <button class="main-tab" onclick="switchMainTab('plan')">📋 Plan</button>
-  <button class="main-tab" onclick="switchMainTab('strategy')">🏁 Strategy</button>
-  <button class="main-tab" onclick="switchMainTab('stats')">📊 Stats</button>
+  <button class="main-tab active" onclick="switchMainTab('today')"><span class="tab-icon">📅</span><span class="tab-label">Today</span></button>
+  <button class="main-tab" onclick="switchMainTab('plan')"><span class="tab-icon">📋</span><span class="tab-label">Plan</span></button>
+  <button class="main-tab" onclick="switchMainTab('strategy')"><span class="tab-icon">🏁</span><span class="tab-label">Strategy</span></button>
+  <button class="main-tab" onclick="switchMainTab('stats')"><span class="tab-icon">📊</span><span class="tab-label">Stats</span></button>
 </nav>
 
 <!-- TAB: TODAY -->
