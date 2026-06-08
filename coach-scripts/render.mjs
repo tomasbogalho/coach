@@ -854,86 +854,111 @@ function strengthWorkout(w) {
     };
   }
 
-  // ── SESSION C — FRIDAY: Hyrox Conditioning (cardio-functional, no heavy legs) ──
+  // ── SESSION C — FRIDAY: Lower Body Barbell (2 days before long run — safe) ──
   if (day === 'fri') {
     if (isTaper) return {
-      label: '💪 Session C — Light Conditioning (Taper)',
+      label: '🏋️ Session C — Lower Body Maintenance (Taper)',
       duration: '20 min',
       exercises: [
-        'SkiErg — 3×250 m @ easy pace (no sprinting)',
-        'Farmers Carry — 3×20 m @ light',
-        'Ring Row — 2×8',
-        'Hip flexor + hamstring mobility — 5 min',
+        'Goblet Squat — 2×10 @ light  (movement quality, not load)',
+        'DB Romanian Deadlift — 2×8  (posterior chain activation)',
+        'Single-Leg Calf Raise — 2×12 each  (Achilles tendon prep)',
+        'Hip flexor + hamstring stretch — 5 min',
       ],
-      note: 'Taper. Easy movement only — purpose is to stay loose and feel athletic without adding fatigue.',
+      note: 'Taper week — minimum stimulus only. No soreness. The goal is to feel athletic, not to train. 2 days before long run is fine at this volume.',
     };
     if (isBuild) return {
-      label: '💪 Session C — Hyrox Conditioning (Build)',
-      duration: '45–50 min',
+      label: '🏋️ Session C — Lower Body Strength (Build)',
+      duration: '55–60 min',
       exercises: [
-        'SkiErg — 4×500 m @ hard (rest 90 s) — target sub-2:00/500m  (Hyrox station 1)',
-        'Row — 4×500 m @ hard (rest 90 s)  (Hyrox station 4)',
-        'Burpee Broad Jump — 3×10 reps  (Hyrox station 3 — technique: jump forward, not up)',
-        'Farmers Carry — 4×30 m @ Hyrox weight (24 kg/hand M, 16 kg/hand F)  (station 6)',
-        'Pull-Up or Ring Row — 3×8–10  (upper body pulling strength)',
-        'Box Step-Up — 3×10 each leg @ light  (running posture carryover)',
+        'Back Squat — 5×5 @ heavy (90 s rest)  (primary strength driver — add 2.5–5 kg/week when you hit all 5×5)',
+        'Conventional Deadlift — 4×4 @ heavy  (posterior chain + full-body tension; keep back flat, no rounding)',
+        'Bulgarian Split Squat — 3×8 each leg @ DB  (single-leg strength + balance — brutal but essential)',
+        'Barbell Hip Thrust — 4×12  (glute max power, protects knees under fatigue)',
+        'Nordic Hamstring Curl or Leg Curl — 3×6–8  (hamstring injury prevention — slow eccentric)',
+        'Weighted Calf Raise off step — 4×15  (Achilles tendon resilience for high mileage)',
       ],
-      note: 'This session trains 4 of the 8 Hyrox stations. Push the SkiErg and row intervals hard — they\'re the biggest fitness drivers for Hyrox. Track your 500m times and aim to improve each week.',
+      note: 'Friday = 2 days before Sunday long run. This is plenty of buffer. Go heavy on squat and deadlift — these are the sessions that build race-day leg strength. If you\'re still sore Sunday morning, your load was too high: drop 10% next week. Progressive overload beats all else.',
+    };
+    if (isRecov) return {
+      label: '🏋️ Session C — Lower Body (Recovery Week)',
+      duration: '35–40 min',
+      exercises: [
+        'Back Squat — 3×8 @ 70% of normal load  (maintain pattern, don\'t push)',
+        'Romanian Deadlift — 3×10 @ moderate',
+        'Walking Lunge — 3×10 each leg @ bodyweight',
+        'Calf Raise — 3×15',
+        'Hip flexor mobility — 5 min',
+      ],
+      note: 'Recovery week — 70% load across the board. Movements matter, weight does not this week.',
     };
     return {
-      label: '💪 Session C — Hyrox Conditioning (Base)',
-      duration: '40–45 min',
+      label: '🏋️ Session C — Lower Body Strength (Base)',
+      duration: '50–55 min',
       exercises: [
-        'SkiErg — 4×250 m @ moderate–hard pace  (learn the movement: hinge, not row)',
-        'Row — 3×500 m @ moderate  (damper 4–5, drive with legs first)',
-        'Burpee Broad Jump — 3×8 reps  (learn technique at manageable volume)',
-        'Farmers Carry — 3×20 m each side @ moderate  (build grip + lateral core)',
-        'DB Bent-Over Row — 3×10 each arm',
+        'Back Squat — 4×6 @ moderate-heavy  (build the pattern before going max; brace hard, full depth)',
+        'Romanian Deadlift — 4×8 @ moderate-heavy  (feel the hamstring stretch at the bottom)',
+        'Bulgarian Split Squat — 3×10 each leg @ DB  (the hardest bodyweight exercise you can do; start light)',
+        'Leg Press — 3×12 @ moderate  (quad volume without spinal load)',
+        'Calf Raise off step — 3×15 each leg  (single leg, slow eccentric)',
+        'Dead Bug — 3×10 each side  (anterior core — protects lumbar under squat/deadlift)',
       ],
-      note: 'Base phase: learn the SkiErg and row at moderate effort. Focus on form before intensity. SkiErg: hinge at the hips, don\'t just pull with arms. Row: legs → lean → arms on the drive.',
+      note: 'Base phase: build the movement patterns before going heavy. Squat depth is more important than load — hit parallel every rep. Deadlift: hinge at the hips first, then push the floor away. 2 days before Sunday long run is a safe buffer.',
     };
   }
 
-  // ── SESSION D — SATURDAY: Hyrox Skill/Sim (moderate, legs available for Sunday) ──
+  // ── SESSION D — SATURDAY: Upper Body + Heavy Carries (NO leg loading — long run tomorrow) ──
   if (day === 'sat') {
     if (isBuild) return {
-      label: '💪 Session D — Hyrox Simulation (Build)',
-      duration: '35–40 min',
+      label: '🏋️ Session D — Upper Body & Carries (Build)',
+      duration: '45–50 min',
       exercises: [
-        'Mini-Hyrox Circuit × 3 rounds (2 min rest between):',
-        '  → SkiErg 250 m',
-        '  → Burpee Broad Jump 5 reps',
-        '  → Farmers Carry 30 m',
-        '  → Wall Ball 10 reps @ 9 kg',
-        'Finish: Row 500 m @ race pace — note your time',
-        'Cool-down: 5 min mobility (hip flexors + quads)',
+        'Weighted Pull-Up or Lat Pulldown — 4×6–8 @ heavy  (back thickness + grip endurance for Hyrox carries)',
+        'Barbell Bench Press or DB Press — 4×8  (horizontal push strength)',
+        'Barbell Bent-Over Row — 4×8  (upper back — essential for posture during carries and running)',
+        'Farmers Carry — 5×30 m @ heavy (24+ kg/hand)  (Hyrox race-weight carries — grip, lat, core)',
+        'Overhead Carry — 3×20 m @ moderate  (shoulder stability + upper back bracing)',
+        'Face Pull — 3×15  (rotator cuff health + rear delt — protects shoulder under heavy load)',
+        'Dead Bug — 3×10 each side',
       ],
-      note: 'This is Hyrox race practice. Go at 80% effort — not all-out. Transition fast between stations (that\'s where Hyrox time is won or lost). Legs must be functional tomorrow for the long run.',
+      note: 'Saturday = day before Sunday long run. No leg-dominant work whatsoever. Upper body and carries only — legs stay fresh. Heavy farmers carries are the highest-value Hyrox-specific movement here. Push the weight on carries while keeping form: chest tall, shoulders packed, fast steps.',
     };
     if (isRecov) return {
-      label: '💪 Session D — Hyrox Skill (Recovery Week)',
-      duration: '25–30 min',
-      exercises: [
-        'SkiErg — 3×200 m @ easy  (technique drill: keep chest tall)',
-        'Farmers Carry — 3×20 m  (light — practice transition speed)',
-        'Wall Ball — 2×10 @ 9 kg  (catch at chest, full squat)',
-        'Burpee Broad Jump — 2×6  (slow, controlled)',
-        'Hip flexor stretch — 5 min',
-      ],
-      note: 'Recovery week. Skill only — no intensity. Practice efficient transitions between stations.',
-    };
-    return {
-      label: '💪 Session D — Hyrox Skill (Base)',
+      label: '🏋️ Session D — Upper Body (Recovery Week)',
       duration: '30–35 min',
       exercises: [
-        'SkiErg — 4×200 m @ easy–moderate  (technique focus)',
-        'Wall Ball — 3×12 @ 9 kg  (squat depth + target accuracy)',
-        'Farmers Carry — 3×20 m  (practice grip switch and turns)',
-        'Burpee Broad Jump — 3×6  (controlled jump distance)',
-        'Row — 2×300 m @ moderate  (pacing practice)',
-        'Cool-down: 5 min hip + quad mobility',
+        'Pull-Up or Ring Row — 3×8  (pull pattern maintenance)',
+        'DB Press — 3×10 @ light',
+        'Farmers Carry — 3×20 m @ moderate',
+        'Face Pull — 3×15',
+        'Hollow Body Hold — 2×25 s',
       ],
-      note: 'Saturday is skill and movement quality day. Intensity is moderate — your legs need to run tomorrow. Focus on learning efficient Hyrox station technique. Wall balls: the ball must hit the target, full squat below parallel.',
+      note: 'Recovery week. Upper body only, no heavy loading. Legs completely rest ahead of Sunday.',
+    };
+    if (isTaper) return {
+      label: '🏋️ Session D — Upper Body Maintenance (Taper)',
+      duration: '20 min',
+      exercises: [
+        'Pull-Up — 2×5 @ bodyweight',
+        'DB Press — 2×8 @ light',
+        'Farmers Carry — 2×20 m @ light',
+        'Shoulder mobility + thoracic rotation — 5 min',
+      ],
+      note: 'Taper. Touch-and-go only — keep the motor patterns alive without adding fatigue. Legs stay completely fresh.',
+    };
+    return {
+      label: '🏋️ Session D — Upper Body & Carries (Base)',
+      duration: '40–45 min',
+      exercises: [
+        'Pull-Up or Assisted Pull-Up — 4×6  (build toward unassisted; these will feel impossible and then they won\'t)',
+        'DB Bench Press — 3×10  (horizontal push)',
+        'Single-Arm DB Row — 4×10 each arm @ heavy  (unilateral pull — prevents left/right imbalance)',
+        'Farmers Carry — 4×25 m @ moderate-heavy  (build grip + lateral core; increase weight each week)',
+        'Overhead DB Carry — 3×15 m each arm  (shoulder stability — harder than it looks)',
+        'Pallof Press — 3×12 each side  (anti-rotation core — protects you during heavy carries)',
+        'Face Pull — 3×15',
+      ],
+      note: 'Saturday = day before Sunday long run. Upper body and carries only — zero leg loading. Farmers carry weight: you should feel your grip failing before your legs. Start at 20 kg/hand and build. This session directly translates to better posture and carry speed in Hyrox.',
     };
   }
 
