@@ -253,6 +253,203 @@ function buildChartData(a) {
   } catch(e) { return null; }
 }
 
+// ── PLANNED RUN CHART DATA (synthetic pace + HR profile) ─────
+// Generates a smooth predicted pace/HR shape based on workout structure.
+// Returns same shape as buildChartData: {hr, pace, dist, kmSplits, isPlanned, label}
+function buildPlannedChartData(w) {
+  if (w.sport !== 'run') return null;
+  const distKm = w.distanceKm || (w.durationMinutes ? w.durationMinutes / 6 : null);
+  if (!distKm || distKm < 0.5) return null;
+  const type = w.type;
+
+  // Parse target pace to sec/km
+  function parsePace(str) {
+    if (!str) return null;
+    const m = str.match(/(\d+):(\d+)/);
+    return m ? parseInt(m[1]) * 60 + parseInt(m[2]) : null;
+  }
+  const targetPaceSec = parsePace(w.targetPace) || 360; // default 6:00/km
+
+  // Zone HR centres
+  const Z = { z1: 130, z2: 142, z3: 152, z4: 161, z5: 170 };
+
+  const N = 200; // data points
+  const hr = [], pace = [], dist = [];
+  const kmSplits = [];
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+  // Small noise for realism
+  function noise(amp) { return (Math.random() - 0.5) * amp; }
+
+  if (type === 'easy' || type === 'aerobic' || type === 'recovery') {
+    // Easy: warmup first km (HR rises from Z1→Z2), then steady Z2, light drift
+    const targetHR = type === 'recovery' ? Z.z1 + 3 : Z.z2;
+    const warmupFrac = Math.min(0.15, 1 / distKm);
+    for (let i = 0; i < N; i++) {
+      const t = i / (N - 1); // 0..1 along the run
+      const d = t * distKm;
+      const warmup = Math.min(1, t / warmupFrac);
+      const drift = t * 3; // slight HR drift over the run
+      const hrVal = clamp(lerp(Z.z1, targetHR, warmup) + drift + noise(2), 110, 180);
+      const paceWarmup = lerp(targetPaceSec + 30, targetPaceSec, warmup);
+      const paceVal = clamp(paceWarmup + noise(5), targetPaceSec - 15, targetPaceSec + 45);
+      hr.push(Math.round(hrVal));
+      pace.push(Math.round(paceVal));
+      dist.push(Math.round(d * 100) / 100);
+    }
+  } else if (type === 'long') {
+    // Long: warmup, long Z2 main, final 20% drift up as fatigue sets in
+    const warmupFrac = Math.min(0.12, 1.5 / distKm);
+    const fatigueStart = 0.75;
+    for (let i = 0; i < N; i++) {
+      const t = i / (N - 1);
+      const d = t * distKm;
+      const warmup = Math.min(1, t / warmupFrac);
+      const fatigue = t > fatigueStart ? (t - fatigueStart) / (1 - fatigueStart) : 0;
+      const hrVal = clamp(lerp(Z.z1, Z.z2, warmup) + fatigue * 8 + noise(2), 110, 180);
+      const paceVal = clamp(targetPaceSec + fatigue * 20 + noise(6), targetPaceSec - 10, targetPaceSec + 50);
+      hr.push(Math.round(hrVal));
+      pace.push(Math.round(paceVal));
+      dist.push(Math.round(d * 100) / 100);
+    }
+  } else if (type === 'tempo') {
+    // Warmup 15% → tempo 70% → cooldown 15%
+    const wuF = 0.15, cdF = 0.15;
+    const tempoPace = parsePace(w.targetPace) || 310;
+    const tempoHR = Z.z3 + 4;
+    for (let i = 0; i < N; i++) {
+      const t = i / (N - 1);
+      const d = t * distKm;
+      let hrVal, paceVal;
+      if (t < wuF) {
+        const p = t / wuF;
+        hrVal = lerp(Z.z1, tempoHR, p);
+        paceVal = lerp(targetPaceSec + 60, tempoPace, p);
+      } else if (t < 1 - cdF) {
+        const p = (t - wuF) / (1 - wuF - cdF);
+        hrVal = lerp(tempoHR, tempoHR + 4, p); // slight HR drift during tempo
+        paceVal = tempoPace + noise(8);
+      } else {
+        const p = (t - (1 - cdF)) / cdF;
+        hrVal = lerp(tempoHR + 4, Z.z1, p);
+        paceVal = lerp(tempoPace, targetPaceSec + 60, p);
+      }
+      hr.push(Math.round(clamp(hrVal + noise(2), 110, 190)));
+      pace.push(Math.round(clamp(paceVal, 240, 500)));
+      dist.push(Math.round(d * 100) / 100);
+    }
+  } else if (type === 'intervals') {
+    // Warmup 15% → repeating intervals (hard+recovery) → cooldown 15%
+    const wuF = 0.15, cdF = 0.15;
+    const workFrac = 1 - wuF - cdF;
+    // Detect rep count from description (e.g. "6×1000m" or "8×400m")
+    const desc = w.description || w.humanReadable || '';
+    const repMatch = desc.match(/(\d+)[×x](\d+(?:\.\d+)?)\s*(?:km|m)/i);
+    const numReps = repMatch ? parseInt(repMatch[1]) : 5;
+    const repDistM = repMatch ? (repMatch[2].includes('.') ? parseFloat(repMatch[2]) * 1000 : parseInt(repMatch[2])) : 1000;
+    const repDurFrac = workFrac / numReps;
+    const effortFrac = repDistM >= 1000 ? 0.55 : 0.45; // proportion of rep = work vs recovery
+    const intPace = parsePace(w.targetPace) || 280;
+    const recPace = intPace + 90;
+    const intHR = Z.z5 - 2;
+    for (let i = 0; i < N; i++) {
+      const t = i / (N - 1);
+      const d = t * distKm;
+      let hrVal, paceVal;
+      if (t < wuF) {
+        const p = t / wuF;
+        hrVal = lerp(Z.z1, Z.z2, p);
+        paceVal = lerp(targetPaceSec + 60, targetPaceSec, p);
+      } else if (t >= 1 - cdF) {
+        const p = (t - (1 - cdF)) / cdF;
+        hrVal = lerp(Z.z2, Z.z1, p);
+        paceVal = lerp(targetPaceSec, targetPaceSec + 60, p);
+      } else {
+        const workT = (t - wuF) / workFrac;
+        const repPhase = (workT % (1 / numReps)) / (1 / numReps);
+        const isHard = repPhase < effortFrac;
+        const repIdx = Math.floor(workT * numReps);
+        const fatigueBump = repIdx * 1.5; // HR climbs slightly each rep
+        if (isHard) {
+          const p = repPhase / effortFrac;
+          hrVal = lerp(Z.z4, intHR + fatigueBump, p);
+          paceVal = intPace + noise(10);
+        } else {
+          const p = (repPhase - effortFrac) / (1 - effortFrac);
+          hrVal = lerp(intHR + fatigueBump, Z.z2, p);
+          paceVal = recPace + noise(15);
+        }
+      }
+      hr.push(Math.round(clamp(hrVal + noise(2), 110, 195)));
+      pace.push(Math.round(clamp(paceVal, 240, 600)));
+      dist.push(Math.round(d * 100) / 100);
+    }
+  } else if (type === 'strides') {
+    // Easy jog with 4–6 short accelerations
+    const strideCount = 5;
+    for (let i = 0; i < N; i++) {
+      const t = i / (N - 1);
+      const d = t * distKm;
+      // Place strides evenly in the second half
+      const strideT = (t - 0.4) / 0.5; // 0..1 within stride zone (40%..90% of run)
+      const inStrideZone = t >= 0.4 && t <= 0.9;
+      let hrVal = Z.z2 + noise(2);
+      let paceVal = targetPaceSec + noise(5);
+      if (inStrideZone) {
+        const stridePhase = (strideT * strideCount) % 1;
+        if (stridePhase < 0.25) { // acceleration phase
+          hrVal = lerp(Z.z2, Z.z4, stridePhase / 0.25) + noise(3);
+          paceVal = lerp(targetPaceSec, targetPaceSec - 80, stridePhase / 0.25);
+        } else if (stridePhase < 0.5) { // deceleration + recovery
+          hrVal = lerp(Z.z4, Z.z2, (stridePhase - 0.25) / 0.5) + noise(3);
+          paceVal = lerp(targetPaceSec - 80, targetPaceSec + 30, (stridePhase - 0.25) / 0.5);
+        }
+      }
+      hr.push(Math.round(clamp(hrVal, 110, 185)));
+      pace.push(Math.round(clamp(paceVal, 240, 500)));
+      dist.push(Math.round(d * 100) / 100);
+    }
+  } else if (type === 'race') {
+    // Race: controlled start, locked race pace, push final 2km
+    const racePace = parsePace(w.targetPace) || 284; // 4:44
+    const raceHR = Z.z4 + 2;
+    const pushStart = 0.85;
+    for (let i = 0; i < N; i++) {
+      const t = i / (N - 1);
+      const d = t * distKm;
+      const warmup = Math.min(1, t / 0.1);
+      const push = t > pushStart ? (t - pushStart) / (1 - pushStart) : 0;
+      const hrVal = clamp(lerp(Z.z1, raceHR, warmup) + push * 8 + noise(2), 120, 200);
+      const paceVal = clamp(lerp(racePace + 30, racePace, warmup) - push * 12 + noise(6), 240, 400);
+      hr.push(Math.round(hrVal));
+      pace.push(Math.round(paceVal));
+      dist.push(Math.round(d * 100) / 100);
+    }
+  } else {
+    return null; // unknown type — no chart
+  }
+
+  // Build per-km splits from synthetic data
+  let curKm = 1;
+  let bucketPace = [], bucketHr = [];
+  for (let i = 0; i < N; i++) {
+    bucketPace.push(pace[i]);
+    bucketHr.push(hr[i]);
+    if (dist[i] >= curKm || i === N - 1) {
+      kmSplits.push({
+        km: curKm,
+        pace: Math.round(bucketPace.reduce((a, b) => a + b, 0) / bucketPace.length),
+        hr: Math.round(bucketHr.reduce((a, b) => a + b, 0) / bucketHr.length),
+      });
+      bucketPace = []; bucketHr = [];
+      curKm++;
+    }
+  }
+
+  return { hr, pace, dist, kmSplits, isPlanned: true, label: w.name };
+}
+
 // Returns {hrDrift, paceDriftSec} from stream data
 function analyzeStreamData(a) {
   if (!a.hr_stream || !a.time_stream) return {};
@@ -771,6 +968,13 @@ function workoutCard(w, dayDate) {
   const focus = w.sport === 'run' ? workoutFocus(w) : null;
   const str = w.sport === 'strength' ? strengthWorkout(w) : null;
 
+  // Planned pace/HR chart (only for future run workouts)
+  const isFutureRun = w.sport === 'run' && (!dayDate || dayDate >= todayStr) && !autoComplete;
+  const plannedChart = isFutureRun ? buildPlannedChartData(w) : null;
+  const plannedChartBtn = plannedChart
+    ? `<button class="chart-btn planned-chart-btn" onclick="event.stopPropagation();showPlannedChart('${w.id}')">📊 Session Preview</button>`
+    : '';
+
   const focusHtml = focus ? `
     <div class="workout-rationale">
       <div class="rationale-block">
@@ -834,6 +1038,7 @@ function workoutCard(w, dayDate) {
       <div class="workout-body" style="display:none">
         ${pace}${hrTarget}
         <div class="workout-desc">${hr}</div>
+        ${plannedChartBtn}
         ${focusHtml}${strHtml}
         ${actFeedbackHtml}
       </div>
@@ -1048,6 +1253,9 @@ function todayPanelHtml() {
         const desc  = (w.humanReadable || w.description || '').replace(/\n/g, '<br>');
         const focus = w.sport === 'run' ? workoutFocus(w) : null;
         const str   = w.sport === 'strength' ? strengthWorkout(w) : null;
+        const todayChartBtn = w.sport === 'run'
+          ? `<button class="chart-btn planned-chart-btn" style="margin-top:14px;font-size:15px;padding:12px 18px" onclick="showPlannedChart('${w.id}')">📊 Session Preview — Pace & HR</button>`
+          : '';
         const exportBtn = w.sport !== 'rest'
           ? `<button class="dl-btn" style="margin-top:12px" onclick="exportWorkout(event,this)" data-wid="${w.id}">↓ Export to watch</button>`
           : '';
@@ -1081,6 +1289,7 @@ function todayPanelHtml() {
             </div>
             ${str.note ? `<div class="today-focus-block"><span class="today-focus-label">📌 Coach note</span><p class="today-focus-text">${str.note}</p></div>` : ''}
           </div>` : ''}
+          ${todayChartBtn}
           ${exportBtn}
         </div>`;
       }).join('');
@@ -1126,7 +1335,8 @@ function todayPanelHtml() {
           <div class="upcoming-focus-block">
             <div class="upcoming-focus-label">🎯 Focus</div>
             <p class="upcoming-focus-text">${focus.focus}</p>
-          </div>` : ''}
+          </div>
+          <button class="chart-btn planned-chart-btn" style="margin-top:4px" onclick="event.stopPropagation();showPlannedChart('${qw.id}')">📊 Session Preview</button>` : ''}
         </div>
       </div>`;
     }).join('')}
@@ -1918,6 +2128,16 @@ window.FITNESS_TREND = ${JSON.stringify(fitnessTrend)};
 window.ACTUAL_KM = ${JSON.stringify(actualKmByWeek)};
 window.PLAN_WEEKS_KM = ${JSON.stringify(plan.weeks.map(w => ({ start: w.startDate, planned: w.summary?.totalKm || 0, wk: w.weekNumber })))};
 window.RACE_PRED = ${JSON.stringify(racePrediction)};
+window.PLANNED_CHARTS = ${JSON.stringify(
+  Object.fromEntries(
+    plan.weeks.flatMap(wk => wk.days.flatMap(d =>
+      d.workouts
+        .filter(w => w.sport === 'run' && d.date >= todayStr)
+        .map(w => [w.id, buildPlannedChartData(w)])
+        .filter(([, v]) => v !== null)
+    ))
+  )
+)};
 
 // Plan day index for "next quality session"
 const PLAN_DAYS = ${JSON.stringify(
@@ -2587,6 +2807,65 @@ document.addEventListener('keydown', e => {
   if (e.key === 'c') document.querySelectorAll('.workout-body').forEach(b => { b.style.display='none'; b.closest('.workout-card').classList.remove('open'); });
   if (e.key === 'Escape') { closeModal(); closeRunChart(); }
 });
+
+// ── PLANNED SESSION CHART ────────────────────────────────────
+function showPlannedChart(wid) {
+  const data = window.PLANNED_CHARTS && window.PLANNED_CHARTS[wid];
+  if (!data) return;
+
+  const hrVals = (data.hr || []).filter(v => v != null && v > 40);
+  const paceVals = (data.pace || []).filter(v => v != null && v > 180 && v < 900);
+  const fmtPace = s => s ? Math.floor(s/60)+':'+(''+(s%60)).padStart(2,'0') : '—';
+  const avgHr = hrVals.length ? Math.round(hrVals.reduce((a,b)=>a+b,0)/hrVals.length) : null;
+  const avgPaceSec = paceVals.length ? Math.round(paceVals.reduce((a,b)=>a+b,0)/paceVals.length) : null;
+  const peakHr = hrVals.length ? Math.max(...hrVals) : null;
+
+  // Zone color helper (reused by drawRunChart)
+  function zoneLabel(hr) {
+    if (!hr) return '';
+    if (hr < 135) return 'Z1 — Recovery (<135 bpm)';
+    if (hr < 150) return 'Z2 — Aerobic (135–149 bpm)';
+    if (hr < 156) return 'Z3 — Tempo (150–155 bpm)';
+    if (hr < 167) return 'Z4 — Threshold (156–166 bpm)';
+    return 'Z5 — VO₂max (≥167 bpm)';
+  }
+
+  const statsHtml = \`
+    <div style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:8px;padding:10px 14px;font-size:12px;color:#fde68a;margin-bottom:12px">
+      ⚡ This is a <strong>predicted</strong> pace & HR profile based on your training zones and workout structure — not actual data.
+    </div>
+    <div class="chart-stats">
+      \${avgPaceSec ? \`<div class="chart-stat-box">Target Pace <strong>\${fmtPace(avgPaceSec)}/km</strong></div>\` : ''}
+      \${avgHr ? \`<div class="chart-stat-box">Expected avg HR <strong>\${avgHr} bpm — \${zoneLabel(avgHr).split('—')[0].trim()}</strong></div>\` : ''}
+      \${peakHr ? \`<div class="chart-stat-box">Peak HR ~<strong>\${peakHr} bpm</strong></div>\` : ''}
+    </div>\`;
+
+  const modal = document.createElement('div');
+  modal.id = 'run-chart-modal';
+  modal.innerHTML = \`
+    <div class="modal-overlay" onclick="closeRunChart()"></div>
+    <div class="modal-box">
+      <div class="modal-header">
+        <span>📊 \${data.label || 'Session Preview'}</span>
+        <button onclick="closeRunChart()" class="modal-close">✕</button>
+      </div>
+      <div class="tab-content">
+        \${statsHtml}
+        <div class="chart-legend">
+          <div class="chart-legend-item"><div class="legend-swatch" style="background:linear-gradient(90deg,#6ee7b7,#3b82f6,#f97316,#ef4444,#7c3aed)"></div>Heart Rate (by zone)</div>
+          <div class="chart-legend-item"><div class="legend-swatch" style="background:#818cf8"></div>Pace</div>
+          <span style="color:var(--text3);font-size:11px;margin-left:auto">x-axis = distance (km)</span>
+        </div>
+        <div class="chart-canvas-wrap">
+          <canvas id="run-chart-canvas" width="860" height="340"></canvas>
+        </div>
+        <div style="font-size:11px;color:var(--text3);margin-top:8px">Zone bands: <span style="color:#6ee7b7">Z1</span> <span style="color:#3b82f6">Z2</span> <span style="color:#f97316">Z3</span> <span style="color:#ef4444">Z4</span> <span style="color:#7c3aed">Z5</span></div>
+        \${buildSplitsTable(data)}
+      </div>
+    </div>\`;
+  document.body.appendChild(modal);
+  requestAnimationFrame(() => drawRunChart(data));
+}
 
 // ── RUN ANALYSIS CHART ───────────────────────────────────────
 function showRunChart(actId) {
