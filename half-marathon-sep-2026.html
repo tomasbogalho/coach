@@ -109,39 +109,70 @@
     .hr-target { font-size: 11px; color: #ef4444; margin-bottom: 6px; }
     .workout-desc { font-size: 11px; color: var(--text2); line-height: 1.6; }
 
-    /* ── RESPONSIVE — MOBILE FIRST ──────────────────────────── */
+    /* ── RESPONSIVE — MOBILE ────────────────────────────────── */
     @media (max-width: 700px) {
-      /* Global spacing */
-      .tab-panel { padding: 12px; }
+      /* ── GLOBAL ── */
+      .tab-panel { padding: 10px; }
 
-      /* Header */
-      .plan-header { padding: 18px 14px; }
-      .plan-title { font-size: 20px; }
-      .plan-subtitle { font-size: 13px; margin-bottom: 14px; }
-      .plan-stats { gap: 8px; }
-      .stat-box { min-width: 0; flex: 1; padding: 8px 10px; }
-      .stat-value { font-size: 18px; }
-      .stat-label { font-size: 10px; }
+      /* ── HEADER ── */
+      .plan-header { padding: 12px 12px 14px; }
+      .plan-title { font-size: 17px; }
+      .plan-subtitle { font-size: 12px; margin-bottom: 10px; }
+      /* Stat boxes: 3-column grid, compact */
+      .plan-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+      .stat-box { min-width: 0; padding: 7px 6px; }
+      .stat-value { font-size: 15px; }
+      .stat-label { font-size: 9px; }
+      /* Hide the keyboard-shortcut hint on touch devices */
+      .plan-header > div:last-child > span { display: none; }
+      /* Stack export + theme buttons */
+      .plan-header > div:last-child { margin-top: 10px; gap: 6px; }
+      .export-all-btn { font-size: 12px; padding: 7px 12px; }
+      .theme-toggle { font-size: 12px; margin-left: 0; }
 
-      /* Countdown sticky bar */
-      .countdown-bar { padding: 10px 14px; flex-wrap: wrap; gap: 8px; }
-      #next-quality-pill { display: none; }
+      /* ── COUNTDOWN BAR — not sticky on mobile (saves screen height) ── */
+      .countdown-bar { position: static; padding: 8px 12px; gap: 10px; }
+      .cd-value { font-size: 16px; }
+      .cd-label { font-size: 9px; }
+      /* Hide progress bar inside countdown on mobile — too wide */
+      .plan-prog-wrap { display: none !important; }
+      #next-session-pill-wrap { display: none; }
 
-      /* Main tabs — equal width, smaller text, no overflow */
-      .main-tabs { padding: 0; }
-      .main-tab { flex: 1; padding: 10px 4px; font-size: 12px; white-space: nowrap; border-radius: 0; }
+      /* ── MAIN TABS — sticky, full-width, emoji only hint ── */
+      .main-tabs { padding: 0; position: sticky; top: 0; }
+      .main-tab { flex: 1; padding: 11px 2px; font-size: 11px; white-space: nowrap; border-radius: 0; }
 
-      /* Week grid — vertical day list, rest days hidden */
-      .weeks-container { padding: 0 8px 48px; gap: 14px; }
+      /* ── TODAY PANEL ── */
+      .today-panel-wrap { grid-template-columns: 1fr; gap: 16px; }
+      .today-date-heading { font-size: 15px; margin-bottom: 10px; }
+      .today-workout-card { padding: 12px; }
+      .today-sport-icon { font-size: 22px; }
+      .today-workout-name { font-size: 14px; }
+      .today-workout-detail { font-size: 12px; }
+      .today-chip { font-size: 11px; padding: 2px 6px; }
+      .today-session-desc { font-size: 12px; }
+      .today-focus-section { padding: 10px; gap: 8px; }
+      .today-focus-text { font-size: 12px; }
+      .today-focus-label { font-size: 10px; }
+      .upcoming-section { margin-top: 14px; }
+      .upcoming-row { grid-template-columns: 66px 1fr; gap: 6px; padding: 8px 10px; }
+      .upcoming-date { font-size: 10px; }
+      .upcoming-name { font-size: 12px; }
+      .upcoming-pace { display: none; }
+      .upcoming-km { display: none; }
+
+      /* ── PLAN TAB — WEEK SECTIONS ── */
+      .weeks-container { padding: 0 6px 48px; gap: 10px; }
       .week-section { border-radius: 8px; }
-      .week-header { padding: 12px 14px; }
-      .week-num { font-size: 14px; }
-      .week-dates { font-size: 11px; }
+      .week-header { padding: 10px 12px; }
+      .week-num { font-size: 13px; }
+      .week-dates { font-size: 10px; }
+      .week-focus { font-size: 11px; }
       .week-collapse-arrow { margin-left: auto; }
+
+      /* Vertical day list — rest days hidden */
       .week-grid { display: flex; flex-direction: column; border-top: 1px solid var(--border); }
-      /* Hide rest-only days on mobile */
       .day-rest-only { display: none; }
-      /* Each active day = full-width card */
       .day-col {
         border-right: none;
         border-bottom: 1px solid var(--border);
@@ -150,73 +181,78 @@
         display: block;
       }
       .day-col:last-child { border-bottom: none; }
-      /* Day header — sticky label inside the card */
+      /* Day label strip */
       .day-header {
         display: flex;
         align-items: center;
         gap: 8px;
-        padding: 8px 14px 6px;
+        padding: 7px 12px 5px;
         background: rgba(255,255,255,.04);
         border-bottom: 1px solid var(--border);
         margin-bottom: 0;
       }
-      .day-name { font-size: 13px; font-weight: 700; text-transform: uppercase; color: var(--accent); }
-      .day-date { font-size: 12px; color: var(--text3); }
-      /* Workouts list inside a day */
-      .day-workouts { padding: 8px 10px; display: flex; flex-direction: column; gap: 6px; }
-      /* Bigger workout cards on mobile */
-      .workout-card { padding: 12px 14px; border-radius: 8px; margin-bottom: 0; }
-      .workout-name { font-size: 14px; }
-      .workout-detail { font-size: 12px; }
-      .sport-icon { font-size: 18px; }
-      .workout-check { font-size: 20px; padding: 2px 4px; }
-      .export-btn { padding: 5px 10px; font-size: 12px; }
+      .day-name { font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--accent); }
+      .day-date { font-size: 11px; color: var(--text3); }
+      /* Workouts inside day */
+      .day-workouts { padding: 7px 8px; display: flex; flex-direction: column; gap: 5px; }
+      .workout-card { padding: 10px 12px; border-radius: 7px; margin-bottom: 0; }
+      .workout-name { font-size: 13px; }
+      .workout-detail { font-size: 11px; }
+      .sport-icon { font-size: 16px; }
+      .workout-check { font-size: 18px; padding: 1px 4px; }
+      .export-btn { padding: 4px 8px; font-size: 11px; }
+      .workout-body { margin-top: 6px; padding-top: 6px; }
+      .pace, .hr-target, .workout-desc { font-size: 11px; }
+      /* Expanded rationale */
+      .workout-rationale { padding: 8px 10px; gap: 8px; }
+      .rationale-label { font-size: 10px; }
+      .rationale-text { font-size: 12px; }
+      .str-exercise-list li { font-size: 12px; }
+      .act-feedback { padding: 7px 8px; }
+      .act-feedback-header { font-size: 10px; }
+      .fb-well, .fb-improve, .fb-line { font-size: 12px; }
 
-      /* Today panel */
-      .today-panel-wrap { grid-template-columns: 1fr; }
-      .today-date-heading { font-size: 16px; }
-      .today-workout-card { padding: 14px; }
-      .today-sport-icon { font-size: 24px; }
-      .today-workout-name { font-size: 15px; }
-      .upcoming-row { grid-template-columns: 70px 1fr; }
-      .upcoming-pace { display: none; }
-      .upcoming-km { display: none; }
+      /* ── WEEK 0 / STRAVA ACTIVITY CARDS ── */
+      .actual-activity { padding: 10px 12px; }
+      .actual-name { font-size: 13px; }
+      .actual-detail { font-size: 11px; }
+      .actual-hr { font-size: 11px; }
+      /* Remove indent so feedback fills full width on mobile */
+      .actual-feedback { padding-left: 0; }
+      .feedback-line { font-size: 12px; }
+      .chart-btn { margin-left: 0; font-size: 12px; padding: 5px 10px; }
 
-      /* Strategy / zones sections */
-      .race-strategy, .zones-section { margin: 0 0 16px; }
-      .strategy-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-      .phase-legend { margin: 0 0 12px; gap: 8px; }
+      /* ── STRATEGY TAB ── */
+      .race-strategy, .zones-section { margin: 0 0 12px; }
+      .strategy-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .strategy-card { padding: 10px; }
+      .strategy-card h3 { font-size: 10px; }
+      .strategy-card p { font-size: 12px; }
+      .pace-goal { font-size: 18px; }
+      .phase-legend { margin: 0 0 10px; gap: 6px; flex-wrap: wrap; }
+      .legend-item { font-size: 11px; }
       .zone-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-      .zone-table th, .zone-table td { padding: 7px 8px; font-size: 12px; white-space: nowrap; }
+      .zone-table th, .zone-table td { padding: 6px 8px; font-size: 11px; white-space: nowrap; }
 
-      /* Stats — charts scroll horizontally */
+      /* ── STATS TAB ── */
+      .progress-bar-wrap { margin: 0 0 12px; padding: 12px; }
+      .prog-week { width: 26px; height: 26px; font-size: 9px; }
+      .progress-weeks { gap: 3px; }
       .volume-canvas-wrap, .trend-canvas-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-      .volume-canvas-wrap canvas, .trend-canvas-wrap canvas { min-width: 560px; }
-
-      /* Progress bar dots — smaller */
-      .prog-week { width: 28px; height: 28px; font-size: 10px; }
-      .progress-bar-wrap { margin: 0 0 16px; }
-
-      /* Modal — full screen */
-      .modal-box { width: 100vw !important; height: 100dvh; max-height: 100dvh; top: 0 !important; left: 0 !important; transform: none !important; border-radius: 0; position: fixed; }
-
-      /* Race predictor */
+      .volume-canvas-wrap canvas, .trend-canvas-wrap canvas { min-width: 520px; }
       .predictor-section { flex-direction: column; gap: 12px; }
       .pred-main { text-align: center; }
 
-      /* Rationale / feedback */
-      .workout-rationale { padding: 10px; }
-      .rationale-text, .today-focus-text { font-size: 13px; }
-      .str-exercise-list li { font-size: 13px; }
-      .act-feedback { padding: 8px 10px; }
-      .fb-well, .fb-improve, .fb-line { font-size: 13px; }
+      /* ── MODAL — full screen ── */
+      .modal-box { width: 100vw !important; height: 100dvh; max-height: 100dvh; top: 0 !important; left: 0 !important; transform: none !important; border-radius: 0; position: fixed; }
     }
 
-    /* Smallest phones */
+    /* Smallest phones (≤380px) */
     @media (max-width: 380px) {
       .strategy-grid { grid-template-columns: 1fr; }
-      .main-tab { font-size: 11px; padding: 10px 3px; }
-      .plan-stats { display: grid; grid-template-columns: 1fr 1fr; }
+      .main-tab { font-size: 10px; }
+      .plan-stats { grid-template-columns: 1fr 1fr; }
+      .stat-box:last-child { display: none; } /* hide 6th stat if 5 don't fit in 2-col */
     }
 
     /* ── PROGRESS BAR ───────────────────────────────────────── */
