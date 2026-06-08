@@ -232,7 +232,7 @@
               "sport": "rest",
               "type": "rest",
               "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "description": "Full rest. Marathon recovery.",
               "completed": false
             }
           ]
@@ -279,9 +279,9 @@
               "id": "w1-wed-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability. Light loads — no heavy squats or plyometrics yet.",
-              "durationMinutes": 45,
+              "name": "Hyrox B — Power",
+              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
+              "durationMinutes": 35,
               "completed": false
             }
           ]
@@ -314,9 +314,9 @@
               "id": "w1-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability. Mobility focus. Hip flexors, hamstrings, calves.",
-              "durationMinutes": 45,
+              "name": "Hyrox C — Conditioning",
+              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
+              "durationMinutes": 35,
               "completed": false
             }
           ]
@@ -380,8 +380,8 @@
               "id": "w2-mon-str",
               "sport": "strength",
               "type": "strength",
-              "name": "KB Upper & Core Activation",
-              "description": "Light kettlebell session — upper body and core only. Day after the long run: no heavy leg loading. Keep it to 25–30 min.",
+              "name": "Hyrox A — Upper & Core",
+              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
               "durationMinutes": 30,
               "completed": false
             }
@@ -428,9 +428,9 @@
               "id": "w2-wed-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
-              "durationMinutes": 45,
+              "name": "Hyrox B — Power",
+              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
+              "durationMinutes": 35,
               "completed": false
             }
           ]
@@ -463,9 +463,9 @@
               "id": "w2-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
-              "durationMinutes": 45,
+              "name": "Hyrox C — Conditioning",
+              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
+              "durationMinutes": 35,
               "completed": false
             }
           ]
@@ -475,11 +475,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w2-sat-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "id": "w2-sat-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Hyrox D — Skill & Sim",
+              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
+              "durationMinutes": 35,
               "completed": false
             }
           ]
@@ -509,7 +510,7 @@
         "totalKm": 33,
         "totalHours": 3.5,
         "runSessions": 4,
-        "strengthSessions": 3
+        "strengthSessions": 4
       }
     },
     {
@@ -529,8 +530,8 @@
               "id": "w3-mon-str",
               "sport": "strength",
               "type": "strength",
-              "name": "KB Upper & Core Activation",
-              "description": "Light kettlebell session — upper body and core only. Day after the long run: no heavy leg loading. Keep it to 25–30 min.",
+              "name": "Hyrox A — Upper & Core",
+              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
               "durationMinutes": 30,
               "completed": false
             }
@@ -577,9 +578,9 @@
               "id": "w3-wed-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
-              "durationMinutes": 45,
+              "name": "Hyrox B — Power",
+              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
+              "durationMinutes": 50,
               "completed": false
             }
           ]
@@ -612,8 +613,8 @@
               "id": "w3-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "name": "Hyrox C — Conditioning",
+              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -624,11 +625,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w3-sat-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "id": "w3-sat-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Hyrox D — Skill & Sim",
+              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
+              "durationMinutes": 35,
               "completed": false
             }
           ]
@@ -658,7 +660,7 @@
         "totalKm": 39,
         "totalHours": 4.1,
         "runSessions": 4,
-        "strengthSessions": 3
+        "strengthSessions": 4
       }
     },
     {
@@ -678,8 +680,8 @@
               "id": "w4-mon-str",
               "sport": "strength",
               "type": "strength",
-              "name": "KB Upper & Core Activation",
-              "description": "Light kettlebell session — upper body and core only. Day after the long run: no heavy leg loading. Keep it to 25–30 min.",
+              "name": "Hyrox A — Upper & Core",
+              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
               "durationMinutes": 30,
               "completed": false
             }
@@ -726,9 +728,9 @@
               "id": "w4-wed-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
-              "durationMinutes": 45,
+              "name": "Hyrox B — Power",
+              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
+              "durationMinutes": 50,
               "completed": false
             }
           ]
@@ -761,8 +763,8 @@
               "id": "w4-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "name": "Hyrox C — Conditioning",
+              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -773,11 +775,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w4-sat-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "id": "w4-sat-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Hyrox D — Skill & Sim",
+              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
+              "durationMinutes": 35,
               "completed": false
             }
           ]
@@ -807,7 +810,7 @@
         "totalKm": 43,
         "totalHours": 4.4,
         "runSessions": 4,
-        "strengthSessions": 3
+        "strengthSessions": 4
       }
     },
     {
@@ -827,8 +830,8 @@
               "id": "w5-mon-str",
               "sport": "strength",
               "type": "strength",
-              "name": "KB Upper & Core Activation",
-              "description": "Light kettlebell session — upper body and core only. Day after the long run: no heavy leg loading. Keep it to 25–30 min.",
+              "name": "Hyrox A — Upper & Core",
+              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
               "durationMinutes": 30,
               "completed": false
             }
@@ -875,9 +878,9 @@
               "id": "w5-wed-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability. Full intensity — recovery week is for legs, not gym.",
-              "durationMinutes": 45,
+              "name": "Hyrox B — Power",
+              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
+              "durationMinutes": 50,
               "completed": false
             }
           ]
@@ -910,8 +913,8 @@
               "id": "w5-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "name": "Hyrox C — Conditioning",
+              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -922,11 +925,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w5-sat-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "id": "w5-sat-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Hyrox D — Skill & Sim",
+              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
+              "durationMinutes": 35,
               "completed": false
             }
           ]
@@ -956,7 +960,7 @@
         "totalKm": 30,
         "totalHours": 3.2,
         "runSessions": 4,
-        "strengthSessions": 3
+        "strengthSessions": 4
       }
     },
     {
@@ -976,8 +980,8 @@
               "id": "w6-mon-str",
               "sport": "strength",
               "type": "strength",
-              "name": "KB Upper & Core Activation",
-              "description": "Light kettlebell session — upper body and core only. Day after the long run: no heavy leg loading. Keep it to 25–30 min.",
+              "name": "Hyrox A — Upper & Core",
+              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
               "durationMinutes": 30,
               "completed": false
             }
@@ -1025,9 +1029,9 @@
               "id": "w6-wed-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
-              "durationMinutes": 45,
+              "name": "Hyrox B — Power",
+              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
+              "durationMinutes": 50,
               "completed": false
             }
           ]
@@ -1060,8 +1064,8 @@
               "id": "w6-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "name": "Hyrox C — Conditioning",
+              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -1072,11 +1076,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w6-sat-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "id": "w6-sat-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Hyrox D — Skill & Sim",
+              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
+              "durationMinutes": 35,
               "completed": false
             }
           ]
@@ -1106,7 +1111,7 @@
         "totalKm": 45,
         "totalHours": 4.4,
         "runSessions": 4,
-        "strengthSessions": 3
+        "strengthSessions": 4
       }
     },
     {
@@ -1126,8 +1131,8 @@
               "id": "w7-mon-str",
               "sport": "strength",
               "type": "strength",
-              "name": "KB Upper & Core Activation",
-              "description": "Light kettlebell session — upper body and core only. Day after the long run: no heavy leg loading. Keep it to 25–30 min.",
+              "name": "Hyrox A — Upper & Core",
+              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
               "durationMinutes": 30,
               "completed": false
             }
@@ -1175,9 +1180,9 @@
               "id": "w7-wed-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
-              "durationMinutes": 45,
+              "name": "Hyrox B — Power",
+              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
+              "durationMinutes": 50,
               "completed": false
             }
           ]
@@ -1210,8 +1215,8 @@
               "id": "w7-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "name": "Hyrox C — Conditioning",
+              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -1222,11 +1227,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w7-sat-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "id": "w7-sat-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Hyrox D — Skill & Sim",
+              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
+              "durationMinutes": 35,
               "completed": false
             }
           ]
@@ -1256,7 +1262,7 @@
         "totalKm": 49,
         "totalHours": 4.8,
         "runSessions": 4,
-        "strengthSessions": 3
+        "strengthSessions": 4
       }
     },
     {
@@ -1276,8 +1282,8 @@
               "id": "w8-mon-str",
               "sport": "strength",
               "type": "strength",
-              "name": "KB Upper & Core Activation",
-              "description": "Light kettlebell session — upper body and core only. Day after the long run: no heavy leg loading. Keep it to 25–30 min.",
+              "name": "Hyrox A — Upper & Core",
+              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
               "durationMinutes": 30,
               "completed": false
             }
@@ -1325,9 +1331,9 @@
               "id": "w8-wed-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
-              "durationMinutes": 45,
+              "name": "Hyrox B — Power",
+              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
+              "durationMinutes": 50,
               "completed": false
             }
           ]
@@ -1360,8 +1366,8 @@
               "id": "w8-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "name": "Hyrox C — Conditioning",
+              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -1372,11 +1378,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w8-sat-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "id": "w8-sat-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Hyrox D — Skill & Sim",
+              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
+              "durationMinutes": 35,
               "completed": false
             }
           ]
@@ -1406,7 +1413,7 @@
         "totalKm": 51,
         "totalHours": 5,
         "runSessions": 4,
-        "strengthSessions": 3
+        "strengthSessions": 4
       }
     },
     {
@@ -1426,8 +1433,8 @@
               "id": "w9-mon-str",
               "sport": "strength",
               "type": "strength",
-              "name": "KB Upper & Core Activation",
-              "description": "Light kettlebell session — upper body and core only. Day after the long run: no heavy leg loading. Keep it to 25–30 min.",
+              "name": "Hyrox A — Upper & Core",
+              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
               "durationMinutes": 30,
               "completed": false
             }
@@ -1475,9 +1482,9 @@
               "id": "w9-wed-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
-              "durationMinutes": 45,
+              "name": "Hyrox B — Power",
+              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
+              "durationMinutes": 50,
               "completed": false
             }
           ]
@@ -1510,8 +1517,8 @@
               "id": "w9-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "name": "Hyrox C — Conditioning",
+              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -1522,11 +1529,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w9-sat-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "id": "w9-sat-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Hyrox D — Skill & Sim",
+              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
+              "durationMinutes": 35,
               "completed": false
             }
           ]
@@ -1556,7 +1564,7 @@
         "totalKm": 49,
         "totalHours": 4.9,
         "runSessions": 4,
-        "strengthSessions": 3
+        "strengthSessions": 4
       }
     },
     {
@@ -1576,8 +1584,8 @@
               "id": "w10-mon-str",
               "sport": "strength",
               "type": "strength",
-              "name": "KB Upper & Core Activation",
-              "description": "Light kettlebell session — upper body and core only. Day after the long run: no heavy leg loading. Keep it to 25–30 min.",
+              "name": "Hyrox A — Upper & Core",
+              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
               "durationMinutes": 30,
               "completed": false
             }
@@ -1625,9 +1633,9 @@
               "id": "w10-wed-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
-              "durationMinutes": 45,
+              "name": "Hyrox B — Power",
+              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
+              "durationMinutes": 50,
               "completed": false
             }
           ]
@@ -1660,8 +1668,8 @@
               "id": "w10-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "name": "Hyrox C — Conditioning",
+              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -1672,11 +1680,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w10-sat-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "id": "w10-sat-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Hyrox D — Skill & Sim",
+              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
+              "durationMinutes": 35,
               "completed": false
             }
           ]
@@ -1706,7 +1715,7 @@
         "totalKm": 49,
         "totalHours": 4.9,
         "runSessions": 4,
-        "strengthSessions": 3
+        "strengthSessions": 4
       }
     },
     {
@@ -1723,11 +1732,12 @@
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w11-mon-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "id": "w11-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Hyrox A — Upper & Core",
+              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
+              "durationMinutes": 30,
               "completed": false
             }
           ]
@@ -1773,9 +1783,9 @@
               "id": "w11-wed-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
-              "durationMinutes": 45,
+              "name": "Hyrox B — Power",
+              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
+              "durationMinutes": 50,
               "completed": false
             }
           ]
@@ -1808,8 +1818,8 @@
               "id": "w11-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "name": "Hyrox C — Conditioning",
+              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -1820,11 +1830,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w11-sat-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "id": "w11-sat-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Hyrox D — Skill & Sim",
+              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
+              "durationMinutes": 35,
               "completed": false
             }
           ]
@@ -1854,7 +1865,7 @@
         "totalKm": 35,
         "totalHours": 3.7,
         "runSessions": 4,
-        "strengthSessions": 2
+        "strengthSessions": 4
       }
     },
     {
@@ -1871,11 +1882,12 @@
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w12-mon-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "id": "w12-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Hyrox A — Upper & Core",
+              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
+              "durationMinutes": 30,
               "completed": false
             }
           ]
@@ -1922,9 +1934,9 @@
               "id": "w12-wed-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
-              "durationMinutes": 45,
+              "name": "Hyrox B — Power",
+              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
+              "durationMinutes": 50,
               "completed": false
             }
           ]
@@ -1957,8 +1969,8 @@
               "id": "w12-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "name": "Hyrox C — Conditioning",
+              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -1969,11 +1981,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w12-sat-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "id": "w12-sat-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Hyrox D — Skill & Sim",
+              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
+              "durationMinutes": 35,
               "completed": false
             }
           ]
@@ -2003,7 +2016,7 @@
         "totalKm": 48,
         "totalHours": 4.8,
         "runSessions": 4,
-        "strengthSessions": 2
+        "strengthSessions": 4
       }
     },
     {
@@ -2020,11 +2033,12 @@
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w13-mon-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "id": "w13-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Hyrox A — Upper & Core",
+              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
+              "durationMinutes": 30,
               "completed": false
             }
           ]
@@ -2071,9 +2085,9 @@
               "id": "w13-wed-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
-              "durationMinutes": 45,
+              "name": "Hyrox B — Power",
+              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
+              "durationMinutes": 50,
               "completed": false
             }
           ]
@@ -2106,8 +2120,8 @@
               "id": "w13-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability.",
+              "name": "Hyrox C — Conditioning",
+              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -2118,11 +2132,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w13-sat-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "id": "w13-sat-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Hyrox D — Skill & Sim",
+              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
+              "durationMinutes": 35,
               "completed": false
             }
           ]
@@ -2152,7 +2167,7 @@
         "totalKm": 47,
         "totalHours": 4.5,
         "runSessions": 4,
-        "strengthSessions": 2
+        "strengthSessions": 4
       }
     },
     {
@@ -2173,7 +2188,7 @@
               "sport": "rest",
               "type": "rest",
               "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "description": "Full rest. Taper.",
               "completed": false
             }
           ]
@@ -2220,9 +2235,9 @@
               "id": "w14-wed-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability. Reduce loads 20-30%. Last heavy strength week.",
-              "durationMinutes": 45,
+              "name": "Hyrox B — Maintenance",
+              "description": "Taper week. Light movement — 2 sets only, no fatigue. Keep the tank full.",
+              "durationMinutes": 25,
               "completed": false
             }
           ]
@@ -2322,7 +2337,7 @@
               "sport": "rest",
               "type": "rest",
               "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "description": "Full rest. Taper.",
               "completed": false
             }
           ]
@@ -2368,9 +2383,9 @@
               "id": "w15-wed-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability. 15-20 min only. Bodyweight, activation only. No heavy loads.",
-              "durationMinutes": 45,
+              "name": "Hyrox B — Maintenance",
+              "description": "Taper week. Light movement — 2 sets only, no fatigue. Keep the tank full.",
+              "durationMinutes": 25,
               "completed": false
             }
           ]
@@ -2403,7 +2418,7 @@
               "sport": "rest",
               "type": "rest",
               "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "description": "Taper rest.",
               "completed": false
             }
           ]
@@ -2467,7 +2482,7 @@
               "sport": "rest",
               "type": "rest",
               "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "description": "Full rest. Taper.",
               "completed": false
             }
           ]
@@ -2494,16 +2509,7 @@
         {
           "date": "2026-09-16",
           "dayOfWeek": "Wednesday",
-          "workouts": [
-            {
-              "id": "w16-wed-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
-              "completed": false
-            }
-          ]
+          "workouts": []
         },
         {
           "date": "2026-09-17",
@@ -2533,7 +2539,7 @@
               "sport": "rest",
               "type": "rest",
               "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "description": "Taper rest.",
               "completed": false
             }
           ]

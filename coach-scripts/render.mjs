@@ -508,111 +508,190 @@ function escJson(obj) {
   return JSON.stringify(obj).replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/'/g,'&apos;');
 }
 
-// ── STRENGTH WORKOUT PRESCRIPTIONS (KB + CrossFit gym) ───────
+// ── STRENGTH WORKOUT PRESCRIPTIONS (Hyrox / CrossFit gym) ────
 function strengthWorkout(w) {
   const match = w.id.match(/^w(\d+)-(\w+)-str/);
   if (!match) return null;
   const weekNum = parseInt(match[1]);
-  const day = match[2]; // mon | wed | fri
+  const day = match[2]; // mon | wed | fri | sat
   const weekData = plan.weeks.find(wk => wk.weekNumber === weekNum);
   const phase = weekData?.phase || 'Base';
-  const isTaper = phase === 'Taper';
-  const isBuild = phase === 'Build';
+  const isTaper  = phase === 'Taper';
+  const isBuild  = phase === 'Build';
+  const isRecov  = phase === 'Recovery';
 
-  // Session C — Monday (light, day after long run)
-  if (day === 'mon') return {
-    label: '💪 Session C — Upper Body & Core Activation',
-    duration: '25–30 min',
-    exercises: [
-      'KB Halo — 3×8 each direction  (shoulder + thoracic mobility)',
-      'Single-Arm KB Farmer Carry — 3×20 m each side  (lateral core, posture)',
-      'KB Glute Bridge — 3×15  (hip activation, not fatiguing)',
-      'KB Bent-Over Row — 3×10 each arm  (upper back + posture)',
-      'Dead Bug — 3×10 each side  (anti-rotation core stability)',
-      'Couch Stretch — 2×60 s each leg  (hip flexor recovery post-run)',
-    ],
-    note: 'Day after the long run — legs are off the menu. Keep loads light, rest 60 s between sets. Purpose is blood flow + upper body stimulus, not fatigue.',
-  };
-
-  // Session A — Wednesday (main lower body session)
-  if (day === 'wed') {
-    if (isTaper) return {
-      label: '💪 Session A — Lower Body Maintenance',
-      duration: '20 min',
-      exercises: [
-        'KB Single-Leg RDL — 2×8 each side  (neuromuscular activation only)',
-        'KB Swing — 3×10  (light)',
-        'Copenhagen Plank — 2×20 s each side',
-        'Weighted Calf Raise — 2×12',
-      ],
-      note: 'Taper week — minimum effective dose. No soreness allowed. Keep the tank full for race day.',
-    };
+  // ── SESSION A — MONDAY: Upper body + core (post long run, no leg loading) ──
+  if (day === 'mon') {
     if (isBuild) return {
-      label: '💪 Session A — Lower Body Power',
-      duration: '35–40 min',
+      label: '💪 Session A — Upper & Core (Build)',
+      duration: '30–35 min',
       exercises: [
-        'KB Deadlift (two KBs) — 4×8 @ challenging weight  (posterior chain strength)',
-        'KB Bulgarian Split Squat — 3×10 each leg  (single-leg power)',
-        'KB Swing — 5×20  (heavier than base phase — hip drive)',
-        'Box Step-Up with KB — 3×12 each leg  (running-specific leg drive)',
-        'Copenhagen Plank — 3×35 s each side  (hip adductor, injury prevention)',
-        'Weighted Calf Raise — 3×15  (Achilles tendon resilience)',
+        'Pull-Up or Ring Row — 4×6–8  (scapular strength, posture under fatigue)',
+        'DB/KB Bench Press or Push-Up w/ weight vest — 3×12  (horizontal push)',
+        'Single-Arm DB Row — 4×10 each side  (heavy — lat activation)',
+        'Farmers Carry — 4×30 m @ heavy  (grip + lateral core + posture)',
+        'Pallof Press — 3×12 each side  (anti-rotation, protects the spine at race pace)',
+        'Dead Bug — 3×10 each side',
+        'Hip 90/90 stretch — 2 min each side  (hip flexor mobility)',
       ],
-      note: 'Posterior chain focus — glutes, hamstrings, calves. These are your running muscles. 2–3 min rest between heavy sets. Stop a set if form breaks.',
+      note: 'Day after long run. Upper body and core only — no squats, lunges, or anything that loads the legs. If you\'re sore from Sunday, reduce sets by 1 across the board.',
     };
     return {
-      label: '💪 Session A — Lower Body Foundation',
-      duration: '40–45 min',
+      label: '💪 Session A — Upper & Core (Base)',
+      duration: '25–30 min',
       exercises: [
-        'KB Goblet Squat — 4×12  (full depth, moderate weight — quad + glute base)',
-        'KB Single-Leg Romanian Deadlift — 3×8 each side  (hamstring + balance)',
-        'KB Swing — 4×15  (hip hinge power, glute activation)',
-        'Walking KB Lunge — 3×10 each leg  (single-leg stability, hip flexor eccentric)',
-        'Copenhagen Plank — 3×25 s each side  (hip adductor — key for knee health in runners)',
-        'Weighted Calf Raise — 3×15  (off a step if available)',
+        'Ring Row or Banded Pull-Down — 3×10  (horizontal pull, scapular control)',
+        'DB Shoulder Press — 3×10  (overhead stability)',
+        'KB Bent-Over Row — 3×10 each arm',
+        'Farmers Carry — 3×20 m each side  (lateral core + posture)',
+        'Dead Bug — 3×8 each side',
+        'Couch Stretch — 2×60 s each leg  (hip flexor recovery)',
       ],
-      note: 'Run comes first — leave something in the tank. 60–90 s rest between sets. Controlled tempo on every rep; the eccentric (lowering) phase matters most.',
+      note: 'Day after long run. Light loads, full ROM, 60 s rest. This is recovery + maintenance, not a hard session.',
     };
   }
 
-  // Session B — Friday (upper body + core; legs recover for weekend)
-  if (isTaper) return {
-    label: '💪 Session B — Upper Body & Core Maintenance',
-    duration: '20 min',
-    exercises: [
-      'KB Turkish Get-Up — 2×2 each side  (skill + mobility, go slow)',
-      'KB Press — 2×8 each arm',
-      'Dead Bug — 2×8 each side',
-      'Hollow Body Hold — 2×20 s',
-    ],
-    note: 'Taper week — just enough to stay sharp. No DOMS this close to race day.',
-  };
-  if (isBuild) return {
-    label: '💪 Session B — Upper Body + Core Power',
-    duration: '35–40 min',
-    exercises: [
-      'KB Turkish Get-Up — 4×4 each side  (full-body integration + shoulder stability)',
-      'KB Push Press — 4×8 each arm  (power + shoulder drive)',
-      'KB Renegade Row — 3×8 each side  (anti-rotation core + upper back)',
-      'KB Windmill — 3×6 each side  (lateral chain, hip mobility)',
-      'Hollow Body Hold — 3×30 s  (anterior core bracing)',
-      'KB Around the World — 3×10 each direction  (shoulder + thoracic)',
-    ],
-    note: 'No running muscles — intentional. Upper body strength and rotational core stability keep your form intact in the final 5 km of a half marathon.',
-  };
-  return {
-    label: '💪 Session B — Upper Body & Core Foundation',
-    duration: '40–45 min',
-    exercises: [
-      'KB Turkish Get-Up — 3×3 each side  (take your time — it\'s a skill, not a grind)',
-      'KB Military Press — 3×10 each arm  (overhead stability, posture muscles)',
-      'KB Bent-Over Row — 3×10 each arm  (upper back, anti-forward lean)',
-      'KB Windmill — 3×5 each side  (lateral chain mobility)',
-      'Dead Bug — 3×10 each side  (lumbo-pelvic stability)',
-      'KB Suitcase Hold — 3×30 s each side  (lateral core — stops side-to-side sway at mile 10)',
-    ],
-    note: 'Go lighter than you think. The Turkish Get-Up should be slow and deliberate — if you rush it, reduce the weight.',
-  };
+  // ── SESSION B — WEDNESDAY: Hyrox Power (main strength session of the week) ──
+  if (day === 'wed') {
+    if (isTaper) return {
+      label: '💪 Session B — Hyrox Maintenance (Taper)',
+      duration: '20–25 min',
+      exercises: [
+        'Sled Push — 2×20 m @ light  (movement quality only)',
+        'DB Romanian Deadlift — 2×8  (posterior chain activation)',
+        'Wall Ball — 2×10 @ light  (movement pattern)',
+        'Copenhagen Plank — 2×20 s each side',
+        'Calf Raise — 2×15',
+      ],
+      note: 'Taper week — 2 sets max on everything. Move well, not heavy. No DOMS allowed this close to race day.',
+    };
+    if (isBuild) return {
+      label: '💪 Session B — Hyrox Power (Build)',
+      duration: '50–55 min',
+      exercises: [
+        'Sled Push — 5×20 m @ heavy (rest 90 s)  (race-specific leg drive — go heavier each week)',
+        'Barbell or DB Romanian Deadlift — 4×6 @ heavy  (posterior chain, hamstrings/glutes)',
+        'Sandbag/DB Lunge — 4×10 each leg  (race station + single-leg strength)',
+        'Wall Ball — 4×20 @ 9 kg  (squat + throw, quad endurance)',
+        'Barbell Hip Thrust — 3×12  (glute max power)',
+        'Copenhagen Plank — 3×40 s each side',
+        'Weighted Calf Raise off step — 3×20  (Achilles resilience for high mileage)',
+      ],
+      note: 'This is your main Hyrox power session. 2–3 min rest between sled sets, 90 s everywhere else. Progressive overload: add 5kg to sled every 2 weeks. Stop a set if form breaks, never if just hard.',
+    };
+    if (isRecov) return {
+      label: '💪 Session B — Hyrox Power (Recovery Week)',
+      duration: '35–40 min',
+      exercises: [
+        'Sled Push — 3×20 m @ moderate  (technique focus)',
+        'DB Romanian Deadlift — 3×10 @ moderate',
+        'Goblet Squat — 3×12',
+        'Wall Ball — 3×15 @ 9 kg',
+        'Copenhagen Plank — 2×25 s each side',
+        'Calf Raise — 3×15',
+      ],
+      note: 'Recovery week — 70% of normal load. Focus on movement quality over weight.',
+    };
+    return {
+      label: '💪 Session B — Hyrox Power (Base)',
+      duration: '45–50 min',
+      exercises: [
+        'Sled Push — 4×20 m @ moderate (build up to heavy over base phase)  (race-specific)',
+        'DB Romanian Deadlift — 4×10  (posterior chain foundation)',
+        'Goblet Squat — 3×12  (quad + hip stability)',
+        'DB/KB Walking Lunge — 3×10 each leg',
+        'Wall Ball — 3×15 @ 9 kg  (learn the standard: full squat, ball to 10 ft target)',
+        'Copenhagen Plank — 3×25 s each side',
+        'Calf Raise off step — 3×15',
+      ],
+      note: 'Learn the Hyrox movements at moderate load before going heavy in Build phase. Sled push is the most race-specific exercise here — prioritise it when fresh.',
+    };
+  }
+
+  // ── SESSION C — FRIDAY: Hyrox Conditioning (cardio-functional, no heavy legs) ──
+  if (day === 'fri') {
+    if (isTaper) return {
+      label: '💪 Session C — Light Conditioning (Taper)',
+      duration: '20 min',
+      exercises: [
+        'SkiErg — 3×250 m @ easy pace (no sprinting)',
+        'Farmers Carry — 3×20 m @ light',
+        'Ring Row — 2×8',
+        'Hip flexor + hamstring mobility — 5 min',
+      ],
+      note: 'Taper. Easy movement only — purpose is to stay loose and feel athletic without adding fatigue.',
+    };
+    if (isBuild) return {
+      label: '💪 Session C — Hyrox Conditioning (Build)',
+      duration: '45–50 min',
+      exercises: [
+        'SkiErg — 4×500 m @ hard (rest 90 s) — target sub-2:00/500m  (Hyrox station 1)',
+        'Row — 4×500 m @ hard (rest 90 s)  (Hyrox station 4)',
+        'Burpee Broad Jump — 3×10 reps  (Hyrox station 3 — technique: jump forward, not up)',
+        'Farmers Carry — 4×30 m @ Hyrox weight (24 kg/hand M, 16 kg/hand F)  (station 6)',
+        'Pull-Up or Ring Row — 3×8–10  (upper body pulling strength)',
+        'Box Step-Up — 3×10 each leg @ light  (running posture carryover)',
+      ],
+      note: 'This session trains 4 of the 8 Hyrox stations. Push the SkiErg and row intervals hard — they\'re the biggest fitness drivers for Hyrox. Track your 500m times and aim to improve each week.',
+    };
+    return {
+      label: '💪 Session C — Hyrox Conditioning (Base)',
+      duration: '40–45 min',
+      exercises: [
+        'SkiErg — 4×250 m @ moderate–hard pace  (learn the movement: hinge, not row)',
+        'Row — 3×500 m @ moderate  (damper 4–5, drive with legs first)',
+        'Burpee Broad Jump — 3×8 reps  (learn technique at manageable volume)',
+        'Farmers Carry — 3×20 m each side @ moderate  (build grip + lateral core)',
+        'DB Bent-Over Row — 3×10 each arm',
+      ],
+      note: 'Base phase: learn the SkiErg and row at moderate effort. Focus on form before intensity. SkiErg: hinge at the hips, don\'t just pull with arms. Row: legs → lean → arms on the drive.',
+    };
+  }
+
+  // ── SESSION D — SATURDAY: Hyrox Skill/Sim (moderate, legs available for Sunday) ──
+  if (day === 'sat') {
+    if (isBuild) return {
+      label: '💪 Session D — Hyrox Simulation (Build)',
+      duration: '35–40 min',
+      exercises: [
+        'Mini-Hyrox Circuit × 3 rounds (2 min rest between):',
+        '  → SkiErg 250 m',
+        '  → Burpee Broad Jump 5 reps',
+        '  → Farmers Carry 30 m',
+        '  → Wall Ball 10 reps @ 9 kg',
+        'Finish: Row 500 m @ race pace — note your time',
+        'Cool-down: 5 min mobility (hip flexors + quads)',
+      ],
+      note: 'This is Hyrox race practice. Go at 80% effort — not all-out. Transition fast between stations (that\'s where Hyrox time is won or lost). Legs must be functional tomorrow for the long run.',
+    };
+    if (isRecov) return {
+      label: '💪 Session D — Hyrox Skill (Recovery Week)',
+      duration: '25–30 min',
+      exercises: [
+        'SkiErg — 3×200 m @ easy  (technique drill: keep chest tall)',
+        'Farmers Carry — 3×20 m  (light — practice transition speed)',
+        'Wall Ball — 2×10 @ 9 kg  (catch at chest, full squat)',
+        'Burpee Broad Jump — 2×6  (slow, controlled)',
+        'Hip flexor stretch — 5 min',
+      ],
+      note: 'Recovery week. Skill only — no intensity. Practice efficient transitions between stations.',
+    };
+    return {
+      label: '💪 Session D — Hyrox Skill (Base)',
+      duration: '30–35 min',
+      exercises: [
+        'SkiErg — 4×200 m @ easy–moderate  (technique focus)',
+        'Wall Ball — 3×12 @ 9 kg  (squat depth + target accuracy)',
+        'Farmers Carry — 3×20 m  (practice grip switch and turns)',
+        'Burpee Broad Jump — 3×6  (controlled jump distance)',
+        'Row — 2×300 m @ moderate  (pacing practice)',
+        'Cool-down: 5 min hip + quad mobility',
+      ],
+      note: 'Saturday is skill and movement quality day. Intensity is moderate — your legs need to run tomorrow. Focus on learning efficient Hyrox station technique. Wall balls: the ball must hit the target, full squat below parallel.',
+    };
+  }
+
+  return null;
 }
 
 function workoutCard(w, dayDate) {
