@@ -740,19 +740,34 @@ function strengthExercisesHtml(exercises, workoutId) {
       ${exercises.map((exercise, index) => `
         <li class="str-exercise-item">
           <span class="str-exercise-text">${escapeHtmlText(exercise)}</span>
-          <label class="str-reps-wrap" onclick="event.stopPropagation()">
-            Reps
-            <input
-              class="str-reps-input"
-              type="text"
-              inputmode="numeric"
-              placeholder="e.g. 8,8,7"
-              data-wid="${wid}"
-              data-exidx="${index}"
-              oninput="saveStrengthRep(this)"
-              onclick="event.stopPropagation()"
-            />
-          </label>
+          <span class="str-metrics-wrap" onclick="event.stopPropagation()">
+            <label class="str-reps-wrap" onclick="event.stopPropagation()">
+              Reps
+              <input
+                class="str-reps-input"
+                type="text"
+                inputmode="numeric"
+                placeholder="e.g. 8,8,7"
+                data-wid="${wid}"
+                data-exidx="${index}"
+                oninput="saveStrengthRep(this)"
+                onclick="event.stopPropagation()"
+              />
+            </label>
+            <label class="str-weight-wrap" onclick="event.stopPropagation()">
+              Weight
+              <input
+                class="str-weight-input"
+                type="text"
+                inputmode="decimal"
+                placeholder="e.g. 40kg"
+                data-wid="${wid}"
+                data-exidx="${index}"
+                oninput="saveStrengthWeight(this)"
+                onclick="event.stopPropagation()"
+              />
+            </label>
+          </span>
         </li>
       `).join('')}
     </ul>
@@ -1596,8 +1611,11 @@ const html = `<!DOCTYPE html>
       .str-exercise-list li { font-size: 14px; padding-left: 16px; line-height: 1.4; }
       .str-exercise-item { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
       .str-exercise-text { flex: 1 1 220px; min-width: 180px; }
+      .str-metrics-wrap { display: inline-flex; align-items: center; gap: 8px; }
       .str-reps-wrap { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+      .str-weight-wrap { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
       .str-reps-input { width: 92px; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 6px; padding: 4px 6px; font-size: 12px; }
+      .str-weight-input { width: 92px; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 6px; padding: 4px 6px; font-size: 12px; }
       .today-rest-card { font-size: 16px; padding: 16px; border-radius: 12px; line-height: 1.6; }
       /* Export to watch button */
       .dl-btn { font-size: 13px; padding: 8px 14px; margin-top: 12px; border-radius: 8px; }
@@ -1927,8 +1945,11 @@ const html = `<!DOCTYPE html>
     .str-exercise-list li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
     .str-exercise-item { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
     .str-exercise-text { flex: 1 1 240px; min-width: 220px; }
+    .str-metrics-wrap { display: inline-flex; align-items: center; gap: 6px; }
     .str-reps-wrap { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text3); }
+    .str-weight-wrap { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text3); }
     .str-reps-input { width: 88px; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 6px; padding: 4px 6px; font-size: 11px; }
+    .str-weight-input { width: 88px; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 6px; padding: 4px 6px; font-size: 11px; }
     .dl-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--accent); border-radius: 6px; font-size: 12px; font-weight: 600; padding: 6px 14px; cursor: pointer; transition: background .15s; }
     .dl-btn:hover { background: var(--accent); color: #000; }
 
@@ -2173,12 +2194,37 @@ function repStoreKey(input) {
   return (input.dataset.wid || '') + '::' + (input.dataset.exidx || '');
 }
 
+function strengthEntry(store, key) {
+  const raw = store[key];
+  if (raw && typeof raw === 'object') {
+    return { reps: raw.reps || '', weight: raw.weight || '' };
+  }
+  if (typeof raw === 'string') {
+    return { reps: raw, weight: '' };
+  }
+  return { reps: '', weight: '' };
+}
+
 function saveStrengthRep(input) {
   const store = loadStrengthReps();
   const key = repStoreKey(input);
   const value = (input.value || '').trim();
   if (!key || key === '::') return;
-  if (value) store[key] = value;
+  const entry = strengthEntry(store, key);
+  entry.reps = value;
+  if (entry.reps || entry.weight) store[key] = entry;
+  else delete store[key];
+  localStorage.setItem(STRENGTH_REPS_KEY, JSON.stringify(store));
+}
+
+function saveStrengthWeight(input) {
+  const store = loadStrengthReps();
+  const key = repStoreKey(input);
+  const value = (input.value || '').trim();
+  if (!key || key === '::') return;
+  const entry = strengthEntry(store, key);
+  entry.weight = value;
+  if (entry.reps || entry.weight) store[key] = entry;
   else delete store[key];
   localStorage.setItem(STRENGTH_REPS_KEY, JSON.stringify(store));
 }
@@ -2187,7 +2233,15 @@ function restoreStrengthReps() {
   const store = loadStrengthReps();
   document.querySelectorAll('.str-reps-input').forEach(input => {
     const key = repStoreKey(input);
-    if (store[key]) input.value = store[key];
+    const entry = strengthEntry(store, key);
+    if (entry.reps) input.value = entry.reps;
+    input.addEventListener('keydown', e => e.stopPropagation());
+    input.addEventListener('click', e => e.stopPropagation());
+  });
+  document.querySelectorAll('.str-weight-input').forEach(input => {
+    const key = repStoreKey(input);
+    const entry = strengthEntry(store, key);
+    if (entry.weight) input.value = entry.weight;
     input.addEventListener('keydown', e => e.stopPropagation());
     input.addEventListener('click', e => e.stopPropagation());
   });
