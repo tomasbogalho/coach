@@ -725,6 +725,40 @@ function escJson(obj) {
   return JSON.stringify(obj).replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/'/g,'&apos;');
 }
 
+function escapeHtmlText(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function strengthExercisesHtml(exercises, workoutId) {
+  const wid = escapeHtmlText(workoutId);
+  return `
+    <ul class="str-exercise-list">
+      ${exercises.map((exercise, index) => `
+        <li class="str-exercise-item">
+          <span class="str-exercise-text">${escapeHtmlText(exercise)}</span>
+          <label class="str-reps-wrap" onclick="event.stopPropagation()">
+            Reps
+            <input
+              class="str-reps-input"
+              type="text"
+              inputmode="numeric"
+              placeholder="e.g. 8,8,7"
+              data-wid="${wid}"
+              data-exidx="${index}"
+              oninput="saveStrengthRep(this)"
+              onclick="event.stopPropagation()"
+            />
+          </label>
+        </li>
+      `).join('')}
+    </ul>
+  `;
+}
+
 // ── STRENGTH WORKOUT PRESCRIPTIONS (Hyrox / CrossFit gym) ────
 function strengthWorkout(w) {
   const match = w.id.match(/^w(\d+)-(\w+)-str/);
@@ -1016,9 +1050,7 @@ function workoutCard(w, dayDate) {
     <div class="workout-rationale">
       <div class="rationale-block">
         <span class="rationale-label">${str.label} · ${str.duration}</span>
-        <ul class="str-exercise-list">
-          ${str.exercises.map(e => `<li>${e}</li>`).join('')}
-        </ul>
+        ${strengthExercisesHtml(str.exercises, w.id)}
       </div>
       ${str.note ? `<div class="rationale-block"><span class="rationale-label">📌 Coach note</span><p class="rationale-text">${str.note}</p></div>` : ''}
     </div>` : '';
@@ -1308,9 +1340,7 @@ function todayPanelHtml() {
           ${str ? `<div class="today-focus-section">
             <div class="today-focus-block">
               <span class="today-focus-label">${str.label} · ${str.duration}</span>
-              <ul class="str-exercise-list" style="margin-top:8px">
-                ${str.exercises.map(e => `<li>${e}</li>`).join('')}
-              </ul>
+              ${strengthExercisesHtml(str.exercises, w.id)}
             </div>
             ${str.note ? `<div class="today-focus-block"><span class="today-focus-label">📌 Coach note</span><p class="today-focus-text">${str.note}</p></div>` : ''}
           </div>` : ''}
@@ -1392,19 +1422,6 @@ const html = `<!DOCTYPE html>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${plan.meta.athlete} — Half Marathon Training Plan · Sep 20, 2026</title>
-  <style>
-    /* ── PASSWORD GATE ───────────────────────────────────────── */
-    #pw-gate { position:fixed; inset:0; background:#0f172a; display:flex; align-items:center; justify-content:center; z-index:9999; flex-direction:column; gap:16px; }
-    #pw-gate h1 { color:#f59e0b; font-size:22px; font-weight:700; margin-bottom:4px; }
-    #pw-gate p  { color:#94a3b8; font-size:13px; margin-bottom:8px; }
-    #pw-form    { display:flex; gap:8px; }
-    #pw-input   { background:#1e293b; border:1px solid #334155; color:#e2e8f0; border-radius:8px; padding:10px 14px; font-size:15px; width:220px; outline:none; }
-    #pw-input:focus { border-color:#f59e0b; }
-    #pw-btn     { background:#f59e0b; border:none; color:#000; border-radius:8px; padding:10px 18px; font-size:14px; font-weight:700; cursor:pointer; }
-    #pw-btn:hover { background:#fbbf24; }
-    #pw-err     { color:#f87171; font-size:12px; min-height:16px; }
-    #pw-gate.hidden { display:none; }
-  </style>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -1554,54 +1571,52 @@ const html = `<!DOCTYPE html>
 
       /* ── CONTENT AREA — pad for bottom nav ── */
       .tab-panel {
-        padding: 16px 14px;
+        padding: 12px 16px;
         padding-bottom: calc(76px + env(safe-area-inset-bottom, 6px));
       }
 
-      /* ── TODAY PANEL ── */
-      .today-panel-wrap { grid-template-columns: 1fr; gap: 20px; }
-      .today-date-heading { font-size: 20px; font-weight: 800; margin-bottom: 16px; }
-      .today-workout-card { padding: 20px 18px; border-radius: 16px; margin-bottom: 12px; }
-      .today-workout-header { gap: 14px; }
-      .today-sport-icon { font-size: 36px; }
-      .today-workout-name { font-size: 22px; font-weight: 800; line-height: 1.2; }
-      .today-workout-detail { font-size: 15px; margin-top: 5px; }
-      .today-chip { font-size: 14px; font-weight: 700; padding: 6px 12px; border-radius: 12px; }
-      /* Hide verbose session description — focus sections cover it */
+      /* ── COACH STATUS CARD — minimal on mobile ── */
+      .coach-status-card { display: none; }
+
+      /* ── TODAY PANEL — CLEAN & MINIMAL ── */
+      .today-panel-wrap { grid-template-columns: 1fr; gap: 12px; }
+      .today-date-heading { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--text2); }
+      .today-workout-card { padding: 16px; border-radius: 12px; margin-bottom: 8px; }
+      .today-workout-header { gap: 12px; }
+      .today-sport-icon { font-size: 32px; }
+      .today-workout-name { font-size: 20px; font-weight: 700; line-height: 1.2; }
+      .today-workout-detail { font-size: 14px; margin-top: 4px; color: var(--text2); }
+      .today-chip { font-size: 13px; font-weight: 600; padding: 4px 10px; border-radius: 8px; }
+      /* Hide verbose session description */
       .today-session-desc { display: none; }
-      .today-focus-section { padding: 16px; gap: 14px; margin-top: 14px; border-radius: 12px; }
-      .today-focus-label { font-size: 11px; }
-      .today-focus-text { font-size: 15px; line-height: 1.65; }
-      .str-exercise-list { margin-top: 10px; gap: 8px; }
-      .str-exercise-list li { font-size: 15px; padding-left: 20px; line-height: 1.5; }
-      .today-rest-card { font-size: 17px; padding: 22px; border-radius: 16px; line-height: 1.7; }
+      .today-focus-section { padding: 12px; gap: 8px; margin-top: 12px; border-radius: 10px; border: 1px solid var(--border); }
+      .today-focus-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+      .today-focus-text { font-size: 14px; line-height: 1.5; }
+      .str-exercise-list { margin-top: 6px; gap: 6px; }
+      .str-exercise-list li { font-size: 14px; padding-left: 16px; line-height: 1.4; }
+      .str-exercise-item { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+      .str-exercise-text { flex: 1 1 220px; min-width: 180px; }
+      .str-reps-wrap { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+      .str-reps-input { width: 92px; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 6px; padding: 4px 6px; font-size: 12px; }
+      .today-rest-card { font-size: 16px; padding: 16px; border-radius: 12px; line-height: 1.6; }
       /* Export to watch button */
-      .dl-btn { font-size: 15px; padding: 12px 20px; margin-top: 16px; border-radius: 10px; }
+      .dl-btn { font-size: 13px; padding: 8px 14px; margin-top: 12px; border-radius: 8px; }
 
-      /* Coach status card */
-      .coach-status-card { padding: 18px 16px; border-radius: 16px; margin-bottom: 20px; }
-      .cs-status-emoji { font-size: 26px; }
-      .cs-status-label { font-size: 18px; }
-      .cs-timeline-pill { font-size: 12px; padding: 5px 12px; }
-      .cs-line { font-size: 15px; line-height: 1.7; }
-      .cs-pred-row { gap: 8px; }
-      .cs-pred-time { font-size: 20px; }
-      .cs-pred-arrow { font-size: 16px; }
-
-      /* Upcoming sessions */
-      .section-sub-title { font-size: 15px; letter-spacing: .04em; margin-bottom: 12px; }
-      .upcoming-section { margin-top: 24px; }
-      .upcoming-card { border-radius: 14px; margin-bottom: 10px; }
-      .upcoming-card-header { padding: 14px 16px; gap: 12px; }
-      .upcoming-icon { font-size: 24px; }
-      .upcoming-name { font-size: 17px; }
-      .upcoming-date { font-size: 13px; margin-top: 3px; }
-      .upcoming-pace-chip { font-size: 13px; padding: 5px 10px; }
-      .upcoming-expand-arrow { font-size: 24px; }
-      .upcoming-detail { padding: 0 16px 16px 16px; gap: 12px; }
-      .upcoming-focus-label { font-size: 11px; }
-      .upcoming-focus-text { font-size: 15px; line-height: 1.7; }
-      .upcoming-desc { font-size: 14px; }
+      /* Upcoming sessions — show only header, collapse details */
+      .section-sub-title { font-size: 13px; font-weight: 700; letter-spacing: .04em; margin-bottom: 8px; color: var(--text2); }
+      .upcoming-section { margin-top: 12px; }
+      .upcoming-card { border-radius: 12px; margin-bottom: 6px; }
+      .upcoming-card-header { padding: 12px 14px; gap: 10px; }
+      .upcoming-icon { font-size: 22px; }
+      .upcoming-name { font-size: 15px; font-weight: 600; }
+      .upcoming-date { font-size: 12px; margin-top: 2px; color: var(--text3); }
+      .upcoming-pace-chip { font-size: 12px; padding: 3px 8px; font-weight: 600; }
+      .upcoming-expand-arrow { font-size: 20px; }
+      .upcoming-detail { display: none; padding: 0 14px 12px 14px; gap: 10px; }
+      .upcoming-detail.show { display: flex; flex-direction: column; }
+      .upcoming-focus-label { font-size: 10px; }
+      .upcoming-focus-text { font-size: 13px; line-height: 1.5; }
+      .upcoming-desc { font-size: 13px; }
 
       /* ── PLAN TAB ── */
       .weeks-container { padding: 0 0 16px; gap: 10px; }
@@ -1910,6 +1925,10 @@ const html = `<!DOCTYPE html>
     .str-exercise-list { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
     .str-exercise-list li { font-size: 12px; color: var(--text2); line-height: 1.45; padding-left: 14px; position: relative; }
     .str-exercise-list li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+    .str-exercise-item { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+    .str-exercise-text { flex: 1 1 240px; min-width: 220px; }
+    .str-reps-wrap { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text3); }
+    .str-reps-input { width: 88px; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 6px; padding: 4px 6px; font-size: 11px; }
     .dl-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--accent); border-radius: 6px; font-size: 12px; font-weight: 600; padding: 6px 14px; cursor: pointer; transition: background .15s; }
     .dl-btn:hover { background: var(--accent); color: #000; }
 
@@ -1930,46 +1949,6 @@ const html = `<!DOCTYPE html>
   </style>
 </head>
 <body>
-<!-- PASSWORD GATE -->
-<div id="pw-gate">
-  <h1>🏃 Coach</h1>
-  <p>Enter your password to access the training plan.</p>
-  <div id="pw-form">
-    <input id="pw-input" type="password" placeholder="Password" autocomplete="current-password">
-    <button id="pw-btn" type="button">Unlock</button>
-  </div>
-  <div id="pw-err"></div>
-</div>
-<script>
-(function() {
-  const HASH = '9cd69e6cdd426e2df45364f2fa1e2d07612237f098fb26225a1ef2c1a62ec4a7';
-  const SESSION_KEY = 'coach_unlocked';
-  async function sha256(str) {
-    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
-  }
-  function unlock() {
-    document.getElementById('pw-gate').classList.add('hidden');
-    sessionStorage.setItem(SESSION_KEY, '1');
-  }
-  if (sessionStorage.getItem(SESSION_KEY) === '1') { unlock(); return; }
-  document.getElementById('pw-btn').addEventListener('click', async () => {
-    const val = document.getElementById('pw-input').value;
-    const h = await sha256(val);
-    if (h === HASH) { unlock(); }
-    else {
-      const err = document.getElementById('pw-err');
-      err.textContent = 'Incorrect password.';
-      document.getElementById('pw-input').value = '';
-      setTimeout(() => { err.textContent = ''; }, 3000);
-    }
-  });
-  document.getElementById('pw-input').addEventListener('keydown', e => {
-    if (e.key === 'Enter') document.getElementById('pw-btn').click();
-  });
-})();
-</script>
-
 <!-- HEADER -->
 <header class="plan-header">
   <div class="plan-title">🏃 Half Marathon Training Plan</div>
@@ -2180,6 +2159,40 @@ const WORKOUT_MAP = ${JSON.stringify(
   )
 )};
 
+const STRENGTH_REPS_KEY = 'coach_strength_reps_v1';
+
+function loadStrengthReps() {
+  try {
+    return JSON.parse(localStorage.getItem(STRENGTH_REPS_KEY) || '{}');
+  } catch (_) {
+    return {};
+  }
+}
+
+function repStoreKey(input) {
+  return (input.dataset.wid || '') + '::' + (input.dataset.exidx || '');
+}
+
+function saveStrengthRep(input) {
+  const store = loadStrengthReps();
+  const key = repStoreKey(input);
+  const value = (input.value || '').trim();
+  if (!key || key === '::') return;
+  if (value) store[key] = value;
+  else delete store[key];
+  localStorage.setItem(STRENGTH_REPS_KEY, JSON.stringify(store));
+}
+
+function restoreStrengthReps() {
+  const store = loadStrengthReps();
+  document.querySelectorAll('.str-reps-input').forEach(input => {
+    const key = repStoreKey(input);
+    if (store[key]) input.value = store[key];
+    input.addEventListener('keydown', e => e.stopPropagation());
+    input.addEventListener('click', e => e.stopPropagation());
+  });
+}
+
 // ── EXPAND / COLLAPSE ────────────────────────────────────────
 function toggleDetail(card) {
   const body = card.querySelector('.workout-body');
@@ -2205,6 +2218,7 @@ document.addEventListener('DOMContentLoaded', () => {
       el.textContent = '✅';
     }
   });
+  restoreStrengthReps();
 });
 
 // ── EXPORT WORKOUT ───────────────────────────────────────────
