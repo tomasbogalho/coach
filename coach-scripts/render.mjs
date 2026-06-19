@@ -740,34 +740,11 @@ function strengthExercisesHtml(exercises, workoutId) {
       ${exercises.map((exercise, index) => `
         <li class="str-exercise-item">
           <span class="str-exercise-text">${escapeHtmlText(exercise)}</span>
-          <span class="str-metrics-wrap" onclick="event.stopPropagation()">
-            <label class="str-reps-wrap" onclick="event.stopPropagation()">
-              Reps
-              <input
-                class="str-reps-input"
-                type="text"
-                inputmode="numeric"
-                placeholder="e.g. 8,8,7"
-                data-wid="${wid}"
-                data-exidx="${index}"
-                oninput="saveStrengthRep(this)"
-                onclick="event.stopPropagation()"
-              />
-            </label>
-            <label class="str-weight-wrap" onclick="event.stopPropagation()">
-              Weight
-              <input
-                class="str-weight-input"
-                type="text"
-                inputmode="decimal"
-                placeholder="e.g. 40kg"
-                data-wid="${wid}"
-                data-exidx="${index}"
-                oninput="saveStrengthWeight(this)"
-                onclick="event.stopPropagation()"
-              />
-            </label>
-          </span>
+          <div class="str-rounds" data-wid="${wid}" data-exidx="${index}" onclick="event.stopPropagation()">
+            <span class="str-rounds-label">Per round (reps - weight)</span>
+            <div class="str-rounds-list"></div>
+            <button class="str-round-add" onclick="addStrengthRound(event, this)">+ Round</button>
+          </div>
         </li>
       `).join('')}
     </ul>
@@ -1609,13 +1586,16 @@ const html = `<!DOCTYPE html>
       .today-focus-text { font-size: 14px; line-height: 1.5; }
       .str-exercise-list { margin-top: 6px; gap: 6px; }
       .str-exercise-list li { font-size: 14px; padding-left: 16px; line-height: 1.4; }
-      .str-exercise-item { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+      .str-exercise-item { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 10px; }
       .str-exercise-text { flex: 1 1 220px; min-width: 180px; }
-      .str-metrics-wrap { display: inline-flex; align-items: center; gap: 8px; }
-      .str-reps-wrap { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
-      .str-weight-wrap { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
-      .str-reps-input { width: 92px; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 6px; padding: 4px 6px; font-size: 12px; }
-      .str-weight-input { width: 92px; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 6px; padding: 4px 6px; font-size: 12px; }
+      .str-rounds { display: flex; flex-direction: column; gap: 6px; min-width: 220px; }
+      .str-rounds-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .04em; }
+      .str-rounds-list { display: flex; flex-direction: column; gap: 5px; }
+      .str-round-row { display: inline-flex; align-items: center; gap: 6px; }
+      .str-round-reps, .str-round-weight { width: 72px; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 6px; padding: 4px 6px; font-size: 12px; }
+      .str-round-sep { color: var(--text3); font-size: 12px; }
+      .str-round-add, .str-round-remove { border: 1px solid var(--border); background: var(--surface); color: var(--text2); border-radius: 6px; padding: 3px 8px; font-size: 11px; cursor: pointer; }
+      .str-round-add:hover, .str-round-remove:hover { border-color: var(--accent); color: var(--accent); }
       .today-rest-card { font-size: 16px; padding: 16px; border-radius: 12px; line-height: 1.6; }
       /* Export to watch button */
       .dl-btn { font-size: 13px; padding: 8px 14px; margin-top: 12px; border-radius: 8px; }
@@ -1943,13 +1923,15 @@ const html = `<!DOCTYPE html>
     .str-exercise-list { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
     .str-exercise-list li { font-size: 12px; color: var(--text2); line-height: 1.45; padding-left: 14px; position: relative; }
     .str-exercise-list li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
-    .str-exercise-item { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+    .str-exercise-item { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 8px; }
     .str-exercise-text { flex: 1 1 240px; min-width: 220px; }
-    .str-metrics-wrap { display: inline-flex; align-items: center; gap: 6px; }
-    .str-reps-wrap { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text3); }
-    .str-weight-wrap { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text3); }
-    .str-reps-input { width: 88px; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 6px; padding: 4px 6px; font-size: 11px; }
-    .str-weight-input { width: 88px; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 6px; padding: 4px 6px; font-size: 11px; }
+    .str-rounds { display: flex; flex-direction: column; gap: 5px; min-width: 205px; }
+    .str-rounds-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .04em; }
+    .str-rounds-list { display: flex; flex-direction: column; gap: 4px; }
+    .str-round-row { display: inline-flex; align-items: center; gap: 5px; }
+    .str-round-reps, .str-round-weight { width: 66px; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 6px; padding: 3px 5px; font-size: 11px; }
+    .str-round-sep { color: var(--text3); font-size: 11px; }
+    .str-round-add, .str-round-remove { border: 1px solid var(--border); background: var(--surface); color: var(--text2); border-radius: 6px; padding: 2px 7px; font-size: 10px; cursor: pointer; }
     .dl-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--accent); border-radius: 6px; font-size: 12px; font-weight: 600; padding: 6px 14px; cursor: pointer; transition: background .15s; }
     .dl-btn:hover { background: var(--accent); color: #000; }
 
@@ -2194,56 +2176,130 @@ function repStoreKey(input) {
   return (input.dataset.wid || '') + '::' + (input.dataset.exidx || '');
 }
 
-function strengthEntry(store, key) {
-  const raw = store[key];
+function parseRoundsCsv(raw) {
+  return String(raw || '')
+    .split(',')
+    .map(v => v.trim())
+    .filter(Boolean);
+}
+
+function normalizeStrengthEntry(raw) {
+  if (raw && typeof raw === 'object' && Array.isArray(raw.rounds)) {
+    return {
+      rounds: raw.rounds
+        .map(r => ({ reps: String(r?.reps || '').trim(), weight: String(r?.weight || '').trim() }))
+        .filter(r => r.reps || r.weight)
+    };
+  }
+
   if (raw && typeof raw === 'object') {
-    return { reps: raw.reps || '', weight: raw.weight || '' };
+    const repsList = parseRoundsCsv(raw.reps);
+    const weightValue = String(raw.weight || '').trim();
+    if (repsList.length > 1) {
+      return { rounds: repsList.map(rep => ({ reps: rep, weight: weightValue })) };
+    }
+    if (repsList.length === 1 || weightValue) {
+      return { rounds: [{ reps: repsList[0] || '', weight: weightValue }] };
+    }
   }
+
   if (typeof raw === 'string') {
-    return { reps: raw, weight: '' };
+    const repsList = parseRoundsCsv(raw);
+    return { rounds: repsList.length ? repsList.map(rep => ({ reps: rep, weight: '' })) : [] };
   }
-  return { reps: '', weight: '' };
+
+  return { rounds: [] };
 }
 
-function saveStrengthRep(input) {
+function roundRowHtml(wid, exidx, round, reps = '', weight = '') {
+  const repsEsc = escapeHtml(String(reps || ''));
+  const weightEsc = escapeHtml(String(weight || ''));
+  const widEsc = escapeHtml(String(wid || ''));
+  const exidxEsc = escapeHtml(String(exidx || ''));
+  return '<div class="str-round-row" data-round="' + round + '">' +
+    '<input class="str-round-reps" type="text" inputmode="numeric" placeholder="reps" value="' + repsEsc + '" data-wid="' + widEsc + '" data-exidx="' + exidxEsc + '" oninput="saveStrengthRound(this)" onclick="event.stopPropagation()" />' +
+    '<span class="str-round-sep">-</span>' +
+    '<input class="str-round-weight" type="text" inputmode="decimal" placeholder="weight" value="' + weightEsc + '" data-wid="' + widEsc + '" data-exidx="' + exidxEsc + '" oninput="saveStrengthRound(this)" onclick="event.stopPropagation()" />' +
+    '<button class="str-round-remove" onclick="removeStrengthRound(event, this)">×</button>' +
+  '</div>';
+}
+
+function collectRounds(container) {
+  return [...container.querySelectorAll('.str-round-row')]
+    .map(row => ({
+      reps: (row.querySelector('.str-round-reps')?.value || '').trim(),
+      weight: (row.querySelector('.str-round-weight')?.value || '').trim(),
+    }))
+    .filter(r => r.reps || r.weight);
+}
+
+function saveStrengthRounds(container) {
   const store = loadStrengthReps();
-  const key = repStoreKey(input);
-  const value = (input.value || '').trim();
+  const key = (container.dataset.wid || '') + '::' + (container.dataset.exidx || '');
   if (!key || key === '::') return;
-  const entry = strengthEntry(store, key);
-  entry.reps = value;
-  if (entry.reps || entry.weight) store[key] = entry;
+  const rounds = collectRounds(container);
+  if (rounds.length) store[key] = { rounds };
   else delete store[key];
   localStorage.setItem(STRENGTH_REPS_KEY, JSON.stringify(store));
 }
 
-function saveStrengthWeight(input) {
-  const store = loadStrengthReps();
-  const key = repStoreKey(input);
-  const value = (input.value || '').trim();
-  if (!key || key === '::') return;
-  const entry = strengthEntry(store, key);
-  entry.weight = value;
-  if (entry.reps || entry.weight) store[key] = entry;
-  else delete store[key];
-  localStorage.setItem(STRENGTH_REPS_KEY, JSON.stringify(store));
+function addRoundRow(container, reps = '', weight = '') {
+  const list = container.querySelector('.str-rounds-list');
+  if (!list) return;
+  const round = list.querySelectorAll('.str-round-row').length + 1;
+  const wid = container.dataset.wid || '';
+  const exidx = container.dataset.exidx || '';
+  list.insertAdjacentHTML('beforeend', roundRowHtml(wid, exidx, round, reps, weight));
 }
 
-function restoreStrengthReps() {
-  const store = loadStrengthReps();
-  document.querySelectorAll('.str-reps-input').forEach(input => {
-    const key = repStoreKey(input);
-    const entry = strengthEntry(store, key);
-    if (entry.reps) input.value = entry.reps;
-    input.addEventListener('keydown', e => e.stopPropagation());
-    input.addEventListener('click', e => e.stopPropagation());
+function reindexRounds(container) {
+  [...container.querySelectorAll('.str-round-row')].forEach((row, idx) => {
+    row.dataset.round = String(idx + 1);
   });
-  document.querySelectorAll('.str-weight-input').forEach(input => {
-    const key = repStoreKey(input);
-    const entry = strengthEntry(store, key);
-    if (entry.weight) input.value = entry.weight;
-    input.addEventListener('keydown', e => e.stopPropagation());
-    input.addEventListener('click', e => e.stopPropagation());
+}
+
+function saveStrengthRound(input) {
+  const container = input.closest('.str-rounds');
+  if (!container) return;
+  saveStrengthRounds(container);
+}
+
+function addStrengthRound(event, btn) {
+  event.preventDefault();
+  event.stopPropagation();
+  const container = btn.closest('.str-rounds');
+  if (!container) return;
+  addRoundRow(container);
+  reindexRounds(container);
+  saveStrengthRounds(container);
+}
+
+function removeStrengthRound(event, btn) {
+  event.preventDefault();
+  event.stopPropagation();
+  const container = btn.closest('.str-rounds');
+  const row = btn.closest('.str-round-row');
+  if (!container || !row) return;
+  row.remove();
+  if (!container.querySelector('.str-round-row')) addRoundRow(container);
+  reindexRounds(container);
+  saveStrengthRounds(container);
+}
+
+function restoreStrengthRounds() {
+  const store = loadStrengthReps();
+  document.querySelectorAll('.str-rounds').forEach(container => {
+    const key = (container.dataset.wid || '') + '::' + (container.dataset.exidx || '');
+    const entry = normalizeStrengthEntry(store[key]);
+    if (entry.rounds.length) {
+      entry.rounds.forEach(r => addRoundRow(container, r.reps, r.weight));
+    } else {
+      addRoundRow(container);
+      addRoundRow(container);
+      addRoundRow(container);
+    }
+    reindexRounds(container);
+    saveStrengthRounds(container);
   });
 }
 
@@ -2272,7 +2328,7 @@ document.addEventListener('DOMContentLoaded', () => {
       el.textContent = '✅';
     }
   });
-  restoreStrengthReps();
+  restoreStrengthRounds();
 });
 
 // ── EXPORT WORKOUT ───────────────────────────────────────────
