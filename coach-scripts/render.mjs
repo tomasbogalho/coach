@@ -721,6 +721,24 @@ function formatDate(d) {
   return new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
 }
 
+function strengthSplitLabel(w) {
+  const n = (w.name || '').toLowerCase();
+  if (n.includes('leg')) return 'Legs';
+  if (n.includes('pull') && n.includes('press')) return 'Push / Pull';
+  if (n.includes('pull')) return 'Pull';
+  if (n.includes('press')) return 'Push';
+
+  const day = (w.id || '').match(/^w\d+-(\w+)-/)?.[1];
+  if (day === 'fri') return 'Legs';
+  if (day === 'wed') return 'Pull';
+  if (day === 'sat') return 'Push';
+  return 'Push / Pull';
+}
+
+function strengthTitle(w) {
+  return `Strength — ${strengthSplitLabel(w)}`;
+}
+
 function escJson(obj) {
   return JSON.stringify(obj).replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/'/g,'&apos;');
 }
@@ -994,10 +1012,14 @@ function strengthWorkout(w) {
 function workoutCard(w, dayDate) {
   const color = sportColor(w);
   const icon = sportIcon(w);
+  const displayName = w.sport === 'strength' ? strengthTitle(w) : w.name;
   const dist = w.distanceKm ? `${w.distanceKm}km` : '';
   const dur = w.durationMinutes ? `${w.durationMinutes}min` : '';
   const detail = [dist, dur].filter(Boolean).join(' · ');
-  const hr = (w.humanReadable || w.description || '').replace(/\n/g, '<br>');
+  const hr = (w.sport === 'strength'
+    ? 'Strength session. Track rounds directly in the title block.'
+    : (w.humanReadable || w.description || '')
+  ).replace(/\n/g, '<br>');
   const pace = w.targetPace ? `<div class="pace">🎯 ${w.targetPace}</div>` : '';
   const hrTarget = w.targetHR ? `<div class="hr-target">❤️ ${w.targetHR}</div>` : '';
   const exportBtn = w.sport !== 'rest'
@@ -1017,7 +1039,7 @@ function workoutCard(w, dayDate) {
   const autoDnf = isPast && !matchedAct && w.sport !== 'rest'; // past day, no activity found
 
   const focus = w.sport === 'run' ? workoutFocus(w) : null;
-  const str = w.sport === 'strength' ? strengthWorkout(w) : null;
+  const str = null;
 
   // Planned pace/HR chart (only for future run workouts)
   const isFutureRun = w.sport === 'run' && (!dayDate || dayDate >= todayStr) && !autoComplete;
@@ -1077,7 +1099,7 @@ function workoutCard(w, dayDate) {
       <div class="workout-header">
         <span class="sport-icon">${icon}</span>
         <div class="workout-info">
-          <div class="workout-name">${w.name}</div>
+          <div class="workout-name">${displayName}</div>
           ${detail ? `<div class="workout-detail">${detail}</div>` : ''}
         </div>
         <span class="expand-arrow">▾</span>
@@ -1296,12 +1318,13 @@ function todayPanelHtml() {
       todayWorkoutHtml = active.map(w => {
         const color = sportColor(w);
         const icon  = sportIcon(w);
+        const displayName = w.sport === 'strength' ? strengthTitle(w) : w.name;
         const dist  = w.distanceKm ? `${w.distanceKm}km` : '';
         const dur   = w.durationMinutes ? `${w.durationMinutes}min` : '';
         const detail = [dist, dur].filter(Boolean).join(' · ');
-        const desc  = (w.humanReadable || w.description || '').replace(/\n/g, '<br>');
+        const desc  = (w.sport === 'strength' ? '' : (w.humanReadable || w.description || '')).replace(/\n/g, '<br>');
         const focus = w.sport === 'run' ? workoutFocus(w) : null;
-        const str   = w.sport === 'strength' ? strengthWorkout(w) : null;
+        const str   = null;
         const todayChartBtn = w.sport === 'run'
           ? `<button class="chart-btn planned-chart-btn" style="margin-top:14px;font-size:15px;padding:12px 18px" onclick="showPlannedChart('${w.id}')">📊 Session Preview — Pace & HR</button>`
           : '';
@@ -1312,7 +1335,7 @@ function todayPanelHtml() {
           <div class="today-workout-header">
             <span class="today-sport-icon">${icon}</span>
             <div style="flex:1">
-              <div class="today-workout-name">${w.name}</div>
+              <div class="today-workout-name">${displayName}</div>
               ${detail ? `<div class="today-workout-detail">${detail}</div>` : ''}
             </div>
             ${w.targetPace ? `<span class="today-chip pace-chip">🎯 ${w.targetPace}</span>` : ''}
