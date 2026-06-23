@@ -13,7 +13,7 @@
     "generatedBy": "Claude Coach",
     "goalTime": "1:39:59",
     "racePacePerKm": "4:44",
-    "notes": "Post-Copenhagen Marathon. Goal: Sub 1:40. 6 days running + 2-3x strength/week."
+    "notes": "4 days running + Wednesday group CrossFit endurance + 2 focused minimalist muscle sessions (+ optional short Saturday accessory)."
   },
   "preferences": {
     "run": "kilometers",
@@ -232,7 +232,7 @@
               "sport": "rest",
               "type": "rest",
               "name": "Rest Day",
-              "description": "Full rest. Marathon recovery.",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
               "completed": false
             }
           ]
@@ -274,15 +274,6 @@
               "targetPace": "5:50–6:15/km",
               "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 5km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
               "completed": false
-            },
-            {
-              "id": "w1-wed-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Hyrox B — Power",
-              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
-              "durationMinutes": 35,
-              "completed": false
             }
           ]
         },
@@ -314,8 +305,8 @@
               "id": "w1-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox C — Conditioning",
-              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
+              "name": "Minimalist Muscle B — Legs + Posterior Chain",
+              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
               "durationMinutes": 35,
               "completed": false
             }
@@ -380,9 +371,9 @@
               "id": "w2-mon-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox A — Upper & Core",
-              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
-              "durationMinutes": 30,
+              "name": "Minimalist Muscle A — Pull + Press",
+              "description": "Pull-up or assisted pull-up 4x6-10, DB press 4x8-12, 1-arm DB row 3x10-12/side, DB overhead press 3x8-10, farmers carry 4x30-40m, hanging knee raises 3x8-12. Keep 1-2 reps in reserve and add load slowly week to week.",
+              "durationMinutes": 35,
               "completed": false
             }
           ]
@@ -423,15 +414,6 @@
               "targetPace": "5:50–6:15/km",
               "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 5km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
               "completed": false
-            },
-            {
-              "id": "w2-wed-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Hyrox B — Power",
-              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
-              "durationMinutes": 35,
-              "completed": false
             }
           ]
         },
@@ -463,8 +445,8 @@
               "id": "w2-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox C — Conditioning",
-              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
+              "name": "Minimalist Muscle B — Legs + Posterior Chain",
+              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
               "durationMinutes": 35,
               "completed": false
             }
@@ -478,9 +460,9 @@
               "id": "w2-sat-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox D — Skill & Sim",
-              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
-              "durationMinutes": 35,
+              "name": "Minimalist Muscle C — Optional Accessories",
+              "description": "Optional short session: pull-up practice 3 sets, DB curls 3x10-15, DB triceps press 3x10-15, DB lateral raises 3x12-20, light carries 3x30m. Skip if fatigued before Sunday long run.",
+              "durationMinutes": 20,
               "completed": false
             }
           ]
@@ -530,9 +512,9 @@
               "id": "w3-mon-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox A — Upper & Core",
-              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
-              "durationMinutes": 30,
+              "name": "Minimalist Muscle A — Pull + Press",
+              "description": "Pull-up or assisted pull-up 4x6-10, DB press 4x8-12, 1-arm DB row 3x10-12/side, DB overhead press 3x8-10, farmers carry 4x30-40m, hanging knee raises 3x8-12. Keep 1-2 reps in reserve and add load slowly week to week.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -573,15 +555,6 @@
               "targetPace": "5:50–6:15/km",
               "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 6km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
               "completed": false
-            },
-            {
-              "id": "w3-wed-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Hyrox B — Power",
-              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
-              "durationMinutes": 50,
-              "completed": false
             }
           ]
         },
@@ -613,8 +586,8 @@
               "id": "w3-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox C — Conditioning",
-              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
+              "name": "Minimalist Muscle B — Legs + Posterior Chain",
+              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -628,9 +601,9 @@
               "id": "w3-sat-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox D — Skill & Sim",
-              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
-              "durationMinutes": 35,
+              "name": "Minimalist Muscle C — Optional Accessories",
+              "description": "Optional short session: pull-up practice 3 sets, DB curls 3x10-15, DB triceps press 3x10-15, DB lateral raises 3x12-20, light carries 3x30m. Skip if fatigued before Sunday long run.",
+              "durationMinutes": 25,
               "completed": false
             }
           ]
@@ -680,9 +653,9 @@
               "id": "w4-mon-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox A — Upper & Core",
-              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
-              "durationMinutes": 30,
+              "name": "Minimalist Muscle A — Pull + Press",
+              "description": "Pull-up or assisted pull-up 4x6-10, DB press 4x8-12, 1-arm DB row 3x10-12/side, DB overhead press 3x8-10, farmers carry 4x30-40m, hanging knee raises 3x8-12. Keep 1-2 reps in reserve and add load slowly week to week.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -723,15 +696,6 @@
               "targetPace": "5:50–6:15/km",
               "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 7km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
               "completed": false
-            },
-            {
-              "id": "w4-wed-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Hyrox B — Power",
-              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
-              "durationMinutes": 50,
-              "completed": false
             }
           ]
         },
@@ -763,8 +727,8 @@
               "id": "w4-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox C — Conditioning",
-              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
+              "name": "Minimalist Muscle B — Legs + Posterior Chain",
+              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -778,9 +742,9 @@
               "id": "w4-sat-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox D — Skill & Sim",
-              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
-              "durationMinutes": 35,
+              "name": "Minimalist Muscle C — Optional Accessories",
+              "description": "Optional short session: pull-up practice 3 sets, DB curls 3x10-15, DB triceps press 3x10-15, DB lateral raises 3x12-20, light carries 3x30m. Skip if fatigued before Sunday long run.",
+              "durationMinutes": 25,
               "completed": false
             }
           ]
@@ -830,9 +794,9 @@
               "id": "w5-mon-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox A — Upper & Core",
-              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
-              "durationMinutes": 30,
+              "name": "Minimalist Muscle A — Pull + Press",
+              "description": "Pull-up or assisted pull-up 4x6-10, DB press 4x8-12, 1-arm DB row 3x10-12/side, DB overhead press 3x8-10, farmers carry 4x30-40m, hanging knee raises 3x8-12. Keep 1-2 reps in reserve and add load slowly week to week.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -873,15 +837,6 @@
               "targetPace": "5:50–6:15/km",
               "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 5km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
               "completed": false
-            },
-            {
-              "id": "w5-wed-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Hyrox B — Power",
-              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
-              "durationMinutes": 50,
-              "completed": false
             }
           ]
         },
@@ -913,8 +868,8 @@
               "id": "w5-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox C — Conditioning",
-              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
+              "name": "Minimalist Muscle B — Legs + Posterior Chain",
+              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -928,9 +883,9 @@
               "id": "w5-sat-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox D — Skill & Sim",
-              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
-              "durationMinutes": 35,
+              "name": "Minimalist Muscle C — Optional Accessories",
+              "description": "Optional short session: pull-up practice 3 sets, DB curls 3x10-15, DB triceps press 3x10-15, DB lateral raises 3x12-20, light carries 3x30m. Skip if fatigued before Sunday long run.",
+              "durationMinutes": 25,
               "completed": false
             }
           ]
@@ -980,9 +935,9 @@
               "id": "w6-mon-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox A — Upper & Core",
-              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
-              "durationMinutes": 30,
+              "name": "Minimalist Muscle A — Pull + Press",
+              "description": "Pull-up or assisted pull-up 4x6-10, DB press 4x8-12, 1-arm DB row 3x10-12/side, DB overhead press 3x8-10, farmers carry 4x30-40m, hanging knee raises 3x8-12. Keep 1-2 reps in reserve and add load slowly week to week.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -1024,15 +979,6 @@
               "targetPace": "5:50–6:15/km",
               "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 7km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
               "completed": false
-            },
-            {
-              "id": "w6-wed-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Hyrox B — Power",
-              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
-              "durationMinutes": 50,
-              "completed": false
             }
           ]
         },
@@ -1064,8 +1010,8 @@
               "id": "w6-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox C — Conditioning",
-              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
+              "name": "Minimalist Muscle B — Legs + Posterior Chain",
+              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -1079,9 +1025,9 @@
               "id": "w6-sat-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox D — Skill & Sim",
-              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
-              "durationMinutes": 35,
+              "name": "Minimalist Muscle C — Optional Accessories",
+              "description": "Optional short session: pull-up practice 3 sets, DB curls 3x10-15, DB triceps press 3x10-15, DB lateral raises 3x12-20, light carries 3x30m. Skip if fatigued before Sunday long run.",
+              "durationMinutes": 25,
               "completed": false
             }
           ]
@@ -1131,9 +1077,9 @@
               "id": "w7-mon-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox A — Upper & Core",
-              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
-              "durationMinutes": 30,
+              "name": "Minimalist Muscle A — Pull + Press",
+              "description": "Pull-up or assisted pull-up 4x6-10, DB press 4x8-12, 1-arm DB row 3x10-12/side, DB overhead press 3x8-10, farmers carry 4x30-40m, hanging knee raises 3x8-12. Keep 1-2 reps in reserve and add load slowly week to week.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -1175,15 +1121,6 @@
               "targetPace": "5:50–6:15/km",
               "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 7km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
               "completed": false
-            },
-            {
-              "id": "w7-wed-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Hyrox B — Power",
-              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
-              "durationMinutes": 50,
-              "completed": false
             }
           ]
         },
@@ -1215,8 +1152,8 @@
               "id": "w7-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox C — Conditioning",
-              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
+              "name": "Minimalist Muscle B — Legs + Posterior Chain",
+              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -1230,9 +1167,9 @@
               "id": "w7-sat-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox D — Skill & Sim",
-              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
-              "durationMinutes": 35,
+              "name": "Minimalist Muscle C — Optional Accessories",
+              "description": "Optional short session: pull-up practice 3 sets, DB curls 3x10-15, DB triceps press 3x10-15, DB lateral raises 3x12-20, light carries 3x30m. Skip if fatigued before Sunday long run.",
+              "durationMinutes": 25,
               "completed": false
             }
           ]
@@ -1282,9 +1219,9 @@
               "id": "w8-mon-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox A — Upper & Core",
-              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
-              "durationMinutes": 30,
+              "name": "Minimalist Muscle A — Pull + Press",
+              "description": "Pull-up or assisted pull-up 4x6-10, DB press 4x8-12, 1-arm DB row 3x10-12/side, DB overhead press 3x8-10, farmers carry 4x30-40m, hanging knee raises 3x8-12. Keep 1-2 reps in reserve and add load slowly week to week.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -1326,15 +1263,6 @@
               "targetPace": "5:50–6:15/km",
               "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 7km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
               "completed": false
-            },
-            {
-              "id": "w8-wed-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Hyrox B — Power",
-              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
-              "durationMinutes": 50,
-              "completed": false
             }
           ]
         },
@@ -1366,8 +1294,8 @@
               "id": "w8-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox C — Conditioning",
-              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
+              "name": "Minimalist Muscle B — Legs + Posterior Chain",
+              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -1381,9 +1309,9 @@
               "id": "w8-sat-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox D — Skill & Sim",
-              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
-              "durationMinutes": 35,
+              "name": "Minimalist Muscle C — Optional Accessories",
+              "description": "Optional short session: pull-up practice 3 sets, DB curls 3x10-15, DB triceps press 3x10-15, DB lateral raises 3x12-20, light carries 3x30m. Skip if fatigued before Sunday long run.",
+              "durationMinutes": 25,
               "completed": false
             }
           ]
@@ -1433,9 +1361,9 @@
               "id": "w9-mon-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox A — Upper & Core",
-              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
-              "durationMinutes": 30,
+              "name": "Minimalist Muscle A — Pull + Press",
+              "description": "Pull-up or assisted pull-up 4x6-10, DB press 4x8-12, 1-arm DB row 3x10-12/side, DB overhead press 3x8-10, farmers carry 4x30-40m, hanging knee raises 3x8-12. Keep 1-2 reps in reserve and add load slowly week to week.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -1477,15 +1405,6 @@
               "targetPace": "5:50–6:15/km",
               "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 7km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
               "completed": false
-            },
-            {
-              "id": "w9-wed-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Hyrox B — Power",
-              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
-              "durationMinutes": 50,
-              "completed": false
             }
           ]
         },
@@ -1517,8 +1436,8 @@
               "id": "w9-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox C — Conditioning",
-              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
+              "name": "Minimalist Muscle B — Legs + Posterior Chain",
+              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -1532,9 +1451,9 @@
               "id": "w9-sat-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox D — Skill & Sim",
-              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
-              "durationMinutes": 35,
+              "name": "Minimalist Muscle C — Optional Accessories",
+              "description": "Optional short session: pull-up practice 3 sets, DB curls 3x10-15, DB triceps press 3x10-15, DB lateral raises 3x12-20, light carries 3x30m. Skip if fatigued before Sunday long run.",
+              "durationMinutes": 25,
               "completed": false
             }
           ]
@@ -1584,9 +1503,9 @@
               "id": "w10-mon-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox A — Upper & Core",
-              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
-              "durationMinutes": 30,
+              "name": "Minimalist Muscle A — Pull + Press",
+              "description": "Pull-up or assisted pull-up 4x6-10, DB press 4x8-12, 1-arm DB row 3x10-12/side, DB overhead press 3x8-10, farmers carry 4x30-40m, hanging knee raises 3x8-12. Keep 1-2 reps in reserve and add load slowly week to week.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -1628,15 +1547,6 @@
               "targetPace": "5:50–6:15/km",
               "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 7km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
               "completed": false
-            },
-            {
-              "id": "w10-wed-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Hyrox B — Power",
-              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
-              "durationMinutes": 50,
-              "completed": false
             }
           ]
         },
@@ -1668,8 +1578,8 @@
               "id": "w10-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox C — Conditioning",
-              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
+              "name": "Minimalist Muscle B — Legs + Posterior Chain",
+              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -1683,9 +1593,9 @@
               "id": "w10-sat-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox D — Skill & Sim",
-              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
-              "durationMinutes": 35,
+              "name": "Minimalist Muscle C — Optional Accessories",
+              "description": "Optional short session: pull-up practice 3 sets, DB curls 3x10-15, DB triceps press 3x10-15, DB lateral raises 3x12-20, light carries 3x30m. Skip if fatigued before Sunday long run.",
+              "durationMinutes": 25,
               "completed": false
             }
           ]
@@ -1735,9 +1645,9 @@
               "id": "w11-mon-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox A — Upper & Core",
-              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
-              "durationMinutes": 30,
+              "name": "Minimalist Muscle A — Pull + Press",
+              "description": "Pull-up or assisted pull-up 4x6-10, DB press 4x8-12, 1-arm DB row 3x10-12/side, DB overhead press 3x8-10, farmers carry 4x30-40m, hanging knee raises 3x8-12. Keep 1-2 reps in reserve and add load slowly week to week.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -1778,15 +1688,6 @@
               "targetPace": "5:50–6:15/km",
               "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 5km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
               "completed": false
-            },
-            {
-              "id": "w11-wed-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Hyrox B — Power",
-              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
-              "durationMinutes": 50,
-              "completed": false
             }
           ]
         },
@@ -1818,8 +1719,8 @@
               "id": "w11-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox C — Conditioning",
-              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
+              "name": "Minimalist Muscle B — Legs + Posterior Chain",
+              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -1833,9 +1734,9 @@
               "id": "w11-sat-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox D — Skill & Sim",
-              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
-              "durationMinutes": 35,
+              "name": "Minimalist Muscle C — Optional Accessories",
+              "description": "Optional short session: pull-up practice 3 sets, DB curls 3x10-15, DB triceps press 3x10-15, DB lateral raises 3x12-20, light carries 3x30m. Skip if fatigued before Sunday long run.",
+              "durationMinutes": 25,
               "completed": false
             }
           ]
@@ -1885,9 +1786,9 @@
               "id": "w12-mon-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox A — Upper & Core",
-              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
-              "durationMinutes": 30,
+              "name": "Minimalist Muscle A — Pull + Press",
+              "description": "Pull-up or assisted pull-up 4x6-10, DB press 4x8-12, 1-arm DB row 3x10-12/side, DB overhead press 3x8-10, farmers carry 4x30-40m, hanging knee raises 3x8-12. Keep 1-2 reps in reserve and add load slowly week to week.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -1929,15 +1830,6 @@
               "targetPace": "5:50–6:15/km",
               "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 7km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
               "completed": false
-            },
-            {
-              "id": "w12-wed-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Hyrox B — Power",
-              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
-              "durationMinutes": 50,
-              "completed": false
             }
           ]
         },
@@ -1969,8 +1861,8 @@
               "id": "w12-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox C — Conditioning",
-              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
+              "name": "Minimalist Muscle B — Legs + Posterior Chain",
+              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -1984,9 +1876,9 @@
               "id": "w12-sat-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox D — Skill & Sim",
-              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
-              "durationMinutes": 35,
+              "name": "Minimalist Muscle C — Optional Accessories",
+              "description": "Optional short session: pull-up practice 3 sets, DB curls 3x10-15, DB triceps press 3x10-15, DB lateral raises 3x12-20, light carries 3x30m. Skip if fatigued before Sunday long run.",
+              "durationMinutes": 25,
               "completed": false
             }
           ]
@@ -2036,9 +1928,9 @@
               "id": "w13-mon-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox A — Upper & Core",
-              "description": "Post long run. Upper body + anti-rotation core. No leg loading.",
-              "durationMinutes": 30,
+              "name": "Minimalist Muscle A — Pull + Press",
+              "description": "Pull-up or assisted pull-up 4x6-10, DB press 4x8-12, 1-arm DB row 3x10-12/side, DB overhead press 3x8-10, farmers carry 4x30-40m, hanging knee raises 3x8-12. Keep 1-2 reps in reserve and add load slowly week to week.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -2080,15 +1972,6 @@
               "targetPace": "5:50–6:15/km",
               "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 7km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
               "completed": false
-            },
-            {
-              "id": "w13-wed-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Hyrox B — Power",
-              "description": "Lower body strength + Hyrox power stations. Main strength session of the week.",
-              "durationMinutes": 50,
-              "completed": false
             }
           ]
         },
@@ -2120,8 +2003,8 @@
               "id": "w13-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox C — Conditioning",
-              "description": "SkiErg, row, farmers carry, burpee broad jumps. Cardio-focused — no heavy leg loading.",
+              "name": "Minimalist Muscle B — Legs + Posterior Chain",
+              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -2135,9 +2018,9 @@
               "id": "w13-sat-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Hyrox D — Skill & Sim",
-              "description": "Station practice + short Hyrox sim. SkiErg, row, carry, wall balls. Moderate intensity — legs must be ready for tomorrow's long run.",
-              "durationMinutes": 35,
+              "name": "Minimalist Muscle C — Optional Accessories",
+              "description": "Optional short session: pull-up practice 3 sets, DB curls 3x10-15, DB triceps press 3x10-15, DB lateral raises 3x12-20, light carries 3x30m. Skip if fatigued before Sunday long run.",
+              "durationMinutes": 25,
               "completed": false
             }
           ]
@@ -2188,7 +2071,7 @@
               "sport": "rest",
               "type": "rest",
               "name": "Rest Day",
-              "description": "Full rest. Taper.",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
               "completed": false
             }
           ]
@@ -2230,15 +2113,6 @@
               "targetPace": "5:50–6:15/km",
               "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 5km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
               "completed": false
-            },
-            {
-              "id": "w14-wed-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Hyrox B — Maintenance",
-              "description": "Taper week. Light movement — 2 sets only, no fatigue. Keep the tank full.",
-              "durationMinutes": 25,
-              "completed": false
             }
           ]
         },
@@ -2270,9 +2144,9 @@
               "id": "w14-fri-str",
               "sport": "strength",
               "type": "strength",
-              "name": "Strength & Conditioning",
-              "description": "CrossFit / weight training. Focus on glutes, hip flexors, core, single-leg stability. Light session — mobility focus.",
-              "durationMinutes": 45,
+              "name": "Minimalist Muscle B — Legs + Posterior Chain",
+              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
+              "durationMinutes": 30,
               "completed": false
             }
           ]
@@ -2337,7 +2211,7 @@
               "sport": "rest",
               "type": "rest",
               "name": "Rest Day",
-              "description": "Full rest. Taper.",
+              "description": "Full rest. Focus on sleep, hydration and nutrition.",
               "completed": false
             }
           ]
@@ -2377,15 +2251,6 @@
               "primaryZone": "Zone 1–2",
               "targetPace": "5:50–6:20/km",
               "humanReadable": "5km easy Z1-2. Stay relaxed, don't push. Your job is to arrive at the start line fresh.",
-              "completed": false
-            },
-            {
-              "id": "w15-wed-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Hyrox B — Maintenance",
-              "description": "Taper week. Light movement — 2 sets only, no fatigue. Keep the tank full.",
-              "durationMinutes": 25,
               "completed": false
             }
           ]
