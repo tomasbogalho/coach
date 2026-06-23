@@ -1093,9 +1093,10 @@ function workoutCard(w, dayDate) {
 
   const checkIcon = autoComplete ? '✅' : autoDnf ? '❌' : '⬜';
   const cardClass = autoComplete ? 'workout-card auto-done' : autoDnf ? 'workout-card auto-miss' : 'workout-card';
+  const moveBtn = `<button class="move-btn" onclick="openMoveModal(event, '${w.id}')">↔ Move</button>`;
 
   return `
-    <div class="${cardClass}" style="border-left: 4px solid ${color}" onclick="toggleDetail(this)">
+    <div class="${cardClass}" style="border-left: 4px solid ${color}" data-wid="${w.id}" data-home-date="${dayDate}" onclick="toggleDetail(this)">
       <div class="workout-header">
         <span class="sport-icon">${icon}</span>
         <div class="workout-info">
@@ -1103,8 +1104,11 @@ function workoutCard(w, dayDate) {
           ${detail ? `<div class="workout-detail">${detail}</div>` : ''}
         </div>
         <span class="expand-arrow">▾</span>
-        <div class="workout-check" onclick="toggleComplete(event, this, '${w.id}')">${checkIcon}</div>
-        ${exportBtn}
+        <div class="workout-actions">
+          <div class="workout-check" onclick="toggleComplete(event, this, '${w.id}')">${checkIcon}</div>
+          ${moveBtn}
+          ${exportBtn}
+        </div>
       </div>
       <div class="workout-body" style="display:none">
         ${pace}${hrTarget}
@@ -1517,11 +1521,14 @@ const html = `<!DOCTYPE html>
     .workout-header { display: flex; align-items: flex-start; gap: 5px; }
     .sport-icon { font-size: 14px; flex-shrink: 0; }
     .workout-info { flex: 1; min-width: 0; }
+    .workout-actions { display: flex; align-items: center; gap: 4px; flex-shrink: 0; margin-left: auto; }
     .workout-name { font-size: 12px; font-weight: 600; color: var(--text); line-height: 1.3; }
     .workout-detail { font-size: 11px; color: var(--text3); margin-top: 2px; }
     .expand-arrow { font-size: 12px; color: var(--text3); flex-shrink: 0; transition: transform .2s; user-select: none; }
     .workout-card.open .expand-arrow { transform: rotate(180deg); }
     .workout-check { font-size: 14px; cursor: pointer; flex-shrink: 0; }
+    .move-btn { background: var(--surface); border: 1px solid var(--border); color: var(--text2); border-radius: 4px; font-size: 11px; padding: 1px 6px; cursor: pointer; flex-shrink: 0; line-height: 1.4; }
+    .move-btn:hover { background: var(--accent); color: #000; border-color: var(--accent); }
     .export-btn { background: var(--surface); border: 1px solid var(--border); color: var(--text2); border-radius: 4px; font-size: 11px; padding: 1px 5px; cursor: pointer; flex-shrink: 0; line-height: 1.4; }
     .export-btn:hover { background: var(--accent); color: #000; border-color: var(--accent); }
     .workout-body { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
@@ -1756,6 +1763,12 @@ const html = `<!DOCTYPE html>
     /* ── MODAL ──────────────────────────────────────────────── */
     .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 99; }
     .modal-box { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 100; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); width: min(700px,95vw); max-height: 85vh; display: flex; flex-direction: column; overflow: hidden; }
+    #move-modal .modal-box { width: min(560px,94vw); }
+    .move-modal-body { padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+    .move-modal-text { font-size: 13px; color: var(--text2); line-height: 1.55; }
+    .move-modal-select { width: 100%; border: 1px solid var(--border); background: var(--surface2); color: var(--text); border-radius: 8px; padding: 10px 12px; font-size: 14px; }
+    .move-modal-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .move-modal-actions .dl-btn { padding: 8px 14px; }
     .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border-bottom: 1px solid var(--border); font-weight: 700; }
     .modal-close { background: none; border: none; color: var(--text2); font-size: 18px; cursor: pointer; }
     .modal-tabs { display: flex; border-bottom: 1px solid var(--border); }
@@ -2186,6 +2199,7 @@ const WORKOUT_MAP = ${JSON.stringify(
 )};
 
 const STRENGTH_REPS_KEY = 'coach_strength_reps_v1';
+const WORKOUT_MOVES_KEY = 'coach_workout_moves_v1';
 
 function loadStrengthReps() {
   try {
@@ -2232,6 +2246,18 @@ function normalizeStrengthEntry(raw) {
   }
 
   return { rounds: [] };
+}
+
+function loadWorkoutMoves() {
+  try {
+    return JSON.parse(localStorage.getItem(WORKOUT_MOVES_KEY) || '{}');
+  } catch (_) {
+    return {};
+  }
+}
+
+function saveWorkoutMoves(store) {
+  localStorage.setItem(WORKOUT_MOVES_KEY, JSON.stringify(store));
 }
 
 function roundRowHtml(wid, exidx, round, reps = '', weight = '') {
@@ -2326,6 +2352,88 @@ function restoreStrengthRounds() {
   });
 }
 
+function getWorkoutCardEl(wid) {
+  return [...document.querySelectorAll('.workout-card')].find(card => card.dataset.wid === wid) || null;
+}
+
+function restoreMovedWorkouts() {
+  const store = loadWorkoutMoves();
+  Object.entries(store).forEach(([wid, targetDate]) => {
+    const card = getWorkoutCardEl(wid);
+    const targetCol = document.querySelector('.day-col[data-date="' + targetDate + '"]');
+    const targetList = targetCol?.querySelector('.day-workouts');
+    if (!card || !targetList) return;
+    targetList.appendChild(card);
+  });
+}
+
+function openMoveModal(event, wid) {
+  event.preventDefault();
+  event.stopPropagation();
+  const existing = document.getElementById('move-modal');
+  if (existing) existing.remove();
+
+  const card = getWorkoutCardEl(wid);
+  if (!card) return;
+  const currentDate = card.closest('.day-col')?.dataset.date || card.dataset.homeDate || TODAY;
+  const workout = WORKOUT_MAP[wid];
+  const options = PLAN_DAYS.map(day => {
+    const label = new Date(day.date).toLocaleDateString('en-GB', {
+      weekday: 'short',
+      day: 'numeric',
+      month: 'short'
+    });
+    return '<option value="' + day.date + '"' + (day.date === currentDate ? ' selected' : '') + '>' + label + ' · Week ' + day.weekNum + '</option>';
+  }).join('');
+
+  const modal = document.createElement('div');
+  modal.id = 'move-modal';
+  modal.dataset.wid = wid;
+  modal.innerHTML =
+    '<div class="modal-overlay" onclick="closeMoveModal()"></div>' +
+    '<div class="modal-box">' +
+      '<div class="modal-header">' +
+        '<span>Move workout: ' + escapeHtml(workout?.name || 'Workout') + '</span>' +
+        '<button onclick="closeMoveModal()" class="modal-close">✕</button>' +
+      '</div>' +
+      '<div class="move-modal-body">' +
+        '<div class="move-modal-text">Choose the day you want this workout to live on. The card will move immediately and stay there on reload.</div>' +
+        '<select id="move-target-select" class="move-modal-select">' + options + '</select>' +
+        '<div class="move-modal-actions">' +
+          '<button class="dl-btn" onclick="confirmMoveWorkout()">Move workout</button>' +
+          '<button class="dl-btn" onclick="closeMoveModal()">Cancel</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(modal);
+}
+
+function closeMoveModal() {
+  document.getElementById('move-modal')?.remove();
+}
+
+function confirmMoveWorkout() {
+  const modal = document.getElementById('move-modal');
+  const wid = modal?.dataset.wid;
+  const select = document.getElementById('move-target-select');
+  const targetDate = select?.value;
+  if (!wid || !targetDate) return;
+
+  const card = getWorkoutCardEl(wid);
+  const targetCol = document.querySelector('.day-col[data-date="' + targetDate + '"]');
+  const targetList = targetCol?.querySelector('.day-workouts');
+  if (!card || !targetList) return;
+
+  targetList.appendChild(card);
+
+  const store = loadWorkoutMoves();
+  const homeDate = card.dataset.homeDate || card.closest('.day-col')?.dataset.date || '';
+  if (targetDate === homeDate) delete store[wid];
+  else store[wid] = targetDate;
+  saveWorkoutMoves(store);
+  closeMoveModal();
+}
+
 // ── EXPAND / COLLAPSE ────────────────────────────────────────
 function toggleDetail(card) {
   const body = card.querySelector('.workout-body');
@@ -2352,6 +2460,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
   restoreStrengthRounds();
+  restoreMovedWorkouts();
 });
 
 // ── EXPORT WORKOUT ───────────────────────────────────────────
