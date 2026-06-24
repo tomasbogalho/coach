@@ -1148,7 +1148,7 @@ function weekCard(w) {
   }).join('');
 
   return `
-  <section class="week-section ${isRecovery ? 'recovery-week' : ''}" data-week-start="${w.startDate}">
+  <section class="week-section ${isRecovery ? 'recovery-week' : ''}" data-week-start="${w.startDate}" data-week-end="${w.endDate}">
     <div class="week-header" onclick="toggleWeek(this)">
       <div class="week-title">
         <span class="week-num">Week ${w.weekNumber}</span>
@@ -3077,8 +3077,8 @@ function toggleUpcoming(uid) {
 (function() {
   if (window.innerWidth > 700) return;
   document.querySelectorAll('.week-section').forEach(sec => {
-    const start = sec.dataset.weekStart;
-    if (start && start < TODAY) sec.classList.add('collapsed');
+    const end = sec.dataset.weekEnd;
+    if (end && end < TODAY) sec.classList.add('collapsed');
   });
 })();
 
