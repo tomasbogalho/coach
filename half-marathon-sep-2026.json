@@ -3,17 +3,17 @@
   "meta": {
     "id": "half-marathon-sep-2026-tomas",
     "athlete": "Tomás Bogalho",
-    "event": "Half Marathon",
+    "event": "Running Fitness",
     "eventDate": "2026-09-20",
     "planStartDate": "2026-06-01",
     "planEndDate": "2026-09-20",
     "createdAt": "2026-05-30T09:17:01.618Z",
-    "updatedAt": "2026-05-30T09:17:01.618Z",
+    "updatedAt": "2026-06-30T13:35:15.1962367+02:00",
     "totalWeeks": 16,
     "generatedBy": "Claude Coach",
-    "goalTime": "1:39:59",
-    "racePacePerKm": "4:44",
-    "notes": "4 days running + Wednesday group CrossFit endurance + 2 focused minimalist muscle sessions (+ optional short Saturday accessory)."
+    "goalTime": "N/A",
+    "racePacePerKm": "N/A",
+    "notes": "Past workouts preserved. From 2026-06-30 onward adapted to: Mon push, Tue easy run, Wed pull, Thu tempo/strides, Fri legs + mobility, Sat optional bike/padel/golf, Sun long run or bike."
   },
   "preferences": {
     "run": "kilometers",
@@ -780,11 +780,11 @@
     {
       "weekNumber": 5,
       "phase": "Base",
-      "focus": "Recovery week. Back off — this is where adaptation happens.",
+      "focus": "General running fitness + strength balance (no race-specific target).",
       "isRecoveryWeek": true,
       "startDate": "2026-06-29",
       "endDate": "2026-07-05",
-      "targetKm": 42,
+      "targetKm": 28,
       "days": [
         {
           "date": "2026-06-29",
@@ -806,16 +806,17 @@
           "dayOfWeek": "Tuesday",
           "workouts": [
             {
-              "id": "w5-tue-str-run",
+              "id": "w5-tue-easy",
               "sport": "run",
-              "type": "strides",
-              "name": "Easy Run + 4×Strides",
-              "description": "Easy aerobic run with 4 strides to activate fast-twitch fibres without adding fatigue.",
-              "durationMinutes": 44,
-              "distanceKm": 6,
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run at conversational pace to build consistency.",
+              "durationMinutes": 43,
+              "distanceKm": 7,
               "primaryZone": "Zone 2",
-              "targetPace": "5:50–6:10/km easy + strides @ 4:10/km for 20 sec",
-              "humanReadable": "Warm-up: 2km easy Z2\nMain: 3km easy Z2\nStrides: 4×20 sec @ 4:00–4:20/km, walk/jog 90 sec between\nCool-down: 1km easy",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1km very easy\nMain: 7 km easy Z2\nFocus: Relaxed form and easy breathing",
               "completed": false
             }
           ]
@@ -825,17 +826,12 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w5-wed-easy",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy Run",
-              "description": "Easy aerobic run — conversational pace.",
-              "durationMinutes": 37,
-              "distanceKm": 6,
-              "primaryZone": "Zone 2",
-              "targetHR": "<149 bpm",
-              "targetPace": "5:50–6:15/km",
-              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 5km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "id": "w5-wed-pull",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength Pull",
+              "description": "Upper-body pull focus: rows, pull-ups/lat pulldown, rear delts, biceps. Controlled form and full ROM.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -845,17 +841,17 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w5-thu-easy",
+              "id": "w5-thu-quality",
               "sport": "run",
-              "type": "easy",
-              "name": "Easy Run",
-              "description": "Easy aerobic run — conversational pace.",
-              "durationMinutes": 37,
-              "distanceKm": 6,
+              "type": "strides",
+              "name": "Easy Run + Strides",
+              "description": "Easy aerobic run plus short strides for speed mechanics.",
+              "durationMinutes": 48,
+              "distanceKm": 8,
               "primaryZone": "Zone 2",
-              "targetHR": "<149 bpm",
-              "targetPace": "5:50–6:15/km",
-              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 5km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "targetHR": "<155 bpm",
+              "targetPace": "Easy + strides @ 4:00-4:20/km for 20 sec",
+              "humanReadable": "Warm-up: 2km easy\nMain: easy running\nStrides: 6x20 sec fast/relaxed with 80-90 sec walk-jog recoveries\nCool-down to complete 8 km",
               "completed": false
             }
           ]
@@ -865,12 +861,12 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w5-fri-str",
+              "id": "w5-fri-legs",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle B — Legs + Posterior Chain",
-              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
-              "durationMinutes": 45,
+              "name": "Strength Legs + Mobility",
+              "description": "Lower-body strength: squat/hinge/lunge/calf work, then 12-15 min mobility (hips, ankles, T-spine).",
+              "durationMinutes": 50,
               "completed": false
             }
           ]
@@ -880,12 +876,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w5-sat-str",
+              "id": "w5-sat-xtrain",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle C — Optional Accessories",
-              "description": "Optional short session: pull-up practice 3 sets, DB curls 3x10-15, DB triceps press 3x10-15, DB lateral raises 3x12-20, light carries 3x30m. Skip if fatigued before Sunday long run.",
-              "durationMinutes": 25,
+              "name": "Optional Cross-Training (Bike/Padel/Golf)",
+              "description": "Choose one: 45-90 min bike, padel, or golf walk. Keep it enjoyable and mostly low-moderate effort.",
+              "durationMinutes": 60,
               "completed": false
             }
           ]
@@ -898,45 +894,45 @@
               "id": "w5-sun-long",
               "sport": "run",
               "type": "long",
-              "name": "Long Run",
-              "description": "Weekly long run. This is the cornerstone workout of the week.",
-              "durationMinutes": 72,
-              "distanceKm": 12,
+              "name": "Long Run (or Optional Bike Ride)",
+              "description": "Primary choice: easy long run. If fatigue is high, replace with 75-120 min easy bike ride.",
+              "durationMinutes": 79,
+              "distanceKm": 13,
               "primaryZone": "Zone 2",
-              "targetPace": "5:50–6:10/km",
               "targetHR": "<149 bpm",
-              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 10km steady Z2 (HR < 149)\nFocus: Stay aerobic, resist pushing. Fuel with gels every 45 min.\nCool-down: Walk 5 min after.",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1-2km easy\nMain: steady easy effort for 13 km\nAlternative: 75-120 min Zone 2 bike if needed",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalKm": 30,
-        "totalHours": 3.2,
-        "runSessions": 4,
+        "totalKm": 28,
+        "totalHours": 6.2,
+        "runSessions": 3,
         "strengthSessions": 4
       }
     },
     {
       "weekNumber": 6,
       "phase": "Base",
-      "focus": "Two quality days: tempo Tuesday + threshold cruise intervals Thursday.",
+      "focus": "General running fitness + strength balance (no race-specific target).",
       "isRecoveryWeek": false,
       "startDate": "2026-07-06",
       "endDate": "2026-07-12",
-      "targetKm": 61,
+      "targetKm": 31,
       "days": [
         {
           "date": "2026-07-06",
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w6-mon-str",
+              "id": "w6-mon-push",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle A — Pull + Press",
-              "description": "Pull-up or assisted pull-up 4x6-10, DB press 4x8-12, 1-arm DB row 3x10-12/side, DB overhead press 3x8-10, farmers carry 4x30-40m, hanging knee raises 3x8-12. Keep 1-2 reps in reserve and add load slowly week to week.",
+              "name": "Strength Push",
+              "description": "Upper-body push focus: bench/DB press, incline press, overhead press, triceps. Keep 1-2 reps in reserve.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -947,17 +943,17 @@
           "dayOfWeek": "Tuesday",
           "workouts": [
             {
-              "id": "w6-tue-tempo",
+              "id": "w6-tue-easy",
               "sport": "run",
-              "type": "tempo",
-              "name": "Tempo Run – 20 min",
-              "description": "Continuous tempo effort at comfortably hard pace. \"7/10 effort\" — you can speak in short phrases only.",
-              "durationMinutes": 57,
-              "distanceKm": 10,
-              "primaryZone": "Zone 3–4",
-              "targetPace": "5:10–5:20/km",
-              "targetHR": "155–165 bpm",
-              "humanReadable": "Warm-up: 2km easy Z1-2 (12 min)\nMain: 20 min continuous @ 5:10–5:20/km\nCool-down: 2km easy Z1 (12 min)\nFocus: Smooth, controlled — if HR exceeds 166, ease off slightly",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run at conversational pace to build consistency.",
+              "durationMinutes": 50,
+              "distanceKm": 8,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1km very easy\nMain: 8 km easy Z2\nFocus: Relaxed form and easy breathing",
               "completed": false
             }
           ]
@@ -967,17 +963,12 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w6-wed-easy",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy Run",
-              "description": "Easy aerobic run — conversational pace.",
-              "durationMinutes": 49,
-              "distanceKm": 8,
-              "primaryZone": "Zone 2",
-              "targetHR": "<149 bpm",
-              "targetPace": "5:50–6:15/km",
-              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 7km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "id": "w6-wed-pull",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength Pull",
+              "description": "Upper-body pull focus: rows, pull-ups/lat pulldown, rear delts, biceps. Controlled form and full ROM.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -987,17 +978,17 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w6-thu-thresh",
+              "id": "w6-thu-quality",
               "sport": "run",
-              "type": "intervals",
-              "name": "Threshold Intervals – 3×1km",
-              "description": "Cruise intervals at half-marathon threshold effort. Controlled and purposeful.",
-              "durationMinutes": 54,
+              "type": "tempo",
+              "name": "Tempo Run",
+              "description": "Controlled tempo effort to improve running economy and threshold.",
+              "durationMinutes": 52,
               "distanceKm": 9,
-              "primaryZone": "Zone 4",
-              "targetPace": "5:00–5:10/km",
-              "targetHR": "157–166 bpm",
-              "humanReadable": "Warm-up: 2km easy Z2 (12 min)\nMain: 3×1km @ 5:00–5:10/km, 90 sec jog recovery\nCool-down: 2km easy (12 min)\nFocus: Smooth sustained effort. Each rep should feel the same.",
+              "primaryZone": "Zone 3-4",
+              "targetHR": "150-166 bpm",
+              "targetPace": "4:55-5:20/km",
+              "humanReadable": "Warm-up: 2km easy\nMain: 20-25 min tempo @ controlled hard\nCool-down: easy jog to complete 9 km",
               "completed": false
             }
           ]
@@ -1007,12 +998,12 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w6-fri-str",
+              "id": "w6-fri-legs",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle B — Legs + Posterior Chain",
-              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
-              "durationMinutes": 45,
+              "name": "Strength Legs + Mobility",
+              "description": "Lower-body strength: squat/hinge/lunge/calf work, then 12-15 min mobility (hips, ankles, T-spine).",
+              "durationMinutes": 50,
               "completed": false
             }
           ]
@@ -1022,12 +1013,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w6-sat-str",
+              "id": "w6-sat-xtrain",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle C — Optional Accessories",
-              "description": "Optional short session: pull-up practice 3 sets, DB curls 3x10-15, DB triceps press 3x10-15, DB lateral raises 3x12-20, light carries 3x30m. Skip if fatigued before Sunday long run.",
-              "durationMinutes": 25,
+              "name": "Optional Cross-Training (Bike/Padel/Golf)",
+              "description": "Choose one: 45-90 min bike, padel, or golf walk. Keep it enjoyable and mostly low-moderate effort.",
+              "durationMinutes": 60,
               "completed": false
             }
           ]
@@ -1040,45 +1031,45 @@
               "id": "w6-sun-long",
               "sport": "run",
               "type": "long",
-              "name": "Progressive Long Run",
-              "description": "Weekly long run. Last 3km at marathon/race pace (4:44–5:00/km). This is the cornerstone workout of the week.",
-              "durationMinutes": 105,
-              "distanceKm": 18,
-              "primaryZone": "Zone 2 → Zone 3",
-              "targetPace": "5:50–6:00/km easy, last 3km @ 4:44–5:00/km",
-              "targetHR": "<149 easy, <165 race finish",
-              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 13km easy Z2 (HR < 149)\nFinish: 3km @ 4:44–5:00/km (Z3-4, controlled effort)\nNutrition: Take a gel every 45 min",
+              "name": "Long Run (or Optional Bike Ride)",
+              "description": "Primary choice: easy long run. If fatigue is high, replace with 75-120 min easy bike ride.",
+              "durationMinutes": 85,
+              "distanceKm": 14,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1-2km easy\nMain: steady easy effort for 14 km\nAlternative: 75-120 min Zone 2 bike if needed",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalKm": 45,
-        "totalHours": 4.4,
-        "runSessions": 4,
+        "totalKm": 31,
+        "totalHours": 6.4,
+        "runSessions": 3,
         "strengthSessions": 4
       }
     },
     {
       "weekNumber": 7,
       "phase": "Base",
-      "focus": "Two quality days: longer tempo Tuesday + threshold intervals Thursday.",
+      "focus": "General running fitness + strength balance (no race-specific target).",
       "isRecoveryWeek": false,
       "startDate": "2026-07-13",
       "endDate": "2026-07-19",
-      "targetKm": 65,
+      "targetKm": 32,
       "days": [
         {
           "date": "2026-07-13",
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w7-mon-str",
+              "id": "w7-mon-push",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle A — Pull + Press",
-              "description": "Pull-up or assisted pull-up 4x6-10, DB press 4x8-12, 1-arm DB row 3x10-12/side, DB overhead press 3x8-10, farmers carry 4x30-40m, hanging knee raises 3x8-12. Keep 1-2 reps in reserve and add load slowly week to week.",
+              "name": "Strength Push",
+              "description": "Upper-body push focus: bench/DB press, incline press, overhead press, triceps. Keep 1-2 reps in reserve.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -1089,17 +1080,17 @@
           "dayOfWeek": "Tuesday",
           "workouts": [
             {
-              "id": "w7-tue-tempo",
+              "id": "w7-tue-easy",
               "sport": "run",
-              "type": "tempo",
-              "name": "Tempo Run – 25 min",
-              "description": "Continuous tempo effort at comfortably hard pace. \"7/10 effort\" — you can speak in short phrases only.",
-              "durationMinutes": 62,
-              "distanceKm": 11,
-              "primaryZone": "Zone 3–4",
-              "targetPace": "5:05–5:15/km",
-              "targetHR": "155–165 bpm",
-              "humanReadable": "Warm-up: 2km easy Z1-2 (12 min)\nMain: 25 min continuous @ 5:05–5:15/km\nCool-down: 2km easy Z1 (12 min)\nFocus: Smooth, controlled — if HR exceeds 166, ease off slightly",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run at conversational pace to build consistency.",
+              "durationMinutes": 50,
+              "distanceKm": 8,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1km very easy\nMain: 8 km easy Z2\nFocus: Relaxed form and easy breathing",
               "completed": false
             }
           ]
@@ -1109,17 +1100,12 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w7-wed-easy",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy Run",
-              "description": "Easy aerobic run — conversational pace.",
-              "durationMinutes": 49,
-              "distanceKm": 8,
-              "primaryZone": "Zone 2",
-              "targetHR": "<149 bpm",
-              "targetPace": "5:50–6:15/km",
-              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 7km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "id": "w7-wed-pull",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength Pull",
+              "description": "Upper-body pull focus: rows, pull-ups/lat pulldown, rear delts, biceps. Controlled form and full ROM.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -1129,17 +1115,17 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w7-thu-thresh",
+              "id": "w7-thu-quality",
               "sport": "run",
-              "type": "intervals",
-              "name": "Threshold Intervals – 4×1km",
-              "description": "Cruise intervals at half-marathon threshold effort. Controlled and purposeful.",
-              "durationMinutes": 60,
-              "distanceKm": 10,
-              "primaryZone": "Zone 4",
-              "targetPace": "4:55–5:05/km",
-              "targetHR": "157–166 bpm",
-              "humanReadable": "Warm-up: 2km easy Z2 (12 min)\nMain: 4×1km @ 4:55–5:05/km, 90 sec jog recovery\nCool-down: 2km easy (12 min)\nFocus: Smooth sustained effort. Each rep should feel the same.",
+              "type": "strides",
+              "name": "Easy Run + Strides",
+              "description": "Easy aerobic run plus short strides for speed mechanics.",
+              "durationMinutes": 54,
+              "distanceKm": 9,
+              "primaryZone": "Zone 2",
+              "targetHR": "<155 bpm",
+              "targetPace": "Easy + strides @ 4:00-4:20/km for 20 sec",
+              "humanReadable": "Warm-up: 2km easy\nMain: easy running\nStrides: 6x20 sec fast/relaxed with 80-90 sec walk-jog recoveries\nCool-down to complete 9 km",
               "completed": false
             }
           ]
@@ -1149,12 +1135,12 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w7-fri-str",
+              "id": "w7-fri-legs",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle B — Legs + Posterior Chain",
-              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
-              "durationMinutes": 45,
+              "name": "Strength Legs + Mobility",
+              "description": "Lower-body strength: squat/hinge/lunge/calf work, then 12-15 min mobility (hips, ankles, T-spine).",
+              "durationMinutes": 50,
               "completed": false
             }
           ]
@@ -1164,12 +1150,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w7-sat-str",
+              "id": "w7-sat-xtrain",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle C — Optional Accessories",
-              "description": "Optional short session: pull-up practice 3 sets, DB curls 3x10-15, DB triceps press 3x10-15, DB lateral raises 3x12-20, light carries 3x30m. Skip if fatigued before Sunday long run.",
-              "durationMinutes": 25,
+              "name": "Optional Cross-Training (Bike/Padel/Golf)",
+              "description": "Choose one: 45-90 min bike, padel, or golf walk. Keep it enjoyable and mostly low-moderate effort.",
+              "durationMinutes": 60,
               "completed": false
             }
           ]
@@ -1182,45 +1168,45 @@
               "id": "w7-sun-long",
               "sport": "run",
               "type": "long",
-              "name": "Progressive Long Run",
-              "description": "Weekly long run. Last 4km at marathon/race pace (4:44–5:00/km). This is the cornerstone workout of the week.",
-              "durationMinutes": 116,
-              "distanceKm": 20,
-              "primaryZone": "Zone 2 → Zone 3",
-              "targetPace": "5:50–6:00/km easy, last 4km @ 4:44–5:00/km",
-              "targetHR": "<149 easy, <165 race finish",
-              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 14km easy Z2 (HR < 149)\nFinish: 4km @ 4:44–5:00/km (Z3-4, controlled effort)\nNutrition: Take a gel every 45 min",
+              "name": "Long Run (or Optional Bike Ride)",
+              "description": "Primary choice: easy long run. If fatigue is high, replace with 75-120 min easy bike ride.",
+              "durationMinutes": 92,
+              "distanceKm": 15,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1-2km easy\nMain: steady easy effort for 15 km\nAlternative: 75-120 min Zone 2 bike if needed",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalKm": 49,
-        "totalHours": 4.8,
-        "runSessions": 4,
+        "totalKm": 32,
+        "totalHours": 6.6,
+        "runSessions": 3,
         "strengthSessions": 4
       }
     },
     {
       "weekNumber": 8,
       "phase": "Base",
-      "focus": "Peak base week. Longest tempo Tuesday + threshold intervals Thursday.",
+      "focus": "General running fitness + strength balance (no race-specific target).",
       "isRecoveryWeek": false,
       "startDate": "2026-07-20",
       "endDate": "2026-07-26",
-      "targetKm": 69,
+      "targetKm": 27,
       "days": [
         {
           "date": "2026-07-20",
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w8-mon-str",
+              "id": "w8-mon-push",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle A — Pull + Press",
-              "description": "Pull-up or assisted pull-up 4x6-10, DB press 4x8-12, 1-arm DB row 3x10-12/side, DB overhead press 3x8-10, farmers carry 4x30-40m, hanging knee raises 3x8-12. Keep 1-2 reps in reserve and add load slowly week to week.",
+              "name": "Strength Push",
+              "description": "Upper-body push focus: bench/DB press, incline press, overhead press, triceps. Keep 1-2 reps in reserve.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -1231,17 +1217,17 @@
           "dayOfWeek": "Tuesday",
           "workouts": [
             {
-              "id": "w8-tue-tempo",
+              "id": "w8-tue-easy",
               "sport": "run",
-              "type": "tempo",
-              "name": "Tempo Run – 30 min",
-              "description": "Continuous tempo effort at comfortably hard pace. \"7/10 effort\" — you can speak in short phrases only.",
-              "durationMinutes": 67,
-              "distanceKm": 12,
-              "primaryZone": "Zone 3–4",
-              "targetPace": "5:00–5:10/km",
-              "targetHR": "155–165 bpm",
-              "humanReadable": "Warm-up: 2km easy Z1-2 (12 min)\nMain: 30 min continuous @ 5:00–5:10/km\nCool-down: 2km easy Z1 (12 min)\nFocus: Smooth, controlled — if HR exceeds 166, ease off slightly",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run at conversational pace to build consistency.",
+              "durationMinutes": 43,
+              "distanceKm": 7,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1km very easy\nMain: 7 km easy Z2\nFocus: Relaxed form and easy breathing",
               "completed": false
             }
           ]
@@ -1251,17 +1237,12 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w8-wed-easy",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy Run",
-              "description": "Easy aerobic run — conversational pace.",
-              "durationMinutes": 49,
-              "distanceKm": 8,
-              "primaryZone": "Zone 2",
-              "targetHR": "<149 bpm",
-              "targetPace": "5:50–6:15/km",
-              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 7km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "id": "w8-wed-pull",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength Pull",
+              "description": "Upper-body pull focus: rows, pull-ups/lat pulldown, rear delts, biceps. Controlled form and full ROM.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -1271,17 +1252,17 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w8-thu-thresh",
+              "id": "w8-thu-quality",
               "sport": "run",
-              "type": "intervals",
-              "name": "Threshold Intervals – 4×1km",
-              "description": "Cruise intervals at half-marathon threshold effort. Controlled and purposeful.",
-              "durationMinutes": 60,
-              "distanceKm": 10,
-              "primaryZone": "Zone 4",
-              "targetPace": "4:52–5:02/km",
-              "targetHR": "157–166 bpm",
-              "humanReadable": "Warm-up: 2km easy Z2 (12 min)\nMain: 4×1km @ 4:52–5:02/km, 90 sec jog recovery\nCool-down: 2km easy (12 min)\nFocus: Smooth sustained effort. Each rep should feel the same.",
+              "type": "tempo",
+              "name": "Tempo Run",
+              "description": "Controlled tempo effort to improve running economy and threshold.",
+              "durationMinutes": 46,
+              "distanceKm": 8,
+              "primaryZone": "Zone 3-4",
+              "targetHR": "150-166 bpm",
+              "targetPace": "4:55-5:20/km",
+              "humanReadable": "Warm-up: 2km easy\nMain: 20-25 min tempo @ controlled hard\nCool-down: easy jog to complete 8 km",
               "completed": false
             }
           ]
@@ -1291,12 +1272,12 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w8-fri-str",
+              "id": "w8-fri-legs",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle B — Legs + Posterior Chain",
-              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
-              "durationMinutes": 45,
+              "name": "Strength Legs + Mobility",
+              "description": "Lower-body strength: squat/hinge/lunge/calf work, then 12-15 min mobility (hips, ankles, T-spine).",
+              "durationMinutes": 50,
               "completed": false
             }
           ]
@@ -1306,12 +1287,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w8-sat-str",
+              "id": "w8-sat-xtrain",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle C — Optional Accessories",
-              "description": "Optional short session: pull-up practice 3 sets, DB curls 3x10-15, DB triceps press 3x10-15, DB lateral raises 3x12-20, light carries 3x30m. Skip if fatigued before Sunday long run.",
-              "durationMinutes": 25,
+              "name": "Optional Cross-Training (Bike/Padel/Golf)",
+              "description": "Choose one: 45-90 min bike, padel, or golf walk. Keep it enjoyable and mostly low-moderate effort.",
+              "durationMinutes": 60,
               "completed": false
             }
           ]
@@ -1324,45 +1305,45 @@
               "id": "w8-sun-long",
               "sport": "run",
               "type": "long",
-              "name": "Progressive Long Run",
-              "description": "Weekly long run. Last 5km at marathon/race pace (4:44–5:00/km). This is the cornerstone workout of the week.",
-              "durationMinutes": 121,
-              "distanceKm": 21,
-              "primaryZone": "Zone 2 → Zone 3",
-              "targetPace": "5:50–6:00/km easy, last 5km @ 4:44–5:00/km",
-              "targetHR": "<149 easy, <165 race finish",
-              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 14km easy Z2 (HR < 149)\nFinish: 5km @ 4:44–5:00/km (Z3-4, controlled effort)\nNutrition: Take a gel every 45 min",
+              "name": "Long Run (or Optional Bike Ride)",
+              "description": "Primary choice: easy long run. If fatigue is high, replace with 75-120 min easy bike ride.",
+              "durationMinutes": 73,
+              "distanceKm": 12,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1-2km easy\nMain: steady easy effort for 12 km\nAlternative: 75-120 min Zone 2 bike if needed",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalKm": 51,
-        "totalHours": 5,
-        "runSessions": 4,
+        "totalKm": 27,
+        "totalHours": 6.0,
+        "runSessions": 3,
         "strengthSessions": 4
       }
     },
     {
       "weekNumber": 9,
       "phase": "Build",
-      "focus": "Build begins. VO₂max intervals + tempo. This is where the sub-1:40 is forged.",
+      "focus": "General running fitness + strength balance (no race-specific target).",
       "isRecoveryWeek": false,
       "startDate": "2026-07-27",
       "endDate": "2026-08-02",
-      "targetKm": 64,
+      "targetKm": 34,
       "days": [
         {
           "date": "2026-07-27",
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w9-mon-str",
+              "id": "w9-mon-push",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle A — Pull + Press",
-              "description": "Pull-up or assisted pull-up 4x6-10, DB press 4x8-12, 1-arm DB row 3x10-12/side, DB overhead press 3x8-10, farmers carry 4x30-40m, hanging knee raises 3x8-12. Keep 1-2 reps in reserve and add load slowly week to week.",
+              "name": "Strength Push",
+              "description": "Upper-body push focus: bench/DB press, incline press, overhead press, triceps. Keep 1-2 reps in reserve.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -1373,17 +1354,17 @@
           "dayOfWeek": "Tuesday",
           "workouts": [
             {
-              "id": "w9-tue-vo2",
+              "id": "w9-tue-easy",
               "sport": "run",
-              "type": "intervals",
-              "name": "VO₂max Intervals – 5×1000m",
-              "description": "Hard VO₂max intervals. These hurt but build your speed ceiling. Full recovery between.",
-              "durationMinutes": 65,
-              "distanceKm": 10,
-              "primaryZone": "Zone 5b",
-              "targetPace": "4:30–4:38/km",
-              "targetHR": "> 167 bpm during reps",
-              "humanReadable": "Warm-up: 2km easy + 4×100m strides (15 min)\nMain: 5×1000m @ 4:30–4:38/km, 2:30 min jog recovery\nCool-down: 2km easy (10 min)\nFocus: Hit pace from rep 1. If fading badly after rep 4, take extra rest.",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run at conversational pace to build consistency.",
+              "durationMinutes": 50,
+              "distanceKm": 8,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1km very easy\nMain: 8 km easy Z2\nFocus: Relaxed form and easy breathing",
               "completed": false
             }
           ]
@@ -1393,17 +1374,12 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w9-wed-easy",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy Run",
-              "description": "Easy aerobic run — conversational pace.",
-              "durationMinutes": 49,
-              "distanceKm": 8,
-              "primaryZone": "Zone 2",
-              "targetHR": "<149 bpm",
-              "targetPace": "5:50–6:15/km",
-              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 7km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "id": "w9-wed-pull",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength Pull",
+              "description": "Upper-body pull focus: rows, pull-ups/lat pulldown, rear delts, biceps. Controlled form and full ROM.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -1413,17 +1389,17 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w9-thu-tempo",
+              "id": "w9-thu-quality",
               "sport": "run",
-              "type": "tempo",
-              "name": "Tempo Run – 25 min",
-              "description": "Continuous tempo effort at comfortably hard pace. \"7/10 effort\" — you can speak in short phrases only.",
-              "durationMinutes": 62,
-              "distanceKm": 11,
-              "primaryZone": "Zone 3–4",
-              "targetPace": "5:00–5:10/km",
-              "targetHR": "155–165 bpm",
-              "humanReadable": "Warm-up: 2km easy Z1-2 (12 min)\nMain: 25 min continuous @ 5:00–5:10/km\nCool-down: 2km easy Z1 (12 min)\nFocus: Smooth, controlled — if HR exceeds 166, ease off slightly",
+              "type": "strides",
+              "name": "Easy Run + Strides",
+              "description": "Easy aerobic run plus short strides for speed mechanics.",
+              "durationMinutes": 60,
+              "distanceKm": 10,
+              "primaryZone": "Zone 2",
+              "targetHR": "<155 bpm",
+              "targetPace": "Easy + strides @ 4:00-4:20/km for 20 sec",
+              "humanReadable": "Warm-up: 2km easy\nMain: easy running\nStrides: 6x20 sec fast/relaxed with 80-90 sec walk-jog recoveries\nCool-down to complete 10 km",
               "completed": false
             }
           ]
@@ -1433,12 +1409,12 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w9-fri-str",
+              "id": "w9-fri-legs",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle B — Legs + Posterior Chain",
-              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
-              "durationMinutes": 45,
+              "name": "Strength Legs + Mobility",
+              "description": "Lower-body strength: squat/hinge/lunge/calf work, then 12-15 min mobility (hips, ankles, T-spine).",
+              "durationMinutes": 50,
               "completed": false
             }
           ]
@@ -1448,12 +1424,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w9-sat-str",
+              "id": "w9-sat-xtrain",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle C — Optional Accessories",
-              "description": "Optional short session: pull-up practice 3 sets, DB curls 3x10-15, DB triceps press 3x10-15, DB lateral raises 3x12-20, light carries 3x30m. Skip if fatigued before Sunday long run.",
-              "durationMinutes": 25,
+              "name": "Optional Cross-Training (Bike/Padel/Golf)",
+              "description": "Choose one: 45-90 min bike, padel, or golf walk. Keep it enjoyable and mostly low-moderate effort.",
+              "durationMinutes": 60,
               "completed": false
             }
           ]
@@ -1466,45 +1442,45 @@
               "id": "w9-sun-long",
               "sport": "run",
               "type": "long",
-              "name": "Progressive Long Run",
-              "description": "Weekly long run. Last 5km at marathon/race pace (4:44–5:00/km). This is the cornerstone workout of the week.",
-              "durationMinutes": 115,
-              "distanceKm": 20,
-              "primaryZone": "Zone 2 → Zone 3",
-              "targetPace": "5:50–6:00/km easy, last 5km @ 4:44–5:00/km",
-              "targetHR": "<149 easy, <165 race finish",
-              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 13km easy Z2 (HR < 149)\nFinish: 5km @ 4:44–5:00/km (Z3-4, controlled effort)\nNutrition: Take a gel every 45 min",
+              "name": "Long Run (or Optional Bike Ride)",
+              "description": "Primary choice: easy long run. If fatigue is high, replace with 75-120 min easy bike ride.",
+              "durationMinutes": 98,
+              "distanceKm": 16,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1-2km easy\nMain: steady easy effort for 16 km\nAlternative: 75-120 min Zone 2 bike if needed",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalKm": 49,
-        "totalHours": 4.9,
-        "runSessions": 4,
+        "totalKm": 34,
+        "totalHours": 6.8,
+        "runSessions": 3,
         "strengthSessions": 4
       }
     },
     {
       "weekNumber": 10,
       "phase": "Build",
-      "focus": "Two quality days: threshold Tuesday + VO₂max intervals Thursday.",
+      "focus": "General running fitness + strength balance (no race-specific target).",
       "isRecoveryWeek": false,
       "startDate": "2026-08-03",
       "endDate": "2026-08-09",
-      "targetKm": 66,
+      "targetKm": 35,
       "days": [
         {
           "date": "2026-08-03",
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w10-mon-str",
+              "id": "w10-mon-push",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle A — Pull + Press",
-              "description": "Pull-up or assisted pull-up 4x6-10, DB press 4x8-12, 1-arm DB row 3x10-12/side, DB overhead press 3x8-10, farmers carry 4x30-40m, hanging knee raises 3x8-12. Keep 1-2 reps in reserve and add load slowly week to week.",
+              "name": "Strength Push",
+              "description": "Upper-body push focus: bench/DB press, incline press, overhead press, triceps. Keep 1-2 reps in reserve.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -1515,17 +1491,17 @@
           "dayOfWeek": "Tuesday",
           "workouts": [
             {
-              "id": "w10-tue-thresh",
+              "id": "w10-tue-easy",
               "sport": "run",
-              "type": "intervals",
-              "name": "Threshold Intervals – 4×2km",
-              "description": "Cruise intervals at half-marathon threshold effort. Controlled and purposeful.",
-              "durationMinutes": 72,
-              "distanceKm": 12,
-              "primaryZone": "Zone 4",
-              "targetPace": "4:52–5:00/km",
-              "targetHR": "157–166 bpm",
-              "humanReadable": "Warm-up: 2km easy Z2 (12 min)\nMain: 4×2km @ 4:52–5:00/km, 90 sec jog recovery\nCool-down: 2km easy (12 min)\nFocus: Smooth sustained effort. Each rep should feel the same.",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run at conversational pace to build consistency.",
+              "durationMinutes": 50,
+              "distanceKm": 8,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1km very easy\nMain: 8 km easy Z2\nFocus: Relaxed form and easy breathing",
               "completed": false
             }
           ]
@@ -1535,17 +1511,12 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w10-wed-easy",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy Run",
-              "description": "Easy aerobic run — conversational pace.",
-              "durationMinutes": 49,
-              "distanceKm": 8,
-              "primaryZone": "Zone 2",
-              "targetHR": "<149 bpm",
-              "targetPace": "5:50–6:15/km",
-              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 7km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "id": "w10-wed-pull",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength Pull",
+              "description": "Upper-body pull focus: rows, pull-ups/lat pulldown, rear delts, biceps. Controlled form and full ROM.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -1555,17 +1526,17 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w10-thu-vo2",
+              "id": "w10-thu-quality",
               "sport": "run",
-              "type": "intervals",
-              "name": "VO₂max Intervals – 5×800m",
-              "description": "Hard VO₂max intervals. These hurt but build your speed ceiling. Full recovery between.",
-              "durationMinutes": 59,
-              "distanceKm": 9,
-              "primaryZone": "Zone 5b",
-              "targetPace": "4:28–4:35/km",
-              "targetHR": "> 167 bpm during reps",
-              "humanReadable": "Warm-up: 2km easy + 4×100m strides (15 min)\nMain: 5×800m @ 4:28–4:35/km, 2:30 min jog recovery\nCool-down: 2km easy (10 min)\nFocus: Hit pace from rep 1. If fading badly after rep 4, take extra rest.",
+              "type": "tempo",
+              "name": "Tempo Run",
+              "description": "Controlled tempo effort to improve running economy and threshold.",
+              "durationMinutes": 58,
+              "distanceKm": 10,
+              "primaryZone": "Zone 3-4",
+              "targetHR": "150-166 bpm",
+              "targetPace": "4:55-5:20/km",
+              "humanReadable": "Warm-up: 2km easy\nMain: 20-25 min tempo @ controlled hard\nCool-down: easy jog to complete 10 km",
               "completed": false
             }
           ]
@@ -1575,12 +1546,12 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w10-fri-str",
+              "id": "w10-fri-legs",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle B — Legs + Posterior Chain",
-              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
-              "durationMinutes": 45,
+              "name": "Strength Legs + Mobility",
+              "description": "Lower-body strength: squat/hinge/lunge/calf work, then 12-15 min mobility (hips, ankles, T-spine).",
+              "durationMinutes": 50,
               "completed": false
             }
           ]
@@ -1590,12 +1561,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w10-sat-str",
+              "id": "w10-sat-xtrain",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle C — Optional Accessories",
-              "description": "Optional short session: pull-up practice 3 sets, DB curls 3x10-15, DB triceps press 3x10-15, DB lateral raises 3x12-20, light carries 3x30m. Skip if fatigued before Sunday long run.",
-              "durationMinutes": 25,
+              "name": "Optional Cross-Training (Bike/Padel/Golf)",
+              "description": "Choose one: 45-90 min bike, padel, or golf walk. Keep it enjoyable and mostly low-moderate effort.",
+              "durationMinutes": 60,
               "completed": false
             }
           ]
@@ -1608,45 +1579,45 @@
               "id": "w10-sun-long",
               "sport": "run",
               "type": "long",
-              "name": "Progressive Long Run",
-              "description": "Weekly long run. Last 6km at marathon/race pace (4:44–5:00/km). This is the cornerstone workout of the week.",
-              "durationMinutes": 114,
-              "distanceKm": 20,
-              "primaryZone": "Zone 2 → Zone 3",
-              "targetPace": "5:50–6:00/km easy, last 6km @ 4:44–5:00/km",
-              "targetHR": "<149 easy, <165 race finish",
-              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 12km easy Z2 (HR < 149)\nFinish: 6km @ 4:44–5:00/km (Z3-4, controlled effort)\nNutrition: Take a gel every 45 min",
+              "name": "Long Run (or Optional Bike Ride)",
+              "description": "Primary choice: easy long run. If fatigue is high, replace with 75-120 min easy bike ride.",
+              "durationMinutes": 104,
+              "distanceKm": 17,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1-2km easy\nMain: steady easy effort for 17 km\nAlternative: 75-120 min Zone 2 bike if needed",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalKm": 49,
-        "totalHours": 4.9,
-        "runSessions": 4,
+        "totalKm": 35,
+        "totalHours": 6.9,
+        "runSessions": 3,
         "strengthSessions": 4
       }
     },
     {
       "weekNumber": 11,
       "phase": "Build",
-      "focus": "Recovery week. You are absorbing the training. Do NOT skip this.",
+      "focus": "General running fitness + strength balance (no race-specific target).",
       "isRecoveryWeek": true,
       "startDate": "2026-08-10",
       "endDate": "2026-08-16",
-      "targetKm": 48,
+      "targetKm": 28,
       "days": [
         {
           "date": "2026-08-10",
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w11-mon-str",
+              "id": "w11-mon-push",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle A — Pull + Press",
-              "description": "Pull-up or assisted pull-up 4x6-10, DB press 4x8-12, 1-arm DB row 3x10-12/side, DB overhead press 3x8-10, farmers carry 4x30-40m, hanging knee raises 3x8-12. Keep 1-2 reps in reserve and add load slowly week to week.",
+              "name": "Strength Push",
+              "description": "Upper-body push focus: bench/DB press, incline press, overhead press, triceps. Keep 1-2 reps in reserve.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -1657,16 +1628,17 @@
           "dayOfWeek": "Tuesday",
           "workouts": [
             {
-              "id": "w11-tue-str-run",
+              "id": "w11-tue-easy",
               "sport": "run",
-              "type": "strides",
-              "name": "Easy Run + 6×Strides",
-              "description": "Easy aerobic run with 6 strides to activate fast-twitch fibres without adding fatigue.",
-              "durationMinutes": 54,
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run at conversational pace to build consistency.",
+              "durationMinutes": 43,
               "distanceKm": 7,
               "primaryZone": "Zone 2",
-              "targetPace": "5:50–6:10/km easy + strides @ 4:10/km for 20 sec",
-              "humanReadable": "Warm-up: 2km easy Z2\nMain: 4km easy Z2\nStrides: 6×20 sec @ 4:00–4:20/km, walk/jog 90 sec between\nCool-down: 1km easy",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1km very easy\nMain: 7 km easy Z2\nFocus: Relaxed form and easy breathing",
               "completed": false
             }
           ]
@@ -1676,17 +1648,12 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w11-wed-easy",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy Run",
-              "description": "Easy aerobic run — conversational pace.",
-              "durationMinutes": 37,
-              "distanceKm": 6,
-              "primaryZone": "Zone 2",
-              "targetHR": "<149 bpm",
-              "targetPace": "5:50–6:15/km",
-              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 5km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "id": "w11-wed-pull",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength Pull",
+              "description": "Upper-body pull focus: rows, pull-ups/lat pulldown, rear delts, biceps. Controlled form and full ROM.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -1696,17 +1663,17 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w11-thu-easy",
+              "id": "w11-thu-quality",
               "sport": "run",
-              "type": "easy",
-              "name": "Easy Run",
-              "description": "Easy aerobic run — conversational pace.",
-              "durationMinutes": 43,
-              "distanceKm": 7,
+              "type": "strides",
+              "name": "Easy Run + Strides",
+              "description": "Easy aerobic run plus short strides for speed mechanics.",
+              "durationMinutes": 48,
+              "distanceKm": 8,
               "primaryZone": "Zone 2",
-              "targetHR": "<149 bpm",
-              "targetPace": "5:50–6:15/km",
-              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 6km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "targetHR": "<155 bpm",
+              "targetPace": "Easy + strides @ 4:00-4:20/km for 20 sec",
+              "humanReadable": "Warm-up: 2km easy\nMain: easy running\nStrides: 6x20 sec fast/relaxed with 80-90 sec walk-jog recoveries\nCool-down to complete 8 km",
               "completed": false
             }
           ]
@@ -1716,12 +1683,12 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w11-fri-str",
+              "id": "w11-fri-legs",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle B — Legs + Posterior Chain",
-              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
-              "durationMinutes": 45,
+              "name": "Strength Legs + Mobility",
+              "description": "Lower-body strength: squat/hinge/lunge/calf work, then 12-15 min mobility (hips, ankles, T-spine).",
+              "durationMinutes": 50,
               "completed": false
             }
           ]
@@ -1731,12 +1698,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w11-sat-str",
+              "id": "w11-sat-xtrain",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle C — Optional Accessories",
-              "description": "Optional short session: pull-up practice 3 sets, DB curls 3x10-15, DB triceps press 3x10-15, DB lateral raises 3x12-20, light carries 3x30m. Skip if fatigued before Sunday long run.",
-              "durationMinutes": 25,
+              "name": "Optional Cross-Training (Bike/Padel/Golf)",
+              "description": "Choose one: 45-90 min bike, padel, or golf walk. Keep it enjoyable and mostly low-moderate effort.",
+              "durationMinutes": 60,
               "completed": false
             }
           ]
@@ -1749,45 +1716,45 @@
               "id": "w11-sun-long",
               "sport": "run",
               "type": "long",
-              "name": "Long Run",
-              "description": "Weekly long run. This is the cornerstone workout of the week.",
-              "durationMinutes": 90,
-              "distanceKm": 15,
+              "name": "Long Run (or Optional Bike Ride)",
+              "description": "Primary choice: easy long run. If fatigue is high, replace with 75-120 min easy bike ride.",
+              "durationMinutes": 79,
+              "distanceKm": 13,
               "primaryZone": "Zone 2",
-              "targetPace": "5:50–6:10/km",
               "targetHR": "<149 bpm",
-              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 13km steady Z2 (HR < 149)\nFocus: Stay aerobic, resist pushing. Fuel with gels every 45 min.\nCool-down: Walk 5 min after.",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1-2km easy\nMain: steady easy effort for 13 km\nAlternative: 75-120 min Zone 2 bike if needed",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalKm": 35,
-        "totalHours": 3.7,
-        "runSessions": 4,
+        "totalKm": 28,
+        "totalHours": 6.2,
+        "runSessions": 3,
         "strengthSessions": 4
       }
     },
     {
       "weekNumber": 12,
       "phase": "Build",
-      "focus": "Peak build week. VO₂max + race pace. This is the hardest week — embrace it.",
+      "focus": "General running fitness + strength balance (no race-specific target).",
       "isRecoveryWeek": false,
       "startDate": "2026-08-17",
       "endDate": "2026-08-23",
-      "targetKm": 65,
+      "targetKm": 38,
       "days": [
         {
           "date": "2026-08-17",
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w12-mon-str",
+              "id": "w12-mon-push",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle A — Pull + Press",
-              "description": "Pull-up or assisted pull-up 4x6-10, DB press 4x8-12, 1-arm DB row 3x10-12/side, DB overhead press 3x8-10, farmers carry 4x30-40m, hanging knee raises 3x8-12. Keep 1-2 reps in reserve and add load slowly week to week.",
+              "name": "Strength Push",
+              "description": "Upper-body push focus: bench/DB press, incline press, overhead press, triceps. Keep 1-2 reps in reserve.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -1798,17 +1765,17 @@
           "dayOfWeek": "Tuesday",
           "workouts": [
             {
-              "id": "w12-tue-vo2",
+              "id": "w12-tue-easy",
               "sport": "run",
-              "type": "intervals",
-              "name": "VO₂max Intervals – 6×1000m",
-              "description": "Hard VO₂max intervals. These hurt but build your speed ceiling. Full recovery between.",
-              "durationMinutes": 65,
-              "distanceKm": 10,
-              "primaryZone": "Zone 5b",
-              "targetPace": "4:28–4:35/km",
-              "targetHR": "> 167 bpm during reps",
-              "humanReadable": "Warm-up: 2km easy + 4×100m strides (15 min)\nMain: 6×1000m @ 4:28–4:35/km, 2:30 min jog recovery\nCool-down: 2km easy (10 min)\nFocus: Hit pace from rep 1. If fading badly after rep 4, take extra rest.",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run at conversational pace to build consistency.",
+              "durationMinutes": 56,
+              "distanceKm": 9,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1km very easy\nMain: 9 km easy Z2\nFocus: Relaxed form and easy breathing",
               "completed": false
             }
           ]
@@ -1818,17 +1785,12 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w12-wed-easy",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy Run",
-              "description": "Easy aerobic run — conversational pace.",
-              "durationMinutes": 49,
-              "distanceKm": 8,
-              "primaryZone": "Zone 2",
-              "targetHR": "<149 bpm",
-              "targetPace": "5:50–6:15/km",
-              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 7km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "id": "w12-wed-pull",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength Pull",
+              "description": "Upper-body pull focus: rows, pull-ups/lat pulldown, rear delts, biceps. Controlled form and full ROM.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -1838,17 +1800,17 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w12-thu-thresh",
+              "id": "w12-thu-quality",
               "sport": "run",
-              "type": "intervals",
-              "name": "Threshold Intervals – 3×2km",
-              "description": "Cruise intervals at half-marathon threshold effort. Controlled and purposeful.",
-              "durationMinutes": 60,
-              "distanceKm": 10,
-              "primaryZone": "Zone 4",
-              "targetPace": "4:48–4:55/km",
-              "targetHR": "157–166 bpm",
-              "humanReadable": "Warm-up: 2km easy Z2 (12 min)\nMain: 3×2km @ 4:48–4:55/km, 90 sec jog recovery\nCool-down: 2km easy (12 min)\nFocus: Smooth sustained effort. Each rep should feel the same.",
+              "type": "tempo",
+              "name": "Tempo Run",
+              "description": "Controlled tempo effort to improve running economy and threshold.",
+              "durationMinutes": 64,
+              "distanceKm": 11,
+              "primaryZone": "Zone 3-4",
+              "targetHR": "150-166 bpm",
+              "targetPace": "4:55-5:20/km",
+              "humanReadable": "Warm-up: 2km easy\nMain: 20-25 min tempo @ controlled hard\nCool-down: easy jog to complete 11 km",
               "completed": false
             }
           ]
@@ -1858,12 +1820,12 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w12-fri-str",
+              "id": "w12-fri-legs",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle B — Legs + Posterior Chain",
-              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
-              "durationMinutes": 45,
+              "name": "Strength Legs + Mobility",
+              "description": "Lower-body strength: squat/hinge/lunge/calf work, then 12-15 min mobility (hips, ankles, T-spine).",
+              "durationMinutes": 50,
               "completed": false
             }
           ]
@@ -1873,12 +1835,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w12-sat-str",
+              "id": "w12-sat-xtrain",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle C — Optional Accessories",
-              "description": "Optional short session: pull-up practice 3 sets, DB curls 3x10-15, DB triceps press 3x10-15, DB lateral raises 3x12-20, light carries 3x30m. Skip if fatigued before Sunday long run.",
-              "durationMinutes": 25,
+              "name": "Optional Cross-Training (Bike/Padel/Golf)",
+              "description": "Choose one: 45-90 min bike, padel, or golf walk. Keep it enjoyable and mostly low-moderate effort.",
+              "durationMinutes": 60,
               "completed": false
             }
           ]
@@ -1891,45 +1853,45 @@
               "id": "w12-sun-long",
               "sport": "run",
               "type": "long",
-              "name": "Progressive Long Run",
-              "description": "Weekly long run. Last 7km at marathon/race pace (4:44–5:00/km). This is the cornerstone workout of the week.",
-              "durationMinutes": 113,
-              "distanceKm": 20,
-              "primaryZone": "Zone 2 → Zone 3",
-              "targetPace": "5:50–6:00/km easy, last 7km @ 4:44–5:00/km",
-              "targetHR": "<149 easy, <165 race finish",
-              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 11km easy Z2 (HR < 149)\nFinish: 7km @ 4:44–5:00/km (Z3-4, controlled effort)\nNutrition: Take a gel every 45 min",
+              "name": "Long Run (or Optional Bike Ride)",
+              "description": "Primary choice: easy long run. If fatigue is high, replace with 75-120 min easy bike ride.",
+              "durationMinutes": 110,
+              "distanceKm": 18,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1-2km easy\nMain: steady easy effort for 18 km\nAlternative: 75-120 min Zone 2 bike if needed",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalKm": 48,
-        "totalHours": 4.8,
-        "runSessions": 4,
+        "totalKm": 38,
+        "totalHours": 7.2,
+        "runSessions": 3,
         "strengthSessions": 4
       }
     },
     {
       "weekNumber": 13,
       "phase": "Build",
-      "focus": "Race-pace Tuesday + tempo Thursday. Maximum race specificity before taper.",
+      "focus": "General running fitness + strength balance (no race-specific target).",
       "isRecoveryWeek": false,
       "startDate": "2026-08-24",
       "endDate": "2026-08-30",
-      "targetKm": 61,
+      "targetKm": 38,
       "days": [
         {
           "date": "2026-08-24",
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w13-mon-str",
+              "id": "w13-mon-push",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle A — Pull + Press",
-              "description": "Pull-up or assisted pull-up 4x6-10, DB press 4x8-12, 1-arm DB row 3x10-12/side, DB overhead press 3x8-10, farmers carry 4x30-40m, hanging knee raises 3x8-12. Keep 1-2 reps in reserve and add load slowly week to week.",
+              "name": "Strength Push",
+              "description": "Upper-body push focus: bench/DB press, incline press, overhead press, triceps. Keep 1-2 reps in reserve.",
               "durationMinutes": 45,
               "completed": false
             }
@@ -1940,17 +1902,17 @@
           "dayOfWeek": "Tuesday",
           "workouts": [
             {
-              "id": "w13-tue-rp",
+              "id": "w13-tue-easy",
               "sport": "run",
-              "type": "intervals",
-              "name": "Race Pace Intervals – 3×3km",
-              "description": "Sub-1:40 race pace rehearsal. Lock in 4:44/km so it feels natural on race day.",
-              "durationMinutes": 70,
-              "distanceKm": 12,
-              "primaryZone": "Zone 4–5a",
-              "targetPace": "4:44/km",
-              "targetHR": "160–167 bpm",
-              "humanReadable": "Warm-up: 2km easy Z2\nMain: 3×3km @ 4:44/km, 2 min easy jog recovery\nCool-down: 2km easy\nFocus: This is your goal race pace — it should feel hard but controlled.",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run at conversational pace to build consistency.",
+              "durationMinutes": 56,
+              "distanceKm": 9,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1km very easy\nMain: 9 km easy Z2\nFocus: Relaxed form and easy breathing",
               "completed": false
             }
           ]
@@ -1960,17 +1922,12 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w13-wed-easy",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy Run",
-              "description": "Easy aerobic run — conversational pace.",
-              "durationMinutes": 49,
-              "distanceKm": 8,
-              "primaryZone": "Zone 2",
-              "targetHR": "<149 bpm",
-              "targetPace": "5:50–6:15/km",
-              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 7km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "id": "w13-wed-pull",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength Pull",
+              "description": "Upper-body pull focus: rows, pull-ups/lat pulldown, rear delts, biceps. Controlled form and full ROM.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -1980,17 +1937,17 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w13-thu-tempo",
+              "id": "w13-thu-quality",
               "sport": "run",
-              "type": "tempo",
-              "name": "Tempo Run – 25 min",
-              "description": "Continuous tempo effort at comfortably hard pace. \"7/10 effort\" — you can speak in short phrases only.",
-              "durationMinutes": 50,
-              "distanceKm": 9,
-              "primaryZone": "Zone 3–4",
-              "targetPace": "4:55–5:05/km",
-              "targetHR": "155–165 bpm",
-              "humanReadable": "Warm-up: 2km easy Z1-2 (12 min)\nMain: 25 min continuous @ 4:55–5:05/km\nCool-down: 2km easy Z1 (12 min)\nFocus: Smooth, controlled — if HR exceeds 166, ease off slightly",
+              "type": "strides",
+              "name": "Easy Run + Strides",
+              "description": "Easy aerobic run plus short strides for speed mechanics.",
+              "durationMinutes": 66,
+              "distanceKm": 11,
+              "primaryZone": "Zone 2",
+              "targetHR": "<155 bpm",
+              "targetPace": "Easy + strides @ 4:00-4:20/km for 20 sec",
+              "humanReadable": "Warm-up: 2km easy\nMain: easy running\nStrides: 6x20 sec fast/relaxed with 80-90 sec walk-jog recoveries\nCool-down to complete 11 km",
               "completed": false
             }
           ]
@@ -2000,12 +1957,12 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w13-fri-str",
+              "id": "w13-fri-legs",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle B — Legs + Posterior Chain",
-              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
-              "durationMinutes": 45,
+              "name": "Strength Legs + Mobility",
+              "description": "Lower-body strength: squat/hinge/lunge/calf work, then 12-15 min mobility (hips, ankles, T-spine).",
+              "durationMinutes": 50,
               "completed": false
             }
           ]
@@ -2015,12 +1972,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w13-sat-str",
+              "id": "w13-sat-xtrain",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle C — Optional Accessories",
-              "description": "Optional short session: pull-up practice 3 sets, DB curls 3x10-15, DB triceps press 3x10-15, DB lateral raises 3x12-20, light carries 3x30m. Skip if fatigued before Sunday long run.",
-              "durationMinutes": 25,
+              "name": "Optional Cross-Training (Bike/Padel/Golf)",
+              "description": "Choose one: 45-90 min bike, padel, or golf walk. Keep it enjoyable and mostly low-moderate effort.",
+              "durationMinutes": 60,
               "completed": false
             }
           ]
@@ -2033,45 +1990,46 @@
               "id": "w13-sun-long",
               "sport": "run",
               "type": "long",
-              "name": "Progressive Long Run",
-              "description": "Weekly long run. Last 6km at marathon/race pace (4:44–5:00/km). This is the cornerstone workout of the week.",
-              "durationMinutes": 102,
+              "name": "Long Run (or Optional Bike Ride)",
+              "description": "Primary choice: easy long run. If fatigue is high, replace with 75-120 min easy bike ride.",
+              "durationMinutes": 110,
               "distanceKm": 18,
-              "primaryZone": "Zone 2 → Zone 3",
-              "targetPace": "5:50–6:00/km easy, last 6km @ 4:44–5:00/km",
-              "targetHR": "<149 easy, <165 race finish",
-              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 10km easy Z2 (HR < 149)\nFinish: 6km @ 4:44–5:00/km (Z3-4, controlled effort)\nNutrition: Take a gel every 45 min",
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1-2km easy\nMain: steady easy effort for 18 km\nAlternative: 75-120 min Zone 2 bike if needed",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalKm": 47,
-        "totalHours": 4.5,
-        "runSessions": 4,
+        "totalKm": 38,
+        "totalHours": 7.2,
+        "runSessions": 3,
         "strengthSessions": 4
       }
     },
     {
       "weekNumber": 14,
       "phase": "Taper",
-      "focus": "Taper begins. Volume drops, quality stays. Trust the process.",
+      "focus": "General running fitness + strength balance (no race-specific target).",
       "isRecoveryWeek": false,
       "startDate": "2026-08-31",
       "endDate": "2026-09-06",
-      "targetKm": 46,
+      "targetKm": 31,
       "days": [
         {
           "date": "2026-08-31",
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w14-mon-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "id": "w14-mon-push",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength Push",
+              "description": "Upper-body push focus: bench/DB press, incline press, overhead press, triceps. Keep 1-2 reps in reserve.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -2081,17 +2039,17 @@
           "dayOfWeek": "Tuesday",
           "workouts": [
             {
-              "id": "w14-tue-rp",
+              "id": "w14-tue-easy",
               "sport": "run",
-              "type": "intervals",
-              "name": "Race Pace Intervals – 4×1km",
-              "description": "Sub-1:40 race pace rehearsal. Lock in 4:44/km so it feels natural on race day.",
-              "durationMinutes": 52,
-              "distanceKm": 9,
-              "primaryZone": "Zone 4–5a",
-              "targetPace": "4:44/km",
-              "targetHR": "160–167 bpm",
-              "humanReadable": "Warm-up: 2km easy Z2\nMain: 4×1km @ 4:44/km, 2 min easy jog recovery\nCool-down: 2km easy\nFocus: This is your goal race pace — it should feel hard but controlled.",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run at conversational pace to build consistency.",
+              "durationMinutes": 50,
+              "distanceKm": 8,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1km very easy\nMain: 8 km easy Z2\nFocus: Relaxed form and easy breathing",
               "completed": false
             }
           ]
@@ -2101,17 +2059,12 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w14-wed-easy",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy Run",
-              "description": "Easy aerobic run — conversational pace.",
-              "durationMinutes": 37,
-              "distanceKm": 6,
-              "primaryZone": "Zone 2",
-              "targetHR": "<149 bpm",
-              "targetPace": "5:50–6:15/km",
-              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 5km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "id": "w14-wed-pull",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength Pull",
+              "description": "Upper-body pull focus: rows, pull-ups/lat pulldown, rear delts, biceps. Controlled form and full ROM.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -2121,17 +2074,17 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w14-thu-easy",
+              "id": "w14-thu-quality",
               "sport": "run",
-              "type": "easy",
-              "name": "Easy Run",
-              "description": "Easy aerobic run — conversational pace.",
-              "durationMinutes": 43,
-              "distanceKm": 7,
-              "primaryZone": "Zone 2",
-              "targetHR": "<149 bpm",
-              "targetPace": "5:50–6:15/km",
-              "humanReadable": "Warm-up: First 1km very easy (Z1)\nMain: 6km easy Z2 — HR < 149, full sentences\nFocus: Relaxed form, don't chase pace",
+              "type": "tempo",
+              "name": "Tempo Run",
+              "description": "Controlled tempo effort to improve running economy and threshold.",
+              "durationMinutes": 52,
+              "distanceKm": 9,
+              "primaryZone": "Zone 3-4",
+              "targetHR": "150-166 bpm",
+              "targetPace": "4:55-5:20/km",
+              "humanReadable": "Warm-up: 2km easy\nMain: 20-25 min tempo @ controlled hard\nCool-down: easy jog to complete 9 km",
               "completed": false
             }
           ]
@@ -2141,12 +2094,12 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w14-fri-str",
+              "id": "w14-fri-legs",
               "sport": "strength",
               "type": "strength",
-              "name": "Minimalist Muscle B — Legs + Posterior Chain",
-              "description": "Barbell Romanian deadlift 4x6-10, goblet/front squat 4x8-12, Bulgarian split squat 3x8-10/side, kettlebell swing 3x15-20, calf raises 3x12-20, plank 3x45-60s. Controlled tempo; stop 1-2 reps before failure.",
-              "durationMinutes": 30,
+              "name": "Strength Legs + Mobility",
+              "description": "Lower-body strength: squat/hinge/lunge/calf work, then 12-15 min mobility (hips, ankles, T-spine).",
+              "durationMinutes": 50,
               "completed": false
             }
           ]
@@ -2156,11 +2109,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w14-sat-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "id": "w14-sat-xtrain",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Optional Cross-Training (Bike/Padel/Golf)",
+              "description": "Choose one: 45-90 min bike, padel, or golf walk. Keep it enjoyable and mostly low-moderate effort.",
+              "durationMinutes": 60,
               "completed": false
             }
           ]
@@ -2173,45 +2127,46 @@
               "id": "w14-sun-long",
               "sport": "run",
               "type": "long",
-              "name": "Progressive Long Run",
-              "description": "Weekly long run. Last 4km at marathon/race pace (4:44–5:00/km). This is the cornerstone workout of the week.",
-              "durationMinutes": 74,
-              "distanceKm": 13,
-              "primaryZone": "Zone 2 → Zone 3",
-              "targetPace": "5:50–6:00/km easy, last 4km @ 4:44–5:00/km",
-              "targetHR": "<149 easy, <165 race finish",
-              "humanReadable": "Warm-up: 2km very easy Z1\nMain: 7km easy Z2 (HR < 149)\nFinish: 4km @ 4:44–5:00/km (Z3-4, controlled effort)\nNutrition: Take a gel every 45 min",
+              "name": "Long Run (or Optional Bike Ride)",
+              "description": "Primary choice: easy long run. If fatigue is high, replace with 75-120 min easy bike ride.",
+              "durationMinutes": 85,
+              "distanceKm": 14,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1-2km easy\nMain: steady easy effort for 14 km\nAlternative: 75-120 min Zone 2 bike if needed",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalKm": 35,
-        "totalHours": 3.4,
-        "runSessions": 4,
-        "strengthSessions": 2
+        "totalKm": 31,
+        "totalHours": 6.4,
+        "runSessions": 3,
+        "strengthSessions": 4
       }
     },
     {
       "weekNumber": 15,
       "phase": "Taper",
-      "focus": "Sharp taper. Stay sharp, sleep more, eat well. The work is done.",
+      "focus": "General running fitness + strength balance (no race-specific target).",
       "isRecoveryWeek": false,
       "startDate": "2026-09-07",
       "endDate": "2026-09-13",
-      "targetKm": 30,
+      "targetKm": 27,
       "days": [
         {
           "date": "2026-09-07",
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w15-mon-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "id": "w15-mon-push",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength Push",
+              "description": "Upper-body push focus: bench/DB press, incline press, overhead press, triceps. Keep 1-2 reps in reserve.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -2221,17 +2176,17 @@
           "dayOfWeek": "Tuesday",
           "workouts": [
             {
-              "id": "w15-tue-sharp",
+              "id": "w15-tue-easy",
               "sport": "run",
-              "type": "intervals",
-              "name": "Race Sharpener – 3×1km",
-              "description": "Short race-pace sharpener to stay sharp during taper. Low volume, high quality.",
-              "durationMinutes": 38,
-              "distanceKm": 6.5,
-              "primaryZone": "Zone 4–5a",
-              "targetPace": "4:44/km",
-              "targetHR": "160–167 bpm",
-              "humanReadable": "Warm-up: 2km easy + 4×strides\nMain: 3×1km @ 4:44/km, 2 min jog recovery\nCool-down: 1.5km easy\nFocus: Remind your legs what race pace feels like. Don't overdo it.",
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run at conversational pace to build consistency.",
+              "durationMinutes": 43,
+              "distanceKm": 7,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1km very easy\nMain: 7 km easy Z2\nFocus: Relaxed form and easy breathing",
               "completed": false
             }
           ]
@@ -2241,16 +2196,12 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w15-wed-taper",
-              "sport": "run",
-              "type": "easy",
-              "name": "Taper Easy Run",
-              "description": "Short easy run during taper. Trust the training — do NOT add extra miles.",
-              "durationMinutes": 30,
-              "distanceKm": 5,
-              "primaryZone": "Zone 1–2",
-              "targetPace": "5:50–6:20/km",
-              "humanReadable": "5km easy Z1-2. Stay relaxed, don't push. Your job is to arrive at the start line fresh.",
+              "id": "w15-wed-pull",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength Pull",
+              "description": "Upper-body pull focus: rows, pull-ups/lat pulldown, rear delts, biceps. Controlled form and full ROM.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -2260,16 +2211,17 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w15-thu-str-run",
+              "id": "w15-thu-quality",
               "sport": "run",
               "type": "strides",
-              "name": "Easy Run + 4×Strides",
-              "description": "Easy aerobic run with 4 strides to activate fast-twitch fibres without adding fatigue.",
-              "durationMinutes": 38,
-              "distanceKm": 5,
+              "name": "Easy Run + Strides",
+              "description": "Easy aerobic run plus short strides for speed mechanics.",
+              "durationMinutes": 48,
+              "distanceKm": 8,
               "primaryZone": "Zone 2",
-              "targetPace": "5:50–6:10/km easy + strides @ 4:10/km for 20 sec",
-              "humanReadable": "Warm-up: 2km easy Z2\nMain: 2km easy Z2\nStrides: 4×20 sec @ 4:00–4:20/km, walk/jog 90 sec between\nCool-down: 1km easy",
+              "targetHR": "<155 bpm",
+              "targetPace": "Easy + strides @ 4:00-4:20/km for 20 sec",
+              "humanReadable": "Warm-up: 2km easy\nMain: easy running\nStrides: 6x20 sec fast/relaxed with 80-90 sec walk-jog recoveries\nCool-down to complete 8 km",
               "completed": false
             }
           ]
@@ -2279,11 +2231,12 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w15-fri-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest Day",
-              "description": "Taper rest.",
+              "id": "w15-fri-legs",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength Legs + Mobility",
+              "description": "Lower-body strength: squat/hinge/lunge/calf work, then 12-15 min mobility (hips, ankles, T-spine).",
+              "durationMinutes": 50,
               "completed": false
             }
           ]
@@ -2293,11 +2246,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w15-sat-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest Day",
-              "description": "Full rest. Focus on sleep, hydration and nutrition.",
+              "id": "w15-sat-xtrain",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Optional Cross-Training (Bike/Padel/Golf)",
+              "description": "Choose one: 45-90 min bike, padel, or golf walk. Keep it enjoyable and mostly low-moderate effort.",
+              "durationMinutes": 60,
               "completed": false
             }
           ]
@@ -2307,47 +2261,49 @@
           "dayOfWeek": "Sunday",
           "workouts": [
             {
-              "id": "w15-sun-taper",
+              "id": "w15-sun-long",
               "sport": "run",
-              "type": "easy",
-              "name": "Taper Easy Run",
-              "description": "Short easy run during taper. Trust the training — do NOT add extra miles.",
-              "durationMinutes": 48,
-              "distanceKm": 8,
-              "primaryZone": "Zone 1–2",
-              "targetPace": "5:50–6:20/km",
-              "humanReadable": "8km easy Z1-2. Stay relaxed, don't push. Your job is to arrive at the start line fresh.",
+              "type": "long",
+              "name": "Long Run (or Optional Bike Ride)",
+              "description": "Primary choice: easy long run. If fatigue is high, replace with 75-120 min easy bike ride.",
+              "durationMinutes": 73,
+              "distanceKm": 12,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1-2km easy\nMain: steady easy effort for 12 km\nAlternative: 75-120 min Zone 2 bike if needed",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalKm": 24.5,
-        "totalHours": 2.6,
-        "runSessions": 4,
-        "strengthSessions": 1
+        "totalKm": 27,
+        "totalHours": 6.1,
+        "runSessions": 3,
+        "strengthSessions": 4
       }
     },
     {
       "weekNumber": 16,
       "phase": "Taper",
-      "focus": "Race week. Be calm. Trust the training. You are ready.",
+      "focus": "General running fitness + strength balance (no race-specific target).",
       "isRecoveryWeek": false,
       "startDate": "2026-09-14",
       "endDate": "2026-09-20",
-      "targetKm": 0,
+      "targetKm": 23,
       "days": [
         {
           "date": "2026-09-14",
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w16-mon-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest Day",
-              "description": "Full rest. Taper.",
+              "id": "w16-mon-push",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength Push",
+              "description": "Upper-body push focus: bench/DB press, incline press, overhead press, triceps. Keep 1-2 reps in reserve.",
+              "durationMinutes": 45,
               "completed": false
             }
           ]
@@ -2357,16 +2313,17 @@
           "dayOfWeek": "Tuesday",
           "workouts": [
             {
-              "id": "w16-tue-str-run",
+              "id": "w16-tue-easy",
               "sport": "run",
-              "type": "strides",
-              "name": "Easy Run + 4×Strides",
-              "description": "Easy aerobic run with 4 strides to activate fast-twitch fibres without adding fatigue.",
-              "durationMinutes": 32,
-              "distanceKm": 4,
+              "type": "easy",
+              "name": "Easy Run",
+              "description": "Easy aerobic run at conversational pace to build consistency.",
+              "durationMinutes": 37,
+              "distanceKm": 6,
               "primaryZone": "Zone 2",
-              "targetPace": "5:50–6:10/km easy + strides @ 4:10/km for 20 sec",
-              "humanReadable": "Warm-up: 2km easy Z2\nMain: 1km easy Z2\nStrides: 4×20 sec @ 4:00–4:20/km, walk/jog 90 sec between\nCool-down: 1km easy",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1km very easy\nMain: 6 km easy Z2\nFocus: Relaxed form and easy breathing",
               "completed": false
             }
           ]
@@ -2374,23 +2331,34 @@
         {
           "date": "2026-09-16",
           "dayOfWeek": "Wednesday",
-          "workouts": []
+          "workouts": [
+            {
+              "id": "w16-wed-pull",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength Pull",
+              "description": "Upper-body pull focus: rows, pull-ups/lat pulldown, rear delts, biceps. Controlled form and full ROM.",
+              "durationMinutes": 45,
+              "completed": false
+            }
+          ]
         },
         {
           "date": "2026-09-17",
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w16-thu-taper",
+              "id": "w16-thu-quality",
               "sport": "run",
-              "type": "easy",
-              "name": "Pre-race Shakeout",
-              "description": "Very easy 3km + 2 strides. Stay off your feet the rest of the day.",
-              "durationMinutes": 18,
-              "distanceKm": 3,
-              "primaryZone": "Zone 1–2",
-              "targetPace": "5:50–6:20/km",
-              "humanReadable": "3km easy Z1-2. Stay relaxed, don't push. Your job is to arrive at the start line fresh.",
+              "type": "tempo",
+              "name": "Tempo Run",
+              "description": "Controlled tempo effort to improve running economy and threshold.",
+              "durationMinutes": 41,
+              "distanceKm": 7,
+              "primaryZone": "Zone 3-4",
+              "targetHR": "150-166 bpm",
+              "targetPace": "4:55-5:20/km",
+              "humanReadable": "Warm-up: 2km easy\nMain: 20-25 min tempo @ controlled hard\nCool-down: easy jog to complete 7 km",
               "completed": false
             }
           ]
@@ -2400,11 +2368,12 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w16-fri-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest Day",
-              "description": "Taper rest.",
+              "id": "w16-fri-legs",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength Legs + Mobility",
+              "description": "Lower-body strength: squat/hinge/lunge/calf work, then 12-15 min mobility (hips, ankles, T-spine).",
+              "durationMinutes": 50,
               "completed": false
             }
           ]
@@ -2414,14 +2383,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w16-sat-pre",
-              "sport": "run",
-              "type": "easy",
-              "name": "Day-Before Activation",
-              "description": "10 min easy jog + 2 strides. Eat pasta tonight.",
-              "durationMinutes": 15,
-              "distanceKm": 2,
-              "primaryZone": "Zone 1",
+              "id": "w16-sat-xtrain",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Optional Cross-Training (Bike/Padel/Golf)",
+              "description": "Choose one: 45-90 min bike, padel, or golf walk. Keep it enjoyable and mostly low-moderate effort.",
+              "durationMinutes": 60,
               "completed": false
             }
           ]
@@ -2431,27 +2398,27 @@
           "dayOfWeek": "Sunday",
           "workouts": [
             {
-              "id": "w16-sun-race",
+              "id": "w16-sun-long",
               "sport": "run",
-              "type": "race",
-              "name": "🏁 Half Marathon – RACE DAY",
-              "description": "Half Marathon. Goal: Sub 1:40:00. Pacing strategy: even splits at 4:44/km with slight negative (last 5km a touch faster).",
-              "distanceKm": 21.1,
-              "durationMinutes": 99,
-              "primaryZone": "Zone 4–5a",
-              "targetPace": "4:44/km",
-              "targetHR": "160–167 bpm",
-              "humanReadable": "Pre-race: Breakfast 3hr before (oats + banana + coffee)\nWarm-up: 10 min easy jog + 4×strides 30 min before gun\nKm 1–3: 4:50–4:55/km (conservative start, let the pack go)\nKm 4–15: 4:44/km (lock in rhythm, run YOUR race)\nKm 16–21: Push — if feeling strong, negative split to 4:38–4:42/km\nNutrition: 1 gel at km 7, 1 gel at km 14. Sip water at every station.\nMantras: \"Smooth, strong, controlled.\"",
+              "type": "long",
+              "name": "Long Run (or Optional Bike Ride)",
+              "description": "Primary choice: easy long run. If fatigue is high, replace with 75-120 min easy bike ride.",
+              "durationMinutes": 61,
+              "distanceKm": 10,
+              "primaryZone": "Zone 2",
+              "targetHR": "<149 bpm",
+              "targetPace": "5:50-6:20/km",
+              "humanReadable": "Warm-up: 1-2km easy\nMain: steady easy effort for 10 km\nAlternative: 75-120 min Zone 2 bike if needed",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalKm": 30.1,
-        "totalHours": 2.7,
-        "runSessions": 4,
-        "strengthSessions": 0
+        "totalKm": 23,
+        "totalHours": 5.6,
+        "runSessions": 3,
+        "strengthSessions": 4
       }
     }
   ],
