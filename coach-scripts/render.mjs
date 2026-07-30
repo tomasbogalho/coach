@@ -873,7 +873,10 @@ function workoutCard(w, dayDate) {
     : (w.humanReadable || w.description || '')
   ).replace(/\n/g, '<br>');
   const pace = w.targetPace ? `<div class="pace">🎯 ${w.targetPace}</div>` : '';
-  const hrTarget = w.targetHR ? `<div class="hr-target">❤️ ${w.targetHR}</div>` : '';
+  const hrTargetText = w.targetHR
+    ? (w.type === 'strides' ? 'Easy portion: <149 bpm (strides can spike briefly)' : w.targetHR)
+    : '';
+  const hrTarget = hrTargetText ? `<div class="hr-target">❤️ ${hrTargetText}</div>` : '';
   const exportBtn = w.sport !== 'rest'
     ? `<button class="export-btn" onclick="exportWorkout(event, this)" data-wid="${w.id}" title="Export workout">↓</button>`
     : '';
@@ -1961,8 +1964,6 @@ const html = `<!DOCTYPE html>
 <nav class="main-tabs">
   <button class="main-tab active" onclick="switchMainTab('today')"><span class="tab-icon">📅</span><span class="tab-label">Today</span></button>
   <button class="main-tab" onclick="switchMainTab('plan')"><span class="tab-icon">📋</span><span class="tab-label">Plan</span></button>
-  <button class="main-tab" onclick="switchMainTab('strategy')"><span class="tab-icon">🏁</span><span class="tab-label">Strategy</span></button>
-  <button class="main-tab" onclick="switchMainTab('stats')"><span class="tab-icon">📊</span><span class="tab-label">Stats</span></button>
 </nav>
 
 <!-- TAB: TODAY -->
@@ -1976,126 +1977,6 @@ const html = `<!DOCTYPE html>
     ${planWeeksHtml}
   </div>
 </div>
-
-<!-- TAB: STRATEGY -->
-<div id="maintab-strategy" class="tab-panel" style="display:none">
-
-<!-- RACE STRATEGY -->
-<div class="race-strategy">
-  <h2>🏁 Race Strategy — Sub 1:40:00</h2>
-  <div class="strategy-grid">
-    <div class="strategy-card">
-      <h3>Goals</h3>
-      <p>🥇 <strong>A:</strong> Sub 1:40:00<br>🥈 <strong>B:</strong> Sub 1:45:00<br>🥉 <strong>C:</strong> Sub 1:50:00 (guaranteed PB)</p>
-    </div>
-    <div class="strategy-card">
-      <h3>Pacing</h3>
-      <p class="pace-goal">4:44/km</p>
-      <p style="margin-top:4px;font-size:12px;">Km 1–3: 4:50–4:55 (controlled)<br>Km 4–15: 4:44 (lock in)<br>Km 16–21: Push if feeling good</p>
-    </div>
-    <div class="strategy-card">
-      <h3>Nutrition</h3>
-      <p>Breakfast 3hr before<br>1 gel at km 7–8<br>1 gel at km 13–14<br>Water at every station</p>
-    </div>
-    <div class="strategy-card">
-      <h3>Warm-Up</h3>
-      <p>10 min easy jog + 4 strides, 30 min before gun. Don't stand in the queue.</p>
-    </div>
-    <div class="strategy-card">
-      <h3>Taper</h3>
-      <p>Starts Aug 31 (Week 14). Volume –40% over 3 weeks. Intensity maintained. Trust the process.</p>
-    </div>
-    <div class="strategy-card">
-      <h3>Weather</h3>
-      <p>Sept in Portugal: likely warm. Start conservative if >20°C. Add 5–10 sec/km for heat.</p>
-    </div>
-  </div>
-</div>
-
-<!-- TRAINING ZONES -->
-<div class="zones-section">
-  <h2>📊 Training Zones (Estimated LTHR: 167 bpm)</h2>
-  <table class="zone-table">
-    <thead><tr><th>Zone</th><th>Name</th><th>HR Range</th><th>Pace Range</th><th>Feel</th></tr></thead>
-    <tbody>
-      <tr><td><span class="zone-dot" style="background:#6ee7b7"></span>Z1</td><td>Recovery</td><td>&lt;135 bpm</td><td>&gt;6:30/km</td><td>Very easy, sing if you want</td></tr>
-      <tr><td><span class="zone-dot" style="background:#3b82f6"></span>Z2</td><td>Aerobic</td><td>135–149 bpm</td><td>5:50–6:15/km</td><td>Easy, full conversations</td></tr>
-      <tr><td><span class="zone-dot" style="background:#f97316"></span>Z3</td><td>Tempo</td><td>150–155 bpm</td><td>5:10–5:30/km</td><td>Moderate, short sentences</td></tr>
-      <tr><td><span class="zone-dot" style="background:#ef4444"></span>Z4</td><td>Sub-threshold</td><td>157–166 bpm</td><td>4:48–5:10/km</td><td>Hard, few words</td></tr>
-      <tr><td><span class="zone-dot" style="background:#7c3aed"></span>Z5</td><td>VO₂max</td><td>&gt;167 bpm</td><td>4:25–4:35/km</td><td>Very hard, can't talk</td></tr>
-      <tr style="font-weight:700;color:#f59e0b"><td>⭐ RP</td><td>Race Pace</td><td>160–167 bpm</td><td>4:44/km</td><td>Controlled hard — race effort</td></tr>
-    </tbody>
-  </table>
-</div>
-
-<!-- PHASE LEGEND -->
-<div class="phase-legend">
-  <div class="legend-item"><div class="legend-dot" style="background:#6b7280"></div>Recovery</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#10b981"></div>Base</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#f97316"></div>Build</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6"></div>Taper</div>
-  <div class="legend-item">🏃 Easy</div>
-  <div class="legend-item">🏃 Long</div>
-  <div class="legend-item">⚡ Tempo</div>
-  <div class="legend-item">🔥 Intervals</div>
-  <div class="legend-item">💨 Strides</div>
-  <div class="legend-item">💪 Strength</div>
-  <div class="legend-item">😴 Rest</div>
-</div>
-
-</div><!-- /maintab-strategy -->
-
-<!-- TAB: STATS -->
-<div id="maintab-stats" class="tab-panel" style="display:none">
-
-<!-- RACE PREDICTOR -->
-${racePrediction ? (() => {
-  const { timeStr, paceStr, gapSec, srcDistKm, srcPaceStr, srcDate, onTrack } = racePrediction;
-  const gapAbs = Math.abs(gapSec);
-  const gapMins = Math.floor(gapAbs / 60), gapSecs = gapAbs % 60;
-  const gapStr = gapMins > 0 ? `${gapMins}m ${gapSecs}s` : `${gapSecs}s`;
-  const gapText = onTrack
-    ? `✅ <span class="pred-gap fast">You're ${gapStr} under target pace</span> — on track for sub-1:40!`
-    : `⏳ <span class="pred-gap slow">Currently ${gapStr} over target</span> — keep building fitness`;
-  // Progress bar: 0% = 1:50 (6600s), 100% = 1:40 (6000s), > 100% = on track
-  const secFor150 = 6600, secFor140 = 6000;
-  const barPct = Math.min(100, Math.max(0, Math.round((secFor150 - racePrediction.predicted) / (secFor150 - secFor140) * 100)));
-  const barColor = onTrack ? '#6ee7b7' : barPct > 60 ? '#f59e0b' : '#ef4444';
-  return `<div class="predictor-section">
-  <div class="pred-main">
-    <div class="pred-time ${onTrack ? 'on-track' : 'off-track'}">${timeStr}</div>
-    <div class="pred-label">Predicted half marathon</div>
-  </div>
-  <div class="pred-details">
-    <h2>🏁 Race Time Predictor</h2>
-    <div class="pred-gap">${gapText}</div>
-    <div class="pred-source">Based on ${srcDistKm}km @ ${srcPaceStr} on ${new Date(srcDate).toLocaleDateString('en-GB',{day:'numeric',month:'short'})} · Riegel formula</div>
-  </div>
-  <div class="pred-bar-wrap">
-    <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3)"><span>1:50</span><span>🎯 1:40</span></div>
-    <div class="pred-bar-track"><div class="pred-bar-fill" style="width:${barPct}%;background:${barColor}"></div></div>
-    <div style="font-size:10px;color:var(--text3);margin-top:4px">Pace @ race pace: ${paceStr} · Target: 4:44/km</div>
-  </div>
-</div>`;
-})() : ''}
-
-<!-- VOLUME BAR CHART -->
-<div class="volume-chart-section">
-  <h2>📊 Weekly Training Volume</h2>
-  <div class="volume-subtitle">Planned km (grey) vs actual km run (coloured) · 16-week plan</div>
-  <div class="volume-canvas-wrap"><canvas id="vol-canvas" width="860" height="140"></canvas></div>
-</div>
-
-<!-- FITNESS TREND -->
-${fitnessTrend.length >= 2 ? `
-<div class="fitness-trend-section">
-  <h2>\u{1F4C8} Aerobic Fitness Trend \u2014 Z2 Pace Over Time</h2>
-  <div class="trend-subtitle">Avg pace on easy (Z2: 135\u2013149 bpm) runs each week \u00b7 lower = faster = fitter</div>
-  <div class="trend-canvas-wrap"><canvas id="trend-canvas" width="860" height="160"></canvas></div>
-  <div class="trend-insight" id="trend-insight"></div>
-</div>` : ''}
-
-</div><!-- /maintab-stats -->
 
 <script>
 // ── DATA CONSTANTS ───────────────────────────────────────────
@@ -2196,7 +2077,10 @@ function renderTodayFromPlan() {
         if (detail) html += '<div class="today-workout-detail">' + escapeHtml(detail) + '</div>';
         html += '</div>';
         if (w.targetPace) html += '<span class="today-chip pace-chip">🎯 ' + escapeHtml(w.targetPace) + '</span>';
-        if (w.targetHR) html += '<span class="today-chip hr-chip">❤️ ' + escapeHtml(w.targetHR) + '</span>';
+        if (w.targetHR) {
+          const hrText = w.type === 'strides' ? 'Easy: <149 bpm (brief spikes OK)' : w.targetHR;
+          html += '<span class="today-chip hr-chip">❤️ ' + escapeHtml(hrText) + '</span>';
+        }
         html += '</div>';
         if (desc) html += '<div class="today-session-desc">' + desc + '</div>';
         if (w.sport === 'run') {
@@ -3098,15 +2982,11 @@ function switchMainTab(name) {
     const col = document.querySelector(\`.day-col[data-date="\${TODAY}"]\`);
     if (col) setTimeout(() => col.closest('.week-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
   }
-  if (name === 'stats') {
-    try { drawFitnessTrend(); } catch(e) {}
-    try { drawVolumeChart(); } catch(e) {}
-  }
   try { localStorage.setItem('coach_active_tab', name); } catch(e) {}
 }
 (function() {
   const saved = localStorage.getItem('coach_active_tab');
-  if (saved && saved !== 'today') switchMainTab(saved);
+  if (saved === 'plan') switchMainTab('plan');
 })();
 
 // ── WEEK COLLAPSE ────────────────────────────────────────────
