@@ -3,167 +3,19 @@
  * with Zepp / Garmin structured workout export
  */
 import { readFile, writeFile } from 'node:fs/promises';
-import { DatabaseSync } from 'node:sqlite';
-import { homedir } from 'node:os';
-import { join } from 'node:path';
 
 const plan = JSON.parse(await readFile('half-marathon-sep-2026.json', 'utf8'));
 const todayStr = new Date().toISOString().slice(0, 10);
 
-// ── QUERY STRAVA ACTIVITIES (current week + full plan history) ─
-const DATA_DIR_PATH = process.env.COACH_DATA_DIR || join(homedir(), '.claude-coach');
-const DB_FILE = join(DATA_DIR_PATH, 'coach.db');
-let recentActivities = [];  // current week only (for week-0 panel)
-let allPlanActivities = []; // all activities since plan start (for plan-day matching)
-try {
-  const db = new DatabaseSync(DB_FILE);
-  // Current week = Mon–Sun of today's week
-  const today = new Date();
-  const dayOfWeek = today.getDay(); // 0=Sun,1=Mon...
-  const monday = new Date(today);
-  monday.setDate(today.getDate() - ((dayOfWeek + 6) % 7));
-  const weekStart = monday.toISOString().slice(0, 10);
-  const planStart = plan.meta.planStartDate;
-
-  const actQuery = `
-    SELECT substr(a.start_date,1,10) as date, a.name, a.type,
-           ROUND(a.distance/1000.0, 2) as km, a.moving_time,
-           a.average_heartrate, a.average_speed, a.max_heartrate,
-           a.total_elevation_gain,
-           s.heartrate as hr_stream, s.time as time_stream,
-           s.distance as distance_stream, s.velocity_smooth as velocity_smooth_stream
-    FROM activities a
-    LEFT JOIN activity_streams s ON s.activity_id = a.id
-    WHERE a.start_date >= ?
-    ORDER BY a.start_date DESC`;
-
-  recentActivities = db.prepare(actQuery).all(weekStart);
-  allPlanActivities = db.prepare(actQuery).all(planStart);
-  db.close();
-} catch(e) { /* DB unavailable — skip Week 0 */ }
-
-// Build a lookup: date → array of activities (for plan-day matching)
+// ── PLANNER-ONLY MODE (no Strava integration) ───────────────
+// Keep these structures so the rest of the renderer can stay unchanged.
+const recentActivities = [];
 const activitiesByDate = {};
-for (const a of allPlanActivities) {
-  if (!activitiesByDate[a.date]) activitiesByDate[a.date] = [];
-  activitiesByDate[a.date].push(a);
-}
-
-// ── WEEKLY ACTUAL KM + FITNESS TREND + INJURY RISK ──────────
-let actualKmByWeek = {}; // weekStart → km
-let fitnessTrend = [];   // [{week, avgPace, runs}]
-let injuryRisk = null;   // warning string or null
-try {
-  const db2 = new DatabaseSync(DB_FILE);
-
-  // 1. Actual km per plan week (only past + current weeks)
-  for (const w of plan.weeks) {
-    if (w.startDate > todayStr) break;
-    const row = db2.prepare(`
-      SELECT COALESCE(SUM(distance)/1000.0, 0) as km
-      FROM activities
-      WHERE type='Run' AND start_date >= '${w.startDate}' AND start_date <= '${w.endDate}T23:59:59'
-    `).get();
-    actualKmByWeek[w.startDate] = Math.round((row?.km || 0) * 10) / 10;
-  }
-
-  // 2. Z2 pace trend — weekly avg pace for easy runs (avg HR 135-149)
-  const z2Rows = db2.prepare(`
-    SELECT substr(start_date,1,10) as date,
-           ROUND(1000.0 / average_speed) as pace_sec
-    FROM activities
-    WHERE type='Run' AND average_heartrate>=135 AND average_heartrate<150
-      AND average_speed>0.3 AND distance>3000
-      AND start_date >= date('now','-20 weeks')
-    ORDER BY start_date
-  `).all();
-  const wkMap = new Map();
-  for (const r of z2Rows) {
-    const d = new Date(r.date), dow = d.getDay();
-    const mon = new Date(d); mon.setDate(d.getDate() - ((dow + 6) % 7));
-    const key = mon.toISOString().slice(0, 10);
-    if (!wkMap.has(key)) wkMap.set(key, []);
-    wkMap.get(key).push(r.pace_sec);
-  }
-  fitnessTrend = [...wkMap.entries()]
-    .map(([week, paces]) => ({ week, avgPace: Math.round(paces.reduce((a, b) => a + b, 0) / paces.length), runs: paces.length }))
-    .sort((a, b) => a.week.localeCompare(b.week));
-
-  // 3. Injury risk: consecutive hard runs (avg HR ≥155) in last 14 days
-  const hardRuns = db2.prepare(`
-    SELECT average_heartrate FROM activities
-    WHERE type='Run' AND distance>3000 AND start_date>=date('now','-14 days')
-    ORDER BY start_date
-  `).all();
-  let streak = 0, maxStreak = 0;
-  for (const r of hardRuns) {
-    if ((r.average_heartrate || 0) >= 155) streak++; else streak = 0;
-    maxStreak = Math.max(maxStreak, streak);
-  }
-  if (maxStreak >= 3) injuryRisk = `⚠️ ${maxStreak} consecutive hard runs (avg HR ≥155 bpm) detected in the last 2 weeks — insert an easy day now`;
-  else if (maxStreak === 2) injuryRisk = `💛 2 back-to-back hard efforts recently — consider making your next run an easy Z2 day`;
-
-  db2.close();
-} catch(e) { /* ignore */ }
-
-// ── RACE TIME PREDICTOR ──────────────────────────────────────
-// Uses Riegel formula: T2 = T1 × (D2/D1)^1.06
-// Uses best recent effort (last 90 days) at race-ish distances (5–22km)
-let racePrediction = null;
-let baselinePrediction = null; // earliest prediction (pre-plan or plan start)
-try {
-  const db3 = new DatabaseSync(DB_FILE);
-  const goalDistM = 21097;
-  const goalDistKm = goalDistM / 1000;
-  const goalSec = (1 * 3600) + (40 * 60); // 1:40:00
-
-  function riegelPredict(rows) {
-    let best = null;
-    for (const r of rows) {
-      if (r.distance < 4000) continue;
-      const predicted = r.moving_time * Math.pow(goalDistM / r.distance, 1.06);
-      if (!best || predicted < best.predicted) best = { ...r, predicted: Math.round(predicted) };
-    }
-    if (!best) return null;
-    const hrs = Math.floor(best.predicted / 3600);
-    const mins = Math.floor((best.predicted % 3600) / 60);
-    const secs = best.predicted % 60;
-    const timeStr = `${hrs}:${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
-    const paceSec = Math.round(best.predicted / goalDistKm);
-    const paceStr = `${Math.floor(paceSec/60)}:${String(paceSec%60).padStart(2,'0')}/km`;
-    const gapSec = best.predicted - goalSec;
-    const srcDistKm = Math.round(best.distance / 100) / 10;
-    const srcPaceSec = Math.round(1000 / best.average_speed);
-    const srcPaceStr = `${Math.floor(srcPaceSec/60)}:${String(srcPaceSec%60).padStart(2,'0')}/km`;
-    return { timeStr, paceStr, gapSec, srcDistKm, srcPaceStr, srcDate: best.date, onTrack: gapSec <= 0, predicted: best.predicted };
-  }
-
-  // Current prediction — best effort last 90 days
-  const recentRuns = db3.prepare(`
-    SELECT distance, moving_time, average_heartrate, average_speed,
-           substr(start_date,1,10) as date
-    FROM activities
-    WHERE type='Run' AND distance>=4000 AND average_speed>0
-      AND start_date>=date('now','-90 days')
-    ORDER BY average_speed DESC LIMIT 20
-  `).all();
-  racePrediction = riegelPredict(recentRuns);
-
-  // Baseline prediction — best effort in the 90 days BEFORE plan start
-  const planStart = plan.meta.planStartDate;
-  const baselineRuns = db3.prepare(`
-    SELECT distance, moving_time, average_heartrate, average_speed,
-           substr(start_date,1,10) as date
-    FROM activities
-    WHERE type='Run' AND distance>=4000 AND average_speed>0
-      AND start_date < '${planStart}'
-      AND start_date >= date('${planStart}','-90 days')
-    ORDER BY average_speed DESC LIMIT 20
-  `).all();
-  baselinePrediction = riegelPredict(baselineRuns);
-
-  db3.close();
-} catch(e) { /* ignore */ }
+const actualKmByWeek = {};
+const fitnessTrend = [];
+const injuryRisk = null;
+const racePrediction = null;
+const baselinePrediction = null;
 
 // ── PLAN PROGRESS STATS ──────────────────────────────────────
 const planStartDate = plan.meta.planStartDate;
@@ -1026,17 +878,15 @@ function workoutCard(w, dayDate) {
     ? `<button class="export-btn" onclick="exportWorkout(event, this)" data-wid="${w.id}" title="Export workout">↓</button>`
     : '';
 
-  // Match a real Strava activity to this planned workout (by date + sport)
-  const dayActs = dayDate ? (activitiesByDate[dayDate] || []) : [];
+  // Planner-only mode: no external activity matching.
+  const dayActs = [];
   const matchedAct = w.sport === 'run'
     ? dayActs.find(a => a.type === 'Run')
     : w.sport === 'strength'
       ? dayActs.find(a => a.type === 'WeightTraining' || a.type === 'Crossfit' || a.type === 'Workout')
       : null;
-  // Auto-complete: day is in the past and a matching activity exists
-  const isPast = dayDate && dayDate < todayStr;
-  const autoComplete = !!(isPast && matchedAct);
-  const autoDnf = isPast && !matchedAct && w.sport !== 'rest'; // past day, no activity found
+  const autoComplete = false;
+  const autoDnf = false;
 
   const focus = w.sport === 'run' ? workoutFocus(w) : null;
   const str = null;
@@ -1069,9 +919,9 @@ function workoutCard(w, dayDate) {
       ${str.note ? `<div class="rationale-block"><span class="rationale-label">📌 Coach note</span><p class="rationale-text">${str.note}</p></div>` : ''}
     </div>` : '';
 
-  // Strava feedback block for matched activity
+  // Activity feedback is disabled in planner-only mode.
   let actFeedbackHtml = '';
-  if (matchedAct) {
+  if (false && matchedAct) {
     const fb = coachFeedback(matchedAct);
     const fbLines = fb.split('\n').map(l => l.trim()).filter(Boolean);
     const fbFormatted = fbLines.map(l => {
@@ -1087,8 +937,6 @@ function workoutCard(w, dayDate) {
       <div class="act-feedback-header">📊 Strava: ${matchedAct.name} <span class="act-feedback-meta">${actSummary}</span></div>
       <div class="act-feedback-body">${fbFormatted}</div>
     </div>`;
-  } else if (autoDnf) {
-    actFeedbackHtml = `<div class="act-feedback act-feedback-miss">❌ No Strava activity found for this day — skipped or not synced yet.</div>`;
   }
 
   const checkIcon = autoComplete ? '✅' : autoDnf ? '❌' : '⬜';
@@ -1171,81 +1019,24 @@ function weekCard(w) {
 // ── TODAY PANEL (server-side) ────────────────────────────────
 // ── COACH STATUS / PROGRESSION COMMENTARY ───────────────────
 function coachStatusHtml() {
-  const goalSec = 6000; // 1:40:00
   const weeksLeft = totalPlanWeeks - weeksCompleted;
   const pctDone = Math.round((weeksCompleted / totalPlanWeeks) * 100);
 
-  // Progress sentence
   const progressLine = weeksCompleted === 0
-    ? `Plan just started — week 1 of ${totalPlanWeeks}.`
-    : `${weeksCompleted} of ${totalPlanWeeks} weeks complete (${pctDone}% of the plan).`;
+    ? `Plan started. You are in week 1 of ${totalPlanWeeks}.`
+    : `${weeksCompleted} of ${totalPlanWeeks} weeks complete (${pctDone}% done).`;
 
-  // Km adherence
-  let kmLine = '';
-  if (plannedKmToDate > 0) {
-    const pct = Math.round((actualKmToDate / plannedKmToDate) * 100);
-    const diff = Math.abs(actualKmToDate - plannedKmToDate).toFixed(0);
-    if (pct >= 90) kmLine = `You've run <strong>${actualKmToDate.toFixed(0)}km</strong> vs ${plannedKmToDate.toFixed(0)}km planned — great adherence (${pct}%).`;
-    else if (pct >= 70) kmLine = `You've run <strong>${actualKmToDate.toFixed(0)}km</strong> vs ${plannedKmToDate.toFixed(0)}km planned (${pct}%). About ${diff}km behind — manageable, keep the current week clean.`;
-    else if (actualKmToDate > 0) kmLine = `You've run <strong>${actualKmToDate.toFixed(0)}km</strong> vs ${plannedKmToDate.toFixed(0)}km planned (${pct}%). ${diff}km behind schedule — prioritise not missing any more runs this block.`;
-  }
+  const mileageLine = plannedKmToDate > 0
+    ? `Planned load completed by calendar so far: <strong>${plannedKmToDate.toFixed(0)}km</strong>.`
+    : 'First week in progress — keep showing up daily.';
 
-  // Prediction delta narrative
-  let predLine = '';
-  let trend = null;
-  if (racePrediction && baselinePrediction) {
-    const deltaS = baselinePrediction.predicted - racePrediction.predicted;
-    const deltaMins = Math.abs(Math.floor(deltaS / 60));
-    const deltaSecs = Math.abs(deltaS % 60);
-    const deltaStr = deltaMins > 0 ? `${deltaMins}m ${deltaSecs}s` : `${deltaSecs}s`;
-    if (deltaS > 30) {
-      trend = 'improving';
-      predLine = `Since starting the plan your predicted time has improved by <strong>${deltaStr}</strong> — from ${baselinePrediction.timeStr} → <strong>${racePrediction.timeStr}</strong>. The training is working.`;
-    } else if (deltaS < -30) {
-      trend = 'slower';
-      predLine = `Your current prediction (${racePrediction.timeStr}) is <strong>${deltaStr} slower</strong> than at plan start (${baselinePrediction.timeStr}). This can happen with training fatigue or low mileage — keep the easy runs easy and hit the quality sessions.`;
-    } else {
-      trend = 'flat';
-      predLine = `Prediction is holding steady at <strong>${racePrediction.timeStr}</strong> (baseline was ${baselinePrediction.timeStr}). Fitness gains typically show up in the Build phase — stay consistent.`;
-    }
-  } else if (racePrediction) {
-    predLine = `Current prediction: <strong>${racePrediction.timeStr}</strong>. No baseline data from before the plan — progress comparison will appear once more Strava data is synced.`;
-  }
+  const consistencyLine = weeksLeft <= 4
+    ? 'Final block: prioritize consistency, sleep, and race-day pacing practice.'
+    : 'Main goal now: execute the next sessions consistently and avoid stacking fatigue.';
 
-  // Gap to goal
-  let gapLine = '';
-  if (racePrediction) {
-    const gapAbs = Math.abs(racePrediction.gapSec);
-    const gapMins = Math.floor(gapAbs / 60), gapSecs = gapAbs % 60;
-    const gapStr = `${gapMins}m ${gapSecs}s`;
-    if (racePrediction.onTrack) {
-      gapLine = `You're <strong>${gapStr} ahead of your 1:40 goal</strong>. Keep building — don't change anything, don't go harder.`;
-    } else {
-      const gapPerKm = Math.round(racePrediction.gapSec / 21.1);
-      gapLine = `You need to find <strong>${gapStr}</strong> to hit 1:40 — that's ${gapPerKm} sec/km at race pace. ${weeksLeft > 8 ? 'Plenty of time with consistent training.' : weeksLeft > 4 ? 'Focused quality work in the next few weeks can close this.' : 'Taper well and race smart.'}`;
-    }
-  }
-
-  // Overall coaching status label
-  let statusEmoji = '📋', statusColor = '#64748b', statusLabel = 'Building base';
-  if (racePrediction) {
-    if (racePrediction.onTrack && trend === 'improving') { statusEmoji = '🚀'; statusColor = '#10b981'; statusLabel = 'On fire — ahead of target'; }
-    else if (racePrediction.onTrack) { statusEmoji = '✅'; statusColor = '#10b981'; statusLabel = 'On track for sub-1:40'; }
-    else if (trend === 'improving') { statusEmoji = '📈'; statusColor = '#f59e0b'; statusLabel = 'Improving — keep going'; }
-    else if (trend === 'slower') { statusEmoji = '⚠️'; statusColor = '#ef4444'; statusLabel = 'Attention needed'; }
-    else { statusEmoji = '🔄'; statusColor = '#6366f1'; statusLabel = 'Steady — gains coming'; }
-  }
-
-  // Z2 trend narrative (last 3 weeks if available)
-  let z2Line = '';
-  if (fitnessTrend.length >= 2) {
-    const last = fitnessTrend[fitnessTrend.length - 1];
-    const prev = fitnessTrend[fitnessTrend.length - 2];
-    const delta = last.avgPace - prev.avgPace;
-    const fmtPace = s => `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}/km`;
-    if (delta < -8) z2Line = `Your easy-run pace improved by ${Math.abs(delta)} sec/km this week (${fmtPace(prev.avgPace)} → ${fmtPace(last.avgPace)}) — aerobic engine is responding.`;
-    else if (delta > 8) z2Line = `Easy-run pace was ${delta} sec/km slower this week — likely accumulated fatigue. Prioritise sleep and keep this week's easy runs genuinely easy.`;
-  }
+  let statusEmoji = '📋', statusColor = '#6366f1', statusLabel = 'Plan Tracker Active';
+  if (weeksLeft <= 3) { statusEmoji = '🎯'; statusColor = '#f59e0b'; statusLabel = 'Taper Window'; }
+  else if (weeksCompleted >= totalPlanWeeks / 2) { statusEmoji = '🔥'; statusColor = '#10b981'; statusLabel = 'Build Momentum'; }
 
   // Weeks left comment
   const timelineComment = weeksLeft <= 0 ? '' :
@@ -1254,7 +1045,7 @@ function coachStatusHtml() {
     weeksLeft <= 6 ? '🔥 Build phase — the hardest and most important weeks. Execute every session.' :
     '🌱 Still in base — consistency over intensity. Every easy run counts.';
 
-  const lines = [progressLine, kmLine, predLine, gapLine, z2Line].filter(Boolean);
+  const lines = [progressLine, mileageLine, consistencyLine].filter(Boolean);
 
   return `
   <div class="coach-status-card">
@@ -1268,34 +1059,17 @@ function coachStatusHtml() {
     <div class="cs-body">
       ${lines.map(l => `<p class="cs-line">${l}</p>`).join('')}
     </div>
-    ${racePrediction && baselinePrediction ? `
     <div class="cs-pred-row">
-      <div class="cs-pred-box cs-pred-baseline">
-        <div class="cs-pred-label">At plan start</div>
-        <div class="cs-pred-time">${baselinePrediction.timeStr}</div>
-      </div>
-      <div class="cs-pred-arrow">→</div>
-      <div class="cs-pred-box cs-pred-now" style="border-color:${racePrediction.onTrack ? '#10b981' : '#f59e0b'}">
-        <div class="cs-pred-label">Now</div>
-        <div class="cs-pred-time" style="color:${racePrediction.onTrack ? '#10b981' : '#f59e0b'}">${racePrediction.timeStr}</div>
-      </div>
-      <div class="cs-pred-arrow">→</div>
       <div class="cs-pred-box cs-pred-goal">
         <div class="cs-pred-label">Goal</div>
         <div class="cs-pred-time" style="color:#f59e0b">1:40:00</div>
       </div>
-    </div>` : (racePrediction ? `
-    <div class="cs-pred-row">
-      <div class="cs-pred-box cs-pred-now" style="border-color:${racePrediction.onTrack ? '#10b981' : '#f59e0b'}">
-        <div class="cs-pred-label">Current prediction</div>
-        <div class="cs-pred-time" style="color:${racePrediction.onTrack ? '#10b981' : '#f59e0b'}">${racePrediction.timeStr}</div>
-      </div>
       <div class="cs-pred-arrow">→</div>
-      <div class="cs-pred-box cs-pred-goal">
-        <div class="cs-pred-label">Goal</div>
-        <div class="cs-pred-time" style="color:#f59e0b">1:40:00</div>
+      <div class="cs-pred-box cs-pred-now" style="border-color:#6366f1">
+        <div class="cs-pred-label">Current mode</div>
+        <div class="cs-pred-time" style="color:#6366f1">Planner</div>
       </div>
-    </div>` : '')}
+    </div>
   </div>`;
 }
 
@@ -1424,10 +1198,6 @@ function todayPanelHtml() {
       ${injuryRisk ? `<div class="inj-risk-banner ${injuryRisk.startsWith('⚠️') ? 'risk-warn' : 'risk-caution'}" style="margin:0 0 16px">${injuryRisk}</div>` : ''}
       <div class="today-workouts-wrap">${todayWorkoutHtml}</div>
       ${upcomingHtml}
-    </div>
-    <div class="today-right">
-      <h3 class="section-sub-title" style="margin-bottom:12px">🏃 This Week's Strava Activity</h3>
-      ${week0Html()}
     </div>
   </div>`;
 }
