@@ -2187,7 +2187,7 @@ function renderTodayFromPlan() {
         const dur = w.durationMinutes ? (w.durationMinutes + 'min') : '';
         const detail = [dist, dur].filter(Boolean).join(' · ');
         const descRaw = w.sport === 'strength' ? '' : (w.humanReadable || w.description || '');
-        const desc = escapeHtml(descRaw).replace(/\n/g, '<br>').replace(/&lt;br&gt;/g, '<br>');
+        const desc = escapeHtml(descRaw).replace(/\\n/g, '<br>').replace(/&lt;br&gt;/g, '<br>');
         html += '<div class="today-workout-card">';
         html += '<div class="today-workout-header">';
         html += '<span class="today-sport-icon">' + icon + '</span>';
@@ -2200,7 +2200,7 @@ function renderTodayFromPlan() {
         html += '</div>';
         if (desc) html += '<div class="today-session-desc">' + desc + '</div>';
         if (w.sport === 'run') {
-          html += '<button class="chart-btn planned-chart-btn" style="margin-top:14px;font-size:15px;padding:12px 18px" onclick="showPlannedChart(\'' + escapeHtml(w.id) + '\')">📊 Session Preview — Pace & HR</button>';
+          html += '<button class="chart-btn planned-chart-btn" style="margin-top:14px;font-size:15px;padding:12px 18px" onclick="showPlannedChart(\\\'' + escapeHtml(w.id) + '\\\')">📊 Session Preview — Pace & HR</button>';
         }
         if (w.sport !== 'rest') {
           html += '<button class="dl-btn" style="margin-top:12px" onclick="exportWorkout(event,this)" data-wid="' + escapeHtml(w.id) + '">↓ Export to watch</button>';
