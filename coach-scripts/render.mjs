@@ -1755,6 +1755,172 @@ const html = `<!DOCTYPE html>
     .workout-card.auto-done { opacity: 0.82; }
     .workout-card.auto-done .workout-name { text-decoration: line-through; text-decoration-color: #22c55e60; }
     .workout-card.auto-miss .workout-name { text-decoration: line-through; text-decoration-color: #ef444470; }
+
+    /* ── MOBILE OVERRIDES LAST (prevents desktop rules overriding phone layout) ── */
+    @media (max-width: 700px) {
+      html, body { width: 100%; overflow-x: hidden; }
+      body { font-size: 16px; }
+
+      .plan-header { display: none !important; }
+
+      .countdown-bar {
+        position: sticky;
+        top: 0;
+        z-index: 80;
+        padding: 12px 14px;
+        gap: 12px;
+      }
+      .cd-value { font-size: 20px; }
+      .cd-label { font-size: 10px; }
+      .cd-sep { display: none; }
+      .plan-prog-wrap { display: none !important; }
+
+      .main-tabs {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: auto;
+        z-index: 100;
+        gap: 0;
+        padding: 0 0 env(safe-area-inset-bottom, 6px);
+        border-bottom: none;
+        border-top: 2px solid var(--border);
+      }
+      .main-tab {
+        flex: 1;
+        min-height: 56px;
+        padding: 8px 4px 6px;
+        margin-bottom: 0;
+        border-radius: 0;
+        border-bottom: none;
+        border-top: 3px solid transparent;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+      }
+      .main-tab.active {
+        border-top-color: var(--accent);
+        border-bottom-color: transparent;
+      }
+      .tab-icon { font-size: 20px; }
+      .tab-label { font-size: 10px; }
+
+      .tab-panel {
+        padding: 12px;
+        padding-bottom: calc(76px + env(safe-area-inset-bottom, 6px));
+      }
+
+      .race-strategy,
+      .zones-section,
+      .progress-bar-wrap,
+      .predictor-section,
+      .volume-chart-section,
+      .fitness-trend-section {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .today-panel-wrap {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .today-workout-card,
+      .today-rest-card { padding: 14px; }
+      .today-workout-name { font-size: 18px; }
+      .today-workout-detail,
+      .today-session-desc { font-size: 14px; }
+      .upcoming-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        padding: 10px 12px;
+      }
+      .upcoming-date,
+      .upcoming-name,
+      .upcoming-km,
+      .upcoming-pace { font-size: 13px; }
+
+      .weeks-container {
+        padding: 0 0 16px;
+        gap: 10px;
+      }
+      .week-grid {
+        display: flex;
+        flex-direction: column;
+      }
+      .day-rest-only { display: none; }
+      .day-col {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        min-height: 0;
+        padding: 0;
+      }
+      .day-col:last-child { border-bottom: none; }
+      .day-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 0;
+        padding: 8px 12px;
+      }
+      .day-name { font-size: 13px; }
+      .day-date { font-size: 12px; }
+      .day-workouts {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .workout-card {
+        margin-bottom: 0;
+        border-radius: 10px;
+        padding: 12px;
+      }
+      .workout-name { font-size: 16px; }
+      .workout-detail,
+      .workout-desc,
+      .pace,
+      .hr-target,
+      .rationale-text,
+      .fb-line,
+      .fb-well,
+      .fb-improve { font-size: 14px; }
+      .workout-check {
+        font-size: 22px;
+        padding: 2px 6px;
+      }
+      .export-btn,
+      .dl-btn,
+      .move-btn,
+      .chart-btn {
+        min-height: 40px;
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+      .chart-btn {
+        margin-left: 0;
+        margin-top: 10px;
+      }
+
+      .modal-box {
+        width: 100vw !important;
+        max-height: 100dvh;
+        height: 100dvh;
+        top: 0 !important;
+        left: 0 !important;
+        transform: none !important;
+        border-radius: 0;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .tab-label { display: none; }
+      .main-tab { padding-top: 10px; }
+    }
   </style>
 </head>
 <body>
