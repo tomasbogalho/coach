@@ -1433,7 +1433,7 @@ const html = `<!DOCTYPE html>
 
       /* Vertical day list — rest-only days hidden */
       .week-grid { display: flex; flex-direction: column; border-top: 1px solid var(--border); }
-      .day-rest-only { display: none; }
+      .day-rest-only { display: block; }
       .day-col {
         border-right: none;
         border-bottom: 1px solid var(--border);
@@ -1854,7 +1854,7 @@ const html = `<!DOCTYPE html>
         display: flex;
         flex-direction: column;
       }
-      .day-rest-only { display: none; }
+      .day-rest-only { display: block; }
       .day-col {
         border-right: none;
         border-bottom: 1px solid var(--border);
@@ -3003,12 +3003,11 @@ function toggleUpcoming(uid) {
   detail.style.display = open ? 'flex' : 'none';
   if (arrow) arrow.classList.toggle('open', open);
 }
-// On mobile, collapse all past weeks by default to keep plan tidy
+// Keep all weeks expanded on mobile so the full 7-day structure is always visible.
 (function() {
   if (window.innerWidth > 700) return;
   document.querySelectorAll('.week-section').forEach(sec => {
-    const end = sec.dataset.weekEnd;
-    if (end && end < TODAY) sec.classList.add('collapsed');
+    sec.classList.remove('collapsed');
   });
 })();
 
