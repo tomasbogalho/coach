@@ -1801,7 +1801,7 @@ const html = `<!DOCTYPE html>
 
 <!-- TAB: TODAY -->
 <div id="maintab-today" class="tab-panel">
-  ${todayPanelHtml()}
+  <div id="today-dynamic-root"></div>
 </div>
 
 <!-- TAB: PLAN -->
@@ -1933,7 +1933,13 @@ ${fitnessTrend.length >= 2 ? `
 
 <script>
 // ── DATA CONSTANTS ───────────────────────────────────────────
-const TODAY = '${todayStr}';
+function localIsoDate(d = new Date()) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return y + '-' + m + '-' + day;
+}
+const TODAY = localIsoDate();
 const RACE_DATE = '${plan.meta.eventDate}';
 const PLAN_START = '${plan.meta.planStartDate}';
 const PLAN_TOTAL_WEEKS = ${plan.meta.totalWeeks};
@@ -1945,7 +1951,7 @@ window.PLANNED_CHARTS = ${JSON.stringify(
   Object.fromEntries(
     plan.weeks.flatMap(wk => wk.days.flatMap(d =>
       d.workouts
-        .filter(w => w.sport === 'run' && d.date >= todayStr)
+        .filter(w => w.sport === 'run')
         .map(w => [w.id, buildPlannedChartData(w)])
         .filter(([, v]) => v !== null)
     ))
@@ -1967,6 +1973,112 @@ const WORKOUT_MAP = ${JSON.stringify(
     plan.weeks.flatMap(wk => wk.days.flatMap(d => d.workouts.map(w => [w.id, w])))
   )
 )};
+
+function sportIconForClient(w) {
+  if (w.sport === 'rest') return '😴';
+  if (w.sport === 'strength') return '💪';
+  if (w.type === 'race') return '🏁';
+  if (w.type === 'long') return '🏃';
+  if (w.type === 'tempo') return '⚡';
+  if (w.type === 'intervals') return '🔥';
+  if (w.type === 'strides') return '💨';
+  return '🏃';
+}
+
+function formatIsoForDisplay(iso, opts) {
+  return new Date(iso + 'T00:00:00').toLocaleDateString('en-GB', opts);
+}
+
+function renderTodayFromPlan() {
+  const root = document.getElementById('today-dynamic-root');
+  if (!root) return;
+
+  const todayIso = localIsoDate();
+  const todayEntry = PLAN_DAYS.find(d => d.date === todayIso);
+  const dateHeading = formatIsoForDisplay(todayIso, { weekday: 'long', day: 'numeric', month: 'long' });
+  const qualityTypes = new Set(['tempo', 'intervals', 'strides', 'race', 'long']);
+
+  let html = '';
+  html += '<div class="today-panel-wrap"><div class="today-left">';
+  html += '<h2 class="today-date-heading">📅 ' + escapeHtml(dateHeading) + '</h2>';
+
+  if (!todayEntry) {
+    if (todayIso < PLAN_START) {
+      html += '<div class="today-rest-card">📋 Plan starts <strong>' + escapeHtml(formatIsoForDisplay(PLAN_START, { day: 'numeric', month: 'long' })) + '</strong>.</div>';
+    } else if (todayIso > RACE_DATE) {
+      html += '<div class="today-rest-card">🏁 Race day has passed. Check the plan tab for the full schedule.</div>';
+    } else {
+      html += '<div class="today-rest-card">📋 No structured session scheduled today.</div>';
+    }
+  } else {
+    const active = todayEntry.workouts.filter(w => w.sport !== 'rest').map(w => WORKOUT_MAP[w.id] || w);
+    if (!active.length) {
+      html += '<div class="today-rest-card">😴 <strong>Rest Day</strong> — scheduled recovery day.</div>';
+    } else {
+      for (const w of active) {
+        const icon = sportIconForClient(w);
+        const dist = w.distanceKm ? (w.distanceKm + 'km') : '';
+        const dur = w.durationMinutes ? (w.durationMinutes + 'min') : '';
+        const detail = [dist, dur].filter(Boolean).join(' · ');
+        const descRaw = w.sport === 'strength' ? '' : (w.humanReadable || w.description || '');
+        const desc = escapeHtml(descRaw).replace(/\n/g, '<br>').replace(/&lt;br&gt;/g, '<br>');
+        html += '<div class="today-workout-card">';
+        html += '<div class="today-workout-header">';
+        html += '<span class="today-sport-icon">' + icon + '</span>';
+        html += '<div style="flex:1">';
+        html += '<div class="today-workout-name">' + escapeHtml(w.name || 'Workout') + '</div>';
+        if (detail) html += '<div class="today-workout-detail">' + escapeHtml(detail) + '</div>';
+        html += '</div>';
+        if (w.targetPace) html += '<span class="today-chip pace-chip">🎯 ' + escapeHtml(w.targetPace) + '</span>';
+        if (w.targetHR) html += '<span class="today-chip hr-chip">❤️ ' + escapeHtml(w.targetHR) + '</span>';
+        html += '</div>';
+        if (desc) html += '<div class="today-session-desc">' + desc + '</div>';
+        if (w.sport === 'run') {
+          html += '<button class="chart-btn planned-chart-btn" style="margin-top:14px;font-size:15px;padding:12px 18px" onclick="showPlannedChart(\'' + escapeHtml(w.id) + '\')">📊 Session Preview — Pace & HR</button>';
+        }
+        if (w.sport !== 'rest') {
+          html += '<button class="dl-btn" style="margin-top:12px" onclick="exportWorkout(event,this)" data-wid="' + escapeHtml(w.id) + '">↓ Export to watch</button>';
+        }
+        html += '</div>';
+      }
+    }
+  }
+
+  const upcoming = PLAN_DAYS
+    .filter(d => d.date > todayIso)
+    .filter(d => d.workouts.some(w => qualityTypes.has(w.type)))
+    .slice(0, 4);
+  if (upcoming.length) {
+    html += '<div class="upcoming-section">';
+    html += '<h3 class="section-sub-title">📅 Next Quality Sessions</h3>';
+    for (const d of upcoming) {
+      const q = d.workouts.find(w => qualityTypes.has(w.type));
+      const full = WORKOUT_MAP[q.id] || q;
+      const dt = formatIsoForDisplay(d.date, { weekday: 'short', day: 'numeric', month: 'short' });
+      html += '<div class="upcoming-row">';
+      html += '<div class="upcoming-date">' + escapeHtml(dt) + '</div>';
+      html += '<div class="upcoming-name">' + escapeHtml(full.name || q.name) + '</div>';
+      html += '<div class="upcoming-km">' + (full.distanceKm ? escapeHtml(String(full.distanceKm) + 'km') : '') + '</div>';
+      html += '<div class="upcoming-pace">' + (full.targetPace ? ('🎯 ' + escapeHtml(full.targetPace)) : '') + '</div>';
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+
+  html += '</div></div>';
+  root.innerHTML = html;
+}
+
+function scheduleTodayRefresh() {
+  const now = new Date();
+  const next = new Date(now);
+  next.setHours(24, 0, 1, 0);
+  const ms = next.getTime() - now.getTime();
+  setTimeout(() => {
+    renderTodayFromPlan();
+    scheduleTodayRefresh();
+  }, Math.max(1000, ms));
+}
 
 const STRENGTH_REPS_KEY = 'coach_strength_reps_v1';
 const WORKOUT_MOVES_KEY = 'coach_workout_moves_v1';
@@ -2223,6 +2335,8 @@ function toggleComplete(event, el, id) {
 
 // ── RESTORE STATE ON LOAD ────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+  renderTodayFromPlan();
+  scheduleTodayRefresh();
   document.querySelectorAll('.workout-check').forEach(el => {
     const id = el.getAttribute('onclick').match(/'([^']+)'/)?.[1];
     if (id && localStorage.getItem('coach_complete_' + id) === '1') {
