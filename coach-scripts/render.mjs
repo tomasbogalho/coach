@@ -3331,6 +3331,7 @@ function drawRunChart(data) {
 </body>
 </html>`;
 
-await writeFile('half-marathon-sep-2026.html', html);
+const normalizedHtml = html.replace(/—/g, '-');
+await writeFile('half-marathon-sep-2026.html', normalizedHtml);
 console.log('✓ HTML plan rendered: half-marathon-sep-2026.html');
 console.log('  Open in browser to view your interactive training plan.');
